@@ -132,6 +132,10 @@ module.exports = {
               { text: '单元测试', link: '/md/develop/JUnit/01什么是单元测试.md' },
               { text: 'IDEA配置', link: '/md/project/jt-project/2. IDEA配置.md' },
             ] },
+            { text: '开发日志', items: [
+              { text: '我的开发博客', link: 'https://blog.nowcoder.net/h2py' },
+              { text: '面试流程', link: 'https://blog.nowcoder.net/n/934dc505aa234b7fb54416ffa24e1062' },
+            ] },
 
           ]
         },
