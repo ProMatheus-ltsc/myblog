@@ -1,0 +1,27 @@
+{
+  "name": "myblog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:dev": "vuepress  dev docs",
+    "docs:build": "vuepress  build docs",
+    "fix-memory-limit": "cross-env LIMIT=4096 increase-memory-limit",
+    "deploy": "bash /home/coder/myblog/deploy.sh"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@vuepress/plugin-back-to-top": "^2.0.0-beta.45",
+    "@vuepress/plugin-medium-zoom": "^2.0.0-beta.45",
+    "@vuepress/plugin-search": "^1.9.7",
+    "cross-env": "^7.0.3",
+    
+    "vuepress": "^1.9.7"
+  },
+  "dependencies": {
+    "vuepress-plugin-code-copy": "^1.0.6",
+    "vuepress-plugin-copyright": "^1.0.2"
+  }
+}
