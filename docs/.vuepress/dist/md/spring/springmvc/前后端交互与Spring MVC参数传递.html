@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>前后端交互与SpringMVC参数传递 | MyBlog</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="包含: Java 基础, JVM, Spring, Spring Boot, Spring Cloud, MySQL, ElasticSearch, MongoDB, Docker, k8s, Linux, DevOps, 分布式,  开发工具, Git, IDE...">
+    
+    <link rel="preload" href="/matheusblog/assets/css/0.styles.980a01be.css" as="style"><link rel="preload" href="/matheusblog/assets/js/app.d1bc8cd0.js" as="script"><link rel="preload" href="/matheusblog/assets/js/3.21aaf515.js" as="script"><link rel="preload" href="/matheusblog/assets/js/311.c135c48c.js" as="script"><link rel="prefetch" href="/matheusblog/assets/js/10.54a7cbcb.js"><link rel="prefetch" href="/matheusblog/assets/js/100.65c579fe.js"><link rel="prefetch" href="/matheusblog/assets/js/101.b41c3c3e.js"><link rel="prefetch" href="/matheusblog/assets/js/102.4f362209.js"><link rel="prefetch" href="/matheusblog/assets/js/103.3634017b.js"><link rel="prefetch" href="/matheusblog/assets/js/104.3bee8dc7.js"><link rel="prefetch" href="/matheusblog/assets/js/105.4dde7830.js"><link rel="prefetch" href="/matheusblog/assets/js/106.868e8474.js"><link rel="prefetch" href="/matheusblog/assets/js/107.c7fc6303.js"><link rel="prefetch" href="/matheusblog/assets/js/108.ceb9c82d.js"><link rel="prefetch" href="/matheusblog/assets/js/109.a9f0c9ae.js"><link rel="prefetch" href="/matheusblog/assets/js/11.2c2c6a67.js"><link rel="prefetch" href="/matheusblog/assets/js/110.fe3adf68.js"><link rel="prefetch" href="/matheusblog/assets/js/111.2c3688da.js"><link rel="prefetch" href="/matheusblog/assets/js/112.3cad34e6.js"><link rel="prefetch" href="/matheusblog/assets/js/113.aa50199f.js"><link rel="prefetch" href="/matheusblog/assets/js/114.60ac3f02.js"><link rel="prefetch" href="/matheusblog/assets/js/115.2db78ad2.js"><link rel="prefetch" href="/matheusblog/assets/js/116.7312786f.js"><link rel="prefetch" href="/matheusblog/assets/js/117.4a3a0337.js"><link rel="prefetch" href="/matheusblog/assets/js/118.e5af8b9d.js"><link rel="prefetch" href="/matheusblog/assets/js/119.e0967512.js"><link rel="prefetch" href="/matheusblog/assets/js/12.6f0ae98d.js"><link rel="prefetch" href="/matheusblog/assets/js/120.1ce6260c.js"><link rel="prefetch" href="/matheusblog/assets/js/121.c5f567f4.js"><link rel="prefetch" href="/matheusblog/assets/js/122.ff4f9bed.js"><link rel="prefetch" href="/matheusblog/assets/js/123.b354268c.js"><link rel="prefetch" href="/matheusblog/assets/js/124.ba2aa1f2.js"><link rel="prefetch" href="/matheusblog/assets/js/125.d6737c1d.js"><link rel="prefetch" href="/matheusblog/assets/js/126.ed190ed8.js"><link rel="prefetch" href="/matheusblog/assets/js/127.032ab16f.js"><link rel="prefetch" href="/matheusblog/assets/js/128.eaa5481c.js"><link rel="prefetch" href="/matheusblog/assets/js/129.61e1d174.js"><link rel="prefetch" href="/matheusblog/assets/js/13.c0ff77f9.js"><link rel="prefetch" href="/matheusblog/assets/js/130.d09f60e2.js"><link rel="prefetch" href="/matheusblog/assets/js/131.21aa1c96.js"><link rel="prefetch" href="/matheusblog/assets/js/132.351a321e.js"><link rel="prefetch" href="/matheusblog/assets/js/133.e5e36230.js"><link rel="prefetch" href="/matheusblog/assets/js/134.cea97435.js"><link rel="prefetch" href="/matheusblog/assets/js/135.a56e2494.js"><link rel="prefetch" href="/matheusblog/assets/js/136.557d9fdf.js"><link rel="prefetch" href="/matheusblog/assets/js/137.21eda887.js"><link rel="prefetch" href="/matheusblog/assets/js/138.c10c815c.js"><link rel="prefetch" href="/matheusblog/assets/js/139.5ebe91b0.js"><link rel="prefetch" href="/matheusblog/assets/js/14.6ed4a73f.js"><link rel="prefetch" href="/matheusblog/assets/js/140.9830147a.js"><link rel="prefetch" href="/matheusblog/assets/js/141.708bb77b.js"><link rel="prefetch" href="/matheusblog/assets/js/142.96c71160.js"><link rel="prefetch" href="/matheusblog/assets/js/143.ac186a53.js"><link rel="prefetch" href="/matheusblog/assets/js/144.6411b0b7.js"><link rel="prefetch" href="/matheusblog/assets/js/145.5c75cd6c.js"><link rel="prefetch" href="/matheusblog/assets/js/146.fdb5e7c8.js"><link rel="prefetch" href="/matheusblog/assets/js/147.4f67ac67.js"><link rel="prefetch" href="/matheusblog/assets/js/148.424b4f21.js"><link rel="prefetch" href="/matheusblog/assets/js/149.6161dd02.js"><link rel="prefetch" href="/matheusblog/assets/js/15.6bf38d8a.js"><link rel="prefetch" href="/matheusblog/assets/js/150.40ac7609.js"><link rel="prefetch" href="/matheusblog/assets/js/151.a246fd40.js"><link rel="prefetch" href="/matheusblog/assets/js/152.e430bd35.js"><link rel="prefetch" href="/matheusblog/assets/js/153.27a16b43.js"><link rel="prefetch" href="/matheusblog/assets/js/154.03f42b0e.js"><link rel="prefetch" href="/matheusblog/assets/js/155.c01c0b8b.js"><link rel="prefetch" href="/matheusblog/assets/js/156.9e75b32b.js"><link rel="prefetch" href="/matheusblog/assets/js/157.8539cba7.js"><link rel="prefetch" href="/matheusblog/assets/js/158.200135a9.js"><link rel="prefetch" href="/matheusblog/assets/js/159.1472f0e3.js"><link rel="prefetch" href="/matheusblog/assets/js/16.0bd8975e.js"><link rel="prefetch" href="/matheusblog/assets/js/160.a897bdbf.js"><link rel="prefetch" href="/matheusblog/assets/js/161.8ebaced9.js"><link rel="prefetch" href="/matheusblog/assets/js/162.69a52259.js"><link rel="prefetch" href="/matheusblog/assets/js/163.61b0c093.js"><link rel="prefetch" href="/matheusblog/assets/js/164.3fd70b50.js"><link rel="prefetch" href="/matheusblog/assets/js/165.99a4a455.js"><link rel="prefetch" href="/matheusblog/assets/js/166.be429d07.js"><link rel="prefetch" href="/matheusblog/assets/js/167.35fa8427.js"><link rel="prefetch" href="/matheusblog/assets/js/168.98c13248.js"><link rel="prefetch" href="/matheusblog/assets/js/169.0c800163.js"><link rel="prefetch" href="/matheusblog/assets/js/17.e107c04a.js"><link rel="prefetch" href="/matheusblog/assets/js/170.18e31e2a.js"><link rel="prefetch" href="/matheusblog/assets/js/171.fd0af1e7.js"><link rel="prefetch" href="/matheusblog/assets/js/172.2ae1a92c.js"><link rel="prefetch" href="/matheusblog/assets/js/173.4f22a7d7.js"><link rel="prefetch" href="/matheusblog/assets/js/174.1914bfac.js"><link rel="prefetch" href="/matheusblog/assets/js/175.cf52c6f0.js"><link rel="prefetch" href="/matheusblog/assets/js/176.2d62ffaf.js"><link rel="prefetch" href="/matheusblog/assets/js/177.7998e89e.js"><link rel="prefetch" href="/matheusblog/assets/js/178.db1004ac.js"><link rel="prefetch" href="/matheusblog/assets/js/179.ad97e66d.js"><link rel="prefetch" href="/matheusblog/assets/js/18.e3120c6e.js"><link rel="prefetch" href="/matheusblog/assets/js/180.598dae51.js"><link rel="prefetch" href="/matheusblog/assets/js/181.599b5236.js"><link rel="prefetch" href="/matheusblog/assets/js/182.2dbe3970.js"><link rel="prefetch" href="/matheusblog/assets/js/183.39b4f5d6.js"><link rel="prefetch" href="/matheusblog/assets/js/184.5e15d758.js"><link rel="prefetch" href="/matheusblog/assets/js/185.ba3d76a6.js"><link rel="prefetch" href="/matheusblog/assets/js/186.62a1d264.js"><link rel="prefetch" href="/matheusblog/assets/js/187.ce9ab2bc.js"><link rel="prefetch" href="/matheusblog/assets/js/188.b9ad970d.js"><link rel="prefetch" href="/matheusblog/assets/js/189.29df5075.js"><link rel="prefetch" href="/matheusblog/assets/js/19.fc33d9dc.js"><link rel="prefetch" href="/matheusblog/assets/js/190.8d142ac0.js"><link rel="prefetch" href="/matheusblog/assets/js/191.3fac1cfe.js"><link rel="prefetch" href="/matheusblog/assets/js/192.fd44ba5f.js"><link rel="prefetch" href="/matheusblog/assets/js/193.4dc021ba.js"><link rel="prefetch" href="/matheusblog/assets/js/194.088fad3f.js"><link rel="prefetch" href="/matheusblog/assets/js/195.1fa6fd8b.js"><link rel="prefetch" href="/matheusblog/assets/js/196.93035ed5.js"><link rel="prefetch" href="/matheusblog/assets/js/197.60d31e9d.js"><link rel="prefetch" href="/matheusblog/assets/js/198.e2431930.js"><link rel="prefetch" href="/matheusblog/assets/js/199.eb85b79c.js"><link rel="prefetch" href="/matheusblog/assets/js/2.49dcc008.js"><link rel="prefetch" href="/matheusblog/assets/js/20.f0fba33e.js"><link rel="prefetch" href="/matheusblog/assets/js/200.1d5f2566.js"><link rel="prefetch" href="/matheusblog/assets/js/201.78cfa60e.js"><link rel="prefetch" href="/matheusblog/assets/js/202.0538081f.js"><link rel="prefetch" href="/matheusblog/assets/js/203.e99855dc.js"><link rel="prefetch" href="/matheusblog/assets/js/204.f35716b0.js"><link rel="prefetch" href="/matheusblog/assets/js/205.e0d99ed0.js"><link rel="prefetch" href="/matheusblog/assets/js/206.fb60327e.js"><link rel="prefetch" href="/matheusblog/assets/js/207.37d97d63.js"><link rel="prefetch" href="/matheusblog/assets/js/208.3c7cc661.js"><link rel="prefetch" href="/matheusblog/assets/js/209.0f36f5f9.js"><link rel="prefetch" href="/matheusblog/assets/js/21.38b58190.js"><link rel="prefetch" href="/matheusblog/assets/js/210.7d3c1d9e.js"><link rel="prefetch" href="/matheusblog/assets/js/211.fd9c9ed7.js"><link rel="prefetch" href="/matheusblog/assets/js/212.fa687e1a.js"><link rel="prefetch" href="/matheusblog/assets/js/213.4d25912b.js"><link rel="prefetch" href="/matheusblog/assets/js/214.32fa8874.js"><link rel="prefetch" href="/matheusblog/assets/js/215.007c1b40.js"><link rel="prefetch" href="/matheusblog/assets/js/216.2ca1689d.js"><link rel="prefetch" href="/matheusblog/assets/js/217.42d81467.js"><link rel="prefetch" href="/matheusblog/assets/js/218.e8ef68ea.js"><link rel="prefetch" href="/matheusblog/assets/js/219.e81c9223.js"><link rel="prefetch" href="/matheusblog/assets/js/22.50c56cab.js"><link rel="prefetch" href="/matheusblog/assets/js/220.60e29bfc.js"><link rel="prefetch" href="/matheusblog/assets/js/221.22376958.js"><link rel="prefetch" href="/matheusblog/assets/js/222.4bad5952.js"><link rel="prefetch" href="/matheusblog/assets/js/223.cf135a8b.js"><link rel="prefetch" href="/matheusblog/assets/js/224.574a4b29.js"><link rel="prefetch" href="/matheusblog/assets/js/225.fc91759f.js"><link rel="prefetch" href="/matheusblog/assets/js/226.4d8e0f0c.js"><link rel="prefetch" href="/matheusblog/assets/js/227.eedacdd7.js"><link rel="prefetch" href="/matheusblog/assets/js/228.d9e5543d.js"><link rel="prefetch" href="/matheusblog/assets/js/229.198e9b7f.js"><link rel="prefetch" href="/matheusblog/assets/js/23.546acb40.js"><link rel="prefetch" href="/matheusblog/assets/js/230.9c9b55fa.js"><link rel="prefetch" href="/matheusblog/assets/js/231.52ba5c5a.js"><link rel="prefetch" href="/matheusblog/assets/js/232.4abf639c.js"><link rel="prefetch" href="/matheusblog/assets/js/233.677fd788.js"><link rel="prefetch" href="/matheusblog/assets/js/234.bb428729.js"><link rel="prefetch" href="/matheusblog/assets/js/235.6de15ca6.js"><link rel="prefetch" href="/matheusblog/assets/js/236.fede2411.js"><link rel="prefetch" href="/matheusblog/assets/js/237.6c68e409.js"><link rel="prefetch" href="/matheusblog/assets/js/238.b114a429.js"><link rel="prefetch" href="/matheusblog/assets/js/239.b4881685.js"><link rel="prefetch" href="/matheusblog/assets/js/24.037398b9.js"><link rel="prefetch" href="/matheusblog/assets/js/240.5d0ae7fe.js"><link rel="prefetch" href="/matheusblog/assets/js/241.fd2a3483.js"><link rel="prefetch" href="/matheusblog/assets/js/242.414e941d.js"><link rel="prefetch" href="/matheusblog/assets/js/243.9b98a81a.js"><link rel="prefetch" href="/matheusblog/assets/js/244.7a3c10b1.js"><link rel="prefetch" href="/matheusblog/assets/js/245.623c683e.js"><link rel="prefetch" href="/matheusblog/assets/js/246.3544e58b.js"><link rel="prefetch" href="/matheusblog/assets/js/247.9c99d802.js"><link rel="prefetch" href="/matheusblog/assets/js/248.68af4e3b.js"><link rel="prefetch" href="/matheusblog/assets/js/249.ccaca596.js"><link rel="prefetch" href="/matheusblog/assets/js/25.6c5bccf3.js"><link rel="prefetch" href="/matheusblog/assets/js/250.571542c4.js"><link rel="prefetch" href="/matheusblog/assets/js/251.cf75e5e5.js"><link rel="prefetch" href="/matheusblog/assets/js/252.9f57b2df.js"><link rel="prefetch" href="/matheusblog/assets/js/253.976d974c.js"><link rel="prefetch" href="/matheusblog/assets/js/254.447ebae0.js"><link rel="prefetch" href="/matheusblog/assets/js/255.d57e94cf.js"><link rel="prefetch" href="/matheusblog/assets/js/256.0f189f68.js"><link rel="prefetch" href="/matheusblog/assets/js/257.fad20cea.js"><link rel="prefetch" href="/matheusblog/assets/js/258.d239b495.js"><link rel="prefetch" href="/matheusblog/assets/js/259.8bcd5e63.js"><link rel="prefetch" href="/matheusblog/assets/js/26.c1d32692.js"><link rel="prefetch" href="/matheusblog/assets/js/260.090a63d7.js"><link rel="prefetch" href="/matheusblog/assets/js/261.9c49f0d4.js"><link rel="prefetch" href="/matheusblog/assets/js/262.10f98f30.js"><link rel="prefetch" href="/matheusblog/assets/js/263.81f7548d.js"><link rel="prefetch" href="/matheusblog/assets/js/264.8c0bad52.js"><link rel="prefetch" href="/matheusblog/assets/js/265.982857a3.js"><link rel="prefetch" href="/matheusblog/assets/js/266.040cfe24.js"><link rel="prefetch" href="/matheusblog/assets/js/267.7227c614.js"><link rel="prefetch" href="/matheusblog/assets/js/268.b01bce97.js"><link rel="prefetch" href="/matheusblog/assets/js/269.f0235678.js"><link rel="prefetch" href="/matheusblog/assets/js/27.e26685ad.js"><link rel="prefetch" href="/matheusblog/assets/js/270.62ea1068.js"><link rel="prefetch" href="/matheusblog/assets/js/271.c1b9878a.js"><link rel="prefetch" href="/matheusblog/assets/js/272.24a28332.js"><link rel="prefetch" href="/matheusblog/assets/js/273.6c40eac8.js"><link rel="prefetch" href="/matheusblog/assets/js/274.cd992810.js"><link rel="prefetch" href="/matheusblog/assets/js/275.75177aed.js"><link rel="prefetch" href="/matheusblog/assets/js/276.e8985557.js"><link rel="prefetch" href="/matheusblog/assets/js/277.64625549.js"><link rel="prefetch" href="/matheusblog/assets/js/278.4200bee5.js"><link rel="prefetch" href="/matheusblog/assets/js/279.b1186598.js"><link rel="prefetch" href="/matheusblog/assets/js/28.c0534da3.js"><link rel="prefetch" href="/matheusblog/assets/js/280.13632f13.js"><link rel="prefetch" href="/matheusblog/assets/js/281.83aa1bdd.js"><link rel="prefetch" href="/matheusblog/assets/js/282.034b31ee.js"><link rel="prefetch" href="/matheusblog/assets/js/283.19bded06.js"><link rel="prefetch" href="/matheusblog/assets/js/284.a5e29c5e.js"><link rel="prefetch" href="/matheusblog/assets/js/285.8a6391d1.js"><link rel="prefetch" href="/matheusblog/assets/js/286.db317c9e.js"><link rel="prefetch" href="/matheusblog/assets/js/287.dc1dcc8f.js"><link rel="prefetch" href="/matheusblog/assets/js/288.f8724f05.js"><link rel="prefetch" href="/matheusblog/assets/js/289.4b35b3ab.js"><link rel="prefetch" href="/matheusblog/assets/js/29.a210d762.js"><link rel="prefetch" href="/matheusblog/assets/js/290.c6023ba3.js"><link rel="prefetch" href="/matheusblog/assets/js/291.db6e892a.js"><link rel="prefetch" href="/matheusblog/assets/js/292.61d8c4ea.js"><link rel="prefetch" href="/matheusblog/assets/js/293.506e9b4f.js"><link rel="prefetch" href="/matheusblog/assets/js/294.9bc96072.js"><link rel="prefetch" href="/matheusblog/assets/js/295.baf21ce8.js"><link rel="prefetch" href="/matheusblog/assets/js/296.4f010851.js"><link rel="prefetch" href="/matheusblog/assets/js/297.39f85fc0.js"><link rel="prefetch" href="/matheusblog/assets/js/298.cf0708c5.js"><link rel="prefetch" href="/matheusblog/assets/js/299.6c1c41a1.js"><link rel="prefetch" href="/matheusblog/assets/js/30.f88dfbb5.js"><link rel="prefetch" href="/matheusblog/assets/js/300.59368419.js"><link rel="prefetch" href="/matheusblog/assets/js/301.2d80d504.js"><link rel="prefetch" href="/matheusblog/assets/js/302.690f15a6.js"><link rel="prefetch" href="/matheusblog/assets/js/303.d285ad36.js"><link rel="prefetch" href="/matheusblog/assets/js/304.d9d52d35.js"><link rel="prefetch" href="/matheusblog/assets/js/305.ec2cf80c.js"><link rel="prefetch" href="/matheusblog/assets/js/306.6d7e61d2.js"><link rel="prefetch" href="/matheusblog/assets/js/307.ec680f13.js"><link rel="prefetch" href="/matheusblog/assets/js/308.addb7d10.js"><link rel="prefetch" href="/matheusblog/assets/js/309.60c45495.js"><link rel="prefetch" href="/matheusblog/assets/js/31.241f0b56.js"><link rel="prefetch" href="/matheusblog/assets/js/310.36b632f3.js"><link rel="prefetch" href="/matheusblog/assets/js/312.329d4917.js"><link rel="prefetch" href="/matheusblog/assets/js/313.e259927e.js"><link rel="prefetch" href="/matheusblog/assets/js/314.6019fcf4.js"><link rel="prefetch" href="/matheusblog/assets/js/315.a7f16c02.js"><link rel="prefetch" href="/matheusblog/assets/js/316.78cce25e.js"><link rel="prefetch" href="/matheusblog/assets/js/317.9fd2c4e0.js"><link rel="prefetch" href="/matheusblog/assets/js/318.a4fe80b0.js"><link rel="prefetch" href="/matheusblog/assets/js/319.620bd822.js"><link rel="prefetch" href="/matheusblog/assets/js/32.63322225.js"><link rel="prefetch" href="/matheusblog/assets/js/320.0bc73d8d.js"><link rel="prefetch" href="/matheusblog/assets/js/321.6f386429.js"><link rel="prefetch" href="/matheusblog/assets/js/322.dc68c4f6.js"><link rel="prefetch" href="/matheusblog/assets/js/323.990b2c5e.js"><link rel="prefetch" href="/matheusblog/assets/js/324.90800df3.js"><link rel="prefetch" href="/matheusblog/assets/js/325.17b21116.js"><link rel="prefetch" href="/matheusblog/assets/js/326.dc462f7a.js"><link rel="prefetch" href="/matheusblog/assets/js/327.60a3c557.js"><link rel="prefetch" href="/matheusblog/assets/js/328.918be9ec.js"><link rel="prefetch" href="/matheusblog/assets/js/329.fbc9c1c4.js"><link rel="prefetch" href="/matheusblog/assets/js/33.a5e4acbc.js"><link rel="prefetch" href="/matheusblog/assets/js/330.5eb0fa54.js"><link rel="prefetch" href="/matheusblog/assets/js/331.47217147.js"><link rel="prefetch" href="/matheusblog/assets/js/332.891c1931.js"><link rel="prefetch" href="/matheusblog/assets/js/333.22aa3d9c.js"><link rel="prefetch" href="/matheusblog/assets/js/334.7ced64e0.js"><link rel="prefetch" href="/matheusblog/assets/js/335.9f090150.js"><link rel="prefetch" href="/matheusblog/assets/js/34.0bbf3cd4.js"><link rel="prefetch" href="/matheusblog/assets/js/35.5e7a3106.js"><link rel="prefetch" href="/matheusblog/assets/js/36.0a101841.js"><link rel="prefetch" href="/matheusblog/assets/js/37.d2f841a3.js"><link rel="prefetch" href="/matheusblog/assets/js/38.5ffa2ff0.js"><link rel="prefetch" href="/matheusblog/assets/js/39.11eb7112.js"><link rel="prefetch" href="/matheusblog/assets/js/4.172c31f8.js"><link rel="prefetch" href="/matheusblog/assets/js/40.16e1a3d0.js"><link rel="prefetch" href="/matheusblog/assets/js/41.7416be78.js"><link rel="prefetch" href="/matheusblog/assets/js/42.d43b207e.js"><link rel="prefetch" href="/matheusblog/assets/js/43.184ce555.js"><link rel="prefetch" href="/matheusblog/assets/js/44.2e494f9f.js"><link rel="prefetch" href="/matheusblog/assets/js/45.b89064eb.js"><link rel="prefetch" href="/matheusblog/assets/js/46.e7e93b34.js"><link rel="prefetch" href="/matheusblog/assets/js/47.88edf3e7.js"><link rel="prefetch" href="/matheusblog/assets/js/48.a3ef8833.js"><link rel="prefetch" href="/matheusblog/assets/js/49.416e2ff4.js"><link rel="prefetch" href="/matheusblog/assets/js/5.66045499.js"><link rel="prefetch" href="/matheusblog/assets/js/50.6f9e666c.js"><link rel="prefetch" href="/matheusblog/assets/js/51.0ccc90fa.js"><link rel="prefetch" href="/matheusblog/assets/js/52.c4d78d95.js"><link rel="prefetch" href="/matheusblog/assets/js/53.6e9e73bf.js"><link rel="prefetch" href="/matheusblog/assets/js/54.c09c1331.js"><link rel="prefetch" href="/matheusblog/assets/js/55.abb95afe.js"><link rel="prefetch" href="/matheusblog/assets/js/56.255e4f5a.js"><link rel="prefetch" href="/matheusblog/assets/js/57.87bff193.js"><link rel="prefetch" href="/matheusblog/assets/js/58.ac76633b.js"><link rel="prefetch" href="/matheusblog/assets/js/59.deb7ee54.js"><link rel="prefetch" href="/matheusblog/assets/js/6.082e9fa1.js"><link rel="prefetch" href="/matheusblog/assets/js/60.cf9069f9.js"><link rel="prefetch" href="/matheusblog/assets/js/61.96603df6.js"><link rel="prefetch" href="/matheusblog/assets/js/62.c20b80a7.js"><link rel="prefetch" href="/matheusblog/assets/js/63.5686a0b8.js"><link rel="prefetch" href="/matheusblog/assets/js/64.175576f7.js"><link rel="prefetch" href="/matheusblog/assets/js/65.5ae64b74.js"><link rel="prefetch" href="/matheusblog/assets/js/66.521c63ff.js"><link rel="prefetch" href="/matheusblog/assets/js/67.b425835a.js"><link rel="prefetch" href="/matheusblog/assets/js/68.4681f5d4.js"><link rel="prefetch" href="/matheusblog/assets/js/69.a4dd03f4.js"><link rel="prefetch" href="/matheusblog/assets/js/7.ac1c1c22.js"><link rel="prefetch" href="/matheusblog/assets/js/70.b8b1c0e6.js"><link rel="prefetch" href="/matheusblog/assets/js/71.d17ca0a5.js"><link rel="prefetch" href="/matheusblog/assets/js/72.373736b1.js"><link rel="prefetch" href="/matheusblog/assets/js/73.cffad132.js"><link rel="prefetch" href="/matheusblog/assets/js/74.fbb35090.js"><link rel="prefetch" href="/matheusblog/assets/js/75.d7df8fa9.js"><link rel="prefetch" href="/matheusblog/assets/js/76.8fdf1b27.js"><link rel="prefetch" href="/matheusblog/assets/js/77.372d307f.js"><link rel="prefetch" href="/matheusblog/assets/js/78.13b229db.js"><link rel="prefetch" href="/matheusblog/assets/js/79.6a9fcfb3.js"><link rel="prefetch" href="/matheusblog/assets/js/8.aadfe009.js"><link rel="prefetch" href="/matheusblog/assets/js/80.65421bb8.js"><link rel="prefetch" href="/matheusblog/assets/js/81.c6c8f34c.js"><link rel="prefetch" href="/matheusblog/assets/js/82.cdc5fd14.js"><link rel="prefetch" href="/matheusblog/assets/js/83.05eecc6f.js"><link rel="prefetch" href="/matheusblog/assets/js/84.baf2ae71.js"><link rel="prefetch" href="/matheusblog/assets/js/85.9c66f181.js"><link rel="prefetch" href="/matheusblog/assets/js/86.130a310b.js"><link rel="prefetch" href="/matheusblog/assets/js/87.b1fffecd.js"><link rel="prefetch" href="/matheusblog/assets/js/88.8acfd7c2.js"><link rel="prefetch" href="/matheusblog/assets/js/89.fe1c2e91.js"><link rel="prefetch" href="/matheusblog/assets/js/9.787b2fa5.js"><link rel="prefetch" href="/matheusblog/assets/js/90.57c4bcfc.js"><link rel="prefetch" href="/matheusblog/assets/js/91.f51280e1.js"><link rel="prefetch" href="/matheusblog/assets/js/92.96836f34.js"><link rel="prefetch" href="/matheusblog/assets/js/93.f50f9f34.js"><link rel="prefetch" href="/matheusblog/assets/js/94.a9740e63.js"><link rel="prefetch" href="/matheusblog/assets/js/95.d17d251c.js"><link rel="prefetch" href="/matheusblog/assets/js/96.b087ef79.js"><link rel="prefetch" href="/matheusblog/assets/js/97.9ba0439c.js"><link rel="prefetch" href="/matheusblog/assets/js/98.21b2bcc2.js"><link rel="prefetch" href="/matheusblog/assets/js/99.e90fc227.js">
+    <link rel="stylesheet" href="/matheusblog/assets/css/0.styles.980a01be.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/matheusblog/" class="home-link router-link-active"><!----> <span class="site-name">MyBlog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/jvm/00虚拟机内存体系与垃圾回收.html" class="nav-link">
+  JVM简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li><li class="dropdown-item"><h4>
+          ElasticSearch
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/elasticsearch/02Elasticsearch-Docker搭建ES.html" class="nav-link">
+  Docker搭建ES
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/springMVC框架.html" class="nav-link">
+  SpringMVC框架
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springboot/SpringBoot简介.html" class="nav-link">
+  SpringBoot简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/docker/01Docker入门.html" class="nav-link">
+  Docker入门
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/k8s/01Kubernetes介绍及使用.html" class="nav-link">
+  K8s介绍与使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/code-style/effective-java/目录.html" class="nav-link">
+  Effective-Java
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  单元测试
+</a></li><li class="dropdown-subitem"><a href="/matheusblog/md/project/jt-project/2. IDEA配置.html" class="nav-link">
+  IDEA配置
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/scala/Scala学习宝典.html" class="nav-link">
+  Scala学习宝典
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/python/Python基础学习.html" class="nav-link">
+  Python基础学习
+</a></li></ul></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/jvm/00虚拟机内存体系与垃圾回收.html" class="nav-link">
+  JVM简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li><li class="dropdown-item"><h4>
+          ElasticSearch
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/elasticsearch/02Elasticsearch-Docker搭建ES.html" class="nav-link">
+  Docker搭建ES
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/springMVC框架.html" class="nav-link">
+  SpringMVC框架
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springboot/SpringBoot简介.html" class="nav-link">
+  SpringBoot简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/docker/01Docker入门.html" class="nav-link">
+  Docker入门
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/k8s/01Kubernetes介绍及使用.html" class="nav-link">
+  K8s介绍与使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/code-style/effective-java/目录.html" class="nav-link">
+  Effective-Java
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  单元测试
+</a></li><li class="dropdown-subitem"><a href="/matheusblog/md/project/jt-project/2. IDEA配置.html" class="nav-link">
+  IDEA配置
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/scala/Scala学习宝典.html" class="nav-link">
+  Scala学习宝典
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/python/Python基础学习.html" class="nav-link">
+  Python基础学习
+</a></li></ul></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Maven</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/spring/maven/01Tomcat入门基础.html" class="sidebar-link">Tomcat入门基础</a></li><li><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="sidebar-link">Maven入门基础</a></li><li><a href="/matheusblog/md/spring/maven/03Maven pom.xml常用配置.html" class="sidebar-link">Maven的pom.xml常用配置</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Spring</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/spring/spring/Spring概述.html" class="sidebar-link">Spring概述</a></li><li><a href="/matheusblog/md/spring/spring/Spring入门案例.html" class="sidebar-link">Spring入门案例</a></li><li><a href="/matheusblog/md/spring/spring/IoC控制反转.html" class="sidebar-link">IOC控制反转</a></li><li><a href="/matheusblog/md/spring/spring/DI依赖注入.html" class="sidebar-link">DI依赖注入</a></li><li><a href="/matheusblog/md/spring/spring/Bean工厂.html" class="sidebar-link">Bean工厂</a></li><li><a href="/matheusblog/md/spring/spring/AOP面向切面编程.html" class="sidebar-link">AOP面向切面编程</a></li><li><a href="/matheusblog/md/spring/spring/事务控制.html" class="sidebar-link">事务控制</a></li><li><a href="/matheusblog/md/spring/spring/注解大全.html" class="sidebar-link">注解大全</a></li><li><a href="/matheusblog/md/spring/spring/Spring框架.html" class="sidebar-link">Spring框架</a></li><li><a href="/matheusblog/md/spring/spring/Spring设计模式.html" class="sidebar-link">Spring设计模式</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>SpringMVC</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/spring/springmvc/SpringMVC简介.html" class="sidebar-link">Spring MVC 简介</a></li><li><a href="/matheusblog/md/spring/springmvc/SpringMVC入门案例与高级用法.html" class="sidebar-link">SpringMVC入门案例与高级应用</a></li><li><a href="/matheusblog/md/spring/springmvc/SpringMVC框架.html" class="sidebar-link">SpringMVC框架</a></li><li><a href="/matheusblog/md/spring/springmvc/前后端交互与Spring MVC参数传递.html" class="active sidebar-link">前后端交互与SpringMVC参数传递</a></li><li><a href="/matheusblog/md/spring/springmvc/SpringMVC会话管理.html" class="sidebar-link">SpringMVC会话管理</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>MyBatis-Plus</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="sidebar-link">MyBatis简介</a></li><li><a href="/matheusblog/md/spring/mybatis/02入门程序.html" class="sidebar-link">MyBatis入门程序</a></li><li><a href="/matheusblog/md/spring/mybatis/03MyBatis框架.html" class="sidebar-link">MyBatis框架</a></li><li><a href="/matheusblog/md/spring/mybatis/04MyBatis-Plus.html" class="sidebar-link">MyBatis-Plus</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>SpringBoot</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/spring/springboot/SpringBoot简介.html" class="sidebar-link">SpringBoot简介</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="前后端交互与springmvc参数传递"><a href="#前后端交互与springmvc参数传递" class="header-anchor">#</a> 前后端交互与SpringMVC参数传递</h1> <p></p><div class="table-of-contents"><ul><li><a href="#前后端交互">前后端交互</a><ul><li><a href="#框架之间的关系">框架之间的关系</a></li><li><a href="#完成后端层级代码">完成后端层级代码</a></li><li><a href="#查询案例">查询案例</a></li></ul></li><li><a href="#springmvc参数传递">SpringMVC参数传递</a><ul><li><a href="#简单参数接收">简单参数接收</a></li><li><a href="#对象参数接收">对象参数接收</a></li><li><a href="#restful参数接收">RestFul参数接收</a></li><li><a href="#json结构">JSON结构</a></li><li><a href="#springmvc-json返回">SpringMVC JSON返回</a></li><li><a href="#springmvc-用法学习">SpringMVC 用法学习</a></li><li><a href="#restful结构-难点">RestFul结构(难点)</a></li></ul></li><li><a href="#前后端调用">前后端调用</a><ul><li><a href="#入门案例">入门案例</a></li><li><a href="#axios-get">Axios-Get</a></li><li><a href="#简化axios调用">简化Axios调用</a></li></ul></li><li><a href="#axios-post请求">Axios-post请求</a><ul><li><a href="#入门案例">入门案例</a></li><li><a href="#关于常见请求类型语法说明">关于常见请求类型语法说明</a></li><li><a href="#put请求测试">put请求测试</a></li><li><a href="#关于跨域说明">关于跨域说明</a></li></ul></li><li><a href="#axios扩展知识">Axios扩展知识</a><ul><li><a href="#前端js-回调地狱">前端JS-回调地狱</a></li><li><a href="#前端js-回调地狱-解决方案">前端JS-回调地狱-解决方案</a></li></ul></li></ul></div><p></p> <h2 id="前后端交互"><a href="#前后端交互" class="header-anchor">#</a> 前后端交互</h2> <h3 id="框架之间的关系"><a href="#框架之间的关系" class="header-anchor">#</a> 框架之间的关系</h3> <p>1.SpringBoot (工具/框架的框架) 2.Spring(整合第三方)
+3.SpringMVC(实现前后端交互) 4.Mybatis/MP(实现持久化操作)</p> <p><img src="https://img-blog.csdnimg.cn/1fd51cb3ec184325b219cb1aa474dab5.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h3 id="完成后端层级代码"><a href="#完成后端层级代码" class="header-anchor">#</a> 完成后端层级代码</h3> <p>说明: MVC思想主要的目的实现代码的解耦. 根据MVC思想 演化出层级代码结构 Controller/Service /Dao/Mapper
+编码顺序: 1.编辑POJO 2.编辑Mapper接口 3.编辑Service层 4.编辑Controller</p> <p><img src="https://img-blog.csdnimg.cn/e4947d97435743d1ae91f9254ab195fa.png" alt="在这里插入图片描述"></p> <h3 id="查询案例"><a href="#查询案例" class="header-anchor">#</a> 查询案例</h3> <h4 id="业务需求"><a href="#业务需求" class="header-anchor">#</a> 业务需求</h4> <p>用户浏览器输入地址: http://localhost:8090/findAll,
+要求: 利用MP查询数据库,返回集合的JSON数据.</p> <h4 id="编辑usercontroller"><a href="#编辑usercontroller" class="header-anchor">#</a> 编辑UserController</h4> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>jt<span class="token punctuation">.</span>controller</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">com<span class="token punctuation">.</span>jt<span class="token punctuation">.</span>pojo<span class="token punctuation">.</span></span><span class="token class-name">User</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">com<span class="token punctuation">.</span>jt<span class="token punctuation">.</span>service<span class="token punctuation">.</span></span><span class="token class-name">UserService</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">com<span class="token punctuation">.</span>jt<span class="token punctuation">.</span>service<span class="token punctuation">.</span></span><span class="token class-name">UserServiceImpl</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>beans<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Autowired</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>stereotype<span class="token punctuation">.</span></span><span class="token class-name">Controller</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">RequestMapping</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">ResponseBody</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">RestController</span></span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">List</span></span><span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@RestController</span>
+<span class="token comment">//@Controller</span>
+<span class="token comment">//@ResponseBody //将服务端数据转化为JSON串返回</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserController</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">//编码规则: 面向接口编程 解耦</span>
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token keyword">private</span> <span class="token class-name">UserService</span> userService<span class="token punctuation">;</span>
+
+    <span class="token comment">/**
+     * 查询所有的数据
+     * URL: http://localhost:8090/findAll
+     * 参数: 没有参数
+     * 返回值: List&lt;User&gt;
+     */</span>
+    <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/findAll&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> <span class="token function">findAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+        <span class="token keyword">return</span> userService<span class="token punctuation">.</span><span class="token function">findAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+
+
+
+<span class="token punctuation">}</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br></div></div><h4 id="编辑userserviceimpl"><a href="#编辑userserviceimpl" class="header-anchor">#</a> 编辑UserServiceImpl</h4> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token annotation punctuation">@Service</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserServiceImpl</span> <span class="token keyword">implements</span> <span class="token class-name">UserService</span><span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token keyword">private</span> <span class="token class-name">UserMapper</span> userMapper<span class="token punctuation">;</span>
+
+    <span class="token comment">//查询所有的数据 没有where条件所以参数为null</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> <span class="token function">findAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token keyword">return</span> userMapper<span class="token punctuation">.</span><span class="token function">selectList</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><h4 id="页面效果展现"><a href="#页面效果展现" class="header-anchor">#</a> 页面效果展现</h4> <p><img src="https://img-blog.csdnimg.cn/f1680294be8443d88c6cf65b166e86c7.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h2 id="springmvc参数传递"><a href="#springmvc参数传递" class="header-anchor">#</a> SpringMVC参数传递</h2> <h3 id="简单参数接收"><a href="#简单参数接收" class="header-anchor">#</a> 简单参数接收</h3> <h4 id="需求说明"><a href="#需求说明" class="header-anchor">#</a> 需求说明</h4> <p>常识: 通过浏览器的地址栏 只能发起GET请求.</p> <p>URL1: http://localhost:8080/findUserById?id=1</p> <p>难点: 动态接收请求/参数ID</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>根据id查询用户信息    http://localhost:8090/findUserById?id=1
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h4 id="编辑usercontroller-2"><a href="#编辑usercontroller-2" class="header-anchor">#</a> 编辑UserController</h4> <div class="language-java line-numbers-mode"><pre class="language-java"><code> <span class="token comment">/**
+     *
+     * 不同类型的请求注解说明:
+     *  @PostMapping(&quot;&quot;)
+     *  @PutMapping(&quot;&quot;)
+     *  @DeleteMapping(&quot;&quot;)
+     *  参数说明:
+     *     1.参数名称必须与URL中的名称一致.
+     *     2.SpringMVC可以根据用户的需求,自动的实现类型的转化
+     *      底层实现: springmvc所有的参数默认都是String类型
+     *      根据用户参数的类型,自动实现转化.
+     *
+     * URL地址:  http://localhost:8090/findUserById?id=1
+     * 请求类型:  GET/DELETE  /POST/PUT
+     * 参数: id=1
+     * 返回值结果: User对象的json串
+     *
+     */</span>
+    <span class="token comment">//@RequestMapping(value = &quot;/findUserById&quot;,method = RequestMethod.GET)</span>
+    <span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/findUserById&quot;</span><span class="token punctuation">)</span>     <span class="token comment">//只允许接收get类型</span>
+    <span class="token keyword">public</span> <span class="token class-name">User</span> <span class="token function">findUserById</span><span class="token punctuation">(</span><span class="token class-name">Integer</span> id<span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+        <span class="token keyword">return</span> userService<span class="token punctuation">.</span><span class="token function">findUserById</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br></div></div><h4 id="编辑userserviceimpl-2"><a href="#编辑userserviceimpl-2" class="header-anchor">#</a> 编辑UserServiceImpl</h4> <div class="language-java line-numbers-mode"><pre class="language-java"><code> <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">User</span> <span class="token function">findUserById</span><span class="token punctuation">(</span><span class="token class-name">Integer</span> id<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token keyword">return</span> userMapper<span class="token punctuation">.</span><span class="token function">selectById</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h4 id="页面效果展现-2"><a href="#页面效果展现-2" class="header-anchor">#</a> 页面效果展现</h4> <p><img src="https://img-blog.csdnimg.cn/d9d7e3400b274fd8ac8624fb1866aa51.png" alt="在这里插入图片描述"></p> <h3 id="对象参数接收"><a href="#对象参数接收" class="header-anchor">#</a> 对象参数接收</h3> <h4 id="需求"><a href="#需求" class="header-anchor">#</a> 需求</h4> <p>案例: 根据name=“王昭君” sex=女 查询用户数据?</p> <p>URL: http://localhost:8090/findUserByNS?name=王昭君&amp;sex=女</p> <h4 id="编辑usercontroller-3"><a href="#编辑usercontroller-3" class="header-anchor">#</a> 编辑UserController</h4> <div class="language-java line-numbers-mode"><pre class="language-java"><code> <span class="token comment">/**
+     * 规则: SpringMVC 可以利用对象的方式接收
+     * 底层实现: 参数name=&quot;xxx&quot; 拼接set形成setName,之后检查对象中
+     * 是否有对应的setName(), 如果匹配该方法,则为对象赋值.
+     * 注意事项: 参数名称最好以属性名称一致
+     *
+     * URL地址: http://localhost:8090/findUserByNS?name=王昭君&amp;sex=女
+     * 参数：  name=xxx&amp;sex=xx
+     * 返回值：List&lt;User&gt;
+     */</span>
+    <span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/findUserByNS&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> <span class="token function">findUserByNS</span><span class="token punctuation">(</span><span class="token class-name">User</span> user<span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+        <span class="token keyword">return</span> userService<span class="token punctuation">.</span><span class="token function">findUserByNS</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><h4 id="编辑userserviceimpl-3"><a href="#编辑userserviceimpl-3" class="header-anchor">#</a> 编辑UserServiceImpl</h4> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">//MP 可以根据对象中不为null的属性拼接where条件</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> <span class="token function">findUserByNS</span><span class="token punctuation">(</span><span class="token class-name">User</span> user<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> userMapper<span class="token punctuation">.</span><span class="token function">selectList</span><span class="token punctuation">(</span>queryWrapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><h4 id="页面效果展现-3"><a href="#页面效果展现-3" class="header-anchor">#</a> 页面效果展现</h4> <p><img src="https://img-blog.csdnimg.cn/6dd307cacb7746e4a9a9d5ab5b414537.png" alt="在这里插入图片描述"></p> <h3 id="restful参数接收"><a href="#restful参数接收" class="header-anchor">#</a> RestFul参数接收</h3> <h4 id="restful介绍"><a href="#restful介绍" class="header-anchor">#</a> RestFul介绍</h4> <p>REST 指的是一组架构约束条件和原则。满足这些约束条件和原则的应用程序或设计就是 RESTful。
+定义: RESTFul 是一种请求的规则(语法/定义)</p> <h4 id="restful说明"><a href="#restful说明" class="header-anchor">#</a> RESTFul说明</h4> <p>Get请求: http://localhost:8090/findUserByNS?name=王昭君&amp;sex=女</p> <p>信息: 1.查询请求</p> <p>2.参数直观 name=xxx</p> <p>3.请求的结构冗余. 不合适多个参数的写法.</p> <p>请求优化:</p> <p>http://localhost:8090/user/王昭君/女</p> <p>优势:</p> <ol><li><p>用户不能了解请求的意图 规定:请求方法名称不能出现 “动词”,只能写名词.</p></li> <li><p>参数保密, 只有后端服务器清楚参数的意义.</p></li> <li><p>请求字节传输量少 简洁.</p></li></ol> <p>注意事项:</p> <ol><li>URL地址中参数与参数之间使用 /分隔.</li> <li>请求的参数的位置一旦固定,不可轻易修改.</li> <li>用户发请求时,就应该按照restFul的结构执行.</li> <li>restFul请求一般以get请求为主. put/delete/post</li></ol> <h4 id="restful案例"><a href="#restful案例" class="header-anchor">#</a> RESTFul案例</h4> <h5 id="需求-2"><a href="#需求-2" class="header-anchor">#</a> 需求</h5> <p>查询 name=“貂蝉” age&gt; 10 岁 的用户.</p> <p>URL: http://localhost:8090/user/貂蝉/10</p> <h5 id="编辑usercontroller-4"><a href="#编辑usercontroller-4" class="header-anchor">#</a> 编辑UserController</h5> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">/**
+     * 后端服务器接收规则:
+     *     1.参数与参数之后使用 /分隔
+     *     2.参数的位置一旦确定,一般不变.
+     *     3.接收的参数使用 {形参变量}
+     *     4.使用@PathVariable 接收
+     *     5.如果参数有多个建议使用对象接收  参数必须与属性一致,SpringMVC自动封装
+     * 注意事项: 如果名称不统一,则需要转化 具体如下:
+     *          @PathVariable(&quot;name&quot;) String username
+     *
+     * url: http://localhost:8090/user/貂蝉/10
+     * 参数: name/age
+     * 返回值: List&lt;User&gt;
+     */</span>
+
+    <span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/user/{name}/{age}&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> <span class="token function">findUserByNA</span><span class="token punctuation">(</span><span class="token class-name">User</span> user<span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+        <span class="token keyword">return</span> userService<span class="token punctuation">.</span><span class="token function">findUserByNA</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+
+
+
+   <span class="token comment">/*
+    说明: restFul写法1
+    @GetMapping(&quot;/user/{name}/{age}&quot;)
+    public List&lt;User&gt; findUserByNA(@PathVariable String name,
+                                   @PathVariable Integer age){
+        System.out.println(name);
+        System.out.println(age);
+
+        return null;
+    }*/</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br></div></div><div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>jt<span class="token punctuation">.</span>controller</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>stereotype<span class="token punctuation">.</span></span><span class="token class-name">Controller</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">PathVariable</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">RequestMapping</span></span><span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Controller</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RestFulController</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/**
+     * 常规get请求:
+     * url地址: http://localhost:8090/restFul?id=1&amp;name=tom
+     * get请求弊端: 如果参数有多个,则key-value的结构需要多份.
+     * RestFul结构:
+     *  url地址: http://localhost:8090/restFul/{id}/{name}
+     *      1.参数之间使用/分割
+     *      2.参数的位置一旦确定,不可更改
+     *      3.参数使用{}号的形式进行包裹,并且设定形参
+     *      4.在接收参数时,使用特定的注解取值@PathVariable
+     *
+     * @PathVariable: 参数说明
+     *      1.name/value  动态接收形参的数据  如果参数相同则省略不写
+     *      2.必填项 required 默认为true
+     */</span>
+    <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/restFul/{id}/{name}&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">restFul</span><span class="token punctuation">(</span><span class="token annotation punctuation">@PathVariable</span> <span class="token class-name">Integer</span> id<span class="token punctuation">,</span>
+                          <span class="token annotation punctuation">@PathVariable</span> <span class="token class-name">String</span> name<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;获取参数:&quot;</span><span class="token operator">+</span>id<span class="token operator">+</span><span class="token string">&quot;|&quot;</span><span class="token operator">+</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token string">&quot;success&quot;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+
+
+<span class="token punctuation">}</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br></div></div><h5 id="编辑userserviceimpl-4"><a href="#编辑userserviceimpl-4" class="header-anchor">#</a> 编辑UserServiceImpl</h5> <div class="language-java line-numbers-mode"><pre class="language-java"><code> <span class="token comment">//规则: 字段与属性的逻辑运算符为 '=号'时使用实体(user)对象封装</span>
+    <span class="token comment">//查询 name=&quot;貂蝉&quot; age&gt; 10 岁 的用户.</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> <span class="token function">findUserByNA</span><span class="token punctuation">(</span><span class="token class-name">User</span> user<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        queryWrapper<span class="token punctuation">.</span><span class="token function">eq</span><span class="token punctuation">(</span><span class="token string">&quot;name&quot;</span><span class="token punctuation">,</span>user<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">gt</span><span class="token punctuation">(</span><span class="token string">&quot;age&quot;</span><span class="token punctuation">,</span>user<span class="token punctuation">.</span><span class="token function">getAge</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> userMapper<span class="token punctuation">.</span><span class="token function">selectList</span><span class="token punctuation">(</span>queryWrapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><h4 id="同名提交问题"><a href="#同名提交问题" class="header-anchor">#</a> 同名提交问题</h4> <h5 id="需求-3"><a href="#需求-3" class="header-anchor">#</a> 需求</h5> <p>用户查询id=1,3,4,5的数据. 如果有同名参数一般采用 ',号 ’ 分隔</p> <p>URL: http://localhost:8090/getUserByIds?ids=1,3,4,5</p> <h5 id="编辑usercontroller-5"><a href="#编辑usercontroller-5" class="header-anchor">#</a> 编辑UserController</h5> <div class="language-java line-numbers-mode"><pre class="language-java"><code> <span class="token comment">/**
+     * 规则: 如果参数使用,号分隔,则SpringMVC可以自动的转化为数组.
+     * 查询多个用户
+     * URL: http://localhost:8090/getUserByIds?ids=1,3,4,5
+     * 参数: ids = 1,3,4,5
+     * 返回值: List&lt;User&gt;
+     */</span>
+    <span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/getUserByIds&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> <span class="token function">getUserByIds</span><span class="token punctuation">(</span><span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> ids<span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+        <span class="token keyword">return</span> userService<span class="token punctuation">.</span><span class="token function">getUserByIds</span><span class="token punctuation">(</span>ids<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><h5 id="编辑userserviceimpl-5"><a href="#编辑userserviceimpl-5" class="header-anchor">#</a> 编辑UserServiceImpl</h5> <div class="language-java line-numbers-mode"><pre class="language-java"><code> <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> <span class="token function">getUserByIds</span><span class="token punctuation">(</span><span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> ids<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">&gt;</span></span> idList <span class="token operator">=</span> <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span>ids<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> userMapper<span class="token punctuation">.</span><span class="token function">selectBatchIds</span><span class="token punctuation">(</span>idList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><h5 id="页面效果展现-4"><a href="#页面效果展现-4" class="header-anchor">#</a> 页面效果展现</h5> <p><img src="https://img-blog.csdnimg.cn/d45db30b0ea64814b510398e697a62ff.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h4 id="简化业务调用"><a href="#简化业务调用" class="header-anchor">#</a> 简化业务调用</h4> <p>需求: 按照常规说明 执行增删改查的操作,需要多个业务方法.</p> <p>例子:</p> <p>1.新增用户 /insertUser</p> <p>2.修改用户 /updateUser</p> <p>3.删除用户 /deleteUser</p> <p>4.查询用户 /selectUser</p> <p>说明: 上述的操作在早期这么写没有问题.但是新的请求规范规定应该让请求尽可能变成<strong>无状态</strong>的请求.(删除动词)</p> <p>常见请求类型: 1.GET 2.POST 3.PUT 4.DELETE</p> <p>优化:</p> <p>1.新增用户 /user 请求类型: POST</p> <p>2.修改用户 /user 请求类型: PUT</p> <p>3.删除用户 /user 请求类型: DELETE</p> <p>4.查询用户 /user 请求类型: GET</p> <p>优化注解:</p> <p><img src="https://img-blog.csdnimg.cn/20210506115330559.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <p>总结:</p> <p>1.利用RestFul 可以简化get请求类型.</p> <p>2.利用RestFul可以使用无状态的请求,通过不同的请求类型 控制不同的业务逻辑(较为常用)</p> <h3 id="json结构"><a href="#json结构" class="header-anchor">#</a> JSON结构</h3> <h4 id="什么是json"><a href="#什么是json" class="header-anchor">#</a> 什么是JSON</h4> <p>JSON(JavaScript Object Notation) 是一种<strong>轻量级的数据交换格式</strong>。它使得人们很容易的进行阅读和编写。同时也方便了机器进行解析和生成。它是基于 JavaScript Programming Language , Standard ECMA-262 3rd Edition - December 1999 的一个子集。 JSON采用完全独立于程序语言的文本格式，但是也使用了类C语言的习惯（包括C, C++, C#, Java, JavaScript, Perl, Python等）。这些特性使JSON成为理想的数据交换语言。</p> <p>根源:网络传输协议http/https,本质传输的数据都是字符串/字节信息. 协议与系统无关. 所以采用JSON的方式将数据按照特定的顺序进行排列. JSON中的特殊的数据结构,可以很好的解析字符串.</p> <h4 id="json的格式"><a href="#json的格式" class="header-anchor">#</a> JSON的格式</h4> <h5 id="对象格式"><a href="#对象格式" class="header-anchor">#</a> 对象格式</h5> <p>对象（object） 是一个<strong>无序的“‘名称/值’对”集合</strong>。一个对象以“{”（左括号）开始，“}”（右括号）结束。每个“名称”后跟一个“:”（冒号）；“‘名称/值’ 对”之间使用“,”（逗号）分隔。</p> <p><img src="https://img-blog.csdnimg.cn/c866bb99214248e599fc6d2176b144bc.png" alt="在这里插入图片描述"></p> <div class="language-json line-numbers-mode"><pre class="language-json"><code>	<span class="token punctuation">{</span><span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;100&quot;</span><span class="token punctuation">,</span><span class="token property">&quot;name&quot;</span><span class="token operator">:</span><span class="token string">&quot;tomcat&quot;</span><span class="token punctuation">,</span><span class="token property">&quot;age&quot;</span><span class="token operator">:</span><span class="token number">18</span><span class="token punctuation">,</span><span class="token property">&quot;sex&quot;</span><span class="token operator">:</span><span class="token string">&quot;男&quot;</span><span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h5 id="数组格式"><a href="#数组格式" class="header-anchor">#</a> 数组格式</h5> <p>数组（array） 是<strong>值（value）的有序集合</strong>。一个数组以“[”（左中括号）开始，“]”（右中括号）结束。值之间使用“,”（逗号）分隔。</p> <p><img src="https://img-blog.csdnimg.cn/c98b29390be941369fec63b2395ebb7e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Zeq6ICA5aSq6Ziz,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p> <div class="language-json line-numbers-mode"><pre class="language-json"><code>	<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token string">&quot;张三&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;李四&quot;</span><span class="token punctuation">]</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h5 id="嵌套格式"><a href="#嵌套格式" class="header-anchor">#</a> 嵌套格式</h5> <p><strong>值（value）</strong> 可以是双引号括起来的字符串（string）、数值(number)、true、false、 null、对象（object）或者数组（array）。这些结构可以嵌套。</p> <p><img src="https://img-blog.csdnimg.cn/b0f6c23953c444d2b2e1deadbfff9771.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Zeq6ICA5aSq6Ziz,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p> <div class="language-json line-numbers-mode"><pre class="language-json"><code>	<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token boolean">true</span><span class="token punctuation">,</span><span class="token boolean">false</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token property">&quot;id&quot;</span><span class="token operator">:</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token property">&quot;name&quot;</span><span class="token operator">:</span><span class="token string">&quot;tomcat&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token punctuation">{</span>arrays<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h3 id="springmvc-json返回"><a href="#springmvc-json返回" class="header-anchor">#</a> SpringMVC JSON返回</h3> <h4 id="学习的意义"><a href="#学习的意义" class="header-anchor">#</a> 学习的意义</h4> <p>现阶段一般的请求都是前后端分离的方式.ajax (jQuery/axios),一般向服务器请求的数据 通常详情下 都是采用JSON串的方式返回.</p> <h4 id="responsebody注解"><a href="#responsebody注解" class="header-anchor">#</a> @ResponseBody注解</h4> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>jt<span class="token punctuation">.</span>controller</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">com<span class="token punctuation">.</span>jt<span class="token punctuation">.</span>pojo<span class="token punctuation">.</span></span><span class="token class-name">User</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>stereotype<span class="token punctuation">.</span></span><span class="token class-name">Controller</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">RequestMapping</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">ResponseBody</span></span><span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Controller</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JSONController</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/**
+     * 需求: 要求根据getJSON的请求,获取User对象的JSON数据.
+     * 用法: 如果需要返回JOSN数据则使用注解@ResponseBody
+     * 知识点讲解:
+     *      返回的对象之后,SpringMVC通过内部API(ObjectMapper)
+     *      调用对象的getXXX()方法动态的获取属性和属性值.
+     *  演化规则:
+     *      getAge() ~~~~~去掉get首字母~~~~~Age()
+     *      ~~~~~~首字母小写~~~~~age()~~~~获取属性age
+     *      ~~~~~通过getAge() 动态获取属性的值
+     *
+     *  JSON: {&quot;age&quot;: &quot;今年18岁!!!&quot;}
+     *  注意事项:
+     *      必须添加get/set方法
+     */</span>
+    <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/getJSON&quot;</span><span class="token punctuation">)</span>
+    <span class="token annotation punctuation">@ResponseBody</span> <span class="token comment">//返回值就是一个JSON串</span>
+    <span class="token keyword">public</span> <span class="token class-name">User</span> <span class="token function">getJSON</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">User</span> user <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">User</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        user<span class="token punctuation">.</span><span class="token function">setId</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setName</span><span class="token punctuation">(</span><span class="token string">&quot;JSON测试&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> user<span class="token punctuation">;</span> <span class="token comment">//不需要执行视图解析器</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br></div></div><h4 id="restcontroller"><a href="#restcontroller" class="header-anchor">#</a> @RestController</h4> <p><img src="https://img-blog.csdnimg.cn/2021050615134247.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h3 id="springmvc-用法学习"><a href="#springmvc-用法学习" class="header-anchor">#</a> SpringMVC 用法学习</h3> <h4 id="关于springmvc-对象返回说明"><a href="#关于springmvc-对象返回说明" class="header-anchor">#</a> 关于SpringMVC 对象返回说明</h4> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">/**
+     * 要求:返回User对象
+     * URL: http://localhost:8080/getUserById?id=100
+     * 返回值: User对象
+     * 知识点: 对象转化为json时,调用对象的get方法获取属性和属性值
+     *        获取getxxx(),之后去除get 然后首字母小写 当做key,
+     *        方法的返回值当做value
+     */</span>
+    <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/getUserById&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">User</span> <span class="token function">getUserById</span><span class="token punctuation">(</span><span class="token keyword">int</span> id<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">User</span> user <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">User</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        user<span class="token punctuation">.</span><span class="token function">setId</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        user<span class="token punctuation">.</span><span class="token function">setName</span><span class="token punctuation">(</span><span class="token string">&quot;测试数据&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        user<span class="token punctuation">.</span><span class="token function">setSex</span><span class="token punctuation">(</span><span class="token string">&quot;男&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        user<span class="token punctuation">.</span><span class="token function">setAge</span><span class="token punctuation">(</span><span class="token number">18</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> user<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><h4 id="关于springmvc-同名提交问题"><a href="#关于springmvc-同名提交问题" class="header-anchor">#</a> 关于SpringMVC 同名提交问题</h4> <div class="language-java line-numbers-mode"><pre class="language-java"><code> <span class="token comment">/**
+     * SpringMVC动态参数接收 同名提交问题 多个参数使用,号进行分隔
+     * 爱好: 口 打篮球  口 踢足球  口 乒乓球
+     * URL传递:http://localhost:8080/hobby?names=打篮球,踢足球,乒乓球
+     * 返回值: 返回爱好的list集合
+     * 知识点: 如果springmvc遇到同名提交参数,并且中间使用&quot;,&quot;号分隔
+     *        则可以自动转化为数组.
+     */</span>
+    <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/hobby&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> <span class="token function">hobby</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> names<span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+        <span class="token comment">//数组如何转化为List集合</span>
+        <span class="token keyword">return</span>  <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span>names<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><h3 id="restful结构-难点"><a href="#restful结构-难点" class="header-anchor">#</a> RestFul结构(难点)</h3> <h4 id="传入get请求业务说明"><a href="#传入get请求业务说明" class="header-anchor">#</a> 传入GET请求业务说明</h4> <p>需求说明: 向后端服务器传递多个参数, name=tomcat, age=18,sex=男</p> <p>URL地址: http://localhost:8080/getUser?name=tomcat&amp;age=18&amp;sex=男</p> <p>该方法能否优化? 能否降低字节数量</p> <h4 id="restful参数拼接"><a href="#restful参数拼接" class="header-anchor">#</a> RestFul参数拼接</h4> <p>语法: 省略key,将value使用/的方式进行分隔.并且位置固定.</p> <p>URL地址: http://localhost:8080/getUser/tomcat/18/男</p> <h4 id="restful参数接收-2"><a href="#restful参数接收-2" class="header-anchor">#</a> RestFul参数接收</h4> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">/**
+     * 需求: 使用restFul结构接收参数
+     * URL: http://localhost:8080/user/tomcat/18/男
+     * 参数:  name/age/sex
+     * 返回值: User对象
+     * 难点知识: 如果获取url路径中的参数!!!
+     * restFul参数接收的语法:
+     *      1.参数使用{}进行包裹,并且指定属性名称
+     *      2.使用注解@PathVariable进行参数接收
+     *      3.restFul要求请求的路径不能出现动词
+     * 优化: 如果restFul的属性名称与对象的属性名称一致,则可以利用对象接收
+     */</span>
+    <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/user/{name}/{age}/{sex}&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">User</span> <span class="token function">getUser</span><span class="token punctuation">(</span><span class="token class-name">User</span> user<span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+        <span class="token keyword">return</span> user<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+   <span class="token comment">/* public User getUser(@PathVariable String name,
+                        @PathVariable int age,
+                        @PathVariable String sex){
+        User user = new User();
+        user.setName(name);
+        user.setAge(age);
+        user.setSex(sex);
+        return user;
+    }*/</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br></div></div><h4 id="restful请求路径的通用写法"><a href="#restful请求路径的通用写法" class="header-anchor">#</a> RestFul请求路径的通用写法</h4> <p>例子:</p> <ol><li>http://localhost:8080/getUserById?id=100</li> <li>http://localhost:8080/deleteUserById?id=100</li> <li>http://localhost:8080/updateUserById?id=100&amp;name=tomcat</li> <li>http://localhost:8080/insertUser POST 提交</li></ol> <p>问题: 上述的操作 意图特别的明显. 对后期操作会带来不安全的风险.</p> <p>优化: restFul风格的请求名称的要求,不能出现动词</p> <ol><li>http://localhost:8080/userById?id=100 类型: GET 查询业务逻辑</li> <li>http://localhost:8080/userById?id=100 类型: Delete 删除业务逻辑</li> <li>http://localhost:8080/userById?id=100&amp;name=tomcat 类型: PUT 更新业务逻辑</li> <li>http://localhost:8080/user 类型: POST 新增业务逻辑</li></ol> <p><img src="https://img-blog.csdnimg.cn/618401998573493fad713002acb4d5be.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Zeq6ICA5aSq6Ziz,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p> <h4 id="请求类型的种类"><a href="#请求类型的种类" class="header-anchor">#</a> 请求类型的种类</h4> <p>请求类型一共8种, 常用的4种 GET/POST/PUT/DELETE</p> <p><img src="https://img-blog.csdnimg.cn/ff1ac38adb66472badbeb1589586c4bf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Zeq6ICA5aSq6Ziz,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p> <h2 id="前后端调用"><a href="#前后端调用" class="header-anchor">#</a> 前后端调用</h2> <h3 id="入门案例"><a href="#入门案例" class="header-anchor">#</a> 入门案例</h3> <h4 id="编辑前端页面"><a href="#编辑前端页面" class="header-anchor">#</a> 编辑前端页面</h4> <div class="language-html line-numbers-mode"><pre class="language-html"><code><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>utf-8<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>Axios入门案例<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+		<span class="token comment">&lt;!-- 1.导入js文件 --&gt;</span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>js/axios.js<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+		
+		<span class="token comment">&lt;!-- 2.编辑JS代码 --&gt;</span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+			<span class="token comment">//url地址: http://localhost:8080/findUser</span>
+			<span class="token keyword">let</span> url1 <span class="token operator">=</span> <span class="token string">&quot;http://localhost:8080/axios/findUser&quot;</span>
+			<span class="token comment">//语法: axios.get(url地址)</span>
+            <span class="token comment">//在get请求下，参数需要使用【params】来设置</span>
+			axios<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>url1<span class="token punctuation">)</span>
+				 <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">promise</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+					console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>promise<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+				 <span class="token punctuation">}</span><span class="token punctuation">)</span>
+		</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>学习Axios的ajax调用<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br></div></div><h4 id="编辑后端controller"><a href="#编辑后端controller" class="header-anchor">#</a> 编辑后端Controller</h4> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token annotation punctuation">@RestController</span> <span class="token comment">// @Controller + @ResponseBody</span>
+<span class="token annotation punctuation">@CrossOrigin</span>    <span class="token comment">// 允许跨域访问</span>
+<span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/axios&quot;</span><span class="token punctuation">)</span>   <span class="token comment">//将公共的部分抽取</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">AxiosController</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/findUser&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">findUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+        <span class="token keyword">return</span> <span class="token string">&quot;查询用户成功!!!&quot;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><h4 id="关于promise对象说明"><a href="#关于promise对象说明" class="header-anchor">#</a> 关于promise对象说明</h4> <p>说明: axios 发送Ajax请求时,获取的服务器端数据,通过promise对象进行封装 格式如下. 一般通过data属性获取返回值结果</p> <p><img src="https://img-blog.csdnimg.cn/de245ac7c50a40e791c2542cca61cfd8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Zeq6ICA5aSq6Ziz,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p> <h4 id="关于谷歌浏览器常见功能"><a href="#关于谷歌浏览器常见功能" class="header-anchor">#</a> 关于谷歌浏览器常见功能</h4> <p>1.network</p> <p><img src="https://img-blog.csdnimg.cn/ff5c387a5eb34cacb14ae765c3ff0e61.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Zeq6ICA5aSq6Ziz,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p> <ol start="2"><li>根据报错提示 快速定位报错信息</li></ol> <p><img src="https://img-blog.csdnimg.cn/00418da87b6d49b686c6e919508aae5b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Zeq6ICA5aSq6Ziz,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p> <h3 id="axios-get"><a href="#axios-get" class="header-anchor">#</a> Axios-Get</h3> <h4 id="参数拼接写法"><a href="#参数拼接写法" class="header-anchor">#</a> 参数拼接写法</h4> <ol><li>页面JS</li></ol> <div class="language-javascript line-numbers-mode"><pre class="language-javascript"><code>			<span class="token comment">/**
+			 * 2.参数拼接  	
+			 * 需求: 根据Id查询User数据.
+			 */</span> 
+			<span class="token keyword">let</span> id2  <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
+			<span class="token keyword">let</span> url2 <span class="token operator">=</span> <span class="token string">&quot;http://localhost:8080/axios/findUserById?id=&quot;</span><span class="token operator">+</span>id2
+			axios<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>url2<span class="token punctuation">)</span>
+				 <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">promise</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+					 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>promise<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+				 <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><ol start="2"><li>编辑AxiosController</li></ol> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">/**
+     * 需求: 根据Id查询用户信息
+     * URL: http://localhost:8080/axios/findUserById?id=100
+     * 参数: id=100
+     * 返回值: User对象
+     */</span>
+    <span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/findUserById&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">User</span> <span class="token function">findUserById</span><span class="token punctuation">(</span><span class="token class-name">Integer</span> id<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">User</span> user <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">User</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        user<span class="token punctuation">.</span><span class="token function">setId</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        user<span class="token punctuation">.</span><span class="token function">setName</span><span class="token punctuation">(</span><span class="token string">&quot;测试数据&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        user<span class="token punctuation">.</span><span class="token function">setAge</span><span class="token punctuation">(</span><span class="token number">18</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        user<span class="token punctuation">.</span><span class="token function">setSex</span><span class="token punctuation">(</span><span class="token string">&quot;女&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> user<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p><img src="https://img-blog.csdnimg.cn/e8cab04707fe412bb8eb01787cc49e89.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Zeq6ICA5aSq6Ziz,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p> <h4 id="传递对象的写法"><a href="#传递对象的写法" class="header-anchor">#</a> 传递对象的写法</h4> <ol><li>编辑页面JS</li></ol> <div class="language-javascript line-numbers-mode"><pre class="language-javascript"><code><span class="token comment">/**
+			 * 需求3: 查询name=&quot;疫情快结束&quot; age=1
+			 * URL: http://localhost:8080/axios/findUserByNA?name=xxx&amp;age=1	
+			 * 关键字: params 对象标识符
+			 * 返回值: User对象
+			 */</span>
+			<span class="token keyword">let</span> user3 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token literal-property property">name</span><span class="token operator">:</span><span class="token string">&quot;西安加油&quot;</span><span class="token punctuation">,</span> <span class="token literal-property property">age</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">}</span>
+			<span class="token keyword">let</span> url3 <span class="token operator">=</span> <span class="token string">&quot;http://localhost:8080/axios/findUserByNA&quot;</span>
+			axios<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>url3<span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token literal-property property">params</span><span class="token operator">:</span> user3<span class="token punctuation">}</span><span class="token punctuation">)</span>
+				 <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">promise</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+					 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>promise<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+				 <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><ol start="2"><li>编辑AxiosController</li></ol> <div class="language-java line-numbers-mode"><pre class="language-java"><code> <span class="token comment">/**
+     * 业务需求: 动态接收参数
+     * URL地址: http://localhost:8080/axios/findUserByNA?name=xx&amp;age=1
+     * 参数: name=xx&amp;age=1
+     * 返回值: 返回User对象
+     */</span>
+    <span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/findUserByNA&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">User</span> <span class="token function">findUserByNA</span><span class="token punctuation">(</span><span class="token class-name">User</span> user<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        user<span class="token punctuation">.</span><span class="token function">setId</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        user<span class="token punctuation">.</span><span class="token function">setSex</span><span class="token punctuation">(</span><span class="token string">&quot;男&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> user<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><ol start="3"><li><p>页面效果展现</p> <p><img src="https://img-blog.csdnimg.cn/9d8d178a15634527978e5f8dfa10d3d1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Zeq6ICA5aSq6Ziz,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p></li></ol> <h4 id="restful结构实现数据传参"><a href="#restful结构实现数据传参" class="header-anchor">#</a> restFul结构实现数据传参</h4> <ol><li>编辑前端JS</li></ol> <div class="language-javascript line-numbers-mode"><pre class="language-javascript"><code><span class="token comment">/**
+			 * 需求: 利用restFul 传递name/age
+			 * 前端知识点:  模板字符串
+			 * 语法:  反引号 `` 
+			 * 作用:
+			 * 		1. 可以保证字符串的语法结构
+			 * 		2. 可以动态的获取对象中的数据
+			 * 
+			 */</span>
+			<span class="token keyword">let</span> user4 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">&quot;南孚电池&quot;</span><span class="token punctuation">,</span><span class="token literal-property property">age</span><span class="token operator">:</span> <span class="token number">8</span> <span class="token punctuation">}</span>
+			<span class="token comment">//let url4 = &quot;http://localhost:8080/axios/user/&quot;+user4.name+&quot;/&quot;+user4.age</span>
+			<span class="token keyword">let</span> url4 <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">http://localhost:8080/axios/user/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>user4<span class="token punctuation">.</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>user4<span class="token punctuation">.</span>age<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
+			
+			axios<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>url4<span class="token punctuation">)</span>
+				<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">promise</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+					console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>promise<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+				<span class="token punctuation">}</span><span class="token punctuation">)</span>
+			
+			<span class="token keyword">let</span> html <span class="token operator">=</span>  <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&lt;div&gt;
+							&lt;p&gt;第一&lt;/p&gt;
+							&lt;p&gt;第二&lt;/p&gt;
+							&lt;p&gt;第三&lt;/p&gt;
+						 &lt;/div&gt;</span><span class="token template-punctuation string">`</span></span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div><ol start="2"><li>编辑AxiosController</li></ol> <div class="language-java line-numbers-mode"><pre class="language-java"><code> <span class="token comment">/**
+     * 动态接收前端restFul结构
+     * URL: http://localhost:8080/axios/user/xxx/8
+     * 参数:  name/age
+     * 返回值: User对象返回
+     */</span>
+    <span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/user/{name}/{age}&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">User</span> <span class="token function">findUserNA</span><span class="token punctuation">(</span><span class="token class-name">User</span> user<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        user<span class="token punctuation">.</span><span class="token function">setId</span><span class="token punctuation">(</span><span class="token number">101</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        user<span class="token punctuation">.</span><span class="token function">setSex</span><span class="token punctuation">(</span><span class="token string">&quot;男&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> user<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><ol start="3"><li><p>页面效果展现</p> <p><img src="https://img-blog.csdnimg.cn/a8f06086760347e5bf969e13a5ef9c07.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Zeq6ICA5aSq6Ziz,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p></li></ol> <h3 id="简化axios调用"><a href="#简化axios调用" class="header-anchor">#</a> 简化Axios调用</h3> <p>语法: axios.defaults.baseURL = “http://localhost:8080/axios”</p> <div class="language-javascript line-numbers-mode"><pre class="language-javascript"><code>	<span class="token comment">/* 简化Axios调用 设定公共的请求的前缀 如果已经有http://协议则不拼接前缀   */</span>
+	axios<span class="token punctuation">.</span>defaults<span class="token punctuation">.</span>baseURL <span class="token operator">=</span> <span class="token string">&quot;http://localhost:8080/axios&quot;</span>
+	<span class="token keyword">let</span> url5 <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">/user/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>user4<span class="token punctuation">.</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>user4<span class="token punctuation">.</span>age<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
+	axios<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>url5<span class="token punctuation">)</span>
+		<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">promise</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+			console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>promise<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+		<span class="token punctuation">}</span><span class="token punctuation">)</span>			  
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><h2 id="axios-post请求"><a href="#axios-post请求" class="header-anchor">#</a> Axios-post请求</h2> <h3 id="入门案例-2"><a href="#入门案例-2" class="header-anchor">#</a> 入门案例</h3> <h4 id="前端js"><a href="#前端js" class="header-anchor">#</a> 前端JS</h4> <div class="language-javascript line-numbers-mode"><pre class="language-javascript"><code><span class="token comment">//1.指定请求的前缀</span>
+			axios<span class="token punctuation">.</span>defaults<span class="token punctuation">.</span>baseURL<span class="token operator">=</span><span class="token string">&quot;http://localhost:8080/axios&quot;</span>
+			
+			<span class="token comment">/**
+			 * 2. 需求: 一般业务新增时,采用post提交
+			 *    URL: http://localhost:8080/axios/saveUser
+			 * axios.post(url地址,js对象)
+			 * 		.then(回调函数!!!)
+			 */</span>
+			<span class="token keyword">let</span> user1 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">,</span><span class="token literal-property property">name</span><span class="token operator">:</span><span class="token string">&quot;tomcat猫&quot;</span><span class="token punctuation">,</span><span class="token literal-property property">age</span><span class="token operator">:</span><span class="token number">18</span><span class="token punctuation">,</span><span class="token literal-property property">sex</span><span class="token operator">:</span><span class="token string">&quot;女&quot;</span><span class="token punctuation">}</span>
+			axios<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">&quot;/saveUser&quot;</span><span class="token punctuation">,</span>user1<span class="token punctuation">)</span>
+				 <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span> <span class="token parameter">promise</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+					 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>promise<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+				 <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><h4 id="post请求参数说明"><a href="#post请求参数说明" class="header-anchor">#</a> post请求参数说明</h4> <p>说明: axios中的post请求,参数传递的是<strong>JSON串</strong></p> <p><img src="https://img-blog.csdnimg.cn/c35c05ebd77245b3b40c7dcfed64af48.png" alt="在这里插入图片描述"></p> <h4 id="axioscontroller-调用"><a href="#axioscontroller-调用" class="header-anchor">#</a> AxiosController 调用</h4> <div class="language-java line-numbers-mode"><pre class="language-java"><code>  <span class="token comment">/**
+     * 业务说明: 接收post请求
+     * url地址: http://localhost:8080/axios/saveUser
+     * 参数:    JSON串={&quot;id&quot;:100,&quot;name&quot;:&quot;tomcat猫&quot;,&quot;age&quot;:18,&quot;sex&quot;:&quot;女&quot;}
+     * 返回值:  User对象
+     * 知识点:
+     *      1.将JSON串转化为对象  @RequestBody
+     *      2.将对象转化为JSON串  @ResponseBody
+     */</span>
+    <span class="token annotation punctuation">@PostMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/saveUser&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">User</span> <span class="token function">saveUser</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestBody</span> <span class="token class-name">User</span> user<span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+        <span class="token keyword">return</span> user<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><h3 id="关于常见请求类型语法说明"><a href="#关于常见请求类型语法说明" class="header-anchor">#</a> 关于常见请求类型语法说明</h3> <ol><li>GET/DELETE 语法相同</li> <li>POST/PUT 语法相同</li></ol> <h3 id="put请求测试"><a href="#put请求测试" class="header-anchor">#</a> put请求测试</h3> <h4 id="编辑前端js"><a href="#编辑前端js" class="header-anchor">#</a> 编辑前端JS</h4> <div class="language-javascript line-numbers-mode"><pre class="language-javascript"><code><span class="token comment">/**
+			 * 业务需求:  实现数据的更新操作
+			 * 		     修改id=3的数据  name=&quot;张三&quot;  age=18
+			 * URL:http://localhost:8080/axios/updateUser
+			 * 类型: put
+			 * 写法1: 利用对象传参提交数据
+			 * 写法2: 利用restFul结构实现
+			 */</span>
+			<span class="token keyword">let</span> user2 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token literal-property property">id</span><span class="token operator">:</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token literal-property property">name</span><span class="token operator">:</span><span class="token string">&quot;张三&quot;</span><span class="token punctuation">,</span> <span class="token literal-property property">age</span><span class="token operator">:</span><span class="token number">18</span><span class="token punctuation">}</span>
+			axios<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;/updateUser&quot;</span><span class="token punctuation">,</span>user2<span class="token punctuation">)</span>
+				 <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">promise</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+					 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>promise<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+				 <span class="token punctuation">}</span><span class="token punctuation">)</span>
+			
+			<span class="token keyword">let</span> url3<span class="token operator">=</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">http://localhost:8080/axios/user/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>user2<span class="token punctuation">.</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>user2<span class="token punctuation">.</span>age<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>user2<span class="token punctuation">.</span>id<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
+			axios<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>url3<span class="token punctuation">)</span>
+				 <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">promise</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+				 	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>promise<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+				 <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><h4 id="编辑axioscontroller"><a href="#编辑axioscontroller" class="header-anchor">#</a> 编辑AxiosController</h4> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">/**
+     * 业务: 完成修改操作
+     * 类型: put类型
+     * URL地址: http://localhost:8080/axios/updateUser
+     * 参数: user的JSON串
+     * 返回值: User返回
+     */</span>
+    <span class="token annotation punctuation">@PutMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/updateUser&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">User</span> <span class="token function">updateUser</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestBody</span> <span class="token class-name">User</span> user<span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+        <span class="token keyword">return</span> user<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">/**
+     *  需求: restFul结构
+     *  url地址: `http://localhost:8080/axios/user/${user2.name}/${user2.age}/${user2.id}`
+     *  请求类型: put
+     *  返回值: User
+     */</span>
+    <span class="token annotation punctuation">@PutMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/user/{name}/{age}/{id}&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">User</span> <span class="token function">updateUser2</span><span class="token punctuation">(</span><span class="token class-name">User</span> user<span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+        <span class="token keyword">return</span> user<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div><h3 id="关于跨域说明"><a href="#关于跨域说明" class="header-anchor">#</a> 关于跨域说明</h3> <h4 id="同源策略"><a href="#同源策略" class="header-anchor">#</a> 同源策略</h4> <p>要素1: 浏览器的访问地址</p> <p>要素2: Ajax的请求的网址</p> <p>策略说明: 如果上述的要素同时满足 <strong>协议://域名:端口号都相同的情况</strong>,则称之为满足同源策略.可以进行正确的调用. 也称之为 <strong>“同域访问”.</strong></p> <h4 id="什么是跨域"><a href="#什么是跨域" class="header-anchor">#</a> 什么是跨域</h4> <p>违反了同源策略就叫<strong>跨域访问</strong></p> <h4 id="考题"><a href="#考题" class="header-anchor">#</a> 考题</h4> <p>案例1:</p> <ol><li>浏览器地址: http://www.jd.com/xx/xx</li> <li>ajax地址: https://www.jd.com/yy/yy 跨域: 协议不同</li></ol> <p>案例2:</p> <ol><li>浏览器地址: http://www.jd.com/xx/xx</li> <li>ajax地址: http://www.jd.com/yy/yy 同域请求</li></ol> <p>案例3:</p> <ol><li>浏览器地址: http://www.jd.com:80/xx/xx</li> <li>ajax地址: http://www.jd.com/yy/yy 同域请求!!!</li></ol> <p>案例4:</p> <p>前提: 域名与IP对应</p> <ol><li>浏览器地址: http://www.jd.com/xx/xx</li> <li>ajax地址: http://8.8.8.8/yy/yy 跨域请求! 域名不一致</li></ol> <p>案例5:</p> <ol><li>浏览器地址: https://www.jd.com/xx/xx</li> <li>ajax地址: https://www.jd.com:443/yy/yy 同域请求 https的默认端口号 443</li></ol> <p>案例6:</p> <ol><li>浏览器地址: http://www.jd.com/xx/yy/xx</li> <li>ajax地址: http://miaoshi.jd.com/yy/yy 跨域请求 域名不同</li></ol> <h4 id="关于-crossorigin注解说明"><a href="#关于-crossorigin注解说明" class="header-anchor">#</a> 关于@CrossOrigin注解说明</h4> <p><img src="https://img-blog.csdnimg.cn/7016360cf4804d0b8522df55900e4e63.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Zeq6ICA5aSq6Ziz,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p> <h2 id="axios扩展知识"><a href="#axios扩展知识" class="header-anchor">#</a> Axios扩展知识</h2> <h3 id="前端js-回调地狱"><a href="#前端js-回调地狱" class="header-anchor">#</a> 前端JS-回调地狱</h3> <p>说明: 如果Ajax<strong>嵌套</strong>的层级较多,则把这种结构称之为&quot;回调地狱&quot;
+嵌套规则:</p> <ol><li><p>用户发起第一个Ajax请求.回调函数中的结果,要当做第二个ajax请求的参数.</p></li> <li><p>用户第二个ajax回调函数的结果,要当做第三个Ajax请求的参数 以此类推!!!</p></li></ol> <p><img src="https://img-blog.csdnimg.cn/43dda859a1ee42edaf304897c9a4c0c2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Zeq6ICA5aSq6Ziz,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p> <p>回调地狱问题说明:</p> <p>由于回调方法和请求的方法在2行,导致嵌套的结构没有办法优化.如果需要优化,则应该将Ajax的请求一行搞定. 例如</p> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token keyword">let</span> result1 <span class="token operator">=</span> axios<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>url1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> result2 <span class="token operator">=</span> axios<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>url2<span class="token punctuation">,</span>result1<span class="token punctuation">)</span>
+<span class="token keyword">let</span> result3 <span class="token operator">=</span> axios<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>url3<span class="token punctuation">,</span>result2<span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="前端js-回调地狱-解决方案"><a href="#前端js-回调地狱-解决方案" class="header-anchor">#</a> 前端JS-回调地狱-解决方案</h3> <div class="language-javascript line-numbers-mode"><pre class="language-javascript"><code><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token constant">DOCTYPE</span> html<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>html<span class="token operator">&gt;</span>
+	<span class="token operator">&lt;</span>head<span class="token operator">&gt;</span>
+		<span class="token operator">&lt;</span>meta charset<span class="token operator">=</span><span class="token string">&quot;utf-8&quot;</span><span class="token operator">&gt;</span>
+		<span class="token operator">&lt;</span>title<span class="token operator">&gt;</span>Axios入门案例<span class="token operator">&lt;</span><span class="token operator">/</span>title<span class="token operator">&gt;</span>
+	<span class="token operator">&lt;</span><span class="token operator">/</span>head<span class="token operator">&gt;</span>
+	<span class="token operator">&lt;</span>body<span class="token operator">&gt;</span>
+		<span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> <span class="token number">1.</span>导入js文件 <span class="token operator">--</span><span class="token operator">&gt;</span>
+		<span class="token operator">&lt;</span>script src<span class="token operator">=</span><span class="token string">&quot;js/axios.js&quot;</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+		
+		<span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> <span class="token number">2.</span>编辑<span class="token constant">JS</span>代码 <span class="token operator">--</span><span class="token operator">&gt;</span>
+		<span class="token operator">&lt;</span>script<span class="token operator">&gt;</span>
+			<span class="token comment">/* let url1 = &quot;http://localhost:8080/axios/findUser&quot;
+			axios.get(url1)
+				 .then(function(promise){
+					console.log(promise.data)
+					
+					axios.get(&quot;url2&quot;,promise.data)
+						 .then(promise2 =&gt; {
+							 console.log(promise2.data);
+							 
+							 axios.get(&quot;url3&quot;,promise2.data)
+								  .then(promise3 =&gt; {
+									  console.log(promise3.data)
+									  //...嵌套十八层,比喻为回调地狱
+								  })
+						 })
+				 }) */</span>
+				 
+				 <span class="token comment">/**
+				  * 语法: 
+				  * 	1.async 关键字修饰函数
+				  * 	2.await 关键字修改ajax请求
+				  * 	3.先定义函数.之后调用函数
+				  * 	语法说明: 解构赋值操作
+				  */</span>
+				 <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">getUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+					<span class="token keyword">let</span> url1 <span class="token operator">=</span> <span class="token string">&quot;http://localhost:8080/axios/findUser&quot;</span>
+					<span class="token keyword">let</span> <span class="token punctuation">{</span><span class="token literal-property property">data</span><span class="token operator">:</span> result<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">await</span> axios<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>url1<span class="token punctuation">)</span>
+					console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span>
+					
+					<span class="token comment">//let promise= let promise = await axios.get(url1)</span>
+					<span class="token comment">//console.log(promise.data)</span>
+					 <span class="token comment">//return promise</span>
+				 <span class="token punctuation">}</span>
+				 
+				 <span class="token comment">//调用函数</span>
+				 <span class="token function">getUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+				 
+				<span class="token comment">/* async function getUser2(data){
+					 let url2 = &quot;http://localhost:8080/axios/findUser&quot;
+					 let promise = await axios.get(url2,data)
+					 return promise
+				 }
+				 
+				 let result1 = getUser();
+				 let result2 = getUser2(result1); */</span>
+				 
+		<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+		<span class="token operator">&lt;</span>h1<span class="token operator">&gt;</span>学习Axios的ajax调用<span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">&gt;</span>
+	<span class="token operator">&lt;</span><span class="token operator">/</span>body<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>html<span class="token operator">&gt;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br></div></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/matheusblog/md/spring/springmvc/SpringMVC框架.html" class="prev">
+        SpringMVC框架
+      </a></span> <span class="next"><a href="/matheusblog/md/spring/springmvc/SpringMVC会话管理.html">
+        SpringMVC会话管理
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/matheusblog/assets/js/app.d1bc8cd0.js" defer></script><script src="/matheusblog/assets/js/3.21aaf515.js" defer></script><script src="/matheusblog/assets/js/311.c135c48c.js" defer></script>
+  </body>
+</html>

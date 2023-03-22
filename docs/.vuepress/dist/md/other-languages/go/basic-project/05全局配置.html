@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>全局配置 | MyBlog</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="包含: Java 基础, JVM, Spring, Spring Boot, Spring Cloud, MySQL, ElasticSearch, MongoDB, Docker, k8s, Linux, DevOps, 分布式,  开发工具, Git, IDE...">
+    
+    <link rel="preload" href="/matheusblog/assets/css/0.styles.980a01be.css" as="style"><link rel="preload" href="/matheusblog/assets/js/app.d1bc8cd0.js" as="script"><link rel="preload" href="/matheusblog/assets/js/3.21aaf515.js" as="script"><link rel="preload" href="/matheusblog/assets/js/80.65421bb8.js" as="script"><link rel="prefetch" href="/matheusblog/assets/js/10.54a7cbcb.js"><link rel="prefetch" href="/matheusblog/assets/js/100.65c579fe.js"><link rel="prefetch" href="/matheusblog/assets/js/101.b41c3c3e.js"><link rel="prefetch" href="/matheusblog/assets/js/102.4f362209.js"><link rel="prefetch" href="/matheusblog/assets/js/103.3634017b.js"><link rel="prefetch" href="/matheusblog/assets/js/104.3bee8dc7.js"><link rel="prefetch" href="/matheusblog/assets/js/105.4dde7830.js"><link rel="prefetch" href="/matheusblog/assets/js/106.868e8474.js"><link rel="prefetch" href="/matheusblog/assets/js/107.c7fc6303.js"><link rel="prefetch" href="/matheusblog/assets/js/108.ceb9c82d.js"><link rel="prefetch" href="/matheusblog/assets/js/109.a9f0c9ae.js"><link rel="prefetch" href="/matheusblog/assets/js/11.2c2c6a67.js"><link rel="prefetch" href="/matheusblog/assets/js/110.fe3adf68.js"><link rel="prefetch" href="/matheusblog/assets/js/111.2c3688da.js"><link rel="prefetch" href="/matheusblog/assets/js/112.3cad34e6.js"><link rel="prefetch" href="/matheusblog/assets/js/113.aa50199f.js"><link rel="prefetch" href="/matheusblog/assets/js/114.60ac3f02.js"><link rel="prefetch" href="/matheusblog/assets/js/115.2db78ad2.js"><link rel="prefetch" href="/matheusblog/assets/js/116.7312786f.js"><link rel="prefetch" href="/matheusblog/assets/js/117.4a3a0337.js"><link rel="prefetch" href="/matheusblog/assets/js/118.e5af8b9d.js"><link rel="prefetch" href="/matheusblog/assets/js/119.e0967512.js"><link rel="prefetch" href="/matheusblog/assets/js/12.6f0ae98d.js"><link rel="prefetch" href="/matheusblog/assets/js/120.1ce6260c.js"><link rel="prefetch" href="/matheusblog/assets/js/121.c5f567f4.js"><link rel="prefetch" href="/matheusblog/assets/js/122.ff4f9bed.js"><link rel="prefetch" href="/matheusblog/assets/js/123.b354268c.js"><link rel="prefetch" href="/matheusblog/assets/js/124.ba2aa1f2.js"><link rel="prefetch" href="/matheusblog/assets/js/125.d6737c1d.js"><link rel="prefetch" href="/matheusblog/assets/js/126.ed190ed8.js"><link rel="prefetch" href="/matheusblog/assets/js/127.032ab16f.js"><link rel="prefetch" href="/matheusblog/assets/js/128.eaa5481c.js"><link rel="prefetch" href="/matheusblog/assets/js/129.61e1d174.js"><link rel="prefetch" href="/matheusblog/assets/js/13.c0ff77f9.js"><link rel="prefetch" href="/matheusblog/assets/js/130.d09f60e2.js"><link rel="prefetch" href="/matheusblog/assets/js/131.21aa1c96.js"><link rel="prefetch" href="/matheusblog/assets/js/132.351a321e.js"><link rel="prefetch" href="/matheusblog/assets/js/133.e5e36230.js"><link rel="prefetch" href="/matheusblog/assets/js/134.cea97435.js"><link rel="prefetch" href="/matheusblog/assets/js/135.a56e2494.js"><link rel="prefetch" href="/matheusblog/assets/js/136.557d9fdf.js"><link rel="prefetch" href="/matheusblog/assets/js/137.21eda887.js"><link rel="prefetch" href="/matheusblog/assets/js/138.c10c815c.js"><link rel="prefetch" href="/matheusblog/assets/js/139.5ebe91b0.js"><link rel="prefetch" href="/matheusblog/assets/js/14.6ed4a73f.js"><link rel="prefetch" href="/matheusblog/assets/js/140.9830147a.js"><link rel="prefetch" href="/matheusblog/assets/js/141.708bb77b.js"><link rel="prefetch" href="/matheusblog/assets/js/142.96c71160.js"><link rel="prefetch" href="/matheusblog/assets/js/143.ac186a53.js"><link rel="prefetch" href="/matheusblog/assets/js/144.6411b0b7.js"><link rel="prefetch" href="/matheusblog/assets/js/145.5c75cd6c.js"><link rel="prefetch" href="/matheusblog/assets/js/146.fdb5e7c8.js"><link rel="prefetch" href="/matheusblog/assets/js/147.4f67ac67.js"><link rel="prefetch" href="/matheusblog/assets/js/148.424b4f21.js"><link rel="prefetch" href="/matheusblog/assets/js/149.6161dd02.js"><link rel="prefetch" href="/matheusblog/assets/js/15.6bf38d8a.js"><link rel="prefetch" href="/matheusblog/assets/js/150.40ac7609.js"><link rel="prefetch" href="/matheusblog/assets/js/151.a246fd40.js"><link rel="prefetch" href="/matheusblog/assets/js/152.e430bd35.js"><link rel="prefetch" href="/matheusblog/assets/js/153.27a16b43.js"><link rel="prefetch" href="/matheusblog/assets/js/154.03f42b0e.js"><link rel="prefetch" href="/matheusblog/assets/js/155.c01c0b8b.js"><link rel="prefetch" href="/matheusblog/assets/js/156.9e75b32b.js"><link rel="prefetch" href="/matheusblog/assets/js/157.8539cba7.js"><link rel="prefetch" href="/matheusblog/assets/js/158.200135a9.js"><link rel="prefetch" href="/matheusblog/assets/js/159.1472f0e3.js"><link rel="prefetch" href="/matheusblog/assets/js/16.0bd8975e.js"><link rel="prefetch" href="/matheusblog/assets/js/160.a897bdbf.js"><link rel="prefetch" href="/matheusblog/assets/js/161.8ebaced9.js"><link rel="prefetch" href="/matheusblog/assets/js/162.69a52259.js"><link rel="prefetch" href="/matheusblog/assets/js/163.61b0c093.js"><link rel="prefetch" href="/matheusblog/assets/js/164.3fd70b50.js"><link rel="prefetch" href="/matheusblog/assets/js/165.99a4a455.js"><link rel="prefetch" href="/matheusblog/assets/js/166.be429d07.js"><link rel="prefetch" href="/matheusblog/assets/js/167.35fa8427.js"><link rel="prefetch" href="/matheusblog/assets/js/168.98c13248.js"><link rel="prefetch" href="/matheusblog/assets/js/169.0c800163.js"><link rel="prefetch" href="/matheusblog/assets/js/17.e107c04a.js"><link rel="prefetch" href="/matheusblog/assets/js/170.18e31e2a.js"><link rel="prefetch" href="/matheusblog/assets/js/171.fd0af1e7.js"><link rel="prefetch" href="/matheusblog/assets/js/172.2ae1a92c.js"><link rel="prefetch" href="/matheusblog/assets/js/173.4f22a7d7.js"><link rel="prefetch" href="/matheusblog/assets/js/174.1914bfac.js"><link rel="prefetch" href="/matheusblog/assets/js/175.cf52c6f0.js"><link rel="prefetch" href="/matheusblog/assets/js/176.2d62ffaf.js"><link rel="prefetch" href="/matheusblog/assets/js/177.7998e89e.js"><link rel="prefetch" href="/matheusblog/assets/js/178.db1004ac.js"><link rel="prefetch" href="/matheusblog/assets/js/179.ad97e66d.js"><link rel="prefetch" href="/matheusblog/assets/js/18.e3120c6e.js"><link rel="prefetch" href="/matheusblog/assets/js/180.598dae51.js"><link rel="prefetch" href="/matheusblog/assets/js/181.599b5236.js"><link rel="prefetch" href="/matheusblog/assets/js/182.2dbe3970.js"><link rel="prefetch" href="/matheusblog/assets/js/183.39b4f5d6.js"><link rel="prefetch" href="/matheusblog/assets/js/184.5e15d758.js"><link rel="prefetch" href="/matheusblog/assets/js/185.ba3d76a6.js"><link rel="prefetch" href="/matheusblog/assets/js/186.62a1d264.js"><link rel="prefetch" href="/matheusblog/assets/js/187.ce9ab2bc.js"><link rel="prefetch" href="/matheusblog/assets/js/188.b9ad970d.js"><link rel="prefetch" href="/matheusblog/assets/js/189.29df5075.js"><link rel="prefetch" href="/matheusblog/assets/js/19.fc33d9dc.js"><link rel="prefetch" href="/matheusblog/assets/js/190.8d142ac0.js"><link rel="prefetch" href="/matheusblog/assets/js/191.3fac1cfe.js"><link rel="prefetch" href="/matheusblog/assets/js/192.fd44ba5f.js"><link rel="prefetch" href="/matheusblog/assets/js/193.4dc021ba.js"><link rel="prefetch" href="/matheusblog/assets/js/194.088fad3f.js"><link rel="prefetch" href="/matheusblog/assets/js/195.1fa6fd8b.js"><link rel="prefetch" href="/matheusblog/assets/js/196.93035ed5.js"><link rel="prefetch" href="/matheusblog/assets/js/197.60d31e9d.js"><link rel="prefetch" href="/matheusblog/assets/js/198.e2431930.js"><link rel="prefetch" href="/matheusblog/assets/js/199.eb85b79c.js"><link rel="prefetch" href="/matheusblog/assets/js/2.49dcc008.js"><link rel="prefetch" href="/matheusblog/assets/js/20.f0fba33e.js"><link rel="prefetch" href="/matheusblog/assets/js/200.1d5f2566.js"><link rel="prefetch" href="/matheusblog/assets/js/201.78cfa60e.js"><link rel="prefetch" href="/matheusblog/assets/js/202.0538081f.js"><link rel="prefetch" href="/matheusblog/assets/js/203.e99855dc.js"><link rel="prefetch" href="/matheusblog/assets/js/204.f35716b0.js"><link rel="prefetch" href="/matheusblog/assets/js/205.e0d99ed0.js"><link rel="prefetch" href="/matheusblog/assets/js/206.fb60327e.js"><link rel="prefetch" href="/matheusblog/assets/js/207.37d97d63.js"><link rel="prefetch" href="/matheusblog/assets/js/208.3c7cc661.js"><link rel="prefetch" href="/matheusblog/assets/js/209.0f36f5f9.js"><link rel="prefetch" href="/matheusblog/assets/js/21.38b58190.js"><link rel="prefetch" href="/matheusblog/assets/js/210.7d3c1d9e.js"><link rel="prefetch" href="/matheusblog/assets/js/211.fd9c9ed7.js"><link rel="prefetch" href="/matheusblog/assets/js/212.fa687e1a.js"><link rel="prefetch" href="/matheusblog/assets/js/213.4d25912b.js"><link rel="prefetch" href="/matheusblog/assets/js/214.32fa8874.js"><link rel="prefetch" href="/matheusblog/assets/js/215.007c1b40.js"><link rel="prefetch" href="/matheusblog/assets/js/216.2ca1689d.js"><link rel="prefetch" href="/matheusblog/assets/js/217.42d81467.js"><link rel="prefetch" href="/matheusblog/assets/js/218.e8ef68ea.js"><link rel="prefetch" href="/matheusblog/assets/js/219.e81c9223.js"><link rel="prefetch" href="/matheusblog/assets/js/22.50c56cab.js"><link rel="prefetch" href="/matheusblog/assets/js/220.60e29bfc.js"><link rel="prefetch" href="/matheusblog/assets/js/221.22376958.js"><link rel="prefetch" href="/matheusblog/assets/js/222.4bad5952.js"><link rel="prefetch" href="/matheusblog/assets/js/223.cf135a8b.js"><link rel="prefetch" href="/matheusblog/assets/js/224.574a4b29.js"><link rel="prefetch" href="/matheusblog/assets/js/225.fc91759f.js"><link rel="prefetch" href="/matheusblog/assets/js/226.4d8e0f0c.js"><link rel="prefetch" href="/matheusblog/assets/js/227.eedacdd7.js"><link rel="prefetch" href="/matheusblog/assets/js/228.d9e5543d.js"><link rel="prefetch" href="/matheusblog/assets/js/229.198e9b7f.js"><link rel="prefetch" href="/matheusblog/assets/js/23.546acb40.js"><link rel="prefetch" href="/matheusblog/assets/js/230.9c9b55fa.js"><link rel="prefetch" href="/matheusblog/assets/js/231.52ba5c5a.js"><link rel="prefetch" href="/matheusblog/assets/js/232.4abf639c.js"><link rel="prefetch" href="/matheusblog/assets/js/233.677fd788.js"><link rel="prefetch" href="/matheusblog/assets/js/234.bb428729.js"><link rel="prefetch" href="/matheusblog/assets/js/235.6de15ca6.js"><link rel="prefetch" href="/matheusblog/assets/js/236.fede2411.js"><link rel="prefetch" href="/matheusblog/assets/js/237.6c68e409.js"><link rel="prefetch" href="/matheusblog/assets/js/238.b114a429.js"><link rel="prefetch" href="/matheusblog/assets/js/239.b4881685.js"><link rel="prefetch" href="/matheusblog/assets/js/24.037398b9.js"><link rel="prefetch" href="/matheusblog/assets/js/240.5d0ae7fe.js"><link rel="prefetch" href="/matheusblog/assets/js/241.fd2a3483.js"><link rel="prefetch" href="/matheusblog/assets/js/242.414e941d.js"><link rel="prefetch" href="/matheusblog/assets/js/243.9b98a81a.js"><link rel="prefetch" href="/matheusblog/assets/js/244.7a3c10b1.js"><link rel="prefetch" href="/matheusblog/assets/js/245.623c683e.js"><link rel="prefetch" href="/matheusblog/assets/js/246.3544e58b.js"><link rel="prefetch" href="/matheusblog/assets/js/247.9c99d802.js"><link rel="prefetch" href="/matheusblog/assets/js/248.68af4e3b.js"><link rel="prefetch" href="/matheusblog/assets/js/249.ccaca596.js"><link rel="prefetch" href="/matheusblog/assets/js/25.6c5bccf3.js"><link rel="prefetch" href="/matheusblog/assets/js/250.571542c4.js"><link rel="prefetch" href="/matheusblog/assets/js/251.cf75e5e5.js"><link rel="prefetch" href="/matheusblog/assets/js/252.9f57b2df.js"><link rel="prefetch" href="/matheusblog/assets/js/253.976d974c.js"><link rel="prefetch" href="/matheusblog/assets/js/254.447ebae0.js"><link rel="prefetch" href="/matheusblog/assets/js/255.d57e94cf.js"><link rel="prefetch" href="/matheusblog/assets/js/256.0f189f68.js"><link rel="prefetch" href="/matheusblog/assets/js/257.fad20cea.js"><link rel="prefetch" href="/matheusblog/assets/js/258.d239b495.js"><link rel="prefetch" href="/matheusblog/assets/js/259.8bcd5e63.js"><link rel="prefetch" href="/matheusblog/assets/js/26.c1d32692.js"><link rel="prefetch" href="/matheusblog/assets/js/260.090a63d7.js"><link rel="prefetch" href="/matheusblog/assets/js/261.9c49f0d4.js"><link rel="prefetch" href="/matheusblog/assets/js/262.10f98f30.js"><link rel="prefetch" href="/matheusblog/assets/js/263.81f7548d.js"><link rel="prefetch" href="/matheusblog/assets/js/264.8c0bad52.js"><link rel="prefetch" href="/matheusblog/assets/js/265.982857a3.js"><link rel="prefetch" href="/matheusblog/assets/js/266.040cfe24.js"><link rel="prefetch" href="/matheusblog/assets/js/267.7227c614.js"><link rel="prefetch" href="/matheusblog/assets/js/268.b01bce97.js"><link rel="prefetch" href="/matheusblog/assets/js/269.f0235678.js"><link rel="prefetch" href="/matheusblog/assets/js/27.e26685ad.js"><link rel="prefetch" href="/matheusblog/assets/js/270.62ea1068.js"><link rel="prefetch" href="/matheusblog/assets/js/271.c1b9878a.js"><link rel="prefetch" href="/matheusblog/assets/js/272.24a28332.js"><link rel="prefetch" href="/matheusblog/assets/js/273.6c40eac8.js"><link rel="prefetch" href="/matheusblog/assets/js/274.cd992810.js"><link rel="prefetch" href="/matheusblog/assets/js/275.75177aed.js"><link rel="prefetch" href="/matheusblog/assets/js/276.e8985557.js"><link rel="prefetch" href="/matheusblog/assets/js/277.64625549.js"><link rel="prefetch" href="/matheusblog/assets/js/278.4200bee5.js"><link rel="prefetch" href="/matheusblog/assets/js/279.b1186598.js"><link rel="prefetch" href="/matheusblog/assets/js/28.c0534da3.js"><link rel="prefetch" href="/matheusblog/assets/js/280.13632f13.js"><link rel="prefetch" href="/matheusblog/assets/js/281.83aa1bdd.js"><link rel="prefetch" href="/matheusblog/assets/js/282.034b31ee.js"><link rel="prefetch" href="/matheusblog/assets/js/283.19bded06.js"><link rel="prefetch" href="/matheusblog/assets/js/284.a5e29c5e.js"><link rel="prefetch" href="/matheusblog/assets/js/285.8a6391d1.js"><link rel="prefetch" href="/matheusblog/assets/js/286.db317c9e.js"><link rel="prefetch" href="/matheusblog/assets/js/287.dc1dcc8f.js"><link rel="prefetch" href="/matheusblog/assets/js/288.f8724f05.js"><link rel="prefetch" href="/matheusblog/assets/js/289.4b35b3ab.js"><link rel="prefetch" href="/matheusblog/assets/js/29.a210d762.js"><link rel="prefetch" href="/matheusblog/assets/js/290.c6023ba3.js"><link rel="prefetch" href="/matheusblog/assets/js/291.db6e892a.js"><link rel="prefetch" href="/matheusblog/assets/js/292.61d8c4ea.js"><link rel="prefetch" href="/matheusblog/assets/js/293.506e9b4f.js"><link rel="prefetch" href="/matheusblog/assets/js/294.9bc96072.js"><link rel="prefetch" href="/matheusblog/assets/js/295.baf21ce8.js"><link rel="prefetch" href="/matheusblog/assets/js/296.4f010851.js"><link rel="prefetch" href="/matheusblog/assets/js/297.39f85fc0.js"><link rel="prefetch" href="/matheusblog/assets/js/298.cf0708c5.js"><link rel="prefetch" href="/matheusblog/assets/js/299.6c1c41a1.js"><link rel="prefetch" href="/matheusblog/assets/js/30.f88dfbb5.js"><link rel="prefetch" href="/matheusblog/assets/js/300.59368419.js"><link rel="prefetch" href="/matheusblog/assets/js/301.2d80d504.js"><link rel="prefetch" href="/matheusblog/assets/js/302.690f15a6.js"><link rel="prefetch" href="/matheusblog/assets/js/303.d285ad36.js"><link rel="prefetch" href="/matheusblog/assets/js/304.d9d52d35.js"><link rel="prefetch" href="/matheusblog/assets/js/305.ec2cf80c.js"><link rel="prefetch" href="/matheusblog/assets/js/306.6d7e61d2.js"><link rel="prefetch" href="/matheusblog/assets/js/307.ec680f13.js"><link rel="prefetch" href="/matheusblog/assets/js/308.addb7d10.js"><link rel="prefetch" href="/matheusblog/assets/js/309.60c45495.js"><link rel="prefetch" href="/matheusblog/assets/js/31.241f0b56.js"><link rel="prefetch" href="/matheusblog/assets/js/310.36b632f3.js"><link rel="prefetch" href="/matheusblog/assets/js/311.c135c48c.js"><link rel="prefetch" href="/matheusblog/assets/js/312.329d4917.js"><link rel="prefetch" href="/matheusblog/assets/js/313.e259927e.js"><link rel="prefetch" href="/matheusblog/assets/js/314.6019fcf4.js"><link rel="prefetch" href="/matheusblog/assets/js/315.a7f16c02.js"><link rel="prefetch" href="/matheusblog/assets/js/316.78cce25e.js"><link rel="prefetch" href="/matheusblog/assets/js/317.9fd2c4e0.js"><link rel="prefetch" href="/matheusblog/assets/js/318.a4fe80b0.js"><link rel="prefetch" href="/matheusblog/assets/js/319.620bd822.js"><link rel="prefetch" href="/matheusblog/assets/js/32.63322225.js"><link rel="prefetch" href="/matheusblog/assets/js/320.0bc73d8d.js"><link rel="prefetch" href="/matheusblog/assets/js/321.6f386429.js"><link rel="prefetch" href="/matheusblog/assets/js/322.dc68c4f6.js"><link rel="prefetch" href="/matheusblog/assets/js/323.990b2c5e.js"><link rel="prefetch" href="/matheusblog/assets/js/324.90800df3.js"><link rel="prefetch" href="/matheusblog/assets/js/325.17b21116.js"><link rel="prefetch" href="/matheusblog/assets/js/326.dc462f7a.js"><link rel="prefetch" href="/matheusblog/assets/js/327.60a3c557.js"><link rel="prefetch" href="/matheusblog/assets/js/328.918be9ec.js"><link rel="prefetch" href="/matheusblog/assets/js/329.fbc9c1c4.js"><link rel="prefetch" href="/matheusblog/assets/js/33.a5e4acbc.js"><link rel="prefetch" href="/matheusblog/assets/js/330.5eb0fa54.js"><link rel="prefetch" href="/matheusblog/assets/js/331.47217147.js"><link rel="prefetch" href="/matheusblog/assets/js/332.891c1931.js"><link rel="prefetch" href="/matheusblog/assets/js/333.22aa3d9c.js"><link rel="prefetch" href="/matheusblog/assets/js/334.7ced64e0.js"><link rel="prefetch" href="/matheusblog/assets/js/335.9f090150.js"><link rel="prefetch" href="/matheusblog/assets/js/34.0bbf3cd4.js"><link rel="prefetch" href="/matheusblog/assets/js/35.5e7a3106.js"><link rel="prefetch" href="/matheusblog/assets/js/36.0a101841.js"><link rel="prefetch" href="/matheusblog/assets/js/37.d2f841a3.js"><link rel="prefetch" href="/matheusblog/assets/js/38.5ffa2ff0.js"><link rel="prefetch" href="/matheusblog/assets/js/39.11eb7112.js"><link rel="prefetch" href="/matheusblog/assets/js/4.172c31f8.js"><link rel="prefetch" href="/matheusblog/assets/js/40.16e1a3d0.js"><link rel="prefetch" href="/matheusblog/assets/js/41.7416be78.js"><link rel="prefetch" href="/matheusblog/assets/js/42.d43b207e.js"><link rel="prefetch" href="/matheusblog/assets/js/43.184ce555.js"><link rel="prefetch" href="/matheusblog/assets/js/44.2e494f9f.js"><link rel="prefetch" href="/matheusblog/assets/js/45.b89064eb.js"><link rel="prefetch" href="/matheusblog/assets/js/46.e7e93b34.js"><link rel="prefetch" href="/matheusblog/assets/js/47.88edf3e7.js"><link rel="prefetch" href="/matheusblog/assets/js/48.a3ef8833.js"><link rel="prefetch" href="/matheusblog/assets/js/49.416e2ff4.js"><link rel="prefetch" href="/matheusblog/assets/js/5.66045499.js"><link rel="prefetch" href="/matheusblog/assets/js/50.6f9e666c.js"><link rel="prefetch" href="/matheusblog/assets/js/51.0ccc90fa.js"><link rel="prefetch" href="/matheusblog/assets/js/52.c4d78d95.js"><link rel="prefetch" href="/matheusblog/assets/js/53.6e9e73bf.js"><link rel="prefetch" href="/matheusblog/assets/js/54.c09c1331.js"><link rel="prefetch" href="/matheusblog/assets/js/55.abb95afe.js"><link rel="prefetch" href="/matheusblog/assets/js/56.255e4f5a.js"><link rel="prefetch" href="/matheusblog/assets/js/57.87bff193.js"><link rel="prefetch" href="/matheusblog/assets/js/58.ac76633b.js"><link rel="prefetch" href="/matheusblog/assets/js/59.deb7ee54.js"><link rel="prefetch" href="/matheusblog/assets/js/6.082e9fa1.js"><link rel="prefetch" href="/matheusblog/assets/js/60.cf9069f9.js"><link rel="prefetch" href="/matheusblog/assets/js/61.96603df6.js"><link rel="prefetch" href="/matheusblog/assets/js/62.c20b80a7.js"><link rel="prefetch" href="/matheusblog/assets/js/63.5686a0b8.js"><link rel="prefetch" href="/matheusblog/assets/js/64.175576f7.js"><link rel="prefetch" href="/matheusblog/assets/js/65.5ae64b74.js"><link rel="prefetch" href="/matheusblog/assets/js/66.521c63ff.js"><link rel="prefetch" href="/matheusblog/assets/js/67.b425835a.js"><link rel="prefetch" href="/matheusblog/assets/js/68.4681f5d4.js"><link rel="prefetch" href="/matheusblog/assets/js/69.a4dd03f4.js"><link rel="prefetch" href="/matheusblog/assets/js/7.ac1c1c22.js"><link rel="prefetch" href="/matheusblog/assets/js/70.b8b1c0e6.js"><link rel="prefetch" href="/matheusblog/assets/js/71.d17ca0a5.js"><link rel="prefetch" href="/matheusblog/assets/js/72.373736b1.js"><link rel="prefetch" href="/matheusblog/assets/js/73.cffad132.js"><link rel="prefetch" href="/matheusblog/assets/js/74.fbb35090.js"><link rel="prefetch" href="/matheusblog/assets/js/75.d7df8fa9.js"><link rel="prefetch" href="/matheusblog/assets/js/76.8fdf1b27.js"><link rel="prefetch" href="/matheusblog/assets/js/77.372d307f.js"><link rel="prefetch" href="/matheusblog/assets/js/78.13b229db.js"><link rel="prefetch" href="/matheusblog/assets/js/79.6a9fcfb3.js"><link rel="prefetch" href="/matheusblog/assets/js/8.aadfe009.js"><link rel="prefetch" href="/matheusblog/assets/js/81.c6c8f34c.js"><link rel="prefetch" href="/matheusblog/assets/js/82.cdc5fd14.js"><link rel="prefetch" href="/matheusblog/assets/js/83.05eecc6f.js"><link rel="prefetch" href="/matheusblog/assets/js/84.baf2ae71.js"><link rel="prefetch" href="/matheusblog/assets/js/85.9c66f181.js"><link rel="prefetch" href="/matheusblog/assets/js/86.130a310b.js"><link rel="prefetch" href="/matheusblog/assets/js/87.b1fffecd.js"><link rel="prefetch" href="/matheusblog/assets/js/88.8acfd7c2.js"><link rel="prefetch" href="/matheusblog/assets/js/89.fe1c2e91.js"><link rel="prefetch" href="/matheusblog/assets/js/9.787b2fa5.js"><link rel="prefetch" href="/matheusblog/assets/js/90.57c4bcfc.js"><link rel="prefetch" href="/matheusblog/assets/js/91.f51280e1.js"><link rel="prefetch" href="/matheusblog/assets/js/92.96836f34.js"><link rel="prefetch" href="/matheusblog/assets/js/93.f50f9f34.js"><link rel="prefetch" href="/matheusblog/assets/js/94.a9740e63.js"><link rel="prefetch" href="/matheusblog/assets/js/95.d17d251c.js"><link rel="prefetch" href="/matheusblog/assets/js/96.b087ef79.js"><link rel="prefetch" href="/matheusblog/assets/js/97.9ba0439c.js"><link rel="prefetch" href="/matheusblog/assets/js/98.21b2bcc2.js"><link rel="prefetch" href="/matheusblog/assets/js/99.e90fc227.js">
+    <link rel="stylesheet" href="/matheusblog/assets/css/0.styles.980a01be.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/matheusblog/" class="home-link router-link-active"><!----> <span class="site-name">MyBlog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/jvm/00虚拟机内存体系与垃圾回收.html" class="nav-link">
+  JVM简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li><li class="dropdown-item"><h4>
+          ElasticSearch
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/elasticsearch/02Elasticsearch-Docker搭建ES.html" class="nav-link">
+  Docker搭建ES
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/springMVC框架.html" class="nav-link">
+  SpringMVC框架
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springboot/SpringBoot简介.html" class="nav-link">
+  SpringBoot简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/docker/01Docker入门.html" class="nav-link">
+  Docker入门
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/k8s/01Kubernetes介绍及使用.html" class="nav-link">
+  K8s介绍与使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/code-style/effective-java/目录.html" class="nav-link">
+  Effective-Java
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  单元测试
+</a></li><li class="dropdown-subitem"><a href="/matheusblog/md/project/jt-project/2. IDEA配置.html" class="nav-link">
+  IDEA配置
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/scala/Scala学习宝典.html" class="nav-link">
+  Scala学习宝典
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/python/Python基础学习.html" class="nav-link">
+  Python基础学习
+</a></li></ul></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/jvm/00虚拟机内存体系与垃圾回收.html" class="nav-link">
+  JVM简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li><li class="dropdown-item"><h4>
+          ElasticSearch
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/elasticsearch/02Elasticsearch-Docker搭建ES.html" class="nav-link">
+  Docker搭建ES
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/springMVC框架.html" class="nav-link">
+  SpringMVC框架
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springboot/SpringBoot简介.html" class="nav-link">
+  SpringBoot简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/docker/01Docker入门.html" class="nav-link">
+  Docker入门
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/k8s/01Kubernetes介绍及使用.html" class="nav-link">
+  K8s介绍与使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/code-style/effective-java/目录.html" class="nav-link">
+  Effective-Java
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  单元测试
+</a></li><li class="dropdown-subitem"><a href="/matheusblog/md/project/jt-project/2. IDEA配置.html" class="nav-link">
+  IDEA配置
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/scala/Scala学习宝典.html" class="nav-link">
+  Scala学习宝典
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/python/Python基础学习.html" class="nav-link">
+  Python基础学习
+</a></li></ul></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Go</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="sidebar-link">Go 语言介绍</a></li><li><a href="/matheusblog/md/other-languages/go/02Go语言基础.html" class="sidebar-link">Go 语言基础</a></li><li><a href="/matheusblog/md/other-languages/go/03Go语言顺序编程.html" class="sidebar-link">顺序编程</a></li><li><a href="/matheusblog/md/other-languages/go/04面向对象编程.html" class="sidebar-link">面向对象编程</a></li><li><a href="/matheusblog/md/other-languages/go/05并发编程.html" class="sidebar-link">并发编程</a></li><li><a href="/matheusblog/md/other-languages/go/06词频统计综合案例.html" class="sidebar-link">词频统计综合案例</a></li><li><a href="/matheusblog/md/other-languages/go/07IDE及环境配置.html" class="sidebar-link">IDE及环境配置</a></li><li><a href="/matheusblog/md/other-languages/go/08数组与切片.html" class="sidebar-link">数组与切片</a></li><li><a href="/matheusblog/md/other-languages/go/09栈与栈的应用.html" class="sidebar-link">栈与栈的应用</a></li><li><a href="/matheusblog/md/other-languages/go/10七大设计原则.html" class="sidebar-link">七大设计原则</a></li><li><a href="/matheusblog/md/other-languages/go/11简单工厂与抽象工厂.html" class="sidebar-link">简单工厂与抽象工厂</a></li><li><a href="/matheusblog/md/other-languages/go/12go相对Java的优势.html" class="sidebar-link">go相对Java优势</a></li><li><a href="/matheusblog/md/other-languages/go/13快速开始一个Go程序.html" class="sidebar-link">快速开始一个Go程序</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Go并发服务器框架Zinx入门</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/other-languages/go/basic-project/00项目基础go语言API.html" class="sidebar-link">项目基础go语言API</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/01Zinx课程大纲.html" class="sidebar-link">Zinx课程大纲</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/02实现Server模块.html" class="sidebar-link">实现Server模块</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/03实现链接封装业务与业务绑定.html" class="sidebar-link">实现链路封装业务与业务绑定</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/04实现基础路由模块.html" class="sidebar-link">实现基础路由模块</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/05全局配置.html" class="active sidebar-link">全局配置</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/06消息封装.html" class="sidebar-link">消息封装</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/07多路由模式.html" class="sidebar-link">多路由模式</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/08读写分离.html" class="sidebar-link">读写分离</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/09实现工作池.html" class="sidebar-link">实现工作池</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/10实现链接控制.html" class="sidebar-link">实现链路控制</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/11连接属性设置.html" class="sidebar-link">连接属性设置</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/12Web基础知识介绍.html" class="sidebar-link">Web基础知识介绍</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/13ChitCha论坛.html" class="sidebar-link">ChitCha论坛</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Scala</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/other-languages/scala/Scala学习宝典.html" class="sidebar-link">Scala学习宝典</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Python</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/other-languages/python/Python基础学习.html" class="sidebar-link">Python基础学习</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="全局配置"><a href="#全局配置" class="header-anchor">#</a> 全局配置</h1> <p></p><div class="table-of-contents"><ul><li><a href="#实验介绍">实验介绍</a></li><li><a href="#准备工作">准备工作</a></li><li><a href="#zinx-的全局配置">Zinx 的全局配置</a><ul><li><a href="#使用-zinx-v0-4-完成应用程序">使用 Zinx-V0.4 完成应用程序</a></li></ul></li><li><a href="#实验总结">实验总结</a></li></ul></div><p></p> <h2 id="实验介绍"><a href="#实验介绍" class="header-anchor">#</a> 实验介绍</h2> <p>本节实验中，我们将完成 Zinx 框架的全局配置模块。如下面的思维导图中所表示的这些功能。</p> <p><img src="/matheusblog/assets/img/image-20220531170221877.6ebdbd64.png" alt="image-20220531170221877"></p> <h2 id="准备工作"><a href="#准备工作" class="header-anchor">#</a> 准备工作</h2> <p>首先我们执行如下代码：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">wget</span> https://labfile.oss.aliyuncs.com/courses/1639/03.sh <span class="token operator">&amp;&amp;</span> /bin/bash 03.sh
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>执行后我们的项目目录如下图所示：</p> <p><img src="/matheusblog/assets/img/image-20220531170227332.1d5956d7.png" alt="image-20220531170227332"></p> <h2 id="zinx-的全局配置"><a href="#zinx-的全局配置" class="header-anchor">#</a> Zinx 的全局配置</h2> <p>随着架构逐步的变大，参数就会越来越多，为了省去我们后续大频率修改参数的麻烦，接下来 Zinx 需要做一个加载配置的模块，和一个全局获取 Zinx 参数的对象。 这样也方便了我们以后的维护操作，试想一下，如果你的项目里每个类的配置都写在自己的类方法里，后续出现需要更改配置的时候再去修改配置就会很麻烦。所以，通常我们都会用一个全局的配置功能来方便后续维护。</p> <h4 id="zinx-v0-4-增添全局配置代码实现"><a href="#zinx-v0-4-增添全局配置代码实现" class="header-anchor">#</a> Zinx-V0.4 增添全局配置代码实现</h4> <p>我们先做一个简单的加载配置模块，要加载的配置文件的文本格式，就选择比较通用的<code>json</code>格式，配置信息暂时如下:</p> <p>我们先在 zinx 文件夹下新建 conf 文件夹，然后再 conf 文件夹下新建 zinx.json 文件。</p> <p>配置信息如下：</p> <div class="language-json line-numbers-mode"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;Name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;demo server&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;Host&quot;</span><span class="token operator">:</span> <span class="token string">&quot;127.0.0.1&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;TcpPort&quot;</span><span class="token operator">:</span> <span class="token number">7777</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;MaxConn&quot;</span><span class="token operator">:</span> <span class="token number">3</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>这里需要大家注意一下 json 的书写规范如下：</p> <ol><li>数组或对象之中的字符串必须使用双引号，不能使用单引号。</li> <li>对象的成员名称必须使用双引号。</li> <li>数组或对象最后一个成员的后面，不能加逗号 。</li> <li>数组或对象的每个成员的值，可以是简单值，也可以是复合值。简单值分为四种：字符串、数值（必须以十进制表示）、布尔值和 null（NaN, Infinity, -Infinity 和 undefined 都会被转为 null）。复合值分为两种：符合 JSON 格式的对象和符合 JSON 格式的数组。</li></ol> <p>现在我们需要建立一个全局配置信息的对象。</p> <h4 id="创建全局参数文件"><a href="#创建全局参数文件" class="header-anchor">#</a> 创建全局参数文件</h4> <p>创建<code>zinx/utils</code>文件夹，在下面创建<code>globalobj.go</code>文件,暂时编写如下。</p> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">package</span> utils
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;encoding/json&quot;</span>
+    <span class="token string">&quot;io/ioutil&quot;</span>
+    <span class="token string">&quot;zinx/ziface&quot;</span>
+<span class="token punctuation">)</span>
+<span class="token comment">/*
+    存储一切有关Zinx框架的全局参数，供其他模块使用
+    一些参数也可以通过 用户根据 zinx.json来配置
+*/</span>
+<span class="token keyword">type</span> GlobalObj <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    TcpServer ziface<span class="token punctuation">.</span>IServer <span class="token comment">//当前Zinx的全局Server对象</span>
+    Host      <span class="token builtin">string</span>         <span class="token comment">//当前服务器主机IP</span>
+    TcpPort   <span class="token builtin">int</span>            <span class="token comment">//当前服务器主机监听端口号</span>
+    Name      <span class="token builtin">string</span>         <span class="token comment">//当前服务器名称</span>
+    Version   <span class="token builtin">string</span>         <span class="token comment">//当前Zinx版本号</span>
+    MaxPacketSize <span class="token builtin">uint32</span> <span class="token comment">//都需数据包的最大值</span>
+    MaxConn       <span class="token builtin">int</span>    <span class="token comment">//当前服务器主机允许的最大链接个数</span>
+<span class="token punctuation">}</span>
+<span class="token comment">/*
+    定义一个全局的对象
+*/</span>
+<span class="token keyword">var</span> GlobalObject <span class="token operator">*</span>GlobalObj
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div><p>我们在全局定义了一个<code>GlobalObject</code>对象，目的就是让其他模块都能访问到里面的参数。</p> <h4 id="提供-init-初始化方法"><a href="#提供-init-初始化方法" class="header-anchor">#</a> 提供 init 初始化方法</h4> <p>然后我们提供一个<code>init()</code>方法，目的是初始化<code>GlobalObject</code>对象，和加载服务端应用配置文件<code>conf/zinx.json</code></p> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">package</span> utils
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;encoding/json&quot;</span>
+    <span class="token string">&quot;io/ioutil&quot;</span>
+    <span class="token string">&quot;zinx/ziface&quot;</span>
+<span class="token punctuation">)</span>
+<span class="token comment">/*
+    存储一切有关Zinx框架的全局参数，供其他模块使用
+    一些参数也可以通过 用户根据 zinx.json来配置
+*/</span>
+<span class="token keyword">type</span> GlobalObj <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    TcpServer ziface<span class="token punctuation">.</span>IServer <span class="token comment">//当前Zinx的全局Server对象</span>
+    Host      <span class="token builtin">string</span>         <span class="token comment">//当前服务器主机IP</span>
+    TcpPort   <span class="token builtin">int</span>            <span class="token comment">//当前服务器主机监听端口号</span>
+    Name      <span class="token builtin">string</span>         <span class="token comment">//当前服务器名称</span>
+    Version   <span class="token builtin">string</span>         <span class="token comment">//当前Zinx版本号</span>
+    MaxPacketSize <span class="token builtin">uint32</span> <span class="token comment">//都需数据包的最大值</span>
+    MaxConn       <span class="token builtin">int</span>    <span class="token comment">//当前服务器主机允许的最大链接个数</span>
+<span class="token punctuation">}</span>
+<span class="token comment">/*
+    定义一个全局的对象
+*/</span>
+<span class="token keyword">var</span> GlobalObject <span class="token operator">*</span>GlobalObj
+<span class="token comment">//读取用户的配置文件</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>g <span class="token operator">*</span>GlobalObj<span class="token punctuation">)</span> <span class="token function">Reload</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    data<span class="token punctuation">,</span> err <span class="token operator">:=</span> ioutil<span class="token punctuation">.</span><span class="token function">ReadFile</span><span class="token punctuation">(</span><span class="token string">&quot;conf/zinx.json&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        <span class="token function">panic</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">//将json数据解析到struct中</span>
+    <span class="token comment">//fmt.Printf(&quot;json :%s\n&quot;, data)</span>
+    err <span class="token operator">=</span> json<span class="token punctuation">.</span><span class="token function">Unmarshal</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> <span class="token operator">&amp;</span>GlobalObject<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        <span class="token function">panic</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment">/*
+    提供init方法，默认加载
+*/</span>
+<span class="token keyword">func</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">//初始化GlobalObject变量，设置一些默认值</span>
+    GlobalObject <span class="token operator">=</span> <span class="token operator">&amp;</span>GlobalObj<span class="token punctuation">{</span>
+        Name<span class="token punctuation">:</span>    <span class="token string">&quot;ZinxServerApp&quot;</span><span class="token punctuation">,</span>
+        Version<span class="token punctuation">:</span> <span class="token string">&quot;V0.4&quot;</span><span class="token punctuation">,</span>
+        TcpPort<span class="token punctuation">:</span> <span class="token number">7777</span><span class="token punctuation">,</span>
+        Host<span class="token punctuation">:</span>    <span class="token string">&quot;0.0.0.0&quot;</span><span class="token punctuation">,</span>
+        MaxConn<span class="token punctuation">:</span> <span class="token number">12000</span><span class="token punctuation">,</span>
+        MaxPacketSize<span class="token punctuation">:</span><span class="token number">4096</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">//从配置文件中加载一些用户配置的参数</span>
+    GlobalObject<span class="token punctuation">.</span><span class="token function">Reload</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br></div></div><p>这里的 init 方法其实是 Golang 的一个特性，在执行 Go 语言程序时，Golang 会先看各个包里有没有 init 方法，如果有就先执行初始化。初始化方法全都运行完之后才会执行主函数。</p> <h4 id="硬参数替换与-server-初始化参数配置"><a href="#硬参数替换与-server-初始化参数配置" class="header-anchor">#</a> 硬参数替换与 Server 初始化参数配置</h4> <p>我们这里来修改 znet/server.go 文件的 NewServer 方法。</p> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token comment">// 这里别忘了在头部 import &quot;zinx/utils&quot;</span>
+
+<span class="token comment">/*
+  创建一个服务器句柄
+ */</span>
+<span class="token keyword">func</span> NewServer <span class="token punctuation">(</span><span class="token punctuation">)</span> ziface<span class="token punctuation">.</span>IServer <span class="token punctuation">{</span>
+    <span class="token comment">//先初始化全局配置文件</span>
+    utils<span class="token punctuation">.</span>GlobalObject<span class="token punctuation">.</span><span class="token function">Reload</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    s<span class="token operator">:=</span> <span class="token operator">&amp;</span>Server <span class="token punctuation">{</span>
+        Name <span class="token punctuation">:</span>utils<span class="token punctuation">.</span>GlobalObject<span class="token punctuation">.</span>Name<span class="token punctuation">,</span><span class="token comment">//从全局参数获取</span>
+        IPVersion<span class="token punctuation">:</span><span class="token string">&quot;tcp4&quot;</span><span class="token punctuation">,</span>
+        IP<span class="token punctuation">:</span>utils<span class="token punctuation">.</span>GlobalObject<span class="token punctuation">.</span>Host<span class="token punctuation">,</span><span class="token comment">//从全局参数获取</span>
+        Port<span class="token punctuation">:</span>utils<span class="token punctuation">.</span>GlobalObject<span class="token punctuation">.</span>TcpPort<span class="token punctuation">,</span><span class="token comment">//从全局参数获取</span>
+        Router<span class="token punctuation">:</span> <span class="token boolean">nil</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> s
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><p>我们未来方便验证我们的参数已经成功被加载，在<code>Server.Start()</code>方法中加入几行调试信息</p> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">func</span> <span class="token punctuation">(</span>s <span class="token operator">*</span>Server<span class="token punctuation">)</span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 如果我们的方法正确，运行时就会打印出Version: V0.4, MaxConn: 3,  MaxPacketSize: 4096</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;[START] Server name: %s,listenner at IP: %s, Port %d is starting\n&quot;</span><span class="token punctuation">,</span> s<span class="token punctuation">.</span>Name<span class="token punctuation">,</span> s<span class="token punctuation">.</span>IP<span class="token punctuation">,</span> s<span class="token punctuation">.</span>Port<span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;[Zinx] Version: %s, MaxConn: %d,  MaxPacketSize: %d\n&quot;</span><span class="token punctuation">,</span>
+        utils<span class="token punctuation">.</span>GlobalObject<span class="token punctuation">.</span>Version<span class="token punctuation">,</span>
+        utils<span class="token punctuation">.</span>GlobalObject<span class="token punctuation">.</span>MaxConn<span class="token punctuation">,</span>
+        utils<span class="token punctuation">.</span>GlobalObject<span class="token punctuation">.</span>MaxPacketSize<span class="token punctuation">)</span>
+    <span class="token comment">// 以上是添加进来的调试信息</span>
+    <span class="token comment">//开启一个go去做服务端Linster业务</span>
+    <span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">//1 获取一个TCP的Addr</span>
+        addr<span class="token punctuation">,</span> err <span class="token operator">:=</span> net<span class="token punctuation">.</span><span class="token function">ResolveTCPAddr</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span>IPVersion<span class="token punctuation">,</span> fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span><span class="token string">&quot;%s:%d&quot;</span><span class="token punctuation">,</span> s<span class="token punctuation">.</span>IP<span class="token punctuation">,</span> s<span class="token punctuation">.</span>Port<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+            fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;resolve tcp addr err: &quot;</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+            <span class="token keyword">return</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">//2 监听服务器地址</span>
+        listenner<span class="token punctuation">,</span> err<span class="token operator">:=</span> net<span class="token punctuation">.</span><span class="token function">ListenTCP</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span>IPVersion<span class="token punctuation">,</span> addr<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+            fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;listen&quot;</span><span class="token punctuation">,</span> s<span class="token punctuation">.</span>IPVersion<span class="token punctuation">,</span> <span class="token string">&quot;err&quot;</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+            <span class="token keyword">return</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">//已经监听成功</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;start Zinx server  &quot;</span><span class="token punctuation">,</span> s<span class="token punctuation">.</span>Name<span class="token punctuation">,</span> <span class="token string">&quot; succ, now listenning...&quot;</span><span class="token punctuation">)</span>
+        <span class="token comment">//TODO server.go 应该有一个自动生成ID的方法</span>
+        <span class="token keyword">var</span> cid <span class="token builtin">uint32</span>
+        cid <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token comment">//3 启动server网络连接业务</span>
+        <span class="token keyword">for</span> <span class="token punctuation">{</span>
+            <span class="token comment">//3.1 阻塞等待客户端建立连接请求</span>
+            conn<span class="token punctuation">,</span> err <span class="token operator">:=</span> listenner<span class="token punctuation">.</span><span class="token function">AcceptTCP</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+                fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;Accept err &quot;</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+                <span class="token keyword">continue</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment">//3.2 TODO Server.Start() 设置服务器最大连接控制,如果超过最大连接，那么则关闭此新的连接</span>
+            <span class="token comment">//3.3 处理该新连接请求的 业务 方法， 此时应该有 handler 和 conn是绑定的</span>
+            dealConn <span class="token operator">:=</span> <span class="token function">NewConntion</span><span class="token punctuation">(</span>conn<span class="token punctuation">,</span> cid<span class="token punctuation">,</span> s<span class="token punctuation">.</span>Router<span class="token punctuation">)</span>
+            cid <span class="token operator">++</span>
+            <span class="token comment">//3.4 启动当前链接的处理业务</span>
+            <span class="token keyword">go</span> dealConn<span class="token punctuation">.</span><span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br></div></div><p>当然还有一些其他的之前写死的数值，均可以在配置文件配置，用全局参数替换，这里不列举，大家可以尝试自己将其修改过来。</p> <p>当前 zinx 框架目录结构：</p> <p><img src="/matheusblog/assets/img/image-20220531170236340.8cb4b60c.png" alt="image-20220531170236340"></p> <h3 id="使用-zinx-v0-4-完成应用程序"><a href="#使用-zinx-v0-4-完成应用程序" class="header-anchor">#</a> 使用 Zinx-V0.4 完成应用程序</h3> <p>我们来修改 Server.go 文件。</p> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">package</span> main
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;zinx/ziface&quot;</span>
+    <span class="token string">&quot;zinx/znet&quot;</span>
+<span class="token punctuation">)</span>
+<span class="token comment">//ping test 自定义路由</span>
+<span class="token keyword">type</span> PingRouter <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    znet<span class="token punctuation">.</span>BaseRouter
+<span class="token punctuation">}</span>
+<span class="token comment">//Test Handle</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>this <span class="token operator">*</span>PingRouter<span class="token punctuation">)</span> <span class="token function">Handle</span><span class="token punctuation">(</span>request ziface<span class="token punctuation">.</span>IRequest<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;Call PingRouter Handle&quot;</span><span class="token punctuation">)</span>
+    <span class="token boolean">_</span><span class="token punctuation">,</span> err <span class="token operator">:=</span> request<span class="token punctuation">.</span><span class="token function">GetConnection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">GetTCPConnection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span><span class="token string">&quot;ping...ping...ping\n&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;call back ping ping ping error&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">//创建一个server句柄</span>
+    s <span class="token operator">:=</span> znet<span class="token punctuation">.</span><span class="token function">NewServer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">//配置路由</span>
+    s<span class="token punctuation">.</span><span class="token function">AddRouter</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>PingRouter<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token comment">//开启服务</span>
+    s<span class="token punctuation">.</span><span class="token function">Serve</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br></div></div><p>在控制台切换到 zinx 文件夹下，执行 <code>go run Server.go</code> 命令来查询结果。</p> <p><img src="/matheusblog/assets/img/image-20220531170243569.4c92a78d.png" alt="image-20220531170243569"></p> <p>还记得我们在上面 server 中做的修改，添加的调试信息吗，这里可以正常把参数打印，就说明我们的配置文件成功的被读取进来了。</p> <h2 id="实验总结"><a href="#实验总结" class="header-anchor">#</a> 实验总结</h2> <p>我们今天完成了对我们框架进行全局配置的实现。同时使用到了 json 反序列化的方式使配置文件变成了配置对象，来方便我们对其进行操作。</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/matheusblog/md/other-languages/go/basic-project/04实现基础路由模块.html" class="prev">
+        实现基础路由模块
+      </a></span> <span class="next"><a href="/matheusblog/md/other-languages/go/basic-project/06消息封装.html">
+        消息封装
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/matheusblog/assets/js/app.d1bc8cd0.js" defer></script><script src="/matheusblog/assets/js/3.21aaf515.js" defer></script><script src="/matheusblog/assets/js/80.65421bb8.js" defer></script>
+  </body>
+</html>

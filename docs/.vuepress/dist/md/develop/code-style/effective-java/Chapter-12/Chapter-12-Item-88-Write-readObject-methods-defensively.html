@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Chapter 12. Serialization（序列化） | MyBlog</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="包含: Java 基础, JVM, Spring, Spring Boot, Spring Cloud, MySQL, ElasticSearch, MongoDB, Docker, k8s, Linux, DevOps, 分布式,  开发工具, Git, IDE...">
+    
+    <link rel="preload" href="/matheusblog/assets/css/0.styles.980a01be.css" as="style"><link rel="preload" href="/matheusblog/assets/js/app.d1bc8cd0.js" as="script"><link rel="preload" href="/matheusblog/assets/js/3.21aaf515.js" as="script"><link rel="preload" href="/matheusblog/assets/js/173.4f22a7d7.js" as="script"><link rel="prefetch" href="/matheusblog/assets/js/10.54a7cbcb.js"><link rel="prefetch" href="/matheusblog/assets/js/100.65c579fe.js"><link rel="prefetch" href="/matheusblog/assets/js/101.b41c3c3e.js"><link rel="prefetch" href="/matheusblog/assets/js/102.4f362209.js"><link rel="prefetch" href="/matheusblog/assets/js/103.3634017b.js"><link rel="prefetch" href="/matheusblog/assets/js/104.3bee8dc7.js"><link rel="prefetch" href="/matheusblog/assets/js/105.4dde7830.js"><link rel="prefetch" href="/matheusblog/assets/js/106.868e8474.js"><link rel="prefetch" href="/matheusblog/assets/js/107.c7fc6303.js"><link rel="prefetch" href="/matheusblog/assets/js/108.ceb9c82d.js"><link rel="prefetch" href="/matheusblog/assets/js/109.a9f0c9ae.js"><link rel="prefetch" href="/matheusblog/assets/js/11.2c2c6a67.js"><link rel="prefetch" href="/matheusblog/assets/js/110.fe3adf68.js"><link rel="prefetch" href="/matheusblog/assets/js/111.2c3688da.js"><link rel="prefetch" href="/matheusblog/assets/js/112.3cad34e6.js"><link rel="prefetch" href="/matheusblog/assets/js/113.aa50199f.js"><link rel="prefetch" href="/matheusblog/assets/js/114.60ac3f02.js"><link rel="prefetch" href="/matheusblog/assets/js/115.2db78ad2.js"><link rel="prefetch" href="/matheusblog/assets/js/116.7312786f.js"><link rel="prefetch" href="/matheusblog/assets/js/117.4a3a0337.js"><link rel="prefetch" href="/matheusblog/assets/js/118.e5af8b9d.js"><link rel="prefetch" href="/matheusblog/assets/js/119.e0967512.js"><link rel="prefetch" href="/matheusblog/assets/js/12.6f0ae98d.js"><link rel="prefetch" href="/matheusblog/assets/js/120.1ce6260c.js"><link rel="prefetch" href="/matheusblog/assets/js/121.c5f567f4.js"><link rel="prefetch" href="/matheusblog/assets/js/122.ff4f9bed.js"><link rel="prefetch" href="/matheusblog/assets/js/123.b354268c.js"><link rel="prefetch" href="/matheusblog/assets/js/124.ba2aa1f2.js"><link rel="prefetch" href="/matheusblog/assets/js/125.d6737c1d.js"><link rel="prefetch" href="/matheusblog/assets/js/126.ed190ed8.js"><link rel="prefetch" href="/matheusblog/assets/js/127.032ab16f.js"><link rel="prefetch" href="/matheusblog/assets/js/128.eaa5481c.js"><link rel="prefetch" href="/matheusblog/assets/js/129.61e1d174.js"><link rel="prefetch" href="/matheusblog/assets/js/13.c0ff77f9.js"><link rel="prefetch" href="/matheusblog/assets/js/130.d09f60e2.js"><link rel="prefetch" href="/matheusblog/assets/js/131.21aa1c96.js"><link rel="prefetch" href="/matheusblog/assets/js/132.351a321e.js"><link rel="prefetch" href="/matheusblog/assets/js/133.e5e36230.js"><link rel="prefetch" href="/matheusblog/assets/js/134.cea97435.js"><link rel="prefetch" href="/matheusblog/assets/js/135.a56e2494.js"><link rel="prefetch" href="/matheusblog/assets/js/136.557d9fdf.js"><link rel="prefetch" href="/matheusblog/assets/js/137.21eda887.js"><link rel="prefetch" href="/matheusblog/assets/js/138.c10c815c.js"><link rel="prefetch" href="/matheusblog/assets/js/139.5ebe91b0.js"><link rel="prefetch" href="/matheusblog/assets/js/14.6ed4a73f.js"><link rel="prefetch" href="/matheusblog/assets/js/140.9830147a.js"><link rel="prefetch" href="/matheusblog/assets/js/141.708bb77b.js"><link rel="prefetch" href="/matheusblog/assets/js/142.96c71160.js"><link rel="prefetch" href="/matheusblog/assets/js/143.ac186a53.js"><link rel="prefetch" href="/matheusblog/assets/js/144.6411b0b7.js"><link rel="prefetch" href="/matheusblog/assets/js/145.5c75cd6c.js"><link rel="prefetch" href="/matheusblog/assets/js/146.fdb5e7c8.js"><link rel="prefetch" href="/matheusblog/assets/js/147.4f67ac67.js"><link rel="prefetch" href="/matheusblog/assets/js/148.424b4f21.js"><link rel="prefetch" href="/matheusblog/assets/js/149.6161dd02.js"><link rel="prefetch" href="/matheusblog/assets/js/15.6bf38d8a.js"><link rel="prefetch" href="/matheusblog/assets/js/150.40ac7609.js"><link rel="prefetch" href="/matheusblog/assets/js/151.a246fd40.js"><link rel="prefetch" href="/matheusblog/assets/js/152.e430bd35.js"><link rel="prefetch" href="/matheusblog/assets/js/153.27a16b43.js"><link rel="prefetch" href="/matheusblog/assets/js/154.03f42b0e.js"><link rel="prefetch" href="/matheusblog/assets/js/155.c01c0b8b.js"><link rel="prefetch" href="/matheusblog/assets/js/156.9e75b32b.js"><link rel="prefetch" href="/matheusblog/assets/js/157.8539cba7.js"><link rel="prefetch" href="/matheusblog/assets/js/158.200135a9.js"><link rel="prefetch" href="/matheusblog/assets/js/159.1472f0e3.js"><link rel="prefetch" href="/matheusblog/assets/js/16.0bd8975e.js"><link rel="prefetch" href="/matheusblog/assets/js/160.a897bdbf.js"><link rel="prefetch" href="/matheusblog/assets/js/161.8ebaced9.js"><link rel="prefetch" href="/matheusblog/assets/js/162.69a52259.js"><link rel="prefetch" href="/matheusblog/assets/js/163.61b0c093.js"><link rel="prefetch" href="/matheusblog/assets/js/164.3fd70b50.js"><link rel="prefetch" href="/matheusblog/assets/js/165.99a4a455.js"><link rel="prefetch" href="/matheusblog/assets/js/166.be429d07.js"><link rel="prefetch" href="/matheusblog/assets/js/167.35fa8427.js"><link rel="prefetch" href="/matheusblog/assets/js/168.98c13248.js"><link rel="prefetch" href="/matheusblog/assets/js/169.0c800163.js"><link rel="prefetch" href="/matheusblog/assets/js/17.e107c04a.js"><link rel="prefetch" href="/matheusblog/assets/js/170.18e31e2a.js"><link rel="prefetch" href="/matheusblog/assets/js/171.fd0af1e7.js"><link rel="prefetch" href="/matheusblog/assets/js/172.2ae1a92c.js"><link rel="prefetch" href="/matheusblog/assets/js/174.1914bfac.js"><link rel="prefetch" href="/matheusblog/assets/js/175.cf52c6f0.js"><link rel="prefetch" href="/matheusblog/assets/js/176.2d62ffaf.js"><link rel="prefetch" href="/matheusblog/assets/js/177.7998e89e.js"><link rel="prefetch" href="/matheusblog/assets/js/178.db1004ac.js"><link rel="prefetch" href="/matheusblog/assets/js/179.ad97e66d.js"><link rel="prefetch" href="/matheusblog/assets/js/18.e3120c6e.js"><link rel="prefetch" href="/matheusblog/assets/js/180.598dae51.js"><link rel="prefetch" href="/matheusblog/assets/js/181.599b5236.js"><link rel="prefetch" href="/matheusblog/assets/js/182.2dbe3970.js"><link rel="prefetch" href="/matheusblog/assets/js/183.39b4f5d6.js"><link rel="prefetch" href="/matheusblog/assets/js/184.5e15d758.js"><link rel="prefetch" href="/matheusblog/assets/js/185.ba3d76a6.js"><link rel="prefetch" href="/matheusblog/assets/js/186.62a1d264.js"><link rel="prefetch" href="/matheusblog/assets/js/187.ce9ab2bc.js"><link rel="prefetch" href="/matheusblog/assets/js/188.b9ad970d.js"><link rel="prefetch" href="/matheusblog/assets/js/189.29df5075.js"><link rel="prefetch" href="/matheusblog/assets/js/19.fc33d9dc.js"><link rel="prefetch" href="/matheusblog/assets/js/190.8d142ac0.js"><link rel="prefetch" href="/matheusblog/assets/js/191.3fac1cfe.js"><link rel="prefetch" href="/matheusblog/assets/js/192.fd44ba5f.js"><link rel="prefetch" href="/matheusblog/assets/js/193.4dc021ba.js"><link rel="prefetch" href="/matheusblog/assets/js/194.088fad3f.js"><link rel="prefetch" href="/matheusblog/assets/js/195.1fa6fd8b.js"><link rel="prefetch" href="/matheusblog/assets/js/196.93035ed5.js"><link rel="prefetch" href="/matheusblog/assets/js/197.60d31e9d.js"><link rel="prefetch" href="/matheusblog/assets/js/198.e2431930.js"><link rel="prefetch" href="/matheusblog/assets/js/199.eb85b79c.js"><link rel="prefetch" href="/matheusblog/assets/js/2.49dcc008.js"><link rel="prefetch" href="/matheusblog/assets/js/20.f0fba33e.js"><link rel="prefetch" href="/matheusblog/assets/js/200.1d5f2566.js"><link rel="prefetch" href="/matheusblog/assets/js/201.78cfa60e.js"><link rel="prefetch" href="/matheusblog/assets/js/202.0538081f.js"><link rel="prefetch" href="/matheusblog/assets/js/203.e99855dc.js"><link rel="prefetch" href="/matheusblog/assets/js/204.f35716b0.js"><link rel="prefetch" href="/matheusblog/assets/js/205.e0d99ed0.js"><link rel="prefetch" href="/matheusblog/assets/js/206.fb60327e.js"><link rel="prefetch" href="/matheusblog/assets/js/207.37d97d63.js"><link rel="prefetch" href="/matheusblog/assets/js/208.3c7cc661.js"><link rel="prefetch" href="/matheusblog/assets/js/209.0f36f5f9.js"><link rel="prefetch" href="/matheusblog/assets/js/21.38b58190.js"><link rel="prefetch" href="/matheusblog/assets/js/210.7d3c1d9e.js"><link rel="prefetch" href="/matheusblog/assets/js/211.fd9c9ed7.js"><link rel="prefetch" href="/matheusblog/assets/js/212.fa687e1a.js"><link rel="prefetch" href="/matheusblog/assets/js/213.4d25912b.js"><link rel="prefetch" href="/matheusblog/assets/js/214.32fa8874.js"><link rel="prefetch" href="/matheusblog/assets/js/215.007c1b40.js"><link rel="prefetch" href="/matheusblog/assets/js/216.2ca1689d.js"><link rel="prefetch" href="/matheusblog/assets/js/217.42d81467.js"><link rel="prefetch" href="/matheusblog/assets/js/218.e8ef68ea.js"><link rel="prefetch" href="/matheusblog/assets/js/219.e81c9223.js"><link rel="prefetch" href="/matheusblog/assets/js/22.50c56cab.js"><link rel="prefetch" href="/matheusblog/assets/js/220.60e29bfc.js"><link rel="prefetch" href="/matheusblog/assets/js/221.22376958.js"><link rel="prefetch" href="/matheusblog/assets/js/222.4bad5952.js"><link rel="prefetch" href="/matheusblog/assets/js/223.cf135a8b.js"><link rel="prefetch" href="/matheusblog/assets/js/224.574a4b29.js"><link rel="prefetch" href="/matheusblog/assets/js/225.fc91759f.js"><link rel="prefetch" href="/matheusblog/assets/js/226.4d8e0f0c.js"><link rel="prefetch" href="/matheusblog/assets/js/227.eedacdd7.js"><link rel="prefetch" href="/matheusblog/assets/js/228.d9e5543d.js"><link rel="prefetch" href="/matheusblog/assets/js/229.198e9b7f.js"><link rel="prefetch" href="/matheusblog/assets/js/23.546acb40.js"><link rel="prefetch" href="/matheusblog/assets/js/230.9c9b55fa.js"><link rel="prefetch" href="/matheusblog/assets/js/231.52ba5c5a.js"><link rel="prefetch" href="/matheusblog/assets/js/232.4abf639c.js"><link rel="prefetch" href="/matheusblog/assets/js/233.677fd788.js"><link rel="prefetch" href="/matheusblog/assets/js/234.bb428729.js"><link rel="prefetch" href="/matheusblog/assets/js/235.6de15ca6.js"><link rel="prefetch" href="/matheusblog/assets/js/236.fede2411.js"><link rel="prefetch" href="/matheusblog/assets/js/237.6c68e409.js"><link rel="prefetch" href="/matheusblog/assets/js/238.b114a429.js"><link rel="prefetch" href="/matheusblog/assets/js/239.b4881685.js"><link rel="prefetch" href="/matheusblog/assets/js/24.037398b9.js"><link rel="prefetch" href="/matheusblog/assets/js/240.5d0ae7fe.js"><link rel="prefetch" href="/matheusblog/assets/js/241.fd2a3483.js"><link rel="prefetch" href="/matheusblog/assets/js/242.414e941d.js"><link rel="prefetch" href="/matheusblog/assets/js/243.9b98a81a.js"><link rel="prefetch" href="/matheusblog/assets/js/244.7a3c10b1.js"><link rel="prefetch" href="/matheusblog/assets/js/245.623c683e.js"><link rel="prefetch" href="/matheusblog/assets/js/246.3544e58b.js"><link rel="prefetch" href="/matheusblog/assets/js/247.9c99d802.js"><link rel="prefetch" href="/matheusblog/assets/js/248.68af4e3b.js"><link rel="prefetch" href="/matheusblog/assets/js/249.ccaca596.js"><link rel="prefetch" href="/matheusblog/assets/js/25.6c5bccf3.js"><link rel="prefetch" href="/matheusblog/assets/js/250.571542c4.js"><link rel="prefetch" href="/matheusblog/assets/js/251.cf75e5e5.js"><link rel="prefetch" href="/matheusblog/assets/js/252.9f57b2df.js"><link rel="prefetch" href="/matheusblog/assets/js/253.976d974c.js"><link rel="prefetch" href="/matheusblog/assets/js/254.447ebae0.js"><link rel="prefetch" href="/matheusblog/assets/js/255.d57e94cf.js"><link rel="prefetch" href="/matheusblog/assets/js/256.0f189f68.js"><link rel="prefetch" href="/matheusblog/assets/js/257.fad20cea.js"><link rel="prefetch" href="/matheusblog/assets/js/258.d239b495.js"><link rel="prefetch" href="/matheusblog/assets/js/259.8bcd5e63.js"><link rel="prefetch" href="/matheusblog/assets/js/26.c1d32692.js"><link rel="prefetch" href="/matheusblog/assets/js/260.090a63d7.js"><link rel="prefetch" href="/matheusblog/assets/js/261.9c49f0d4.js"><link rel="prefetch" href="/matheusblog/assets/js/262.10f98f30.js"><link rel="prefetch" href="/matheusblog/assets/js/263.81f7548d.js"><link rel="prefetch" href="/matheusblog/assets/js/264.8c0bad52.js"><link rel="prefetch" href="/matheusblog/assets/js/265.982857a3.js"><link rel="prefetch" href="/matheusblog/assets/js/266.040cfe24.js"><link rel="prefetch" href="/matheusblog/assets/js/267.7227c614.js"><link rel="prefetch" href="/matheusblog/assets/js/268.b01bce97.js"><link rel="prefetch" href="/matheusblog/assets/js/269.f0235678.js"><link rel="prefetch" href="/matheusblog/assets/js/27.e26685ad.js"><link rel="prefetch" href="/matheusblog/assets/js/270.62ea1068.js"><link rel="prefetch" href="/matheusblog/assets/js/271.c1b9878a.js"><link rel="prefetch" href="/matheusblog/assets/js/272.24a28332.js"><link rel="prefetch" href="/matheusblog/assets/js/273.6c40eac8.js"><link rel="prefetch" href="/matheusblog/assets/js/274.cd992810.js"><link rel="prefetch" href="/matheusblog/assets/js/275.75177aed.js"><link rel="prefetch" href="/matheusblog/assets/js/276.e8985557.js"><link rel="prefetch" href="/matheusblog/assets/js/277.64625549.js"><link rel="prefetch" href="/matheusblog/assets/js/278.4200bee5.js"><link rel="prefetch" href="/matheusblog/assets/js/279.b1186598.js"><link rel="prefetch" href="/matheusblog/assets/js/28.c0534da3.js"><link rel="prefetch" href="/matheusblog/assets/js/280.13632f13.js"><link rel="prefetch" href="/matheusblog/assets/js/281.83aa1bdd.js"><link rel="prefetch" href="/matheusblog/assets/js/282.034b31ee.js"><link rel="prefetch" href="/matheusblog/assets/js/283.19bded06.js"><link rel="prefetch" href="/matheusblog/assets/js/284.a5e29c5e.js"><link rel="prefetch" href="/matheusblog/assets/js/285.8a6391d1.js"><link rel="prefetch" href="/matheusblog/assets/js/286.db317c9e.js"><link rel="prefetch" href="/matheusblog/assets/js/287.dc1dcc8f.js"><link rel="prefetch" href="/matheusblog/assets/js/288.f8724f05.js"><link rel="prefetch" href="/matheusblog/assets/js/289.4b35b3ab.js"><link rel="prefetch" href="/matheusblog/assets/js/29.a210d762.js"><link rel="prefetch" href="/matheusblog/assets/js/290.c6023ba3.js"><link rel="prefetch" href="/matheusblog/assets/js/291.db6e892a.js"><link rel="prefetch" href="/matheusblog/assets/js/292.61d8c4ea.js"><link rel="prefetch" href="/matheusblog/assets/js/293.506e9b4f.js"><link rel="prefetch" href="/matheusblog/assets/js/294.9bc96072.js"><link rel="prefetch" href="/matheusblog/assets/js/295.baf21ce8.js"><link rel="prefetch" href="/matheusblog/assets/js/296.4f010851.js"><link rel="prefetch" href="/matheusblog/assets/js/297.39f85fc0.js"><link rel="prefetch" href="/matheusblog/assets/js/298.cf0708c5.js"><link rel="prefetch" href="/matheusblog/assets/js/299.6c1c41a1.js"><link rel="prefetch" href="/matheusblog/assets/js/30.f88dfbb5.js"><link rel="prefetch" href="/matheusblog/assets/js/300.59368419.js"><link rel="prefetch" href="/matheusblog/assets/js/301.2d80d504.js"><link rel="prefetch" href="/matheusblog/assets/js/302.690f15a6.js"><link rel="prefetch" href="/matheusblog/assets/js/303.d285ad36.js"><link rel="prefetch" href="/matheusblog/assets/js/304.d9d52d35.js"><link rel="prefetch" href="/matheusblog/assets/js/305.ec2cf80c.js"><link rel="prefetch" href="/matheusblog/assets/js/306.6d7e61d2.js"><link rel="prefetch" href="/matheusblog/assets/js/307.ec680f13.js"><link rel="prefetch" href="/matheusblog/assets/js/308.addb7d10.js"><link rel="prefetch" href="/matheusblog/assets/js/309.60c45495.js"><link rel="prefetch" href="/matheusblog/assets/js/31.241f0b56.js"><link rel="prefetch" href="/matheusblog/assets/js/310.36b632f3.js"><link rel="prefetch" href="/matheusblog/assets/js/311.c135c48c.js"><link rel="prefetch" href="/matheusblog/assets/js/312.329d4917.js"><link rel="prefetch" href="/matheusblog/assets/js/313.e259927e.js"><link rel="prefetch" href="/matheusblog/assets/js/314.6019fcf4.js"><link rel="prefetch" href="/matheusblog/assets/js/315.a7f16c02.js"><link rel="prefetch" href="/matheusblog/assets/js/316.78cce25e.js"><link rel="prefetch" href="/matheusblog/assets/js/317.9fd2c4e0.js"><link rel="prefetch" href="/matheusblog/assets/js/318.a4fe80b0.js"><link rel="prefetch" href="/matheusblog/assets/js/319.620bd822.js"><link rel="prefetch" href="/matheusblog/assets/js/32.63322225.js"><link rel="prefetch" href="/matheusblog/assets/js/320.0bc73d8d.js"><link rel="prefetch" href="/matheusblog/assets/js/321.6f386429.js"><link rel="prefetch" href="/matheusblog/assets/js/322.dc68c4f6.js"><link rel="prefetch" href="/matheusblog/assets/js/323.990b2c5e.js"><link rel="prefetch" href="/matheusblog/assets/js/324.90800df3.js"><link rel="prefetch" href="/matheusblog/assets/js/325.17b21116.js"><link rel="prefetch" href="/matheusblog/assets/js/326.dc462f7a.js"><link rel="prefetch" href="/matheusblog/assets/js/327.60a3c557.js"><link rel="prefetch" href="/matheusblog/assets/js/328.918be9ec.js"><link rel="prefetch" href="/matheusblog/assets/js/329.fbc9c1c4.js"><link rel="prefetch" href="/matheusblog/assets/js/33.a5e4acbc.js"><link rel="prefetch" href="/matheusblog/assets/js/330.5eb0fa54.js"><link rel="prefetch" href="/matheusblog/assets/js/331.47217147.js"><link rel="prefetch" href="/matheusblog/assets/js/332.891c1931.js"><link rel="prefetch" href="/matheusblog/assets/js/333.22aa3d9c.js"><link rel="prefetch" href="/matheusblog/assets/js/334.7ced64e0.js"><link rel="prefetch" href="/matheusblog/assets/js/335.9f090150.js"><link rel="prefetch" href="/matheusblog/assets/js/34.0bbf3cd4.js"><link rel="prefetch" href="/matheusblog/assets/js/35.5e7a3106.js"><link rel="prefetch" href="/matheusblog/assets/js/36.0a101841.js"><link rel="prefetch" href="/matheusblog/assets/js/37.d2f841a3.js"><link rel="prefetch" href="/matheusblog/assets/js/38.5ffa2ff0.js"><link rel="prefetch" href="/matheusblog/assets/js/39.11eb7112.js"><link rel="prefetch" href="/matheusblog/assets/js/4.172c31f8.js"><link rel="prefetch" href="/matheusblog/assets/js/40.16e1a3d0.js"><link rel="prefetch" href="/matheusblog/assets/js/41.7416be78.js"><link rel="prefetch" href="/matheusblog/assets/js/42.d43b207e.js"><link rel="prefetch" href="/matheusblog/assets/js/43.184ce555.js"><link rel="prefetch" href="/matheusblog/assets/js/44.2e494f9f.js"><link rel="prefetch" href="/matheusblog/assets/js/45.b89064eb.js"><link rel="prefetch" href="/matheusblog/assets/js/46.e7e93b34.js"><link rel="prefetch" href="/matheusblog/assets/js/47.88edf3e7.js"><link rel="prefetch" href="/matheusblog/assets/js/48.a3ef8833.js"><link rel="prefetch" href="/matheusblog/assets/js/49.416e2ff4.js"><link rel="prefetch" href="/matheusblog/assets/js/5.66045499.js"><link rel="prefetch" href="/matheusblog/assets/js/50.6f9e666c.js"><link rel="prefetch" href="/matheusblog/assets/js/51.0ccc90fa.js"><link rel="prefetch" href="/matheusblog/assets/js/52.c4d78d95.js"><link rel="prefetch" href="/matheusblog/assets/js/53.6e9e73bf.js"><link rel="prefetch" href="/matheusblog/assets/js/54.c09c1331.js"><link rel="prefetch" href="/matheusblog/assets/js/55.abb95afe.js"><link rel="prefetch" href="/matheusblog/assets/js/56.255e4f5a.js"><link rel="prefetch" href="/matheusblog/assets/js/57.87bff193.js"><link rel="prefetch" href="/matheusblog/assets/js/58.ac76633b.js"><link rel="prefetch" href="/matheusblog/assets/js/59.deb7ee54.js"><link rel="prefetch" href="/matheusblog/assets/js/6.082e9fa1.js"><link rel="prefetch" href="/matheusblog/assets/js/60.cf9069f9.js"><link rel="prefetch" href="/matheusblog/assets/js/61.96603df6.js"><link rel="prefetch" href="/matheusblog/assets/js/62.c20b80a7.js"><link rel="prefetch" href="/matheusblog/assets/js/63.5686a0b8.js"><link rel="prefetch" href="/matheusblog/assets/js/64.175576f7.js"><link rel="prefetch" href="/matheusblog/assets/js/65.5ae64b74.js"><link rel="prefetch" href="/matheusblog/assets/js/66.521c63ff.js"><link rel="prefetch" href="/matheusblog/assets/js/67.b425835a.js"><link rel="prefetch" href="/matheusblog/assets/js/68.4681f5d4.js"><link rel="prefetch" href="/matheusblog/assets/js/69.a4dd03f4.js"><link rel="prefetch" href="/matheusblog/assets/js/7.ac1c1c22.js"><link rel="prefetch" href="/matheusblog/assets/js/70.b8b1c0e6.js"><link rel="prefetch" href="/matheusblog/assets/js/71.d17ca0a5.js"><link rel="prefetch" href="/matheusblog/assets/js/72.373736b1.js"><link rel="prefetch" href="/matheusblog/assets/js/73.cffad132.js"><link rel="prefetch" href="/matheusblog/assets/js/74.fbb35090.js"><link rel="prefetch" href="/matheusblog/assets/js/75.d7df8fa9.js"><link rel="prefetch" href="/matheusblog/assets/js/76.8fdf1b27.js"><link rel="prefetch" href="/matheusblog/assets/js/77.372d307f.js"><link rel="prefetch" href="/matheusblog/assets/js/78.13b229db.js"><link rel="prefetch" href="/matheusblog/assets/js/79.6a9fcfb3.js"><link rel="prefetch" href="/matheusblog/assets/js/8.aadfe009.js"><link rel="prefetch" href="/matheusblog/assets/js/80.65421bb8.js"><link rel="prefetch" href="/matheusblog/assets/js/81.c6c8f34c.js"><link rel="prefetch" href="/matheusblog/assets/js/82.cdc5fd14.js"><link rel="prefetch" href="/matheusblog/assets/js/83.05eecc6f.js"><link rel="prefetch" href="/matheusblog/assets/js/84.baf2ae71.js"><link rel="prefetch" href="/matheusblog/assets/js/85.9c66f181.js"><link rel="prefetch" href="/matheusblog/assets/js/86.130a310b.js"><link rel="prefetch" href="/matheusblog/assets/js/87.b1fffecd.js"><link rel="prefetch" href="/matheusblog/assets/js/88.8acfd7c2.js"><link rel="prefetch" href="/matheusblog/assets/js/89.fe1c2e91.js"><link rel="prefetch" href="/matheusblog/assets/js/9.787b2fa5.js"><link rel="prefetch" href="/matheusblog/assets/js/90.57c4bcfc.js"><link rel="prefetch" href="/matheusblog/assets/js/91.f51280e1.js"><link rel="prefetch" href="/matheusblog/assets/js/92.96836f34.js"><link rel="prefetch" href="/matheusblog/assets/js/93.f50f9f34.js"><link rel="prefetch" href="/matheusblog/assets/js/94.a9740e63.js"><link rel="prefetch" href="/matheusblog/assets/js/95.d17d251c.js"><link rel="prefetch" href="/matheusblog/assets/js/96.b087ef79.js"><link rel="prefetch" href="/matheusblog/assets/js/97.9ba0439c.js"><link rel="prefetch" href="/matheusblog/assets/js/98.21b2bcc2.js"><link rel="prefetch" href="/matheusblog/assets/js/99.e90fc227.js">
+    <link rel="stylesheet" href="/matheusblog/assets/css/0.styles.980a01be.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/matheusblog/" class="home-link router-link-active"><!----> <span class="site-name">MyBlog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/jvm/00虚拟机内存体系与垃圾回收.html" class="nav-link">
+  JVM简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li><li class="dropdown-item"><h4>
+          ElasticSearch
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/elasticsearch/02Elasticsearch-Docker搭建ES.html" class="nav-link">
+  Docker搭建ES
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/springMVC框架.html" class="nav-link">
+  SpringMVC框架
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springboot/SpringBoot简介.html" class="nav-link">
+  SpringBoot简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/docker/01Docker入门.html" class="nav-link">
+  Docker入门
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/k8s/01Kubernetes介绍及使用.html" class="nav-link">
+  K8s介绍与使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/code-style/effective-java/目录.html" class="nav-link">
+  Effective-Java
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  单元测试
+</a></li><li class="dropdown-subitem"><a href="/matheusblog/md/project/jt-project/2. IDEA配置.html" class="nav-link">
+  IDEA配置
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/scala/Scala学习宝典.html" class="nav-link">
+  Scala学习宝典
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/python/Python基础学习.html" class="nav-link">
+  Python基础学习
+</a></li></ul></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/jvm/00虚拟机内存体系与垃圾回收.html" class="nav-link">
+  JVM简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li><li class="dropdown-item"><h4>
+          ElasticSearch
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/elasticsearch/02Elasticsearch-Docker搭建ES.html" class="nav-link">
+  Docker搭建ES
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/springMVC框架.html" class="nav-link">
+  SpringMVC框架
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springboot/SpringBoot简介.html" class="nav-link">
+  SpringBoot简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/docker/01Docker入门.html" class="nav-link">
+  Docker入门
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/k8s/01Kubernetes介绍及使用.html" class="nav-link">
+  K8s介绍与使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/code-style/effective-java/目录.html" class="nav-link">
+  Effective-Java
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  单元测试
+</a></li><li class="dropdown-subitem"><a href="/matheusblog/md/project/jt-project/2. IDEA配置.html" class="nav-link">
+  IDEA配置
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/scala/Scala学习宝典.html" class="nav-link">
+  Scala学习宝典
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/python/Python基础学习.html" class="nav-link">
+  Python基础学习
+</a></li></ul></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>JUnit</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="sidebar-link">什么是软件测试</a></li><li><a href="/matheusblog/md/develop/JUnit/02第一个单元测试.html" class="sidebar-link">第一个单元测试</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Effective-Java</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/develop/code-style/effective-java/目录.html" class="sidebar-link">Effective-Java目录</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="chapter-12-serialization-序列化"><a href="#chapter-12-serialization-序列化" class="header-anchor">#</a> Chapter 12. Serialization（序列化）</h2> <h3 id="item-88-write-readobject-methods-defensively-防御性地编写-readobject-方法"><a href="#item-88-write-readobject-methods-defensively-防御性地编写-readobject-方法" class="header-anchor">#</a> Item 88: Write readObject methods defensively（防御性地编写 readObject 方法）</h3> <p>Item 50 contains an immutable date-range class with mutable private Date fields. The class goes to great lengths to preserve its invariants and immutability by defensively copying Date objects in its constructor and accessors. Here is the class:</p> <p><a href="/matheusblog/Chapter-8/Chapter-8-Item-50-Make-defensive-copies-when-needed.html">Item-50</a> 包含一个具有可变私有 Date 字段的不可变日期范围类。该类通过在构造函数和访问器中防御性地复制 Date 对象，不遗余力地保持其不变性和不可变性。它是这样的：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>// Immutable class that uses defensive copying
+public final class Period {
+    private final Date start;
+    private final Date end;
+
+    /**
+    * @param start the beginning of the period
+    * @param end the end of the period; must not precede start
+    * @throws IllegalArgumentException if start is after end
+    * @throws NullPointerException if start or end is null
+    */
+    public Period(Date start, Date end) {
+        this.start = new Date(start.getTime());
+        this.end = new Date(end.getTime());
+        if (this.start.compareTo(this.end) &gt; 0)
+            throw new IllegalArgumentException(start + &quot; after &quot; + end);
+    }
+
+    public Date start () { return new Date(start.getTime()); }
+
+    public Date end () { return new Date(end.getTime()); }
+
+    public String toString() { return start + &quot; - &quot; + end; }
+
+    ... // Remainder omitted
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br></div></div><p>Suppose you decide that you want this class to be serializable. Because the physical representation of a Period object exactly mirrors its logical data content, it is not unreasonable to use the default serialized form (Item 87). Therefore, it might seem that all you have to do to make the class serializable is to add the words implements Serializable to the class declaration. If you did so, however, the class would no longer guarantee its critical invariants.</p> <p>假设你决定让这个类可序列化。由于 Period 对象的物理表示精确地反映了它的逻辑数据内容，所以使用默认的序列化形式是合理的（<a href="/matheusblog/Chapter-12/Chapter-12-Item-87-Consider-using-a-custom-serialized-form.html">Item-87</a>）。因此，要使类可序列化，似乎只需将实现 Serializable 接口。但是，如果这样做，该类将不再保证它的临界不变量。</p> <p>The problem is that the readObject method is effectively another public constructor, and it demands all of the same care as any other constructor. Just as a constructor must check its arguments for validity (Item 49) and make defensive copies of parameters where appropriate (Item 50), so must a readObject method. If a readObject method fails to do either of these things, it is a relatively simple matter for an attacker to violate the class’s invariants.</p> <p>问题是 readObject 方法实际上是另一个公共构造函数，它与任何其他构造函数有相同的注意事项。如，构造函数必须检查其参数的有效性（<a href="/matheusblog/Chapter-8/Chapter-8-Item-49-Check-parameters-for-validity.html">Item-49</a>）并在适当的地方制作防御性副本（<a href="/matheusblog/Chapter-8/Chapter-8-Item-50-Make-defensive-copies-when-needed.html">Item-50</a>）一样，readObject 方法也必须这样做。如果 readObject 方法没有做到这两件事中的任何一件，那么攻击者就很容易违反类的不变性。</p> <p>Loosely speaking, readObject is a constructor that takes a byte stream as its sole parameter. In normal use, the byte stream is generated by serializing a normally constructed instance. The problem arises when readObject is presented with a byte stream that is artificially constructed to generate an object that violates the invariants of its class. Such a byte stream can be used to create an impossible object, which could not have been created using a normal constructor.</p> <p>不严格地说，readObject 是一个构造函数，它唯一的参数是字节流。在正常使用中，字节流是通过序列化一个正常构造的实例生成的。当 readObject 呈现一个字节流时，问题就出现了，这个字节流是人为构造的，用来生成一个违反类不变性的对象。这样的字节流可用于创建一个不可思议的对象，而该对象不能使用普通构造函数创建。</p> <p>Assume that we simply added implements Serializable to the class declaration for Period. This ugly program would then generate a Period instance whose end precedes its start. The casts on byte values whose highorder bit is set is a consequence of Java’s lack of byte literals combined with the unfortunate decision to make the byte type signed:</p> <p>假设我们只是简单地让 Period 实现 Serializable 接口。然后，这个有问题的程序将生成一个 Period 实例，其结束比起始时间还要早。对其高位位设置的字节值进行强制转换，这是由于 Java 缺少字节字面值，再加上让字节类型签名的错误决定导致的：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>public class BogusPeriod {
+// Byte stream couldn't have come from a real Period instance!
+    private static final byte[] serializedForm = {
+        (byte)0xac, (byte)0xed, 0x00, 0x05, 0x73, 0x72, 0x00, 0x06,
+        0x50, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x40, 0x7e, (byte)0xf8,
+        0x2b, 0x4f, 0x46, (byte)0xc0, (byte)0xf4, 0x02, 0x00, 0x02,
+        0x4c, 0x00, 0x03, 0x65, 0x6e, 0x64, 0x74, 0x00, 0x10, 0x4c,
+        0x6a, 0x61, 0x76, 0x61, 0x2f, 0x75, 0x74, 0x69, 0x6c, 0x2f,
+        0x44, 0x61, 0x74, 0x65, 0x3b, 0x4c, 0x00, 0x05, 0x73, 0x74,
+        0x61, 0x72, 0x74, 0x71, 0x00, 0x7e, 0x00, 0x01, 0x78, 0x70,
+        0x73, 0x72, 0x00, 0x0e, 0x6a, 0x61, 0x76, 0x61, 0x2e, 0x75,
+        0x74, 0x69, 0x6c, 0x2e, 0x44, 0x61, 0x74, 0x65, 0x68, 0x6a,
+        (byte)0x81, 0x01, 0x4b, 0x59, 0x74, 0x19, 0x03, 0x00, 0x00,
+        0x78, 0x70, 0x77, 0x08, 0x00, 0x00, 0x00, 0x66, (byte)0xdf,
+        0x6e, 0x1e, 0x00, 0x78, 0x73, 0x71, 0x00, 0x7e, 0x00, 0x03,
+        0x77, 0x08, 0x00, 0x00, 0x00, (byte)0xd5, 0x17, 0x69, 0x22,
+        0x00, 0x78
+    };
+
+    public static void main(String[] args) {
+        Period p = (Period) deserialize(serializedForm);
+        System.out.println(p);
+    }
+
+    // Returns the object with the specified serialized form
+    static Object deserialize(byte[] sf) {
+        try {
+            return new ObjectInputStream(new ByteArrayInputStream(sf)).readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br></div></div><p>The byte array literal used to initialize serializedForm was generated by serializing a normal Period instance and hand-editing the resulting byte stream. The details of the stream are unimportant to the example, but if you’re curious, the serialization byte-stream format is described in the Java Object Serialization Specification [Serialization, 6]. If you run this program, it prints Fri Jan 01 12:00:00 PST 1999 - Sun Jan 01 12:00:00 PST 1984. Simply declaring Period serializable enabled us to create an object that violates its class invariants.</p> <p>用于初始化 serializedForm 的字节数组文本是通过序列化一个普通 Period 实例并手工编辑得到的字节流生成的。流的细节对示例并不重要，但是如果你感兴趣，可以在《JavaTM Object Serialization Specification》[serialization, 6]中查到序列化字节流的格式描述。如果你运行这个程序，它将打印 <code>Fri Jan 01 12:00:00 PST 1999 - Sun Jan 01 12:00:00 PST 1984</code>。只需声明 Period 可序列化，就可以创建一个违反其类不变性的对象。</p> <p>To fix this problem, provide a readObject method for Period that calls defaultReadObject and then checks the validity of the deserialized object. If the validity check fails, the readObject method throws InvalidObjectException, preventing the deserialization from completing:</p> <p>要解决此问题，请为 Period 提供一个 readObject 方法，该方法调用 defaultReadObject，然后检查反序列化对象的有效性。如果有效性检查失败，readObject 方法抛出 InvalidObjectException，阻止反序列化完成：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>// readObject method with validity checking - insufficient!
+private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+    s.defaultReadObject();
+    // Check that our invariants are satisfied
+    if (start.compareTo(end) &gt; 0)
+        throw new InvalidObjectException(start +&quot; after &quot;+ end);
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>While this prevents an attacker from creating an invalid Period instance, there is a more subtle problem still lurking. It is possible to create a mutable Period instance by fabricating a byte stream that begins with a valid Period instance and then appends extra references to the private Date fields internal to the Period instance. The attacker reads the Period instance from the ObjectInputStream and then reads the “rogue object references” that were appended to the stream. These references give the attacker access to the objects referenced by the private Date fields within the Period object. By mutating these Date instances, the attacker can mutate the Period instance. The following class demonstrates this attack:</p> <p>虽然这可以防止攻击者创建无效的 Period 实例，但还有一个更微妙的问题仍然潜伏着。可以通过字节流来创建一个可变的 Period 实例，该字节流以一个有效的 Period 实例开始，然后向 Period 实例内部的私有日期字段追加额外的引用。攻击者从 ObjectInputStream 中读取 Period 实例，然后读取附加到流中的「恶意对象引用」。这些引用使攻击者能够访问 Period 对象中的私有日期字段引用的对象。通过修改这些日期实例，攻击者可以修改 Period 实例。下面的类演示了这种攻击：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>public class MutablePeriod {
+    // A period instance
+    public final Period period;
+
+    // period's start field, to which we shouldn't have access
+    public final Date start;
+
+    // period's end field, to which we shouldn't have access
+    public final Date end;
+
+    public MutablePeriod() {
+        try {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ObjectOutputStream out = new ObjectOutputStream(bos);
+
+            // Serialize a valid Period instance
+            out.writeObject(new Period(new Date(), new Date()));
+
+            /*
+            * Append rogue &quot;previous object refs&quot; for internal
+            * Date fields in Period. For details, see &quot;Java
+            * Object Serialization Specification,&quot; Section 6.4.
+            */
+            byte[] ref = { 0x71, 0, 0x7e, 0, 5 }; // Ref #5
+            bos.write(ref); // The start field
+            ref[4] = 4; // Ref # 4
+            bos.write(ref); // The end field
+
+            // Deserialize Period and &quot;stolen&quot; Date references
+            ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray()));
+            period = (Period) in.readObject();
+            start = (Date) in.readObject();
+            end = (Date) in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new AssertionError(e);
+        }
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br></div></div><p>To see the attack in action, run the following program:</p> <p>要查看攻击的实际效果，请运行以下程序：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>public static void main(String[] args) {
+    MutablePeriod mp = new MutablePeriod();
+    Period p = mp.period;
+    Date pEnd = mp.end;
+
+    // Let's turn back the clock
+    pEnd.setYear(78);
+    System.out.println(p);
+
+    // Bring back the 60s!
+    pEnd.setYear(69);
+    System.out.println(p);
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p>In my locale, running this program produces the following output:</p> <p>在我的语言环境中，运行这个程序会产生以下输出：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>Wed Nov 22 00:21:29 PST 2017 - Wed Nov 22 00:21:29 PST 1978
+Wed Nov 22 00:21:29 PST 2017 - Sat Nov 22 00:21:29 PST 1969
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>While the Period instance is created with its invariants intact, it is possible to modify its internal components at will. Once in possession of a mutable Period instance, an attacker might cause great harm by passing the instance to a class that depends on Period’s immutability for its security. This is not so farfetched: there are classes that depend on String’s immutability for their security.</p> <p>虽然创建 Period 实例时保留了它的不变性，但是可以随意修改它的内部组件。一旦拥有一个可变的 Period 实例，攻击者可能会将实例传递给一个依赖于 Period 的不变性来保证其安全性的类，从而造成极大的危害。这并不是牵强附会的：有些类依赖于 String 的不变性来保证其安全。</p> <p>The source of the problem is that Period’s readObject method is not doing enough defensive copying. <strong>When an object is deserialized, it is critical to defensively copy any field containing an object reference that a client must not possess.</strong> Therefore, every serializable immutable class containing private mutable components must defensively copy these components in its readObject method. The following readObject method suffices to ensure Period’s invariants and to maintain its immutability:</p> <p>问题的根源在于 Period 的 readObject 方法没有进行足够的防御性复制。<strong>当对象被反序列化时，对任何客户端不能拥有的对象引用的字段进行防御性地复制至关重要。</strong> 因此，对于每个可序列化的不可变类，如果它包含了私有的可变组件，那么在它的 readObjec 方法中，必须要对这些组件进行防御性地复制。下面的 readObject 方法足以保证周期的不变性，并保持其不变性：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>// readObject method with defensive copying and validity checking
+private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+    s.defaultReadObject();
+    // Defensively copy our mutable components
+    start = new Date(start.getTime());
+    end = new Date(end.getTime());
+    // Check that our invariants are satisfied
+    if (start.compareTo(end) &gt; 0)
+        throw new InvalidObjectException(start +&quot; after &quot;+ end);
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>Note that the defensive copy is performed prior to the validity check and that we did not use Date’s clone method to perform the defensive copy. Both of these details are required to protect Period against attack (Item 50). Note also that defensive copying is not possible for final fields. To use the readObject method, we must make the start and end fields nonfinal. This is unfortunate, but it is the lesser of two evils. With the new readObject method in place and the final modifier removed from the start and end fields, the MutablePeriod class is rendered ineffective. The above attack program now generates this output:</p> <p>注意，防御副本是在有效性检查之前执行的，我们没有使用 Date 的 clone 方法来执行防御副本。这两个细节对于保护 Period 免受攻击是必要的(第50项)。还要注意，防御性复制不可能用于 final 字段。要使用 readObject 方法，必须使 start 和 end 字段非 final。这是不幸的，但却是权衡利弊后的方案。使用新的 readObject 方法，并从 start 和 end 字段中删除 final 修饰符，MutablePeriod 类将无效。上面的攻击程序现在生成这个输出：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>Wed Nov 22 00:23:41 PST 2017 - Wed Nov 22 00:23:41 PST 2017
+Wed Nov 22 00:23:41 PST 2017 - Wed Nov 22 00:23:41 PST 2017
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>Here is a simple litmus test for deciding whether the default readObject method is acceptable for a class: would you feel comfortable adding a public constructor that took as parameters the values for each nontransient field in the object and stored the values in the fields with no validation whatsoever? If not, you must provide a readObject method, and it must perform all the validity checking and defensive copying that would be required of a constructor. Alternatively, you can use the serialization proxy pattern (Item 90). This pattern is highly recommended because it takes much of the effort out of safe deserialization.</p> <p>下面是一个简单的测试，用于判断默认 readObject 方法是否可用于类：你是否愿意添加一个公共构造函数，该构造函数将对象中每个非 transient 字段的值作为参数，并在没有任何验证的情况下将值存储在字段中？如果没有，则必须提供 readObject 方法，并且它必须执行构造函数所需的所有有效性检查和防御性复制。或者，你可以使用序列化代理模式（<a href="/matheusblog/Chapter-12/Chapter-12-Item-90-Consider-serialization-proxies-instead-of-serialized-instances.html">Item-90</a>）。强烈推荐使用这种模式，否则会在安全反序列化方面花费大量精力。</p> <p>There is one other similarity between readObject methods and constructors that applies to nonfinal serializable classes. Like a constructor, a readObject method must not invoke an overridable method, either directly or indirectly (Item 19). If this rule is violated and the method in question is overridden, the overriding method will run before the subclass’s state has been deserialized. A program failure is likely to result [Bloch05, Puzzle 91].</p> <p>readObject 方法和构造函数之间还有一个相似之处，适用于非 final 序列化类。与构造函数一样，readObject 方法不能直接或间接调用可覆盖的方法（<a href="/matheusblog/Chapter-4/Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.html">Item-19</a>）。如果违反了这条规则，并且涉及的方法被覆盖，则覆盖方法将在子类的状态反序列化之前运行。很可能导致程序失败 [Bloch05, Puzzle 91]。</p> <p>To summarize, anytime you write a readObject method, adopt the mindset that you are writing a public constructor that must produce a valid instance regardless of what byte stream it is given. Do not assume that the byte stream represents an actual serialized instance. While the examples in this item concern a class that uses the default serialized form, all of the issues that were raised apply equally to classes with custom serialized forms. Here, in summary form, are the guidelines for writing a readObject method:</p> <p>总而言之，无论何时编写 readObject 方法，都要采用这样的思维方式，即编写一个公共构造函数，该构造函数必须生成一个有效的实例，而不管给定的是什么字节流。不要假设字节流表示实际的序列化实例。虽然本条目中的示例涉及使用默认序列化形式的类，但是所引发的所有问题都同样适用于具有自定义序列化形式的类。下面是编写 readObject 方法的指导原则：</p> <ul><li>For classes with object reference fields that must remain private, defensively copy each object in such a field. Mutable components of immutable classes fall into this category.</li></ul> <p>对象引用字段必须保持私有的的类，应防御性地复制该字段中的每个对象。不可变类的可变组件属于这一类。</p> <ul><li>Check any invariants and throw an InvalidObjectException if a check fails. The checks should follow any defensive copying.</li></ul> <p>检查任何不变量，如果检查失败，则抛出 InvalidObjectException。检查动作应该跟在任何防御性复制之后。</p> <ul><li>If an entire object graph must be validated after it is deserialized, use the ObjectInputValidation interface (not discussed in this book).</li></ul> <p>如果必须在反序列化后验证整个对象图，那么使用 ObjectInputValidation 接口（在本书中没有讨论）。</p> <ul><li>Do not invoke any overridable methods in the class, directly or indirectly.</li></ul> <p>不要直接或间接地调用类中任何可被覆盖的方法。</p></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/matheusblog/assets/js/app.d1bc8cd0.js" defer></script><script src="/matheusblog/assets/js/3.21aaf515.js" defer></script><script src="/matheusblog/assets/js/173.4f22a7d7.js" defer></script>
+  </body>
+</html>

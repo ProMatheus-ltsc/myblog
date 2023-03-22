@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Shell脚本实现Linux系统监控 | MyBlog</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="包含: Java 基础, JVM, Spring, Spring Boot, Spring Cloud, MySQL, ElasticSearch, MongoDB, Docker, k8s, Linux, DevOps, 分布式,  开发工具, Git, IDE...">
+    
+    <link rel="preload" href="/matheusblog/assets/css/0.styles.980a01be.css" as="style"><link rel="preload" href="/matheusblog/assets/js/app.d1bc8cd0.js" as="script"><link rel="preload" href="/matheusblog/assets/js/3.21aaf515.js" as="script"><link rel="preload" href="/matheusblog/assets/js/74.fbb35090.js" as="script"><link rel="prefetch" href="/matheusblog/assets/js/10.54a7cbcb.js"><link rel="prefetch" href="/matheusblog/assets/js/100.65c579fe.js"><link rel="prefetch" href="/matheusblog/assets/js/101.b41c3c3e.js"><link rel="prefetch" href="/matheusblog/assets/js/102.4f362209.js"><link rel="prefetch" href="/matheusblog/assets/js/103.3634017b.js"><link rel="prefetch" href="/matheusblog/assets/js/104.3bee8dc7.js"><link rel="prefetch" href="/matheusblog/assets/js/105.4dde7830.js"><link rel="prefetch" href="/matheusblog/assets/js/106.868e8474.js"><link rel="prefetch" href="/matheusblog/assets/js/107.c7fc6303.js"><link rel="prefetch" href="/matheusblog/assets/js/108.ceb9c82d.js"><link rel="prefetch" href="/matheusblog/assets/js/109.a9f0c9ae.js"><link rel="prefetch" href="/matheusblog/assets/js/11.2c2c6a67.js"><link rel="prefetch" href="/matheusblog/assets/js/110.fe3adf68.js"><link rel="prefetch" href="/matheusblog/assets/js/111.2c3688da.js"><link rel="prefetch" href="/matheusblog/assets/js/112.3cad34e6.js"><link rel="prefetch" href="/matheusblog/assets/js/113.aa50199f.js"><link rel="prefetch" href="/matheusblog/assets/js/114.60ac3f02.js"><link rel="prefetch" href="/matheusblog/assets/js/115.2db78ad2.js"><link rel="prefetch" href="/matheusblog/assets/js/116.7312786f.js"><link rel="prefetch" href="/matheusblog/assets/js/117.4a3a0337.js"><link rel="prefetch" href="/matheusblog/assets/js/118.e5af8b9d.js"><link rel="prefetch" href="/matheusblog/assets/js/119.e0967512.js"><link rel="prefetch" href="/matheusblog/assets/js/12.6f0ae98d.js"><link rel="prefetch" href="/matheusblog/assets/js/120.1ce6260c.js"><link rel="prefetch" href="/matheusblog/assets/js/121.c5f567f4.js"><link rel="prefetch" href="/matheusblog/assets/js/122.ff4f9bed.js"><link rel="prefetch" href="/matheusblog/assets/js/123.b354268c.js"><link rel="prefetch" href="/matheusblog/assets/js/124.ba2aa1f2.js"><link rel="prefetch" href="/matheusblog/assets/js/125.d6737c1d.js"><link rel="prefetch" href="/matheusblog/assets/js/126.ed190ed8.js"><link rel="prefetch" href="/matheusblog/assets/js/127.032ab16f.js"><link rel="prefetch" href="/matheusblog/assets/js/128.eaa5481c.js"><link rel="prefetch" href="/matheusblog/assets/js/129.61e1d174.js"><link rel="prefetch" href="/matheusblog/assets/js/13.c0ff77f9.js"><link rel="prefetch" href="/matheusblog/assets/js/130.d09f60e2.js"><link rel="prefetch" href="/matheusblog/assets/js/131.21aa1c96.js"><link rel="prefetch" href="/matheusblog/assets/js/132.351a321e.js"><link rel="prefetch" href="/matheusblog/assets/js/133.e5e36230.js"><link rel="prefetch" href="/matheusblog/assets/js/134.cea97435.js"><link rel="prefetch" href="/matheusblog/assets/js/135.a56e2494.js"><link rel="prefetch" href="/matheusblog/assets/js/136.557d9fdf.js"><link rel="prefetch" href="/matheusblog/assets/js/137.21eda887.js"><link rel="prefetch" href="/matheusblog/assets/js/138.c10c815c.js"><link rel="prefetch" href="/matheusblog/assets/js/139.5ebe91b0.js"><link rel="prefetch" href="/matheusblog/assets/js/14.6ed4a73f.js"><link rel="prefetch" href="/matheusblog/assets/js/140.9830147a.js"><link rel="prefetch" href="/matheusblog/assets/js/141.708bb77b.js"><link rel="prefetch" href="/matheusblog/assets/js/142.96c71160.js"><link rel="prefetch" href="/matheusblog/assets/js/143.ac186a53.js"><link rel="prefetch" href="/matheusblog/assets/js/144.6411b0b7.js"><link rel="prefetch" href="/matheusblog/assets/js/145.5c75cd6c.js"><link rel="prefetch" href="/matheusblog/assets/js/146.fdb5e7c8.js"><link rel="prefetch" href="/matheusblog/assets/js/147.4f67ac67.js"><link rel="prefetch" href="/matheusblog/assets/js/148.424b4f21.js"><link rel="prefetch" href="/matheusblog/assets/js/149.6161dd02.js"><link rel="prefetch" href="/matheusblog/assets/js/15.6bf38d8a.js"><link rel="prefetch" href="/matheusblog/assets/js/150.40ac7609.js"><link rel="prefetch" href="/matheusblog/assets/js/151.a246fd40.js"><link rel="prefetch" href="/matheusblog/assets/js/152.e430bd35.js"><link rel="prefetch" href="/matheusblog/assets/js/153.27a16b43.js"><link rel="prefetch" href="/matheusblog/assets/js/154.03f42b0e.js"><link rel="prefetch" href="/matheusblog/assets/js/155.c01c0b8b.js"><link rel="prefetch" href="/matheusblog/assets/js/156.9e75b32b.js"><link rel="prefetch" href="/matheusblog/assets/js/157.8539cba7.js"><link rel="prefetch" href="/matheusblog/assets/js/158.200135a9.js"><link rel="prefetch" href="/matheusblog/assets/js/159.1472f0e3.js"><link rel="prefetch" href="/matheusblog/assets/js/16.0bd8975e.js"><link rel="prefetch" href="/matheusblog/assets/js/160.a897bdbf.js"><link rel="prefetch" href="/matheusblog/assets/js/161.8ebaced9.js"><link rel="prefetch" href="/matheusblog/assets/js/162.69a52259.js"><link rel="prefetch" href="/matheusblog/assets/js/163.61b0c093.js"><link rel="prefetch" href="/matheusblog/assets/js/164.3fd70b50.js"><link rel="prefetch" href="/matheusblog/assets/js/165.99a4a455.js"><link rel="prefetch" href="/matheusblog/assets/js/166.be429d07.js"><link rel="prefetch" href="/matheusblog/assets/js/167.35fa8427.js"><link rel="prefetch" href="/matheusblog/assets/js/168.98c13248.js"><link rel="prefetch" href="/matheusblog/assets/js/169.0c800163.js"><link rel="prefetch" href="/matheusblog/assets/js/17.e107c04a.js"><link rel="prefetch" href="/matheusblog/assets/js/170.18e31e2a.js"><link rel="prefetch" href="/matheusblog/assets/js/171.fd0af1e7.js"><link rel="prefetch" href="/matheusblog/assets/js/172.2ae1a92c.js"><link rel="prefetch" href="/matheusblog/assets/js/173.4f22a7d7.js"><link rel="prefetch" href="/matheusblog/assets/js/174.1914bfac.js"><link rel="prefetch" href="/matheusblog/assets/js/175.cf52c6f0.js"><link rel="prefetch" href="/matheusblog/assets/js/176.2d62ffaf.js"><link rel="prefetch" href="/matheusblog/assets/js/177.7998e89e.js"><link rel="prefetch" href="/matheusblog/assets/js/178.db1004ac.js"><link rel="prefetch" href="/matheusblog/assets/js/179.ad97e66d.js"><link rel="prefetch" href="/matheusblog/assets/js/18.e3120c6e.js"><link rel="prefetch" href="/matheusblog/assets/js/180.598dae51.js"><link rel="prefetch" href="/matheusblog/assets/js/181.599b5236.js"><link rel="prefetch" href="/matheusblog/assets/js/182.2dbe3970.js"><link rel="prefetch" href="/matheusblog/assets/js/183.39b4f5d6.js"><link rel="prefetch" href="/matheusblog/assets/js/184.5e15d758.js"><link rel="prefetch" href="/matheusblog/assets/js/185.ba3d76a6.js"><link rel="prefetch" href="/matheusblog/assets/js/186.62a1d264.js"><link rel="prefetch" href="/matheusblog/assets/js/187.ce9ab2bc.js"><link rel="prefetch" href="/matheusblog/assets/js/188.b9ad970d.js"><link rel="prefetch" href="/matheusblog/assets/js/189.29df5075.js"><link rel="prefetch" href="/matheusblog/assets/js/19.fc33d9dc.js"><link rel="prefetch" href="/matheusblog/assets/js/190.8d142ac0.js"><link rel="prefetch" href="/matheusblog/assets/js/191.3fac1cfe.js"><link rel="prefetch" href="/matheusblog/assets/js/192.fd44ba5f.js"><link rel="prefetch" href="/matheusblog/assets/js/193.4dc021ba.js"><link rel="prefetch" href="/matheusblog/assets/js/194.088fad3f.js"><link rel="prefetch" href="/matheusblog/assets/js/195.1fa6fd8b.js"><link rel="prefetch" href="/matheusblog/assets/js/196.93035ed5.js"><link rel="prefetch" href="/matheusblog/assets/js/197.60d31e9d.js"><link rel="prefetch" href="/matheusblog/assets/js/198.e2431930.js"><link rel="prefetch" href="/matheusblog/assets/js/199.eb85b79c.js"><link rel="prefetch" href="/matheusblog/assets/js/2.49dcc008.js"><link rel="prefetch" href="/matheusblog/assets/js/20.f0fba33e.js"><link rel="prefetch" href="/matheusblog/assets/js/200.1d5f2566.js"><link rel="prefetch" href="/matheusblog/assets/js/201.78cfa60e.js"><link rel="prefetch" href="/matheusblog/assets/js/202.0538081f.js"><link rel="prefetch" href="/matheusblog/assets/js/203.e99855dc.js"><link rel="prefetch" href="/matheusblog/assets/js/204.f35716b0.js"><link rel="prefetch" href="/matheusblog/assets/js/205.e0d99ed0.js"><link rel="prefetch" href="/matheusblog/assets/js/206.fb60327e.js"><link rel="prefetch" href="/matheusblog/assets/js/207.37d97d63.js"><link rel="prefetch" href="/matheusblog/assets/js/208.3c7cc661.js"><link rel="prefetch" href="/matheusblog/assets/js/209.0f36f5f9.js"><link rel="prefetch" href="/matheusblog/assets/js/21.38b58190.js"><link rel="prefetch" href="/matheusblog/assets/js/210.7d3c1d9e.js"><link rel="prefetch" href="/matheusblog/assets/js/211.fd9c9ed7.js"><link rel="prefetch" href="/matheusblog/assets/js/212.fa687e1a.js"><link rel="prefetch" href="/matheusblog/assets/js/213.4d25912b.js"><link rel="prefetch" href="/matheusblog/assets/js/214.32fa8874.js"><link rel="prefetch" href="/matheusblog/assets/js/215.007c1b40.js"><link rel="prefetch" href="/matheusblog/assets/js/216.2ca1689d.js"><link rel="prefetch" href="/matheusblog/assets/js/217.42d81467.js"><link rel="prefetch" href="/matheusblog/assets/js/218.e8ef68ea.js"><link rel="prefetch" href="/matheusblog/assets/js/219.e81c9223.js"><link rel="prefetch" href="/matheusblog/assets/js/22.50c56cab.js"><link rel="prefetch" href="/matheusblog/assets/js/220.60e29bfc.js"><link rel="prefetch" href="/matheusblog/assets/js/221.22376958.js"><link rel="prefetch" href="/matheusblog/assets/js/222.4bad5952.js"><link rel="prefetch" href="/matheusblog/assets/js/223.cf135a8b.js"><link rel="prefetch" href="/matheusblog/assets/js/224.574a4b29.js"><link rel="prefetch" href="/matheusblog/assets/js/225.fc91759f.js"><link rel="prefetch" href="/matheusblog/assets/js/226.4d8e0f0c.js"><link rel="prefetch" href="/matheusblog/assets/js/227.eedacdd7.js"><link rel="prefetch" href="/matheusblog/assets/js/228.d9e5543d.js"><link rel="prefetch" href="/matheusblog/assets/js/229.198e9b7f.js"><link rel="prefetch" href="/matheusblog/assets/js/23.546acb40.js"><link rel="prefetch" href="/matheusblog/assets/js/230.9c9b55fa.js"><link rel="prefetch" href="/matheusblog/assets/js/231.52ba5c5a.js"><link rel="prefetch" href="/matheusblog/assets/js/232.4abf639c.js"><link rel="prefetch" href="/matheusblog/assets/js/233.677fd788.js"><link rel="prefetch" href="/matheusblog/assets/js/234.bb428729.js"><link rel="prefetch" href="/matheusblog/assets/js/235.6de15ca6.js"><link rel="prefetch" href="/matheusblog/assets/js/236.fede2411.js"><link rel="prefetch" href="/matheusblog/assets/js/237.6c68e409.js"><link rel="prefetch" href="/matheusblog/assets/js/238.b114a429.js"><link rel="prefetch" href="/matheusblog/assets/js/239.b4881685.js"><link rel="prefetch" href="/matheusblog/assets/js/24.037398b9.js"><link rel="prefetch" href="/matheusblog/assets/js/240.5d0ae7fe.js"><link rel="prefetch" href="/matheusblog/assets/js/241.fd2a3483.js"><link rel="prefetch" href="/matheusblog/assets/js/242.414e941d.js"><link rel="prefetch" href="/matheusblog/assets/js/243.9b98a81a.js"><link rel="prefetch" href="/matheusblog/assets/js/244.7a3c10b1.js"><link rel="prefetch" href="/matheusblog/assets/js/245.623c683e.js"><link rel="prefetch" href="/matheusblog/assets/js/246.3544e58b.js"><link rel="prefetch" href="/matheusblog/assets/js/247.9c99d802.js"><link rel="prefetch" href="/matheusblog/assets/js/248.68af4e3b.js"><link rel="prefetch" href="/matheusblog/assets/js/249.ccaca596.js"><link rel="prefetch" href="/matheusblog/assets/js/25.6c5bccf3.js"><link rel="prefetch" href="/matheusblog/assets/js/250.571542c4.js"><link rel="prefetch" href="/matheusblog/assets/js/251.cf75e5e5.js"><link rel="prefetch" href="/matheusblog/assets/js/252.9f57b2df.js"><link rel="prefetch" href="/matheusblog/assets/js/253.976d974c.js"><link rel="prefetch" href="/matheusblog/assets/js/254.447ebae0.js"><link rel="prefetch" href="/matheusblog/assets/js/255.d57e94cf.js"><link rel="prefetch" href="/matheusblog/assets/js/256.0f189f68.js"><link rel="prefetch" href="/matheusblog/assets/js/257.fad20cea.js"><link rel="prefetch" href="/matheusblog/assets/js/258.d239b495.js"><link rel="prefetch" href="/matheusblog/assets/js/259.8bcd5e63.js"><link rel="prefetch" href="/matheusblog/assets/js/26.c1d32692.js"><link rel="prefetch" href="/matheusblog/assets/js/260.090a63d7.js"><link rel="prefetch" href="/matheusblog/assets/js/261.9c49f0d4.js"><link rel="prefetch" href="/matheusblog/assets/js/262.10f98f30.js"><link rel="prefetch" href="/matheusblog/assets/js/263.81f7548d.js"><link rel="prefetch" href="/matheusblog/assets/js/264.8c0bad52.js"><link rel="prefetch" href="/matheusblog/assets/js/265.982857a3.js"><link rel="prefetch" href="/matheusblog/assets/js/266.040cfe24.js"><link rel="prefetch" href="/matheusblog/assets/js/267.7227c614.js"><link rel="prefetch" href="/matheusblog/assets/js/268.b01bce97.js"><link rel="prefetch" href="/matheusblog/assets/js/269.f0235678.js"><link rel="prefetch" href="/matheusblog/assets/js/27.e26685ad.js"><link rel="prefetch" href="/matheusblog/assets/js/270.62ea1068.js"><link rel="prefetch" href="/matheusblog/assets/js/271.c1b9878a.js"><link rel="prefetch" href="/matheusblog/assets/js/272.24a28332.js"><link rel="prefetch" href="/matheusblog/assets/js/273.6c40eac8.js"><link rel="prefetch" href="/matheusblog/assets/js/274.cd992810.js"><link rel="prefetch" href="/matheusblog/assets/js/275.75177aed.js"><link rel="prefetch" href="/matheusblog/assets/js/276.e8985557.js"><link rel="prefetch" href="/matheusblog/assets/js/277.64625549.js"><link rel="prefetch" href="/matheusblog/assets/js/278.4200bee5.js"><link rel="prefetch" href="/matheusblog/assets/js/279.b1186598.js"><link rel="prefetch" href="/matheusblog/assets/js/28.c0534da3.js"><link rel="prefetch" href="/matheusblog/assets/js/280.13632f13.js"><link rel="prefetch" href="/matheusblog/assets/js/281.83aa1bdd.js"><link rel="prefetch" href="/matheusblog/assets/js/282.034b31ee.js"><link rel="prefetch" href="/matheusblog/assets/js/283.19bded06.js"><link rel="prefetch" href="/matheusblog/assets/js/284.a5e29c5e.js"><link rel="prefetch" href="/matheusblog/assets/js/285.8a6391d1.js"><link rel="prefetch" href="/matheusblog/assets/js/286.db317c9e.js"><link rel="prefetch" href="/matheusblog/assets/js/287.dc1dcc8f.js"><link rel="prefetch" href="/matheusblog/assets/js/288.f8724f05.js"><link rel="prefetch" href="/matheusblog/assets/js/289.4b35b3ab.js"><link rel="prefetch" href="/matheusblog/assets/js/29.a210d762.js"><link rel="prefetch" href="/matheusblog/assets/js/290.c6023ba3.js"><link rel="prefetch" href="/matheusblog/assets/js/291.db6e892a.js"><link rel="prefetch" href="/matheusblog/assets/js/292.61d8c4ea.js"><link rel="prefetch" href="/matheusblog/assets/js/293.506e9b4f.js"><link rel="prefetch" href="/matheusblog/assets/js/294.9bc96072.js"><link rel="prefetch" href="/matheusblog/assets/js/295.baf21ce8.js"><link rel="prefetch" href="/matheusblog/assets/js/296.4f010851.js"><link rel="prefetch" href="/matheusblog/assets/js/297.39f85fc0.js"><link rel="prefetch" href="/matheusblog/assets/js/298.cf0708c5.js"><link rel="prefetch" href="/matheusblog/assets/js/299.6c1c41a1.js"><link rel="prefetch" href="/matheusblog/assets/js/30.f88dfbb5.js"><link rel="prefetch" href="/matheusblog/assets/js/300.59368419.js"><link rel="prefetch" href="/matheusblog/assets/js/301.2d80d504.js"><link rel="prefetch" href="/matheusblog/assets/js/302.690f15a6.js"><link rel="prefetch" href="/matheusblog/assets/js/303.d285ad36.js"><link rel="prefetch" href="/matheusblog/assets/js/304.d9d52d35.js"><link rel="prefetch" href="/matheusblog/assets/js/305.ec2cf80c.js"><link rel="prefetch" href="/matheusblog/assets/js/306.6d7e61d2.js"><link rel="prefetch" href="/matheusblog/assets/js/307.ec680f13.js"><link rel="prefetch" href="/matheusblog/assets/js/308.addb7d10.js"><link rel="prefetch" href="/matheusblog/assets/js/309.60c45495.js"><link rel="prefetch" href="/matheusblog/assets/js/31.241f0b56.js"><link rel="prefetch" href="/matheusblog/assets/js/310.36b632f3.js"><link rel="prefetch" href="/matheusblog/assets/js/311.c135c48c.js"><link rel="prefetch" href="/matheusblog/assets/js/312.329d4917.js"><link rel="prefetch" href="/matheusblog/assets/js/313.e259927e.js"><link rel="prefetch" href="/matheusblog/assets/js/314.6019fcf4.js"><link rel="prefetch" href="/matheusblog/assets/js/315.a7f16c02.js"><link rel="prefetch" href="/matheusblog/assets/js/316.78cce25e.js"><link rel="prefetch" href="/matheusblog/assets/js/317.9fd2c4e0.js"><link rel="prefetch" href="/matheusblog/assets/js/318.a4fe80b0.js"><link rel="prefetch" href="/matheusblog/assets/js/319.620bd822.js"><link rel="prefetch" href="/matheusblog/assets/js/32.63322225.js"><link rel="prefetch" href="/matheusblog/assets/js/320.0bc73d8d.js"><link rel="prefetch" href="/matheusblog/assets/js/321.6f386429.js"><link rel="prefetch" href="/matheusblog/assets/js/322.dc68c4f6.js"><link rel="prefetch" href="/matheusblog/assets/js/323.990b2c5e.js"><link rel="prefetch" href="/matheusblog/assets/js/324.90800df3.js"><link rel="prefetch" href="/matheusblog/assets/js/325.17b21116.js"><link rel="prefetch" href="/matheusblog/assets/js/326.dc462f7a.js"><link rel="prefetch" href="/matheusblog/assets/js/327.60a3c557.js"><link rel="prefetch" href="/matheusblog/assets/js/328.918be9ec.js"><link rel="prefetch" href="/matheusblog/assets/js/329.fbc9c1c4.js"><link rel="prefetch" href="/matheusblog/assets/js/33.a5e4acbc.js"><link rel="prefetch" href="/matheusblog/assets/js/330.5eb0fa54.js"><link rel="prefetch" href="/matheusblog/assets/js/331.47217147.js"><link rel="prefetch" href="/matheusblog/assets/js/332.891c1931.js"><link rel="prefetch" href="/matheusblog/assets/js/333.22aa3d9c.js"><link rel="prefetch" href="/matheusblog/assets/js/334.7ced64e0.js"><link rel="prefetch" href="/matheusblog/assets/js/335.9f090150.js"><link rel="prefetch" href="/matheusblog/assets/js/34.0bbf3cd4.js"><link rel="prefetch" href="/matheusblog/assets/js/35.5e7a3106.js"><link rel="prefetch" href="/matheusblog/assets/js/36.0a101841.js"><link rel="prefetch" href="/matheusblog/assets/js/37.d2f841a3.js"><link rel="prefetch" href="/matheusblog/assets/js/38.5ffa2ff0.js"><link rel="prefetch" href="/matheusblog/assets/js/39.11eb7112.js"><link rel="prefetch" href="/matheusblog/assets/js/4.172c31f8.js"><link rel="prefetch" href="/matheusblog/assets/js/40.16e1a3d0.js"><link rel="prefetch" href="/matheusblog/assets/js/41.7416be78.js"><link rel="prefetch" href="/matheusblog/assets/js/42.d43b207e.js"><link rel="prefetch" href="/matheusblog/assets/js/43.184ce555.js"><link rel="prefetch" href="/matheusblog/assets/js/44.2e494f9f.js"><link rel="prefetch" href="/matheusblog/assets/js/45.b89064eb.js"><link rel="prefetch" href="/matheusblog/assets/js/46.e7e93b34.js"><link rel="prefetch" href="/matheusblog/assets/js/47.88edf3e7.js"><link rel="prefetch" href="/matheusblog/assets/js/48.a3ef8833.js"><link rel="prefetch" href="/matheusblog/assets/js/49.416e2ff4.js"><link rel="prefetch" href="/matheusblog/assets/js/5.66045499.js"><link rel="prefetch" href="/matheusblog/assets/js/50.6f9e666c.js"><link rel="prefetch" href="/matheusblog/assets/js/51.0ccc90fa.js"><link rel="prefetch" href="/matheusblog/assets/js/52.c4d78d95.js"><link rel="prefetch" href="/matheusblog/assets/js/53.6e9e73bf.js"><link rel="prefetch" href="/matheusblog/assets/js/54.c09c1331.js"><link rel="prefetch" href="/matheusblog/assets/js/55.abb95afe.js"><link rel="prefetch" href="/matheusblog/assets/js/56.255e4f5a.js"><link rel="prefetch" href="/matheusblog/assets/js/57.87bff193.js"><link rel="prefetch" href="/matheusblog/assets/js/58.ac76633b.js"><link rel="prefetch" href="/matheusblog/assets/js/59.deb7ee54.js"><link rel="prefetch" href="/matheusblog/assets/js/6.082e9fa1.js"><link rel="prefetch" href="/matheusblog/assets/js/60.cf9069f9.js"><link rel="prefetch" href="/matheusblog/assets/js/61.96603df6.js"><link rel="prefetch" href="/matheusblog/assets/js/62.c20b80a7.js"><link rel="prefetch" href="/matheusblog/assets/js/63.5686a0b8.js"><link rel="prefetch" href="/matheusblog/assets/js/64.175576f7.js"><link rel="prefetch" href="/matheusblog/assets/js/65.5ae64b74.js"><link rel="prefetch" href="/matheusblog/assets/js/66.521c63ff.js"><link rel="prefetch" href="/matheusblog/assets/js/67.b425835a.js"><link rel="prefetch" href="/matheusblog/assets/js/68.4681f5d4.js"><link rel="prefetch" href="/matheusblog/assets/js/69.a4dd03f4.js"><link rel="prefetch" href="/matheusblog/assets/js/7.ac1c1c22.js"><link rel="prefetch" href="/matheusblog/assets/js/70.b8b1c0e6.js"><link rel="prefetch" href="/matheusblog/assets/js/71.d17ca0a5.js"><link rel="prefetch" href="/matheusblog/assets/js/72.373736b1.js"><link rel="prefetch" href="/matheusblog/assets/js/73.cffad132.js"><link rel="prefetch" href="/matheusblog/assets/js/75.d7df8fa9.js"><link rel="prefetch" href="/matheusblog/assets/js/76.8fdf1b27.js"><link rel="prefetch" href="/matheusblog/assets/js/77.372d307f.js"><link rel="prefetch" href="/matheusblog/assets/js/78.13b229db.js"><link rel="prefetch" href="/matheusblog/assets/js/79.6a9fcfb3.js"><link rel="prefetch" href="/matheusblog/assets/js/8.aadfe009.js"><link rel="prefetch" href="/matheusblog/assets/js/80.65421bb8.js"><link rel="prefetch" href="/matheusblog/assets/js/81.c6c8f34c.js"><link rel="prefetch" href="/matheusblog/assets/js/82.cdc5fd14.js"><link rel="prefetch" href="/matheusblog/assets/js/83.05eecc6f.js"><link rel="prefetch" href="/matheusblog/assets/js/84.baf2ae71.js"><link rel="prefetch" href="/matheusblog/assets/js/85.9c66f181.js"><link rel="prefetch" href="/matheusblog/assets/js/86.130a310b.js"><link rel="prefetch" href="/matheusblog/assets/js/87.b1fffecd.js"><link rel="prefetch" href="/matheusblog/assets/js/88.8acfd7c2.js"><link rel="prefetch" href="/matheusblog/assets/js/89.fe1c2e91.js"><link rel="prefetch" href="/matheusblog/assets/js/9.787b2fa5.js"><link rel="prefetch" href="/matheusblog/assets/js/90.57c4bcfc.js"><link rel="prefetch" href="/matheusblog/assets/js/91.f51280e1.js"><link rel="prefetch" href="/matheusblog/assets/js/92.96836f34.js"><link rel="prefetch" href="/matheusblog/assets/js/93.f50f9f34.js"><link rel="prefetch" href="/matheusblog/assets/js/94.a9740e63.js"><link rel="prefetch" href="/matheusblog/assets/js/95.d17d251c.js"><link rel="prefetch" href="/matheusblog/assets/js/96.b087ef79.js"><link rel="prefetch" href="/matheusblog/assets/js/97.9ba0439c.js"><link rel="prefetch" href="/matheusblog/assets/js/98.21b2bcc2.js"><link rel="prefetch" href="/matheusblog/assets/js/99.e90fc227.js">
+    <link rel="stylesheet" href="/matheusblog/assets/css/0.styles.980a01be.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/matheusblog/" class="home-link router-link-active"><!----> <span class="site-name">MyBlog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/jvm/00虚拟机内存体系与垃圾回收.html" class="nav-link">
+  JVM简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li><li class="dropdown-item"><h4>
+          ElasticSearch
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/elasticsearch/02Elasticsearch-Docker搭建ES.html" class="nav-link">
+  Docker搭建ES
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/springMVC框架.html" class="nav-link">
+  SpringMVC框架
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springboot/SpringBoot简介.html" class="nav-link">
+  SpringBoot简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/docker/01Docker入门.html" class="nav-link">
+  Docker入门
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/k8s/01Kubernetes介绍及使用.html" class="nav-link">
+  K8s介绍与使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/code-style/effective-java/目录.html" class="nav-link">
+  Effective-Java
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  单元测试
+</a></li><li class="dropdown-subitem"><a href="/matheusblog/md/project/jt-project/2. IDEA配置.html" class="nav-link">
+  IDEA配置
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/scala/Scala学习宝典.html" class="nav-link">
+  Scala学习宝典
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/python/Python基础学习.html" class="nav-link">
+  Python基础学习
+</a></li></ul></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/jvm/00虚拟机内存体系与垃圾回收.html" class="nav-link">
+  JVM简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li><li class="dropdown-item"><h4>
+          ElasticSearch
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/elasticsearch/02Elasticsearch-Docker搭建ES.html" class="nav-link">
+  Docker搭建ES
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/springMVC框架.html" class="nav-link">
+  SpringMVC框架
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springboot/SpringBoot简介.html" class="nav-link">
+  SpringBoot简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/docker/01Docker入门.html" class="nav-link">
+  Docker入门
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/k8s/01Kubernetes介绍及使用.html" class="nav-link">
+  K8s介绍与使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/code-style/effective-java/目录.html" class="nav-link">
+  Effective-Java
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  单元测试
+</a></li><li class="dropdown-subitem"><a href="/matheusblog/md/project/jt-project/2. IDEA配置.html" class="nav-link">
+  IDEA配置
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/scala/Scala学习宝典.html" class="nav-link">
+  Scala学习宝典
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/python/Python基础学习.html" class="nav-link">
+  Python基础学习
+</a></li></ul></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>工具</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="sidebar-link">VScode使用</a></li><li><a href="/matheusblog/md/devops/tools/Notebook.html" class="sidebar-link">Notebook环境使用指南</a></li><li><a href="/matheusblog/md/devops/tools/HBuilderX.html" class="sidebar-link">HBuilderX</a></li><li><a href="/matheusblog/md/devops/tools/硬件设置.html" class="sidebar-link">硬件设置</a></li><li><a href="/matheusblog/md/devops/tools/IDEA使用.html" class="sidebar-link">IDEA</a></li><li><a href="/matheusblog/md/devops/tools/IDEA快捷键与JavaDoc.html" class="sidebar-link">IDEA快捷键与JavaDoc</a></li><li><a href="/matheusblog/md/devops/tools/网页扒手.html" class="sidebar-link">网页扒手</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Git</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/devops/tools/git/01 基本用法.html" class="sidebar-link">Git安装</a></li><li><a href="/matheusblog/md/devops/tools/git/02 Github快速上手.html" class="sidebar-link">GitHub快速上手</a></li><li><a href="/matheusblog/md/devops/tools/git/03 Git分支操作.html" class="sidebar-link">Git分支操作</a></li><li><a href="/matheusblog/md/devops/tools/git/04 多人协作GitHub部分.html" class="sidebar-link">多人协作GitHub部分</a></li><li><a href="/matheusblog/md/devops/tools/git/05 多人协作Git部分.html" class="sidebar-link">多人协作Git部分</a></li><li><a href="/matheusblog/md/devops/tools/git/06 Git tag和GitHub releases.html" class="sidebar-link">Git tag和GitHub releases</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Vim</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/devops/tools/vim/01 Vim快速入门.html" class="sidebar-link">Vim快速入门</a></li><li><a href="/matheusblog/md/devops/tools/vim/02Vim文档编辑.html" class="sidebar-link">Vim文档编辑</a></li><li><a href="/matheusblog/md/devops/tools/vim/03Vim查找替换.html" class="sidebar-link">Vim查找替换</a></li><li><a href="/matheusblog/md/devops/tools/vim/04Vim高级功能.html" class="sidebar-link">Vim高级功能</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Linux</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/devops/linux/00 Centos.html" class="sidebar-link">Centos</a></li><li><a href="/matheusblog/md/devops/linux/01 编辑c.html" class="sidebar-link">编辑c</a></li><li><a href="/matheusblog/md/devops/linux/03 TCP_IP命令.html" class="sidebar-link">TCP/IP命令</a></li><li><a href="/matheusblog/md/devops/linux/04 基本概念及操作.html" class="sidebar-link">基本概念及操作</a></li><li><a href="/matheusblog/md/devops/linux/05 用户及文件权限管理.html" class="sidebar-link">用户及文件权限管理</a></li><li><a href="/matheusblog/md/devops/linux/06 Linux 目录结构及文件基本操作.html" class="sidebar-link">Linux 目录结构及文件基本操作</a></li><li><a href="/matheusblog/md/devops/linux/07 环境变量与文件查找.html" class="sidebar-link">环境变量与文件查找</a></li><li><a href="/matheusblog/md/devops/linux/08  文件打包与解压缩.html" class="sidebar-link">文件打包与解压缩</a></li><li><a href="/matheusblog/md/devops/linux/09 文件系统操作与磁盘管理.html" class="sidebar-link">文件系统操作与磁盘管理</a></li><li><a href="/matheusblog/md/devops/linux/10 Linux下的帮助命令.html" class="sidebar-link">Linux下的帮助命令</a></li><li><a href="/matheusblog/md/devops/linux/11 Linux任务计划crontab.html" class="sidebar-link">Linux任务计划crontab</a></li><li><a href="/matheusblog/md/devops/linux/12 命令执行顺序控制与管道.html" class="sidebar-link">命令执行顺序控制与管道</a></li><li><a href="/matheusblog/md/devops/linux/13简单的文本处理.html" class="sidebar-link">文本处理命令</a></li><li><a href="/matheusblog/md/devops/linux/14数据流重定向.html" class="sidebar-link">数据流重定向</a></li><li><a href="/matheusblog/md/devops/linux/15正则表达式基础.html" class="sidebar-link">正则表达式</a></li><li><a href="/matheusblog/md/devops/linux/16Linux下软件安装.html" class="sidebar-link">LInux下软件安装</a></li><li><a href="/matheusblog/md/devops/linux/17Linux进程概念.html" class="sidebar-link">Linux进程概念</a></li><li><a href="/matheusblog/md/devops/linux/18Linux进程管理.html" class="sidebar-link">Linux进程管理</a></li><li><a href="/matheusblog/md/devops/linux/19Linux日志系统.html" class="sidebar-link">Linux日志系统</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Bash</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/devops/docker/bash/01bash介绍与入门.html" class="sidebar-link">Bash介绍与入门</a></li><li><a href="/matheusblog/md/devops/docker/bash/02bash特殊字符.html" class="sidebar-link">Bash特殊字符</a></li><li><a href="/matheusblog/md/devops/docker/bash/03变量与参数.html" class="sidebar-link">变量与参数</a></li><li><a href="/matheusblog/md/devops/docker/bash/04基本运算符.html" class="sidebar-link">基本运算符</a></li><li><a href="/matheusblog/md/devops/docker/bash/05流程控制.html" class="sidebar-link">流程控制</a></li><li><a href="/matheusblog/md/devops/docker/bash/06函数.html" class="sidebar-link">函数</a></li><li><a href="/matheusblog/md/devops/docker/bash/07Shell脚本实现Linux系统监控.html" class="active sidebar-link">Shell脚本实现Linux系统监控</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Docker</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/devops/docker/01Docker入门.html" class="sidebar-link">Docker技术简介</a></li><li><a href="/matheusblog/md/devops/docker/02Docker安装实践.html" class="sidebar-link">Docker安装实践</a></li><li><a href="/matheusblog/md/devops/docker/03Docker服务基本操作实践.html" class="sidebar-link">Docker服务基本操作</a></li><li><a href="/matheusblog/md/devops/docker/04Docker镜像操作实践.html" class="sidebar-link">Docker镜像操作实践</a></li><li><a href="/matheusblog/md/devops/docker/05Docker容器操作实践.html" class="sidebar-link">Docker容器操作实践</a></li><li><a href="/matheusblog/md/devops/docker/06Docker数据管理实践.html" class="sidebar-link">Docker数据管理实践</a></li><li><a href="/matheusblog/md/devops/docker/07Docker镜像制作.html" class="sidebar-link">Docker镜像制作实践</a></li><li><a href="/matheusblog/md/devops/docker/08Docker镜像安装实践.html" class="sidebar-link">Docker镜像安装实践</a></li><li><a href="/matheusblog/md/devops/docker/09Docker容器互联实践.html" class="sidebar-link">Docker容器互联实践</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="shell脚本实现linux系统监控"><a href="#shell脚本实现linux系统监控" class="header-anchor">#</a> Shell脚本实现Linux系统监控</h1> <p></p><div class="table-of-contents"><ul><li><a href="#一、实验介绍">一、实验介绍</a></li><li><a href="#二、实验原理">二、实验原理</a><ul><li><a href="#_2-1-主要命令介绍">2.1 主要命令介绍</a></li><li><a href="#_2-2-shell编程注意">2.2 shell编程注意</a></li></ul></li><li><a href="#三、实验步骤">三、实验步骤</a><ul><li><a href="#_3-1-有关参数-i-的模块">3.1 有关参数 i 的模块</a></li><li><a href="#_3-2-有关参数-v-的模块">3.2 有关参数 v 的模块</a></li><li><a href="#_3-3-有关参数-h-的模块">3.3 有关参数 h 的模块</a></li><li><a href="#_3-4-提取信息设置变量">3.4 提取信息设置变量</a></li></ul></li><li><a href="#四、实验总结">四、实验总结</a></li></ul></div><p></p> <h2 id="一、实验介绍"><a href="#一、实验介绍" class="header-anchor">#</a> 一、实验介绍</h2> <h4 id="_1-1-实验内容"><a href="#_1-1-实验内容" class="header-anchor">#</a> 1.1 实验内容</h4> <p>本课程实现 shell 脚本监控系统的各项参数，并可以将脚本加入系统环境中，可以直接在终端里执行。还添加了几个参数，一个脚本可以执行不同的操作。</p> <h4 id="_1-2-知识点"><a href="#_1-2-知识点" class="header-anchor">#</a> 1.2 知识点</h4> <p>本实验涵盖以下知识点：</p> <ol><li>Bash 脚本编程</li> <li>如何获取 Linux 系统信息</li> <li>如何实时获取 Linux 资源使用率</li></ol> <h4 id="_1-3-实验环节"><a href="#_1-3-实验环节" class="header-anchor">#</a> 1.3 实验环节</h4> <ul><li>vim编辑器</li> <li>shell解释器(linux自带)</li></ul> <h4 id="_1-4-适合人群"><a href="#_1-4-适合人群" class="header-anchor">#</a> 1.4 适合人群</h4> <p>适合人群：本课程适合有shell语法基础，想学习shell脚本的实际使用的同学，可以加深对于shell脚本的认识</p> <h4 id="_1-5-代码获取"><a href="#_1-5-代码获取" class="header-anchor">#</a> 1.5 代码获取</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>#获取
+wget http://labfile.oss.aliyuncs.com/courses/597/monitor.sh
+#运行
+bash monitor.sh
+#备注
+如果执行monitor -i安装提示输入密码。可以执行passwd root为root设置密码
+如果安装之后不能运行，修改/usr/bin/monitor.sh的权限
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><h4 id="_1-6-效果截图"><a href="#_1-6-效果截图" class="header-anchor">#</a> 1.6 效果截图</h4> <p>在实验中，我们将逐步实现下面的功能需求：</p> <ul><li>通过脚本查看系统的使用情况，实现对linux的系统监控。</li> <li>将写好的脚本加入系统环境，开启终端即可使用</li> <li>给脚本添加参数，可以实现不同的操作。</li></ul> <p>最终实现的脚本运行效果：</p> <p><img src="/matheusblog/assets/img/image-20220531210631026.6dfb8162.png" alt="image-20220531210631026"></p> <h2 id="二、实验原理"><a href="#二、实验原理" class="header-anchor">#</a> 二、实验原理</h2> <p>这一章节我们将正式开始讲解实验原理，分步骤进行。</p> <h3 id="_2-1-主要命令介绍"><a href="#_2-1-主要命令介绍" class="header-anchor">#</a> 2.1 主要命令介绍</h3> <ul><li>查看内存(<code>free</code>)</li> <li>查看磁盘(<code>df</code>)</li> <li>查看cpu占用率(<code>top</code>)</li> <li>查看内核版本(<code>uname</code>)</li></ul> <p>这些命令是linux管理员必须耳熟能详的基本命令，本课程的监控脚本，也是根据这些命令的返回值做处理，然后打印在终端的，同学们可以敲一敲这些命令，看看他们的基本用法。 命令详解请查看
+http://man.linuxde.net/</p> <h3 id="_2-2-shell编程注意"><a href="#_2-2-shell编程注意" class="header-anchor">#</a> 2.2 shell编程注意</h3> <ul><li>```` 用法 这个符号可以保存命令的返回值，如</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code> PATH=`pwd` #也可以写成 PAHT=$(pwd)
+ echo $PATH
+ #输出pwd命令的值，也就是当前路径
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><ul><li>参数说明
+<code>$1</code>表示第一个参数，<code>$2</code> 表示第二个参数，<code>$#</code>表示参数个数</li></ul> <h2 id="三、实验步骤"><a href="#三、实验步骤" class="header-anchor">#</a> 三、实验步骤</h2> <p>打开终端，进入<code>Code</code>目录，创建文件<code>tecmint_monitor.sh</code>。 <code>getopts</code>：可以获取用户在命令下的参数，然后根据不同的参数进行不同的操作。它的使用方法是getopts option_string variable，option_string 是指字符串，会逐个匹配，variable 每次匹配成功的选项。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>#! /bin/bash
+while getopts ivh name # getopts 有三个参数，分别执行安装，查看版本，帮助说明
+do
+        case $name in
+          i)iopt=1;;
+          v)vopt=1;;
+          h)hopt=1;;
+         *)echo &quot;Invalid arg&quot;;;
+        esac
+done
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>这个脚本主要有 <code>-ivh</code> 三个参数，分别执行安装脚本，查看版本，帮助说明，你也可以添加自己想要的参数。如果不加参数，默认执行系统的监控命令并打印到屏幕上。</p> <h3 id="_3-1-有关参数-i-的模块"><a href="#_3-1-有关参数-i-的模块" class="header-anchor">#</a> 3.1 有关参数 <code>i</code> 的模块</h3> <p>这个部分主要是将脚本添加到环境的目录里，通过终端就可以执行命令。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>if [[ ! -z $iopt ]] #如果iopt非空则执行
+then
+{
+wd=$(pwd)
+basename &quot;$(test -L &quot;$0&quot; &amp;&amp; readlink &quot;$0&quot; || echo &quot;$0&quot;)&quot; &gt; /tmp/scriptname
+#basename命令会删掉所有的前缀包括最后一个slash（‘/’）字符，然后将字符串显示出来
+scriptname=$(echo -e -n $wd/ &amp;&amp; cat /tmp/scriptname)
+#scriptname就是tecmint_monitor.sh的地址
+su -c &quot;cp $scriptname /usr/bin/monitor&quot; root &amp;&amp; echo &quot;Congratulations! Script Installed, now run monitor Command&quot; || echo &quot;Installation failed&quot;
+}
+fi
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p><img src="/matheusblog/assets/img/image-20220531210654284.bd1570e4.png" alt="image-20220531210654284"></p> <h3 id="_3-2-有关参数-v-的模块"><a href="#_3-2-有关参数-v-的模块" class="header-anchor">#</a> 3.2 有关参数 <code>v</code> 的模块</h3> <p>这个部分是查看脚本的版本，版权等信息。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>if [[ ! -z $vopt ]]
+then
+{
+echo -e &quot;tecmint_monitor version 0.1\nReleased Under Apache 2.0 License&quot;
+}
+fi
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p><img src="/matheusblog/assets/img/image-20220531210659155.f2a1aaa8.png" alt="image-20220531210659155"></p> <h3 id="_3-3-有关参数-h-的模块"><a href="#_3-3-有关参数-h-的模块" class="header-anchor">#</a> 3.3 有关参数 <code>h</code> 的模块</h3> <p>这个部分是添加帮助信息，方便其他人使用</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>if [[ ! -z $hopt ]]
+then
+{
+echo -e &quot; -i                                Install script&quot;
+echo -e &quot; -v                                Print version information and exit&quot;
+echo -e &quot; -h                                Print help (this information) and exit&quot;
+}
+fi
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p><img src="/matheusblog/assets/img/image-20220531210704643.4d3dedd6.png" alt="image-20220531210704643"></p> <h3 id="_3-4-提取信息设置变量"><a href="#_3-4-提取信息设置变量" class="header-anchor">#</a> 3.4 提取信息设置变量</h3> <p>先设置一些好记的变量名，这样方便阅读，比直接看代码要更容易一点。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>clear
+
+unset tecreset os architecture kernelrelease internalip externalip nameserver loadaverage
+# unset命令用于删除已定义的shell变量（包括环境变量）和shell函数。
+# 关于unset更多的信息可以查看http://www.runoob.com/linux/linux-comm-unset.html
+# 定义变量 tecreset
+tecreset=$(tput sgr0)
+
+# 查看是否可以连网
+ping -c 1 www.baidu.com &amp;&gt; /dev/null &amp;&amp; echo -e '\E[32m'&quot;Internet: $tecreset Connected&quot; || echo -e '\E[32m'&quot;Internet: $tecreset Disconnected&quot;
+# '\E[32m' 将打印的信息设置为绿色
+# 查看系统的类型
+os=$(uname -o)
+echo -e '\E[32m'&quot;Operating System Type :&quot; $tecreset $os
+
+# 查看系统的版本和名称
+###################################
+OS=`uname -s`
+REV=`uname -r`
+MACH=`uname -m`
+
+GetVersionFromFile()
+{
+    VERSION=`cat $1 | tr &quot;\n&quot; ' ' | sed s/.*VERSION.*=\ // `
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br></div></div><p>查看操作系统的类型，不同的操作系统指令是不一样的。看到大段的代码不要紧张，其实逻辑很简单。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>if [ &quot;${OS}&quot; = &quot;SunOS&quot; ] ; then
+    OS=Solaris
+    ARCH=`uname -p`
+    OSSTR=&quot;${OS} ${REV}(${ARCH} `uname -v`)&quot;
+# uname命令用于打印当前系统相关信息（内核版本号、硬件架构、主机名称和操作系统类型等）。
+elif [ &quot;${OS}&quot; = &quot;AIX&quot; ] ; then
+    OSSTR=&quot;${OS} `oslevel` (`oslevel -r`)&quot;
+#AIX是IBM开发的一套类UNIX操作系统，关于它更多的指令可以查看http://www.cnblogs.com/sbaicl/articles/2947795.html
+elif [ &quot;${OS}&quot; = &quot;Linux&quot; ] ; then
+    KERNEL=`uname -r`
+    if [ -f /etc/redhat-release ] ; then
+        DIST='RedHat'
+        PSUEDONAME=`cat /etc/redhat-release | sed s/.*\(// | sed s/\)//`
+        REV=`cat /etc/redhat-release | sed s/.*release\ // | sed s/\ .*//`
+#sed通常用来匹配一个或多个正则表达式的文本进行处理,可以查看http://coolshell.cn/articles/9104.html
+    elif [ -f /etc/SuSE-release ] ; then
+        DIST=`cat /etc/SuSE-release | tr &quot;\n&quot; ' '| sed s/VERSION.*//`
+        REV=`cat /etc/SuSE-release | tr &quot;\n&quot; ' ' | sed s/.*=\ //`
+    elif [ -f /etc/mandrake-release ] ; then
+        DIST='Mandrake'
+        PSUEDONAME=`cat /etc/mandrake-release | sed s/.*\(// | sed s/\)//`
+        REV=`cat /etc/mandrake-release | sed s/.*release\ // | sed s/\ .*//`
+    elif [ -f /etc/debian_version ] ; then
+        DIST=&quot;Debian `cat /etc/debian_version`&quot;
+        REV=&quot;&quot;
+
+    fi
+    if ${OSSTR} [ -f /etc/UnitedLinux-release ] ; then
+        DIST=&quot;${DIST}[`cat /etc/UnitedLinux-release | tr &quot;\n&quot; ' ' | sed s/VERSION.*//`]&quot;
+    fi
+
+    OSSTR=&quot;${OS} ${DIST} ${REV}(${PSUEDONAME} ${KERNEL} ${MACH})&quot;
+
+fi
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br></div></div><p>最后就是监控系统的各种信息，并打印到屏幕</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>查看操作系统版本
+echo -e '\E[32m'&quot;OS Version :&quot; $tecreset $OSSTR 
+# 查看系统的类型
+architecture=$(uname -m)
+echo -e '\E[32m'&quot;Architecture :&quot; $tecreset $architecture
+
+# 查看内核的版本
+kernelrelease=$(uname -r)
+echo -e '\E[32m'&quot;Kernel Release :&quot; $tecreset $kernelrelease
+
+# 查看主机名
+echo -e '\E[32m'&quot;Hostname :&quot; $tecreset $HOSTNAME
+
+# 查看内网地址
+internalip=$(hostname -I)
+echo -e '\E[32m'&quot;Internal IP :&quot; $tecreset $internalip
+
+# 查看外网地址
+externalip=$(curl -s ipecho.net/plain;echo)
+echo -e '\E[32m'&quot;External IP : $tecreset &quot;$externalip
+
+# 查看DNS
+nameservers=$(cat /etc/resolv.conf | sed '1 d' | awk '{print $2}')
+echo -e '\E[32m'&quot;Name Servers :&quot; $tecreset $nameservers 
+
+# 查看登陆的用户
+who&gt;/tmp/who
+echo -e '\E[32m'&quot;Logged In users :&quot; $tecreset &amp;&amp; cat /tmp/who 
+
+# 查看系统内存使用情况
+free -h | grep -v + &gt; /tmp/ramcache
+echo -e '\E[32m'&quot;Ram Usages :&quot; $tecreset
+cat /tmp/ramcache | grep -v &quot;Swap&quot;
+echo -e '\E[32m'&quot;Swap Usages :&quot; $tecreset
+cat /tmp/ramcache | grep -v &quot;Mem&quot;
+
+# 查看磁盘使用情况
+df -h| grep 'Filesystem\|/dev/sda*' &gt; /tmp/diskusage
+echo -e '\E[32m'&quot;Disk Usages :&quot; $tecreset 
+cat /tmp/diskusage
+
+# 查看系统的负载情况
+loadaverage=$(top -n 1 -b | grep &quot;load average:&quot; | awk '{print $10 $11 $12}')
+echo -e '\E[32m'&quot;Load Average :&quot; $tecreset $loadaverage
+
+# 查看系统的运行时间
+tecuptime=$(uptime | awk '{print $3,$4}' | cut -f1 -d,)
+echo -e '\E[32m'&quot;System Uptime Days/(HH:MM) :&quot; $tecreset $tecuptime
+
+# 删除上面使用的变量，释放资源
+unset tecreset os architecture kernelrelease internalip externalip nameserver loadaverage
+
+# 删除临时文件
+rm /tmp/who /tmp/ramcache /tmp/diskusage
+}
+fi
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br></div></div><h2 id="四、实验总结"><a href="#四、实验总结" class="header-anchor">#</a> 四、实验总结</h2> <p>通过这个小项目，加强了对shell编程的理解，不仅可以执行脚本，还可以将脚本安装到系统环境中，直接执行命令。从实践中学习，把代码敲一遍，就能体会编程的乐趣了:-)</p> <p>最后附上源代码</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>#! /bin/bash
+# unset any variable which system may be using
+# clear the screen
+
+
+while getopts ivh name
+do
+        case $name in
+          i)iopt=1;;
+          v)vopt=1;;
+          h)hopt=1;;
+         *)echo &quot;Invalid arg&quot;;;
+        esac
+done
+# 
+if [[ ! -z $iopt ]]
+then
+{
+wd=$(pwd)
+basename &quot;$(test -L &quot;$0&quot; &amp;&amp; readlink &quot;$0&quot; || echo &quot;$0&quot;)&quot; &gt; /tmp/scriptname
+scriptname=$(echo -e -n $wd/ &amp;&amp; cat /tmp/scriptname)
+su -c &quot;cp $scriptname /usr/bin/monitor&quot; root &amp;&amp; echo &quot;Congratulations! Script Installed, now run monitor Command&quot; || echo &quot;Installation failed&quot;
+}
+fi
+
+if [[ ! -z $vopt ]]
+then
+{
+echo -e &quot;tecmint_monitor version 0.1\nDesigned by Tecmint.com\nReleased Under Apache 2.0 License&quot;
+}
+fi
+if [[ ! -z $hopt ]]
+then
+{
+echo -e &quot; -i                                Install script&quot;
+echo -e &quot; -v                                Print version information and exit&quot;
+echo -e &quot; -h                                Print help (this information) and exit&quot;
+}
+fi
+
+if [[ $# -eq 0 ]]
+then
+{
+clear
+
+unset tecreset os architecture kernelrelease internalip externalip nameserver loadaverage
+
+# Define Variable tecreset
+tecreset=$(tput sgr0)
+
+# Check if connected to Internet or not
+ping -c 1 www.baidu.com &amp;&gt; /dev/null &amp;&amp; echo -e '\E[32m'&quot;Internet: $tecreset Connected&quot; || echo -e '\E[32m'&quot;Internet: $tecreset Disconnected&quot;
+
+# Check OS Type
+os=$(uname -o)
+echo -e '\E[32m'&quot;Operating System Type :&quot; $tecreset $os
+
+# Check OS Release Version and Name
+###################################
+OS=`uname -s`
+REV=`uname -r`
+MACH=`uname -m`
+
+GetVersionFromFile()
+{
+    VERSION=`cat $1 | tr &quot;\n&quot; ' ' | sed s/.*VERSION.*=\ // `
+}
+
+if [ &quot;${OS}&quot; = &quot;SunOS&quot; ] ; then
+    OS=Solaris
+    ARCH=`uname -p`
+    OSSTR=&quot;${OS} ${REV}(${ARCH} `uname -v`)&quot;
+elif [ &quot;${OS}&quot; = &quot;AIX&quot; ] ; then
+    OSSTR=&quot;${OS} `oslevel` (`oslevel -r`)&quot;
+elif [ &quot;${OS}&quot; = &quot;Linux&quot; ] ; then
+    KERNEL=`uname -r`
+    if [ -f /etc/redhat-release ] ; then
+        DIST='RedHat'
+        PSUEDONAME=`cat /etc/redhat-release | sed s/.*\(// | sed s/\)//`
+        REV=`cat /etc/redhat-release | sed s/.*release\ // | sed s/\ .*//`
+    elif [ -f /etc/SuSE-release ] ; then
+        DIST=`cat /etc/SuSE-release | tr &quot;\n&quot; ' '| sed s/VERSION.*//`
+        REV=`cat /etc/SuSE-release | tr &quot;\n&quot; ' ' | sed s/.*=\ //`
+    elif [ -f /etc/mandrake-release ] ; then
+        DIST='Mandrake'
+        PSUEDONAME=`cat /etc/mandrake-release | sed s/.*\(// | sed s/\)//`
+        REV=`cat /etc/mandrake-release | sed s/.*release\ // | sed s/\ .*//`
+    elif [ -f /etc/debian_version ] ; then
+        DIST=&quot;Debian `cat /etc/debian_version`&quot;
+        REV=&quot;&quot;
+
+    fi
+    if ${OSSTR} [ -f /etc/UnitedLinux-release ] ; then
+        DIST=&quot;${DIST}[`cat /etc/UnitedLinux-release | tr &quot;\n&quot; ' ' | sed s/VERSION.*//`]&quot;
+    fi
+
+    OSSTR=&quot;${OS} ${DIST} ${REV}(${PSUEDONAME} ${KERNEL} ${MACH})&quot;
+
+fi
+
+##################################
+#cat /etc/os-release | grep 'NAME\|VERSION' | grep -v 'VERSION_ID' | grep -v 'PRETTY_NAME' &gt; /tmp/osrelease
+#echo -n -e '\E[32m'&quot;OS Name :&quot; $tecreset  &amp;&amp; cat /tmp/osrelease | grep -v &quot;VERSION&quot; | grep -v CPE_NAME | cut -f2 -d\&quot;
+#echo -n -e '\E[32m'&quot;OS Version :&quot; $tecreset &amp;&amp; cat /tmp/osrelease | grep -v &quot;NAME&quot; | grep -v CT_VERSION | cut -f2 -d\&quot;
+echo -e '\E[32m'&quot;OS Version :&quot; $tecreset $OSSTR 
+
+architecture=$(uname -m)
+echo -e '\E[32m'&quot;Architecture :&quot; $tecreset $architecture
+
+
+kernelrelease=$(uname -r)
+echo -e '\E[32m'&quot;Kernel Release :&quot; $tecreset $kernelrelease
+
+
+echo -e '\E[32m'&quot;Hostname :&quot; $tecreset $HOSTNAME
+
+
+internalip=$(hostname -I)
+echo -e '\E[32m'&quot;Internal IP :&quot; $tecreset $internalip
+
+
+externalip=$(curl -s ipecho.net/plain;echo)
+echo -e '\E[32m'&quot;External IP : $tecreset &quot;$externalip
+
+
+nameservers=$(cat /etc/resolv.conf | sed '1 d' | awk '{print $2}')
+echo -e '\E[32m'&quot;Name Servers :&quot; $tecreset $nameservers 
+
+
+who&gt;/tmp/who
+echo -e '\E[32m'&quot;Logged In users :&quot; $tecreset &amp;&amp; cat /tmp/who 
+
+
+free -h | grep -v + &gt; /tmp/ramcache
+echo -e '\E[32m'&quot;Ram Usages :&quot; $tecreset
+cat /tmp/ramcache | grep -v &quot;Swap&quot;
+echo -e '\E[32m'&quot;Swap Usages :&quot; $tecreset
+cat /tmp/ramcache | grep -v &quot;Mem&quot;
+
+
+df -h| grep 'Filesystem\|/dev/sda*' &gt; /tmp/diskusage
+echo -e '\E[32m'&quot;Disk Usages :&quot; $tecreset 
+cat /tmp/diskusage
+
+
+loadaverage=$(top -n 1 -b | grep &quot;load average:&quot; | awk '{print $10 $11 $12}')
+echo -e '\E[32m'&quot;Load Average :&quot; $tecreset $loadaverage
+
+
+tecuptime=$(uptime | awk '{print $3,$4}' | cut -f1 -d,)
+echo -e '\E[32m'&quot;System Uptime Days/(HH:MM) :&quot; $tecreset $tecuptime
+
+
+unset tecreset os architecture kernelrelease internalip externalip nameserver loadaverage
+
+rm /tmp/who /tmp/ramcache /tmp/diskusage
+}
+fi
+shift $(($OPTIND -1))
+# shift命令用于对参数的移动(左移)。可以查看http://blog.csdn.net/zhu_xun/article/details/24796235
+# 
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br><span class="line-number">112</span><br><span class="line-number">113</span><br><span class="line-number">114</span><br><span class="line-number">115</span><br><span class="line-number">116</span><br><span class="line-number">117</span><br><span class="line-number">118</span><br><span class="line-number">119</span><br><span class="line-number">120</span><br><span class="line-number">121</span><br><span class="line-number">122</span><br><span class="line-number">123</span><br><span class="line-number">124</span><br><span class="line-number">125</span><br><span class="line-number">126</span><br><span class="line-number">127</span><br><span class="line-number">128</span><br><span class="line-number">129</span><br><span class="line-number">130</span><br><span class="line-number">131</span><br><span class="line-number">132</span><br><span class="line-number">133</span><br><span class="line-number">134</span><br><span class="line-number">135</span><br><span class="line-number">136</span><br><span class="line-number">137</span><br><span class="line-number">138</span><br><span class="line-number">139</span><br><span class="line-number">140</span><br><span class="line-number">141</span><br><span class="line-number">142</span><br><span class="line-number">143</span><br><span class="line-number">144</span><br><span class="line-number">145</span><br><span class="line-number">146</span><br><span class="line-number">147</span><br><span class="line-number">148</span><br><span class="line-number">149</span><br><span class="line-number">150</span><br><span class="line-number">151</span><br><span class="line-number">152</span><br><span class="line-number">153</span><br><span class="line-number">154</span><br><span class="line-number">155</span><br><span class="line-number">156</span><br><span class="line-number">157</span><br><span class="line-number">158</span><br><span class="line-number">159</span><br><span class="line-number">160</span><br><span class="line-number">161</span><br></div></div><h4 id="版权声明"><a href="#版权声明" class="header-anchor">#</a> 版权声明</h4> <p>本课程主要修改自 atarallo 的 <a href="https://github.com/atarallo/TECMINT_MONITOR" target="_blank" rel="noopener noreferrer">《TECMINT_MONITOR》 <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>项目 , 代码使用<a href="http://www.apache.org/licenses/" target="_blank" rel="noopener noreferrer"> APACHE 协议<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>。</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/matheusblog/md/devops/docker/bash/06函数.html" class="prev">
+        函数
+      </a></span> <span class="next"><a href="/matheusblog/md/devops/docker/01Docker入门.html">
+        Docker技术简介
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/matheusblog/assets/js/app.d1bc8cd0.js" defer></script><script src="/matheusblog/assets/js/3.21aaf515.js" defer></script><script src="/matheusblog/assets/js/74.fbb35090.js" defer></script>
+  </body>
+</html>

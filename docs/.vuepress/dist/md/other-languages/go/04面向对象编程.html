@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>面向对象编程 | MyBlog</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="包含: Java 基础, JVM, Spring, Spring Boot, Spring Cloud, MySQL, ElasticSearch, MongoDB, Docker, k8s, Linux, DevOps, 分布式,  开发工具, Git, IDE...">
+    
+    <link rel="preload" href="/matheusblog/assets/css/0.styles.980a01be.css" as="style"><link rel="preload" href="/matheusblog/assets/js/app.d1bc8cd0.js" as="script"><link rel="preload" href="/matheusblog/assets/js/3.21aaf515.js" as="script"><link rel="preload" href="/matheusblog/assets/js/285.8a6391d1.js" as="script"><link rel="prefetch" href="/matheusblog/assets/js/10.54a7cbcb.js"><link rel="prefetch" href="/matheusblog/assets/js/100.65c579fe.js"><link rel="prefetch" href="/matheusblog/assets/js/101.b41c3c3e.js"><link rel="prefetch" href="/matheusblog/assets/js/102.4f362209.js"><link rel="prefetch" href="/matheusblog/assets/js/103.3634017b.js"><link rel="prefetch" href="/matheusblog/assets/js/104.3bee8dc7.js"><link rel="prefetch" href="/matheusblog/assets/js/105.4dde7830.js"><link rel="prefetch" href="/matheusblog/assets/js/106.868e8474.js"><link rel="prefetch" href="/matheusblog/assets/js/107.c7fc6303.js"><link rel="prefetch" href="/matheusblog/assets/js/108.ceb9c82d.js"><link rel="prefetch" href="/matheusblog/assets/js/109.a9f0c9ae.js"><link rel="prefetch" href="/matheusblog/assets/js/11.2c2c6a67.js"><link rel="prefetch" href="/matheusblog/assets/js/110.fe3adf68.js"><link rel="prefetch" href="/matheusblog/assets/js/111.2c3688da.js"><link rel="prefetch" href="/matheusblog/assets/js/112.3cad34e6.js"><link rel="prefetch" href="/matheusblog/assets/js/113.aa50199f.js"><link rel="prefetch" href="/matheusblog/assets/js/114.60ac3f02.js"><link rel="prefetch" href="/matheusblog/assets/js/115.2db78ad2.js"><link rel="prefetch" href="/matheusblog/assets/js/116.7312786f.js"><link rel="prefetch" href="/matheusblog/assets/js/117.4a3a0337.js"><link rel="prefetch" href="/matheusblog/assets/js/118.e5af8b9d.js"><link rel="prefetch" href="/matheusblog/assets/js/119.e0967512.js"><link rel="prefetch" href="/matheusblog/assets/js/12.6f0ae98d.js"><link rel="prefetch" href="/matheusblog/assets/js/120.1ce6260c.js"><link rel="prefetch" href="/matheusblog/assets/js/121.c5f567f4.js"><link rel="prefetch" href="/matheusblog/assets/js/122.ff4f9bed.js"><link rel="prefetch" href="/matheusblog/assets/js/123.b354268c.js"><link rel="prefetch" href="/matheusblog/assets/js/124.ba2aa1f2.js"><link rel="prefetch" href="/matheusblog/assets/js/125.d6737c1d.js"><link rel="prefetch" href="/matheusblog/assets/js/126.ed190ed8.js"><link rel="prefetch" href="/matheusblog/assets/js/127.032ab16f.js"><link rel="prefetch" href="/matheusblog/assets/js/128.eaa5481c.js"><link rel="prefetch" href="/matheusblog/assets/js/129.61e1d174.js"><link rel="prefetch" href="/matheusblog/assets/js/13.c0ff77f9.js"><link rel="prefetch" href="/matheusblog/assets/js/130.d09f60e2.js"><link rel="prefetch" href="/matheusblog/assets/js/131.21aa1c96.js"><link rel="prefetch" href="/matheusblog/assets/js/132.351a321e.js"><link rel="prefetch" href="/matheusblog/assets/js/133.e5e36230.js"><link rel="prefetch" href="/matheusblog/assets/js/134.cea97435.js"><link rel="prefetch" href="/matheusblog/assets/js/135.a56e2494.js"><link rel="prefetch" href="/matheusblog/assets/js/136.557d9fdf.js"><link rel="prefetch" href="/matheusblog/assets/js/137.21eda887.js"><link rel="prefetch" href="/matheusblog/assets/js/138.c10c815c.js"><link rel="prefetch" href="/matheusblog/assets/js/139.5ebe91b0.js"><link rel="prefetch" href="/matheusblog/assets/js/14.6ed4a73f.js"><link rel="prefetch" href="/matheusblog/assets/js/140.9830147a.js"><link rel="prefetch" href="/matheusblog/assets/js/141.708bb77b.js"><link rel="prefetch" href="/matheusblog/assets/js/142.96c71160.js"><link rel="prefetch" href="/matheusblog/assets/js/143.ac186a53.js"><link rel="prefetch" href="/matheusblog/assets/js/144.6411b0b7.js"><link rel="prefetch" href="/matheusblog/assets/js/145.5c75cd6c.js"><link rel="prefetch" href="/matheusblog/assets/js/146.fdb5e7c8.js"><link rel="prefetch" href="/matheusblog/assets/js/147.4f67ac67.js"><link rel="prefetch" href="/matheusblog/assets/js/148.424b4f21.js"><link rel="prefetch" href="/matheusblog/assets/js/149.6161dd02.js"><link rel="prefetch" href="/matheusblog/assets/js/15.6bf38d8a.js"><link rel="prefetch" href="/matheusblog/assets/js/150.40ac7609.js"><link rel="prefetch" href="/matheusblog/assets/js/151.a246fd40.js"><link rel="prefetch" href="/matheusblog/assets/js/152.e430bd35.js"><link rel="prefetch" href="/matheusblog/assets/js/153.27a16b43.js"><link rel="prefetch" href="/matheusblog/assets/js/154.03f42b0e.js"><link rel="prefetch" href="/matheusblog/assets/js/155.c01c0b8b.js"><link rel="prefetch" href="/matheusblog/assets/js/156.9e75b32b.js"><link rel="prefetch" href="/matheusblog/assets/js/157.8539cba7.js"><link rel="prefetch" href="/matheusblog/assets/js/158.200135a9.js"><link rel="prefetch" href="/matheusblog/assets/js/159.1472f0e3.js"><link rel="prefetch" href="/matheusblog/assets/js/16.0bd8975e.js"><link rel="prefetch" href="/matheusblog/assets/js/160.a897bdbf.js"><link rel="prefetch" href="/matheusblog/assets/js/161.8ebaced9.js"><link rel="prefetch" href="/matheusblog/assets/js/162.69a52259.js"><link rel="prefetch" href="/matheusblog/assets/js/163.61b0c093.js"><link rel="prefetch" href="/matheusblog/assets/js/164.3fd70b50.js"><link rel="prefetch" href="/matheusblog/assets/js/165.99a4a455.js"><link rel="prefetch" href="/matheusblog/assets/js/166.be429d07.js"><link rel="prefetch" href="/matheusblog/assets/js/167.35fa8427.js"><link rel="prefetch" href="/matheusblog/assets/js/168.98c13248.js"><link rel="prefetch" href="/matheusblog/assets/js/169.0c800163.js"><link rel="prefetch" href="/matheusblog/assets/js/17.e107c04a.js"><link rel="prefetch" href="/matheusblog/assets/js/170.18e31e2a.js"><link rel="prefetch" href="/matheusblog/assets/js/171.fd0af1e7.js"><link rel="prefetch" href="/matheusblog/assets/js/172.2ae1a92c.js"><link rel="prefetch" href="/matheusblog/assets/js/173.4f22a7d7.js"><link rel="prefetch" href="/matheusblog/assets/js/174.1914bfac.js"><link rel="prefetch" href="/matheusblog/assets/js/175.cf52c6f0.js"><link rel="prefetch" href="/matheusblog/assets/js/176.2d62ffaf.js"><link rel="prefetch" href="/matheusblog/assets/js/177.7998e89e.js"><link rel="prefetch" href="/matheusblog/assets/js/178.db1004ac.js"><link rel="prefetch" href="/matheusblog/assets/js/179.ad97e66d.js"><link rel="prefetch" href="/matheusblog/assets/js/18.e3120c6e.js"><link rel="prefetch" href="/matheusblog/assets/js/180.598dae51.js"><link rel="prefetch" href="/matheusblog/assets/js/181.599b5236.js"><link rel="prefetch" href="/matheusblog/assets/js/182.2dbe3970.js"><link rel="prefetch" href="/matheusblog/assets/js/183.39b4f5d6.js"><link rel="prefetch" href="/matheusblog/assets/js/184.5e15d758.js"><link rel="prefetch" href="/matheusblog/assets/js/185.ba3d76a6.js"><link rel="prefetch" href="/matheusblog/assets/js/186.62a1d264.js"><link rel="prefetch" href="/matheusblog/assets/js/187.ce9ab2bc.js"><link rel="prefetch" href="/matheusblog/assets/js/188.b9ad970d.js"><link rel="prefetch" href="/matheusblog/assets/js/189.29df5075.js"><link rel="prefetch" href="/matheusblog/assets/js/19.fc33d9dc.js"><link rel="prefetch" href="/matheusblog/assets/js/190.8d142ac0.js"><link rel="prefetch" href="/matheusblog/assets/js/191.3fac1cfe.js"><link rel="prefetch" href="/matheusblog/assets/js/192.fd44ba5f.js"><link rel="prefetch" href="/matheusblog/assets/js/193.4dc021ba.js"><link rel="prefetch" href="/matheusblog/assets/js/194.088fad3f.js"><link rel="prefetch" href="/matheusblog/assets/js/195.1fa6fd8b.js"><link rel="prefetch" href="/matheusblog/assets/js/196.93035ed5.js"><link rel="prefetch" href="/matheusblog/assets/js/197.60d31e9d.js"><link rel="prefetch" href="/matheusblog/assets/js/198.e2431930.js"><link rel="prefetch" href="/matheusblog/assets/js/199.eb85b79c.js"><link rel="prefetch" href="/matheusblog/assets/js/2.49dcc008.js"><link rel="prefetch" href="/matheusblog/assets/js/20.f0fba33e.js"><link rel="prefetch" href="/matheusblog/assets/js/200.1d5f2566.js"><link rel="prefetch" href="/matheusblog/assets/js/201.78cfa60e.js"><link rel="prefetch" href="/matheusblog/assets/js/202.0538081f.js"><link rel="prefetch" href="/matheusblog/assets/js/203.e99855dc.js"><link rel="prefetch" href="/matheusblog/assets/js/204.f35716b0.js"><link rel="prefetch" href="/matheusblog/assets/js/205.e0d99ed0.js"><link rel="prefetch" href="/matheusblog/assets/js/206.fb60327e.js"><link rel="prefetch" href="/matheusblog/assets/js/207.37d97d63.js"><link rel="prefetch" href="/matheusblog/assets/js/208.3c7cc661.js"><link rel="prefetch" href="/matheusblog/assets/js/209.0f36f5f9.js"><link rel="prefetch" href="/matheusblog/assets/js/21.38b58190.js"><link rel="prefetch" href="/matheusblog/assets/js/210.7d3c1d9e.js"><link rel="prefetch" href="/matheusblog/assets/js/211.fd9c9ed7.js"><link rel="prefetch" href="/matheusblog/assets/js/212.fa687e1a.js"><link rel="prefetch" href="/matheusblog/assets/js/213.4d25912b.js"><link rel="prefetch" href="/matheusblog/assets/js/214.32fa8874.js"><link rel="prefetch" href="/matheusblog/assets/js/215.007c1b40.js"><link rel="prefetch" href="/matheusblog/assets/js/216.2ca1689d.js"><link rel="prefetch" href="/matheusblog/assets/js/217.42d81467.js"><link rel="prefetch" href="/matheusblog/assets/js/218.e8ef68ea.js"><link rel="prefetch" href="/matheusblog/assets/js/219.e81c9223.js"><link rel="prefetch" href="/matheusblog/assets/js/22.50c56cab.js"><link rel="prefetch" href="/matheusblog/assets/js/220.60e29bfc.js"><link rel="prefetch" href="/matheusblog/assets/js/221.22376958.js"><link rel="prefetch" href="/matheusblog/assets/js/222.4bad5952.js"><link rel="prefetch" href="/matheusblog/assets/js/223.cf135a8b.js"><link rel="prefetch" href="/matheusblog/assets/js/224.574a4b29.js"><link rel="prefetch" href="/matheusblog/assets/js/225.fc91759f.js"><link rel="prefetch" href="/matheusblog/assets/js/226.4d8e0f0c.js"><link rel="prefetch" href="/matheusblog/assets/js/227.eedacdd7.js"><link rel="prefetch" href="/matheusblog/assets/js/228.d9e5543d.js"><link rel="prefetch" href="/matheusblog/assets/js/229.198e9b7f.js"><link rel="prefetch" href="/matheusblog/assets/js/23.546acb40.js"><link rel="prefetch" href="/matheusblog/assets/js/230.9c9b55fa.js"><link rel="prefetch" href="/matheusblog/assets/js/231.52ba5c5a.js"><link rel="prefetch" href="/matheusblog/assets/js/232.4abf639c.js"><link rel="prefetch" href="/matheusblog/assets/js/233.677fd788.js"><link rel="prefetch" href="/matheusblog/assets/js/234.bb428729.js"><link rel="prefetch" href="/matheusblog/assets/js/235.6de15ca6.js"><link rel="prefetch" href="/matheusblog/assets/js/236.fede2411.js"><link rel="prefetch" href="/matheusblog/assets/js/237.6c68e409.js"><link rel="prefetch" href="/matheusblog/assets/js/238.b114a429.js"><link rel="prefetch" href="/matheusblog/assets/js/239.b4881685.js"><link rel="prefetch" href="/matheusblog/assets/js/24.037398b9.js"><link rel="prefetch" href="/matheusblog/assets/js/240.5d0ae7fe.js"><link rel="prefetch" href="/matheusblog/assets/js/241.fd2a3483.js"><link rel="prefetch" href="/matheusblog/assets/js/242.414e941d.js"><link rel="prefetch" href="/matheusblog/assets/js/243.9b98a81a.js"><link rel="prefetch" href="/matheusblog/assets/js/244.7a3c10b1.js"><link rel="prefetch" href="/matheusblog/assets/js/245.623c683e.js"><link rel="prefetch" href="/matheusblog/assets/js/246.3544e58b.js"><link rel="prefetch" href="/matheusblog/assets/js/247.9c99d802.js"><link rel="prefetch" href="/matheusblog/assets/js/248.68af4e3b.js"><link rel="prefetch" href="/matheusblog/assets/js/249.ccaca596.js"><link rel="prefetch" href="/matheusblog/assets/js/25.6c5bccf3.js"><link rel="prefetch" href="/matheusblog/assets/js/250.571542c4.js"><link rel="prefetch" href="/matheusblog/assets/js/251.cf75e5e5.js"><link rel="prefetch" href="/matheusblog/assets/js/252.9f57b2df.js"><link rel="prefetch" href="/matheusblog/assets/js/253.976d974c.js"><link rel="prefetch" href="/matheusblog/assets/js/254.447ebae0.js"><link rel="prefetch" href="/matheusblog/assets/js/255.d57e94cf.js"><link rel="prefetch" href="/matheusblog/assets/js/256.0f189f68.js"><link rel="prefetch" href="/matheusblog/assets/js/257.fad20cea.js"><link rel="prefetch" href="/matheusblog/assets/js/258.d239b495.js"><link rel="prefetch" href="/matheusblog/assets/js/259.8bcd5e63.js"><link rel="prefetch" href="/matheusblog/assets/js/26.c1d32692.js"><link rel="prefetch" href="/matheusblog/assets/js/260.090a63d7.js"><link rel="prefetch" href="/matheusblog/assets/js/261.9c49f0d4.js"><link rel="prefetch" href="/matheusblog/assets/js/262.10f98f30.js"><link rel="prefetch" href="/matheusblog/assets/js/263.81f7548d.js"><link rel="prefetch" href="/matheusblog/assets/js/264.8c0bad52.js"><link rel="prefetch" href="/matheusblog/assets/js/265.982857a3.js"><link rel="prefetch" href="/matheusblog/assets/js/266.040cfe24.js"><link rel="prefetch" href="/matheusblog/assets/js/267.7227c614.js"><link rel="prefetch" href="/matheusblog/assets/js/268.b01bce97.js"><link rel="prefetch" href="/matheusblog/assets/js/269.f0235678.js"><link rel="prefetch" href="/matheusblog/assets/js/27.e26685ad.js"><link rel="prefetch" href="/matheusblog/assets/js/270.62ea1068.js"><link rel="prefetch" href="/matheusblog/assets/js/271.c1b9878a.js"><link rel="prefetch" href="/matheusblog/assets/js/272.24a28332.js"><link rel="prefetch" href="/matheusblog/assets/js/273.6c40eac8.js"><link rel="prefetch" href="/matheusblog/assets/js/274.cd992810.js"><link rel="prefetch" href="/matheusblog/assets/js/275.75177aed.js"><link rel="prefetch" href="/matheusblog/assets/js/276.e8985557.js"><link rel="prefetch" href="/matheusblog/assets/js/277.64625549.js"><link rel="prefetch" href="/matheusblog/assets/js/278.4200bee5.js"><link rel="prefetch" href="/matheusblog/assets/js/279.b1186598.js"><link rel="prefetch" href="/matheusblog/assets/js/28.c0534da3.js"><link rel="prefetch" href="/matheusblog/assets/js/280.13632f13.js"><link rel="prefetch" href="/matheusblog/assets/js/281.83aa1bdd.js"><link rel="prefetch" href="/matheusblog/assets/js/282.034b31ee.js"><link rel="prefetch" href="/matheusblog/assets/js/283.19bded06.js"><link rel="prefetch" href="/matheusblog/assets/js/284.a5e29c5e.js"><link rel="prefetch" href="/matheusblog/assets/js/286.db317c9e.js"><link rel="prefetch" href="/matheusblog/assets/js/287.dc1dcc8f.js"><link rel="prefetch" href="/matheusblog/assets/js/288.f8724f05.js"><link rel="prefetch" href="/matheusblog/assets/js/289.4b35b3ab.js"><link rel="prefetch" href="/matheusblog/assets/js/29.a210d762.js"><link rel="prefetch" href="/matheusblog/assets/js/290.c6023ba3.js"><link rel="prefetch" href="/matheusblog/assets/js/291.db6e892a.js"><link rel="prefetch" href="/matheusblog/assets/js/292.61d8c4ea.js"><link rel="prefetch" href="/matheusblog/assets/js/293.506e9b4f.js"><link rel="prefetch" href="/matheusblog/assets/js/294.9bc96072.js"><link rel="prefetch" href="/matheusblog/assets/js/295.baf21ce8.js"><link rel="prefetch" href="/matheusblog/assets/js/296.4f010851.js"><link rel="prefetch" href="/matheusblog/assets/js/297.39f85fc0.js"><link rel="prefetch" href="/matheusblog/assets/js/298.cf0708c5.js"><link rel="prefetch" href="/matheusblog/assets/js/299.6c1c41a1.js"><link rel="prefetch" href="/matheusblog/assets/js/30.f88dfbb5.js"><link rel="prefetch" href="/matheusblog/assets/js/300.59368419.js"><link rel="prefetch" href="/matheusblog/assets/js/301.2d80d504.js"><link rel="prefetch" href="/matheusblog/assets/js/302.690f15a6.js"><link rel="prefetch" href="/matheusblog/assets/js/303.d285ad36.js"><link rel="prefetch" href="/matheusblog/assets/js/304.d9d52d35.js"><link rel="prefetch" href="/matheusblog/assets/js/305.ec2cf80c.js"><link rel="prefetch" href="/matheusblog/assets/js/306.6d7e61d2.js"><link rel="prefetch" href="/matheusblog/assets/js/307.ec680f13.js"><link rel="prefetch" href="/matheusblog/assets/js/308.addb7d10.js"><link rel="prefetch" href="/matheusblog/assets/js/309.60c45495.js"><link rel="prefetch" href="/matheusblog/assets/js/31.241f0b56.js"><link rel="prefetch" href="/matheusblog/assets/js/310.36b632f3.js"><link rel="prefetch" href="/matheusblog/assets/js/311.c135c48c.js"><link rel="prefetch" href="/matheusblog/assets/js/312.329d4917.js"><link rel="prefetch" href="/matheusblog/assets/js/313.e259927e.js"><link rel="prefetch" href="/matheusblog/assets/js/314.6019fcf4.js"><link rel="prefetch" href="/matheusblog/assets/js/315.a7f16c02.js"><link rel="prefetch" href="/matheusblog/assets/js/316.78cce25e.js"><link rel="prefetch" href="/matheusblog/assets/js/317.9fd2c4e0.js"><link rel="prefetch" href="/matheusblog/assets/js/318.a4fe80b0.js"><link rel="prefetch" href="/matheusblog/assets/js/319.620bd822.js"><link rel="prefetch" href="/matheusblog/assets/js/32.63322225.js"><link rel="prefetch" href="/matheusblog/assets/js/320.0bc73d8d.js"><link rel="prefetch" href="/matheusblog/assets/js/321.6f386429.js"><link rel="prefetch" href="/matheusblog/assets/js/322.dc68c4f6.js"><link rel="prefetch" href="/matheusblog/assets/js/323.990b2c5e.js"><link rel="prefetch" href="/matheusblog/assets/js/324.90800df3.js"><link rel="prefetch" href="/matheusblog/assets/js/325.17b21116.js"><link rel="prefetch" href="/matheusblog/assets/js/326.dc462f7a.js"><link rel="prefetch" href="/matheusblog/assets/js/327.60a3c557.js"><link rel="prefetch" href="/matheusblog/assets/js/328.918be9ec.js"><link rel="prefetch" href="/matheusblog/assets/js/329.fbc9c1c4.js"><link rel="prefetch" href="/matheusblog/assets/js/33.a5e4acbc.js"><link rel="prefetch" href="/matheusblog/assets/js/330.5eb0fa54.js"><link rel="prefetch" href="/matheusblog/assets/js/331.47217147.js"><link rel="prefetch" href="/matheusblog/assets/js/332.891c1931.js"><link rel="prefetch" href="/matheusblog/assets/js/333.22aa3d9c.js"><link rel="prefetch" href="/matheusblog/assets/js/334.7ced64e0.js"><link rel="prefetch" href="/matheusblog/assets/js/335.9f090150.js"><link rel="prefetch" href="/matheusblog/assets/js/34.0bbf3cd4.js"><link rel="prefetch" href="/matheusblog/assets/js/35.5e7a3106.js"><link rel="prefetch" href="/matheusblog/assets/js/36.0a101841.js"><link rel="prefetch" href="/matheusblog/assets/js/37.d2f841a3.js"><link rel="prefetch" href="/matheusblog/assets/js/38.5ffa2ff0.js"><link rel="prefetch" href="/matheusblog/assets/js/39.11eb7112.js"><link rel="prefetch" href="/matheusblog/assets/js/4.172c31f8.js"><link rel="prefetch" href="/matheusblog/assets/js/40.16e1a3d0.js"><link rel="prefetch" href="/matheusblog/assets/js/41.7416be78.js"><link rel="prefetch" href="/matheusblog/assets/js/42.d43b207e.js"><link rel="prefetch" href="/matheusblog/assets/js/43.184ce555.js"><link rel="prefetch" href="/matheusblog/assets/js/44.2e494f9f.js"><link rel="prefetch" href="/matheusblog/assets/js/45.b89064eb.js"><link rel="prefetch" href="/matheusblog/assets/js/46.e7e93b34.js"><link rel="prefetch" href="/matheusblog/assets/js/47.88edf3e7.js"><link rel="prefetch" href="/matheusblog/assets/js/48.a3ef8833.js"><link rel="prefetch" href="/matheusblog/assets/js/49.416e2ff4.js"><link rel="prefetch" href="/matheusblog/assets/js/5.66045499.js"><link rel="prefetch" href="/matheusblog/assets/js/50.6f9e666c.js"><link rel="prefetch" href="/matheusblog/assets/js/51.0ccc90fa.js"><link rel="prefetch" href="/matheusblog/assets/js/52.c4d78d95.js"><link rel="prefetch" href="/matheusblog/assets/js/53.6e9e73bf.js"><link rel="prefetch" href="/matheusblog/assets/js/54.c09c1331.js"><link rel="prefetch" href="/matheusblog/assets/js/55.abb95afe.js"><link rel="prefetch" href="/matheusblog/assets/js/56.255e4f5a.js"><link rel="prefetch" href="/matheusblog/assets/js/57.87bff193.js"><link rel="prefetch" href="/matheusblog/assets/js/58.ac76633b.js"><link rel="prefetch" href="/matheusblog/assets/js/59.deb7ee54.js"><link rel="prefetch" href="/matheusblog/assets/js/6.082e9fa1.js"><link rel="prefetch" href="/matheusblog/assets/js/60.cf9069f9.js"><link rel="prefetch" href="/matheusblog/assets/js/61.96603df6.js"><link rel="prefetch" href="/matheusblog/assets/js/62.c20b80a7.js"><link rel="prefetch" href="/matheusblog/assets/js/63.5686a0b8.js"><link rel="prefetch" href="/matheusblog/assets/js/64.175576f7.js"><link rel="prefetch" href="/matheusblog/assets/js/65.5ae64b74.js"><link rel="prefetch" href="/matheusblog/assets/js/66.521c63ff.js"><link rel="prefetch" href="/matheusblog/assets/js/67.b425835a.js"><link rel="prefetch" href="/matheusblog/assets/js/68.4681f5d4.js"><link rel="prefetch" href="/matheusblog/assets/js/69.a4dd03f4.js"><link rel="prefetch" href="/matheusblog/assets/js/7.ac1c1c22.js"><link rel="prefetch" href="/matheusblog/assets/js/70.b8b1c0e6.js"><link rel="prefetch" href="/matheusblog/assets/js/71.d17ca0a5.js"><link rel="prefetch" href="/matheusblog/assets/js/72.373736b1.js"><link rel="prefetch" href="/matheusblog/assets/js/73.cffad132.js"><link rel="prefetch" href="/matheusblog/assets/js/74.fbb35090.js"><link rel="prefetch" href="/matheusblog/assets/js/75.d7df8fa9.js"><link rel="prefetch" href="/matheusblog/assets/js/76.8fdf1b27.js"><link rel="prefetch" href="/matheusblog/assets/js/77.372d307f.js"><link rel="prefetch" href="/matheusblog/assets/js/78.13b229db.js"><link rel="prefetch" href="/matheusblog/assets/js/79.6a9fcfb3.js"><link rel="prefetch" href="/matheusblog/assets/js/8.aadfe009.js"><link rel="prefetch" href="/matheusblog/assets/js/80.65421bb8.js"><link rel="prefetch" href="/matheusblog/assets/js/81.c6c8f34c.js"><link rel="prefetch" href="/matheusblog/assets/js/82.cdc5fd14.js"><link rel="prefetch" href="/matheusblog/assets/js/83.05eecc6f.js"><link rel="prefetch" href="/matheusblog/assets/js/84.baf2ae71.js"><link rel="prefetch" href="/matheusblog/assets/js/85.9c66f181.js"><link rel="prefetch" href="/matheusblog/assets/js/86.130a310b.js"><link rel="prefetch" href="/matheusblog/assets/js/87.b1fffecd.js"><link rel="prefetch" href="/matheusblog/assets/js/88.8acfd7c2.js"><link rel="prefetch" href="/matheusblog/assets/js/89.fe1c2e91.js"><link rel="prefetch" href="/matheusblog/assets/js/9.787b2fa5.js"><link rel="prefetch" href="/matheusblog/assets/js/90.57c4bcfc.js"><link rel="prefetch" href="/matheusblog/assets/js/91.f51280e1.js"><link rel="prefetch" href="/matheusblog/assets/js/92.96836f34.js"><link rel="prefetch" href="/matheusblog/assets/js/93.f50f9f34.js"><link rel="prefetch" href="/matheusblog/assets/js/94.a9740e63.js"><link rel="prefetch" href="/matheusblog/assets/js/95.d17d251c.js"><link rel="prefetch" href="/matheusblog/assets/js/96.b087ef79.js"><link rel="prefetch" href="/matheusblog/assets/js/97.9ba0439c.js"><link rel="prefetch" href="/matheusblog/assets/js/98.21b2bcc2.js"><link rel="prefetch" href="/matheusblog/assets/js/99.e90fc227.js">
+    <link rel="stylesheet" href="/matheusblog/assets/css/0.styles.980a01be.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/matheusblog/" class="home-link router-link-active"><!----> <span class="site-name">MyBlog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/jvm/00虚拟机内存体系与垃圾回收.html" class="nav-link">
+  JVM简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li><li class="dropdown-item"><h4>
+          ElasticSearch
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/elasticsearch/02Elasticsearch-Docker搭建ES.html" class="nav-link">
+  Docker搭建ES
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/springMVC框架.html" class="nav-link">
+  SpringMVC框架
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springboot/SpringBoot简介.html" class="nav-link">
+  SpringBoot简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/docker/01Docker入门.html" class="nav-link">
+  Docker入门
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/k8s/01Kubernetes介绍及使用.html" class="nav-link">
+  K8s介绍与使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/code-style/effective-java/目录.html" class="nav-link">
+  Effective-Java
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  单元测试
+</a></li><li class="dropdown-subitem"><a href="/matheusblog/md/project/jt-project/2. IDEA配置.html" class="nav-link">
+  IDEA配置
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/scala/Scala学习宝典.html" class="nav-link">
+  Scala学习宝典
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/python/Python基础学习.html" class="nav-link">
+  Python基础学习
+</a></li></ul></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/jvm/00虚拟机内存体系与垃圾回收.html" class="nav-link">
+  JVM简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li><li class="dropdown-item"><h4>
+          ElasticSearch
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/elasticsearch/02Elasticsearch-Docker搭建ES.html" class="nav-link">
+  Docker搭建ES
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/springMVC框架.html" class="nav-link">
+  SpringMVC框架
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springboot/SpringBoot简介.html" class="nav-link">
+  SpringBoot简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/docker/01Docker入门.html" class="nav-link">
+  Docker入门
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/k8s/01Kubernetes介绍及使用.html" class="nav-link">
+  K8s介绍与使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/code-style/effective-java/目录.html" class="nav-link">
+  Effective-Java
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  单元测试
+</a></li><li class="dropdown-subitem"><a href="/matheusblog/md/project/jt-project/2. IDEA配置.html" class="nav-link">
+  IDEA配置
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/scala/Scala学习宝典.html" class="nav-link">
+  Scala学习宝典
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/python/Python基础学习.html" class="nav-link">
+  Python基础学习
+</a></li></ul></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Go</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="sidebar-link">Go 语言介绍</a></li><li><a href="/matheusblog/md/other-languages/go/02Go语言基础.html" class="sidebar-link">Go 语言基础</a></li><li><a href="/matheusblog/md/other-languages/go/03Go语言顺序编程.html" class="sidebar-link">顺序编程</a></li><li><a href="/matheusblog/md/other-languages/go/04面向对象编程.html" class="active sidebar-link">面向对象编程</a></li><li><a href="/matheusblog/md/other-languages/go/05并发编程.html" class="sidebar-link">并发编程</a></li><li><a href="/matheusblog/md/other-languages/go/06词频统计综合案例.html" class="sidebar-link">词频统计综合案例</a></li><li><a href="/matheusblog/md/other-languages/go/07IDE及环境配置.html" class="sidebar-link">IDE及环境配置</a></li><li><a href="/matheusblog/md/other-languages/go/08数组与切片.html" class="sidebar-link">数组与切片</a></li><li><a href="/matheusblog/md/other-languages/go/09栈与栈的应用.html" class="sidebar-link">栈与栈的应用</a></li><li><a href="/matheusblog/md/other-languages/go/10七大设计原则.html" class="sidebar-link">七大设计原则</a></li><li><a href="/matheusblog/md/other-languages/go/11简单工厂与抽象工厂.html" class="sidebar-link">简单工厂与抽象工厂</a></li><li><a href="/matheusblog/md/other-languages/go/12go相对Java的优势.html" class="sidebar-link">go相对Java优势</a></li><li><a href="/matheusblog/md/other-languages/go/13快速开始一个Go程序.html" class="sidebar-link">快速开始一个Go程序</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Go并发服务器框架Zinx入门</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/other-languages/go/basic-project/00项目基础go语言API.html" class="sidebar-link">项目基础go语言API</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/01Zinx课程大纲.html" class="sidebar-link">Zinx课程大纲</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/02实现Server模块.html" class="sidebar-link">实现Server模块</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/03实现链接封装业务与业务绑定.html" class="sidebar-link">实现链路封装业务与业务绑定</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/04实现基础路由模块.html" class="sidebar-link">实现基础路由模块</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/05全局配置.html" class="sidebar-link">全局配置</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/06消息封装.html" class="sidebar-link">消息封装</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/07多路由模式.html" class="sidebar-link">多路由模式</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/08读写分离.html" class="sidebar-link">读写分离</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/09实现工作池.html" class="sidebar-link">实现工作池</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/10实现链接控制.html" class="sidebar-link">实现链路控制</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/11连接属性设置.html" class="sidebar-link">连接属性设置</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/12Web基础知识介绍.html" class="sidebar-link">Web基础知识介绍</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/13ChitCha论坛.html" class="sidebar-link">ChitCha论坛</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Scala</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/other-languages/scala/Scala学习宝典.html" class="sidebar-link">Scala学习宝典</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Python</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/other-languages/python/Python基础学习.html" class="sidebar-link">Python基础学习</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="面向对象编程"><a href="#面向对象编程" class="header-anchor">#</a> 面向对象编程</h1> <p></p><div class="table-of-contents"><ul><li><a href="#面向对象编程">面向对象编程</a></li><li><a href="#方法">方法</a></li><li><a href="#组合">组合</a></li><li><a href="#接口">接口</a></li><li><a href="#接口变量值的类型">接口变量值的类型</a></li><li><a href="#嵌入-interface">嵌入 interface</a></li><li><a href="#注意">注意</a></li></ul></div><p></p> <h3 id="面向对象编程-2"><a href="#面向对象编程-2" class="header-anchor">#</a> 面向对象编程</h3> <p>在讲解 Go 语言面向对象内容之前，需要说明下 Go 语言的代码是以包结构来组织的，且如果标示符（变量名，函数名，自定义类型等）如果以大写字母开头那么这些标示符是可以导出的，可以在任何导入了定义该标示符的包的包中直接使用。Go 语言中的面向对象和 C++，Java 中的面向对象不同，因为 Go 语言不支持继承，Go 语言只支持组合。</p> <h4 id="自定义类型"><a href="#自定义类型" class="header-anchor">#</a> 自定义类型</h4> <p>Go 语言的中结构体 <code>struct</code> 与 C++、JAVA 中的类 <code>class</code> 相似，但 Go 放弃了传统面向对象的诸多特性，只保留了组合。</p> <ul><li><strong>type</strong> typeName typeSpecification</li></ul> <p>其中，<code>typeName</code> 可以是一个包或者函数内唯一合法的 Go 标示符。<code>typeSpecification</code> 可以是任何内置的类型，一个接口或者是一个结构体。所谓结构体，它的字段是由其他类型或者接口组成。例如我们通过结构体定义了一下类型：</p> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">type</span> ColorPoint <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    color<span class="token punctuation">.</span>Color     <span class="token comment">// 匿名字段(嵌入)</span>
+    x<span class="token punctuation">,</span> y <span class="token builtin">int</span>        <span class="token comment">// 具名字段(聚合)</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>以上代码我们通过结构体自定义了类型 <code>ColorPoint</code>，结构体中 <code>color.Color</code> 字段是 Color 包的类型 color，这个字段没有名字，所以被称为匿名的，也是嵌入字段。字段 <code>x</code> 和 <code>y</code> 是有变量名的，所以被称为具名字段。假如我们创建了类型 <code>ColorPoint</code> 的一个值 <code>point</code>（通过语法：<code>point := ColorPoint{}</code> 创建），那么这些字段可以通过 <code>point.Color</code>、<code>point.x</code>、<code>point.y</code> 访问。其他面向对象语言中的&quot;类 (<code>class</code>)&quot;、&quot;对象 (<code>object</code>)&quot;、&quot;实例 (<code>instance</code>)&quot;在 Go 语言中我们完全避开使用。相反的我们使用&quot;类型 (<code>type</code>)&quot;和其对应的&quot;值&quot;，其中自定义类型的值可以包含方法。</p> <p>定义了结构体后如何创建并初始化一个对象实例呢？Go 语言支持以下几种方法进行实现：</p> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token comment">//先定义一个结构体Man</span>
+<span class="token keyword">type</span> Man <span class="token keyword">struct</span><span class="token punctuation">{</span>
+    name <span class="token builtin">string</span>
+    age <span class="token builtin">int</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//对象创建与初始化</span>
+man <span class="token operator">:=</span> <span class="token function">new</span><span class="token punctuation">(</span>Man<span class="token punctuation">)</span>
+man <span class="token operator">:=</span> <span class="token operator">&amp;</span>Man<span class="token punctuation">{</span><span class="token punctuation">}</span>
+man <span class="token operator">:=</span> <span class="token operator">&amp;</span>Man<span class="token punctuation">{</span><span class="token string">&quot;Tom&quot;</span><span class="token punctuation">,</span> <span class="token number">18</span><span class="token punctuation">}</span>
+man <span class="token operator">:=</span> <span class="token operator">&amp;</span>Man<span class="token punctuation">{</span>name<span class="token punctuation">:</span> <span class="token string">&quot;Tom&quot;</span><span class="token punctuation">,</span> age<span class="token punctuation">:</span> <span class="token number">18</span><span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>为了更加方便的创建对象，我们一般会使用一个全局函数来完成对象的创建，这和传统的“构造函数”类似。</p> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">func</span> <span class="token function">NewMan</span><span class="token punctuation">(</span>name <span class="token builtin">string</span><span class="token punctuation">,</span> age <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token operator">*</span>Man <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token operator">&amp;</span>Man<span class="token punctuation">{</span>name<span class="token punctuation">,</span> age<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="方法"><a href="#方法" class="header-anchor">#</a> 方法</h3> <p>方法是作用在自定义类型上的一类特殊函数，通常自定义类型的值会被传递给该函数，该值可能是以指针或者复制值的形式传递。定义方法和定义函数几乎相同，只是需要在 <code>func</code> 关键字和方法名之间必须写上接接受者。例如我们给类型 <code>Count</code> 定义了以下方法：</p> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">type</span> Count <span class="token builtin">int</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>count <span class="token operator">*</span>Count<span class="token punctuation">)</span> <span class="token function">Increment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">*</span>count<span class="token operator">++</span> <span class="token punctuation">}</span>  <span class="token comment">// 接受者是一个 `Count` 类型的指针</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>count <span class="token operator">*</span>Count<span class="token punctuation">)</span> <span class="token function">Decrement</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">*</span>count<span class="token operator">--</span> <span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>count Count<span class="token punctuation">)</span> <span class="token function">IsZero</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> count <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>以上代码中，我们在内置类型 <code>int</code> 的基础上定义了自定义类型 <code>Count</code>，然后给该类型添加了 <code>Increment()</code>、<code>Decrement()</code> 和 <code>IsZero()</code> 方法，其中前两者的接受者为 <code>Count</code> 类型的指针，后一个方法接收 <code>Count</code> 类型的值。</p> <p>类型的方法集是指可以被该类型的值调用的所有方法的集合。</p> <p>一个指向自定义类型的值的指针，它的方法集由该类型定义的所有方法组成，无论这些方法接受的是一个值还是一个指针。如果在指针上调用一个接受值的方法，Go 语言会聪明地将该指针解引用。</p> <p>一个自定义类型值的方法集合则由该类型定义的接收者为值类型的方法组成，但是不包括那些接收者类型为指针的方法。</p> <p>其实这些限制 Go 语言帮我们解决的非常好，结果就是我们可以在值类型上调用接收者为指针的方法。假如我们只有一个值，仍然可以调用一个接收者为指针类型的方法，这是因为 Go 语言会自动获取值的地址传递给该方法，前提是该值是可寻址的。</p> <p>在以上定义的类型 <code>Count</code> 中，<code>*Count</code> 方法集是 <code>Increment()</code>, <code>Decrement()</code> 和 <code>IsZero()</code>，<code>Count</code> 的值的方法集是 <code>IsZero()</code>。但是因为 <code>Count</code> 类型的是可寻址的，所以我们可以使用 <code>Count</code> 的值调用全部的方法。</p> <p>另外如果结构体的字段也有方法，我们也可以直接通过结构体访问字段中的方法。下面让我们练习下，创建源文件 <code>struct_t.go</code>，输入以下代码：</p> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">&quot;fmt&quot;</span>
+
+<span class="token keyword">type</span> Count <span class="token builtin">int</span> <span class="token comment">// 创建自定义类型 Count</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>count <span class="token operator">*</span>Count<span class="token punctuation">)</span> <span class="token function">Increment</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token punctuation">{</span> <span class="token operator">*</span>count<span class="token operator">++</span> <span class="token punctuation">}</span> <span class="token comment">// Count类型的方法</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>count <span class="token operator">*</span>Count<span class="token punctuation">)</span> <span class="token function">Decrement</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token punctuation">{</span> <span class="token operator">*</span>count<span class="token operator">--</span> <span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>count Count<span class="token punctuation">)</span> <span class="token function">IsZero</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> count <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> Part <span class="token keyword">struct</span> <span class="token punctuation">{</span> <span class="token comment">// 基于结构体创建自定义类型 Part</span>
+    stat  <span class="token builtin">string</span>
+    Count <span class="token comment">// 匿名字段</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>part Part<span class="token punctuation">)</span> <span class="token function">IsZero</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">{</span> <span class="token comment">// 覆盖了匿名字段Count的IsZero()方法</span>
+    <span class="token keyword">return</span> part<span class="token punctuation">.</span>Count<span class="token punctuation">.</span><span class="token function">IsZero</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> part<span class="token punctuation">.</span>stat <span class="token operator">==</span> <span class="token string">&quot;&quot;</span> <span class="token comment">// 调用了匿名字段的方法</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>part Part<span class="token punctuation">)</span> <span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span> <span class="token comment">// 定义String()方法，自定义了格式化指令%v的输出</span>
+    <span class="token keyword">return</span> fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span><span class="token string">&quot;&lt;&lt;%s, %d&gt;&gt;&quot;</span><span class="token punctuation">,</span> part<span class="token punctuation">.</span>stat<span class="token punctuation">,</span> part<span class="token punctuation">.</span>Count<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> i Count <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;Start \&quot;Count\&quot; test:\nOrigin value of count: %d\n&quot;</span><span class="token punctuation">,</span> i<span class="token punctuation">)</span>
+    i<span class="token punctuation">.</span><span class="token function">Increment</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;Value of count after increment: %d\n&quot;</span><span class="token punctuation">,</span> i<span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;Count is zero t/f? : %t\n\n&quot;</span><span class="token punctuation">,</span> i<span class="token punctuation">.</span><span class="token function">IsZero</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;Start: \&quot;Part\&quot; test:&quot;</span><span class="token punctuation">)</span>
+    part <span class="token operator">:=</span> Part<span class="token punctuation">{</span><span class="token string">&quot;232&quot;</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;Part: %v\n&quot;</span><span class="token punctuation">,</span> part<span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;Part is zero t/f? : %t\n&quot;</span><span class="token punctuation">,</span> part<span class="token punctuation">.</span><span class="token function">IsZero</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;Count in Part is zero t/f?: %t\n&quot;</span><span class="token punctuation">,</span> part<span class="token punctuation">.</span>Count<span class="token punctuation">.</span><span class="token function">IsZero</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// 尽管覆盖了匿名字段的方法，单还是可以访问</span>
+
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br></div></div><p>以上代码中，我们创建了 <code>Count</code> 类型，然后在其基础上又创建了结构体类型 <code>Part</code>。我们为 <code>Count</code> 类型定义了 3 个方法，并在 <code>Part</code> 类型中创建了方法 <code>IsZero()</code> 覆盖了其匿名字段 <code>Count</code> 中 <code>IsZero()</code> 方法。但是我们还是可以二次访问到匿名字段中被覆盖的方法。执行代码，输出如下：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>$ go run struct_t.go
+Start <span class="token string">&quot;Count&quot;</span> test:
+
+
+Origin value of count: -1
+Value of count after increment: <span class="token number">0</span>
+Count is zero t/f? <span class="token builtin class-name">:</span> <span class="token boolean">true</span>
+
+Start: <span class="token string">&quot;Part&quot;</span> test:
+Part: <span class="token operator">&lt;&lt;</span><span class="token number">232</span>, <span class="token operator"><span class="token file-descriptor important">0</span>&gt;&gt;</span>
+Part is zero t/f? <span class="token builtin class-name">:</span> <span class="token boolean">false</span>
+Count <span class="token keyword">in</span> Part is zero t/f?: <span class="token boolean">true</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><h3 id="组合"><a href="#组合" class="header-anchor">#</a> 组合</h3> <p>Go 语言虽然抛弃了继承，但是却提供了一个更加方便的组合特性。相对于继承的编译期确定实现，组合的运行态指定实现，更加灵活。下面通过一段代码来了解组合的基本属性以及它与继承的不同之处。</p> <p>先定义一个结构体 Base, 并为它添加两个方法 <code>Foo()</code> 和 <code>Bar()</code>：</p> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">type</span> Base <span class="token keyword">struct</span><span class="token punctuation">{</span>
+    Name <span class="token builtin">string</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>b <span class="token operator">*</span>Base<span class="token punctuation">)</span> <span class="token function">Foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>b <span class="token operator">*</span>Base<span class="token punctuation">)</span> <span class="token function">Bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> Seed <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    Base
+    <span class="token operator">...</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>s <span class="token operator">*</span>Seed<span class="token punctuation">)</span> <span class="token function">Foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    s<span class="token punctuation">.</span>Base<span class="token punctuation">.</span><span class="token function">Foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span><span class="token function">Bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token operator">...</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><p>上面代码先定义了一个 Base 类，然后定义了一个 Seed 类。Seed 类“继承”了 Base 类的所有成员属性和方法并重写了 <code>Foo()</code> 方法。同时在重写 <code>Foo()</code> 方法时调用了 Base 类的 <code>Foo()</code> 方法和 <code>Bar()</code> 方法。需要注意的是，若此时 Seed 的对象通过 <code>s.Foo()</code> 调用 <code>Foo()</code> 方法时，实际调用的是 Seed 重写过后的 <code>Foo()</code> 方法，而不是基类 Base 的 <code>Foo()</code> 方法，若想调用 Base 类的 <code>Foo()</code> 方法则要使用 <code>s.Base.Foo</code>，而调用没有重写的 <code>Bar()</code> 方法时，使用 <code>s.Bar()</code> 和<code>s.Base.Bar()</code> 效果是一样的。</p> <h3 id="接口"><a href="#接口" class="header-anchor">#</a> 接口</h3> <p>在 Go 中，接口是一组方法签名。当一个类型为接口中的所有方法提供定义时，它被称为实现该接口。它与 oop 非常相似。接口指定类型应具有的方法，类型决定如何实现这些方法。</p> <h4 id="接口基础"><a href="#接口基础" class="header-anchor">#</a> 接口基础</h4> <p>之所以说 Go 语言的面向对象很灵活，很大一部分原因是由于接口的存在。接口是一个自定义类型，它声明了一个或者多个方法签名，任何实现了这些方法的类型都实现这个接口。<code>infterface{}</code> 类型是声明了空方法集的接口类型。任何一个值都满足 <code>interface{}</code> 类型，也就是说如果一个函数或者方法接收 <code>interface{}</code> 类型的参数，那么任意类型的参数都可以传递给该函数。接口是完全抽象的，不能实例化。接口能存储任何实现了该接口的类型。直接看例子吧，创建源文件 <code>interface_t.go</code>，输入以下代码：</p> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">&quot;fmt&quot;</span>
+
+<span class="token keyword">type</span> Human <span class="token keyword">struct</span> <span class="token punctuation">{</span> <span class="token comment">// 结构体</span>
+    name  <span class="token builtin">string</span>
+    age   <span class="token builtin">int</span>
+    phone <span class="token builtin">string</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">//Human实现SayHi方法</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>h Human<span class="token punctuation">)</span> <span class="token function">SayHi</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;Hi, I am %s you can call me on %s\n&quot;</span><span class="token punctuation">,</span> h<span class="token punctuation">.</span>name<span class="token punctuation">,</span> h<span class="token punctuation">.</span>phone<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">//Human实现Sing方法</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>h Human<span class="token punctuation">)</span> <span class="token function">Sing</span><span class="token punctuation">(</span>lyrics <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;La la la la...&quot;</span><span class="token punctuation">,</span> lyrics<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> Student <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    Human  <span class="token comment">//匿名字段</span>
+    school <span class="token builtin">string</span>
+    loan   <span class="token builtin">float32</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> Employee <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    Human   <span class="token comment">//匿名字段</span>
+    company <span class="token builtin">string</span>
+    money   <span class="token builtin">float32</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// Employee重载Human的SayHi方法</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>e Employee<span class="token punctuation">)</span> <span class="token function">SayHi</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;Hi, I am %s, I work at %s. Call me on %s\n&quot;</span><span class="token punctuation">,</span> e<span class="token punctuation">.</span>name<span class="token punctuation">,</span>
+        e<span class="token punctuation">.</span>company<span class="token punctuation">,</span> e<span class="token punctuation">.</span>phone<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// Interface Men被Human,Student和Employee实现</span>
+<span class="token comment">// 因为这三个类型都实现了这两个方法</span>
+<span class="token keyword">type</span> Men <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+    <span class="token function">SayHi</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">Sing</span><span class="token punctuation">(</span>lyrics <span class="token builtin">string</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    mike <span class="token operator">:=</span> Student<span class="token punctuation">{</span>Human<span class="token punctuation">{</span><span class="token string">&quot;Mike&quot;</span><span class="token punctuation">,</span> <span class="token number">25</span><span class="token punctuation">,</span> <span class="token string">&quot;222-222-XXX&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">&quot;MIT&quot;</span><span class="token punctuation">,</span> <span class="token number">0.00</span><span class="token punctuation">}</span>
+    paul <span class="token operator">:=</span> Student<span class="token punctuation">{</span>Human<span class="token punctuation">{</span><span class="token string">&quot;Paul&quot;</span><span class="token punctuation">,</span> <span class="token number">26</span><span class="token punctuation">,</span> <span class="token string">&quot;111-222-XXX&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">&quot;Harvard&quot;</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">}</span>
+    sam <span class="token operator">:=</span> Employee<span class="token punctuation">{</span>Human<span class="token punctuation">{</span><span class="token string">&quot;Sam&quot;</span><span class="token punctuation">,</span> <span class="token number">36</span><span class="token punctuation">,</span> <span class="token string">&quot;444-222-XXX&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">&quot;Golang Inc.&quot;</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">}</span>
+    Tom <span class="token operator">:=</span> Employee<span class="token punctuation">{</span>Human<span class="token punctuation">{</span><span class="token string">&quot;Tom&quot;</span><span class="token punctuation">,</span> <span class="token number">37</span><span class="token punctuation">,</span> <span class="token string">&quot;222-444-XXX&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">&quot;Things Ltd.&quot;</span><span class="token punctuation">,</span> <span class="token number">5000</span><span class="token punctuation">}</span>
+
+    <span class="token comment">//定义Men类型的变量i</span>
+    <span class="token keyword">var</span> i Men
+
+    <span class="token comment">//i能存储Student</span>
+    i <span class="token operator">=</span> mike
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;This is Mike, a Student:&quot;</span><span class="token punctuation">)</span>
+    i<span class="token punctuation">.</span><span class="token function">SayHi</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    i<span class="token punctuation">.</span><span class="token function">Sing</span><span class="token punctuation">(</span><span class="token string">&quot;November rain&quot;</span><span class="token punctuation">)</span>
+
+    <span class="token comment">//i也能存储Employee</span>
+    i <span class="token operator">=</span> Tom
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;This is Tom, an Employee:&quot;</span><span class="token punctuation">)</span>
+    i<span class="token punctuation">.</span><span class="token function">SayHi</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    i<span class="token punctuation">.</span><span class="token function">Sing</span><span class="token punctuation">(</span><span class="token string">&quot;Born to be wild&quot;</span><span class="token punctuation">)</span>
+
+    <span class="token comment">//定义了slice Men</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;Let's use a slice of Men and see what happens&quot;</span><span class="token punctuation">)</span>
+    x <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span>Men<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
+    <span class="token comment">//这三个都是不同类型的元素，但是他们实现了interface同一个接口</span>
+    x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> x<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> paul<span class="token punctuation">,</span> sam<span class="token punctuation">,</span> mike
+
+    <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> value <span class="token operator">:=</span> <span class="token keyword">range</span> x <span class="token punctuation">{</span>
+        value<span class="token punctuation">.</span><span class="token function">SayHi</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br></div></div><p>以上代码中，接口类型声明的变量能存储任何实现了该接口的类型的值。运行代码，输出如下：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>go run interface_t.go
+This is Mike, a Student:
+Hi, I am Mike you can call me on <span class="token number">222</span>-222-XXX
+La la la la<span class="token punctuation">..</span>. November rain
+This is Tom, an Employee:
+Hi, I am Tom, I work at Things Ltd<span class="token punctuation">..</span> Call me on <span class="token number">222</span>-444-XXX
+La la la la<span class="token punctuation">..</span>. Born to be wild
+Let's use a slice of Men and see what happens
+Hi, I am Paul you can call me on <span class="token number">111</span>-222-XXX
+Hi, I am Sam, I work at Golang Inc<span class="token punctuation">..</span> Call me on <span class="token number">444</span>-222-XXX
+Hi, I am Mike you can call me on <span class="token number">222</span>-222-XXX
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token comment">// _接口_ 是方法特征的命名集合。</span>
+
+<span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">&quot;fmt&quot;</span>
+<span class="token keyword">import</span> <span class="token string">&quot;math&quot;</span>
+
+<span class="token comment">// 这里是一个几何体的基本接口。</span>
+<span class="token keyword">type</span> geometry <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+    <span class="token function">area</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">float64</span>
+    <span class="token function">perim</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">float64</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 在我们的例子中，我们将让 `square` 和 `circle` 实现</span>
+<span class="token comment">// 这个接口</span>
+<span class="token keyword">type</span> square <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    width<span class="token punctuation">,</span> height <span class="token builtin">float64</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">type</span> circle <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    radius <span class="token builtin">float64</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 要在 Go 中实现一个接口，我们只需要实现接口中的所有</span>
+<span class="token comment">// 方法。这里我们让 `square` 实现了 `geometry` 接口。</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>s square<span class="token punctuation">)</span> <span class="token function">area</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">float64</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> s<span class="token punctuation">.</span>width <span class="token operator">*</span> s<span class="token punctuation">.</span>height
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>s square<span class="token punctuation">)</span> <span class="token function">perim</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">float64</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token number">2</span><span class="token operator">*</span>s<span class="token punctuation">.</span>width <span class="token operator">+</span> <span class="token number">2</span><span class="token operator">*</span>s<span class="token punctuation">.</span>height
+<span class="token punctuation">}</span>
+
+<span class="token comment">// `circle` 的实现。</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c circle<span class="token punctuation">)</span> <span class="token function">area</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">float64</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> math<span class="token punctuation">.</span>Pi <span class="token operator">*</span> c<span class="token punctuation">.</span>radius <span class="token operator">*</span> c<span class="token punctuation">.</span>radius
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c circle<span class="token punctuation">)</span> <span class="token function">perim</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">float64</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token number">2</span> <span class="token operator">*</span> math<span class="token punctuation">.</span>Pi <span class="token operator">*</span> c<span class="token punctuation">.</span>radius
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 如果一个变量的是接口类型，那么我们可以调用这个被命名的</span>
+<span class="token comment">// 接口中的方法。这里有一个一通用的 `measure` 函数，利用这个</span>
+<span class="token comment">// 特性，它可以用在任何 `geometry` 上。</span>
+<span class="token keyword">func</span> <span class="token function">measure</span><span class="token punctuation">(</span>g geometry<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>g<span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">area</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">perim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    s <span class="token operator">:=</span> square<span class="token punctuation">{</span>width<span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">,</span> height<span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">}</span>
+    c <span class="token operator">:=</span> circle<span class="token punctuation">{</span>radius<span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">}</span>
+
+    <span class="token comment">// 结构体类型 `circle` 和 `square` 都实现了 `geometry`</span>
+    <span class="token comment">// 接口，所以我们可以使用它们的实例作为 `measure` 的参数。</span>
+    <span class="token function">measure</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+    <span class="token function">measure</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br></div></div><h3 id="接口变量值的类型"><a href="#接口变量值的类型" class="header-anchor">#</a> 接口变量值的类型</h3> <p>我们知道接口类型声明的变量里能存储任何实现了该接口的类型的值。有的时候我们需要知道这个变量里的值的类型，那么需要怎么做呢？可以使用类型断言，或者是 <code>switch</code> 类型判断分支。以下的例子 <code>interface_t1.go</code> 我们使用了 <code>switch</code> 类型判断分支。</p> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;strconv&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">type</span> Element <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token keyword">type</span> List <span class="token punctuation">[</span><span class="token punctuation">]</span>Element
+
+<span class="token keyword">type</span> Person <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    name <span class="token builtin">string</span>
+    age  <span class="token builtin">int</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 实现了fmt.Stringer接口</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>p Person<span class="token punctuation">)</span> <span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token string">&quot;(name: &quot;</span> <span class="token operator">+</span> p<span class="token punctuation">.</span>name <span class="token operator">+</span> <span class="token string">&quot; - age: &quot;</span> <span class="token operator">+</span> strconv<span class="token punctuation">.</span><span class="token function">Itoa</span><span class="token punctuation">(</span>p<span class="token punctuation">.</span>age<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">&quot; years)&quot;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    list <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span>List<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
+    list<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span>       <span class="token comment">//an int</span>
+    list<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;Hello&quot;</span> <span class="token comment">//a string</span>
+    list<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> Person<span class="token punctuation">{</span><span class="token string">&quot;Dennis&quot;</span><span class="token punctuation">,</span> <span class="token number">70</span><span class="token punctuation">}</span>
+
+    <span class="token keyword">for</span> index<span class="token punctuation">,</span> element <span class="token operator">:=</span> <span class="token keyword">range</span> list <span class="token punctuation">{</span>
+        <span class="token keyword">switch</span> value <span class="token operator">:=</span> element<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token keyword">type</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// switch类型判断开关</span>
+        <span class="token keyword">case</span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+            fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;list[%d] is an int and its value is %d\n&quot;</span><span class="token punctuation">,</span> index<span class="token punctuation">,</span> value<span class="token punctuation">)</span>
+        <span class="token keyword">case</span> <span class="token builtin">string</span><span class="token punctuation">:</span>
+            fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;list[%d] is a string and its value is %s\n&quot;</span><span class="token punctuation">,</span> index<span class="token punctuation">,</span> value<span class="token punctuation">)</span>
+        <span class="token keyword">case</span> Person<span class="token punctuation">:</span>
+            fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;list[%d] is a Person and its value is %s\n&quot;</span><span class="token punctuation">,</span> index<span class="token punctuation">,</span> value<span class="token punctuation">)</span>
+        <span class="token keyword">default</span><span class="token punctuation">:</span>
+            fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;list[%d] is of a different type&quot;</span><span class="token punctuation">,</span> index<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br></div></div><p>运行结果：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>$ go run interface_t1.go
+list<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> is an int and its value is <span class="token number">1</span>
+list<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> is a string and its value is Hello
+list<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> is a Person and its value is <span class="token punctuation">(</span>name: Dennis - age: <span class="token number">70</span> years<span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h3 id="嵌入-interface"><a href="#嵌入-interface" class="header-anchor">#</a> 嵌入 <code>interface</code></h3> <p>在前面的课程中我们已经知道在结构体中可以嵌入匿名字段，其实在接口里也可以再嵌入接口。如果一个 <code>interface1</code> 作为 <code>interface2</code> 的一个嵌入字段，那么 <code>interface2</code> 隐式的包含了 <code>interface1</code> 里的方法。如下例子中，<code>Interface2</code> 包含了 <code>Interface1</code> 的所有方法。</p> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">type</span> Interface1 <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+    <span class="token function">Send</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">Receive</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> Interface2 <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+    Interface1
+    <span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h3 id="注意"><a href="#注意" class="header-anchor">#</a> 注意</h3> <p>了解其他面向对象编程语言的同学可能会发现，Go 语言的面向对象内容很少，那这是不是就意味着 Go 的面向对象不够强大呢？其实并不是，Go 语言的面向对象是非常成熟且实用的！只不过设计者在设计这门语言之初时就尊崇了“大道至简”的设计理念，摈弃了传统面向对象的很多繁复而不实用的语法，这不仅给学习这门语言的人降低了难度，同时在项目开发中也更加的方便、简洁。这一点大家在以后的项目实验课程的学习中就会深有体会。</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/matheusblog/md/other-languages/go/03Go语言顺序编程.html" class="prev">
+        顺序编程
+      </a></span> <span class="next"><a href="/matheusblog/md/other-languages/go/05并发编程.html">
+        并发编程
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/matheusblog/assets/js/app.d1bc8cd0.js" defer></script><script src="/matheusblog/assets/js/3.21aaf515.js" defer></script><script src="/matheusblog/assets/js/285.8a6391d1.js" defer></script>
+  </body>
+</html>
