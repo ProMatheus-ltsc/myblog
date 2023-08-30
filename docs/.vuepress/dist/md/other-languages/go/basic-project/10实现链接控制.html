@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>实现链路控制 | MyBlog</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="包含: Java 基础, JVM, Spring, Spring Boot, Spring Cloud, MySQL, ElasticSearch, MongoDB, Docker, k8s, Linux, DevOps, 分布式,  开发工具, Git, IDE...">
+    
+    <link rel="preload" href="/matheusblog/assets/css/0.styles.980a01be.css" as="style"><link rel="preload" href="/matheusblog/assets/js/app.593a6820.js" as="script"><link rel="preload" href="/matheusblog/assets/js/3.21aaf515.js" as="script"><link rel="preload" href="/matheusblog/assets/js/83.8ceb5155.js" as="script"><link rel="prefetch" href="/matheusblog/assets/js/10.7fc83448.js"><link rel="prefetch" href="/matheusblog/assets/js/100.05d56713.js"><link rel="prefetch" href="/matheusblog/assets/js/101.2ab45181.js"><link rel="prefetch" href="/matheusblog/assets/js/102.8bf99172.js"><link rel="prefetch" href="/matheusblog/assets/js/103.f13719cb.js"><link rel="prefetch" href="/matheusblog/assets/js/104.6bd92b70.js"><link rel="prefetch" href="/matheusblog/assets/js/105.d48f34c1.js"><link rel="prefetch" href="/matheusblog/assets/js/106.f7637ede.js"><link rel="prefetch" href="/matheusblog/assets/js/107.ebfdc222.js"><link rel="prefetch" href="/matheusblog/assets/js/108.fd750675.js"><link rel="prefetch" href="/matheusblog/assets/js/109.e560f905.js"><link rel="prefetch" href="/matheusblog/assets/js/11.ad64f2aa.js"><link rel="prefetch" href="/matheusblog/assets/js/110.7478a946.js"><link rel="prefetch" href="/matheusblog/assets/js/111.498692b5.js"><link rel="prefetch" href="/matheusblog/assets/js/112.ac966976.js"><link rel="prefetch" href="/matheusblog/assets/js/113.ce51f5b2.js"><link rel="prefetch" href="/matheusblog/assets/js/114.7d4e6324.js"><link rel="prefetch" href="/matheusblog/assets/js/115.6c883cb9.js"><link rel="prefetch" href="/matheusblog/assets/js/116.cae197e4.js"><link rel="prefetch" href="/matheusblog/assets/js/117.48a612f3.js"><link rel="prefetch" href="/matheusblog/assets/js/118.2d9116a5.js"><link rel="prefetch" href="/matheusblog/assets/js/119.e0967512.js"><link rel="prefetch" href="/matheusblog/assets/js/12.e3dfadc3.js"><link rel="prefetch" href="/matheusblog/assets/js/120.1ce6260c.js"><link rel="prefetch" href="/matheusblog/assets/js/121.c5f567f4.js"><link rel="prefetch" href="/matheusblog/assets/js/122.ff4f9bed.js"><link rel="prefetch" href="/matheusblog/assets/js/123.b354268c.js"><link rel="prefetch" href="/matheusblog/assets/js/124.48c95555.js"><link rel="prefetch" href="/matheusblog/assets/js/125.d6737c1d.js"><link rel="prefetch" href="/matheusblog/assets/js/126.9ae4183e.js"><link rel="prefetch" href="/matheusblog/assets/js/127.9bfd4011.js"><link rel="prefetch" href="/matheusblog/assets/js/128.c4c149dc.js"><link rel="prefetch" href="/matheusblog/assets/js/129.020ca51a.js"><link rel="prefetch" href="/matheusblog/assets/js/13.992d8475.js"><link rel="prefetch" href="/matheusblog/assets/js/130.8373f4f6.js"><link rel="prefetch" href="/matheusblog/assets/js/131.0049275f.js"><link rel="prefetch" href="/matheusblog/assets/js/132.9c75a703.js"><link rel="prefetch" href="/matheusblog/assets/js/133.7c5a554b.js"><link rel="prefetch" href="/matheusblog/assets/js/134.386d8166.js"><link rel="prefetch" href="/matheusblog/assets/js/135.fc6a9d8a.js"><link rel="prefetch" href="/matheusblog/assets/js/136.923ebe49.js"><link rel="prefetch" href="/matheusblog/assets/js/137.21eda887.js"><link rel="prefetch" href="/matheusblog/assets/js/138.47e05cbd.js"><link rel="prefetch" href="/matheusblog/assets/js/139.1cac91bc.js"><link rel="prefetch" href="/matheusblog/assets/js/14.74ef45d7.js"><link rel="prefetch" href="/matheusblog/assets/js/140.d4f48f33.js"><link rel="prefetch" href="/matheusblog/assets/js/141.b0eac92e.js"><link rel="prefetch" href="/matheusblog/assets/js/142.31ca9508.js"><link rel="prefetch" href="/matheusblog/assets/js/143.19c8f260.js"><link rel="prefetch" href="/matheusblog/assets/js/144.f4b520f6.js"><link rel="prefetch" href="/matheusblog/assets/js/145.45f25bf6.js"><link rel="prefetch" href="/matheusblog/assets/js/146.68a8964b.js"><link rel="prefetch" href="/matheusblog/assets/js/147.75888e64.js"><link rel="prefetch" href="/matheusblog/assets/js/148.33081c7f.js"><link rel="prefetch" href="/matheusblog/assets/js/149.16480e62.js"><link rel="prefetch" href="/matheusblog/assets/js/15.04c8d6cd.js"><link rel="prefetch" href="/matheusblog/assets/js/150.76d4704a.js"><link rel="prefetch" href="/matheusblog/assets/js/151.4cbc533a.js"><link rel="prefetch" href="/matheusblog/assets/js/152.f67f9231.js"><link rel="prefetch" href="/matheusblog/assets/js/153.c81f6a62.js"><link rel="prefetch" href="/matheusblog/assets/js/154.dab8a360.js"><link rel="prefetch" href="/matheusblog/assets/js/155.d367a937.js"><link rel="prefetch" href="/matheusblog/assets/js/156.4a4883e1.js"><link rel="prefetch" href="/matheusblog/assets/js/157.c9543f71.js"><link rel="prefetch" href="/matheusblog/assets/js/158.d9e7b7d7.js"><link rel="prefetch" href="/matheusblog/assets/js/159.dca374fd.js"><link rel="prefetch" href="/matheusblog/assets/js/16.dc555a7c.js"><link rel="prefetch" href="/matheusblog/assets/js/160.a897bdbf.js"><link rel="prefetch" href="/matheusblog/assets/js/161.c79f3328.js"><link rel="prefetch" href="/matheusblog/assets/js/162.5d163b04.js"><link rel="prefetch" href="/matheusblog/assets/js/163.f236c8e7.js"><link rel="prefetch" href="/matheusblog/assets/js/164.ae3996a0.js"><link rel="prefetch" href="/matheusblog/assets/js/165.99a4a455.js"><link rel="prefetch" href="/matheusblog/assets/js/166.2954a59d.js"><link rel="prefetch" href="/matheusblog/assets/js/167.2a009c0f.js"><link rel="prefetch" href="/matheusblog/assets/js/168.98c13248.js"><link rel="prefetch" href="/matheusblog/assets/js/169.d12d1758.js"><link rel="prefetch" href="/matheusblog/assets/js/17.6d9ca1f3.js"><link rel="prefetch" href="/matheusblog/assets/js/170.b748a5b8.js"><link rel="prefetch" href="/matheusblog/assets/js/171.32664859.js"><link rel="prefetch" href="/matheusblog/assets/js/172.db51c06c.js"><link rel="prefetch" href="/matheusblog/assets/js/173.05f4de73.js"><link rel="prefetch" href="/matheusblog/assets/js/174.cf15ba6e.js"><link rel="prefetch" href="/matheusblog/assets/js/175.f5b31a54.js"><link rel="prefetch" href="/matheusblog/assets/js/176.2d62ffaf.js"><link rel="prefetch" href="/matheusblog/assets/js/177.7998e89e.js"><link rel="prefetch" href="/matheusblog/assets/js/178.db1004ac.js"><link rel="prefetch" href="/matheusblog/assets/js/179.734eb25c.js"><link rel="prefetch" href="/matheusblog/assets/js/18.aaa5af31.js"><link rel="prefetch" href="/matheusblog/assets/js/180.4eeacb70.js"><link rel="prefetch" href="/matheusblog/assets/js/181.1aeca267.js"><link rel="prefetch" href="/matheusblog/assets/js/182.6f0b151f.js"><link rel="prefetch" href="/matheusblog/assets/js/183.f31d1295.js"><link rel="prefetch" href="/matheusblog/assets/js/184.681d52e3.js"><link rel="prefetch" href="/matheusblog/assets/js/185.1a0a117b.js"><link rel="prefetch" href="/matheusblog/assets/js/186.e8c0a59e.js"><link rel="prefetch" href="/matheusblog/assets/js/187.3ccf31fc.js"><link rel="prefetch" href="/matheusblog/assets/js/188.e3d7e646.js"><link rel="prefetch" href="/matheusblog/assets/js/189.c19d3eec.js"><link rel="prefetch" href="/matheusblog/assets/js/19.73bd5e10.js"><link rel="prefetch" href="/matheusblog/assets/js/190.05598997.js"><link rel="prefetch" href="/matheusblog/assets/js/191.d10d1229.js"><link rel="prefetch" href="/matheusblog/assets/js/192.3db37086.js"><link rel="prefetch" href="/matheusblog/assets/js/193.b0373c83.js"><link rel="prefetch" href="/matheusblog/assets/js/194.d2ee36cf.js"><link rel="prefetch" href="/matheusblog/assets/js/195.ae787113.js"><link rel="prefetch" href="/matheusblog/assets/js/196.83d4ca09.js"><link rel="prefetch" href="/matheusblog/assets/js/197.cdff575b.js"><link rel="prefetch" href="/matheusblog/assets/js/198.4ea68cd5.js"><link rel="prefetch" href="/matheusblog/assets/js/199.e64510f3.js"><link rel="prefetch" href="/matheusblog/assets/js/2.e59282cd.js"><link rel="prefetch" href="/matheusblog/assets/js/20.4ffcc1a6.js"><link rel="prefetch" href="/matheusblog/assets/js/200.1d5f2566.js"><link rel="prefetch" href="/matheusblog/assets/js/201.9eaf3e34.js"><link rel="prefetch" href="/matheusblog/assets/js/202.465afee5.js"><link rel="prefetch" href="/matheusblog/assets/js/203.12f299cd.js"><link rel="prefetch" href="/matheusblog/assets/js/204.932122b1.js"><link rel="prefetch" href="/matheusblog/assets/js/205.bb5c1814.js"><link rel="prefetch" href="/matheusblog/assets/js/206.fb60327e.js"><link rel="prefetch" href="/matheusblog/assets/js/207.28d97935.js"><link rel="prefetch" href="/matheusblog/assets/js/208.c47c030e.js"><link rel="prefetch" href="/matheusblog/assets/js/209.0f36f5f9.js"><link rel="prefetch" href="/matheusblog/assets/js/21.17363412.js"><link rel="prefetch" href="/matheusblog/assets/js/210.fb6cff70.js"><link rel="prefetch" href="/matheusblog/assets/js/211.2c280ba3.js"><link rel="prefetch" href="/matheusblog/assets/js/212.70017fec.js"><link rel="prefetch" href="/matheusblog/assets/js/213.0563f296.js"><link rel="prefetch" href="/matheusblog/assets/js/214.218e943a.js"><link rel="prefetch" href="/matheusblog/assets/js/215.54417a94.js"><link rel="prefetch" href="/matheusblog/assets/js/216.6a834feb.js"><link rel="prefetch" href="/matheusblog/assets/js/217.83efcc9c.js"><link rel="prefetch" href="/matheusblog/assets/js/218.1e108689.js"><link rel="prefetch" href="/matheusblog/assets/js/219.c394d2b9.js"><link rel="prefetch" href="/matheusblog/assets/js/22.33a3716f.js"><link rel="prefetch" href="/matheusblog/assets/js/220.07f185e1.js"><link rel="prefetch" href="/matheusblog/assets/js/221.22376958.js"><link rel="prefetch" href="/matheusblog/assets/js/222.4bad5952.js"><link rel="prefetch" href="/matheusblog/assets/js/223.49996418.js"><link rel="prefetch" href="/matheusblog/assets/js/224.ccaa0967.js"><link rel="prefetch" href="/matheusblog/assets/js/225.912d880d.js"><link rel="prefetch" href="/matheusblog/assets/js/226.d535936c.js"><link rel="prefetch" href="/matheusblog/assets/js/227.7786b4f6.js"><link rel="prefetch" href="/matheusblog/assets/js/228.d00849f0.js"><link rel="prefetch" href="/matheusblog/assets/js/229.b0dd9aca.js"><link rel="prefetch" href="/matheusblog/assets/js/23.e3bf2ef7.js"><link rel="prefetch" href="/matheusblog/assets/js/230.5eac07fa.js"><link rel="prefetch" href="/matheusblog/assets/js/231.52ba5c5a.js"><link rel="prefetch" href="/matheusblog/assets/js/232.4abf639c.js"><link rel="prefetch" href="/matheusblog/assets/js/233.a1bd2c65.js"><link rel="prefetch" href="/matheusblog/assets/js/234.de8b6730.js"><link rel="prefetch" href="/matheusblog/assets/js/235.028517f9.js"><link rel="prefetch" href="/matheusblog/assets/js/236.a5e5aec8.js"><link rel="prefetch" href="/matheusblog/assets/js/237.3bb9f4d1.js"><link rel="prefetch" href="/matheusblog/assets/js/238.8f877524.js"><link rel="prefetch" href="/matheusblog/assets/js/239.b8cc9b75.js"><link rel="prefetch" href="/matheusblog/assets/js/24.a8c12ef2.js"><link rel="prefetch" href="/matheusblog/assets/js/240.897160bf.js"><link rel="prefetch" href="/matheusblog/assets/js/241.fd2a3483.js"><link rel="prefetch" href="/matheusblog/assets/js/242.2ec904c6.js"><link rel="prefetch" href="/matheusblog/assets/js/243.4e49a9d3.js"><link rel="prefetch" href="/matheusblog/assets/js/244.fe01223f.js"><link rel="prefetch" href="/matheusblog/assets/js/245.582e9c12.js"><link rel="prefetch" href="/matheusblog/assets/js/246.3544e58b.js"><link rel="prefetch" href="/matheusblog/assets/js/247.b7d9ae53.js"><link rel="prefetch" href="/matheusblog/assets/js/248.972e23a8.js"><link rel="prefetch" href="/matheusblog/assets/js/249.ccaca596.js"><link rel="prefetch" href="/matheusblog/assets/js/25.7ad2fc35.js"><link rel="prefetch" href="/matheusblog/assets/js/250.f6f9a19d.js"><link rel="prefetch" href="/matheusblog/assets/js/251.f4c252f4.js"><link rel="prefetch" href="/matheusblog/assets/js/252.9f57b2df.js"><link rel="prefetch" href="/matheusblog/assets/js/253.f5189700.js"><link rel="prefetch" href="/matheusblog/assets/js/254.6489ac1e.js"><link rel="prefetch" href="/matheusblog/assets/js/255.0689b745.js"><link rel="prefetch" href="/matheusblog/assets/js/256.3d10dee2.js"><link rel="prefetch" href="/matheusblog/assets/js/257.6de983e9.js"><link rel="prefetch" href="/matheusblog/assets/js/258.6b020b2b.js"><link rel="prefetch" href="/matheusblog/assets/js/259.247a056e.js"><link rel="prefetch" href="/matheusblog/assets/js/26.b914b59c.js"><link rel="prefetch" href="/matheusblog/assets/js/260.090a63d7.js"><link rel="prefetch" href="/matheusblog/assets/js/261.68eb8558.js"><link rel="prefetch" href="/matheusblog/assets/js/262.faf9abe2.js"><link rel="prefetch" href="/matheusblog/assets/js/263.257f108f.js"><link rel="prefetch" href="/matheusblog/assets/js/264.6d2b9738.js"><link rel="prefetch" href="/matheusblog/assets/js/265.465d955b.js"><link rel="prefetch" href="/matheusblog/assets/js/266.536b61c0.js"><link rel="prefetch" href="/matheusblog/assets/js/267.96b4633e.js"><link rel="prefetch" href="/matheusblog/assets/js/268.96d76f9d.js"><link rel="prefetch" href="/matheusblog/assets/js/269.34016973.js"><link rel="prefetch" href="/matheusblog/assets/js/27.ffeceb01.js"><link rel="prefetch" href="/matheusblog/assets/js/270.d90c188c.js"><link rel="prefetch" href="/matheusblog/assets/js/271.ee4ffe7d.js"><link rel="prefetch" href="/matheusblog/assets/js/272.11f7da14.js"><link rel="prefetch" href="/matheusblog/assets/js/273.fc7315b7.js"><link rel="prefetch" href="/matheusblog/assets/js/274.bc613d3f.js"><link rel="prefetch" href="/matheusblog/assets/js/275.9eac4781.js"><link rel="prefetch" href="/matheusblog/assets/js/276.228c9705.js"><link rel="prefetch" href="/matheusblog/assets/js/277.426f8416.js"><link rel="prefetch" href="/matheusblog/assets/js/278.ccc1bb34.js"><link rel="prefetch" href="/matheusblog/assets/js/279.f5855c5b.js"><link rel="prefetch" href="/matheusblog/assets/js/28.dd11a45d.js"><link rel="prefetch" href="/matheusblog/assets/js/280.d3c75e0a.js"><link rel="prefetch" href="/matheusblog/assets/js/281.603a03b4.js"><link rel="prefetch" href="/matheusblog/assets/js/282.034b31ee.js"><link rel="prefetch" href="/matheusblog/assets/js/283.015dc7ca.js"><link rel="prefetch" href="/matheusblog/assets/js/284.93fc684a.js"><link rel="prefetch" href="/matheusblog/assets/js/285.2bcbd15b.js"><link rel="prefetch" href="/matheusblog/assets/js/286.a33e9947.js"><link rel="prefetch" href="/matheusblog/assets/js/287.dc1dcc8f.js"><link rel="prefetch" href="/matheusblog/assets/js/288.28d0560f.js"><link rel="prefetch" href="/matheusblog/assets/js/289.de725d9a.js"><link rel="prefetch" href="/matheusblog/assets/js/29.208fc435.js"><link rel="prefetch" href="/matheusblog/assets/js/290.e24c300d.js"><link rel="prefetch" href="/matheusblog/assets/js/291.f90df931.js"><link rel="prefetch" href="/matheusblog/assets/js/292.5685020e.js"><link rel="prefetch" href="/matheusblog/assets/js/293.82ed5e46.js"><link rel="prefetch" href="/matheusblog/assets/js/294.eebd2b94.js"><link rel="prefetch" href="/matheusblog/assets/js/295.adcf77fc.js"><link rel="prefetch" href="/matheusblog/assets/js/296.4f010851.js"><link rel="prefetch" href="/matheusblog/assets/js/297.9e673648.js"><link rel="prefetch" href="/matheusblog/assets/js/298.eda8bbb3.js"><link rel="prefetch" href="/matheusblog/assets/js/299.6c1c41a1.js"><link rel="prefetch" href="/matheusblog/assets/js/30.06d6d71a.js"><link rel="prefetch" href="/matheusblog/assets/js/300.6bed6a4c.js"><link rel="prefetch" href="/matheusblog/assets/js/301.8ac12ae7.js"><link rel="prefetch" href="/matheusblog/assets/js/302.79e69467.js"><link rel="prefetch" href="/matheusblog/assets/js/303.684a1a22.js"><link rel="prefetch" href="/matheusblog/assets/js/304.fc032fe3.js"><link rel="prefetch" href="/matheusblog/assets/js/305.1e280374.js"><link rel="prefetch" href="/matheusblog/assets/js/306.1d9a58df.js"><link rel="prefetch" href="/matheusblog/assets/js/307.6ebbe4b0.js"><link rel="prefetch" href="/matheusblog/assets/js/308.522434b5.js"><link rel="prefetch" href="/matheusblog/assets/js/309.60c45495.js"><link rel="prefetch" href="/matheusblog/assets/js/31.67fbcea0.js"><link rel="prefetch" href="/matheusblog/assets/js/310.efef441d.js"><link rel="prefetch" href="/matheusblog/assets/js/311.99d0fd73.js"><link rel="prefetch" href="/matheusblog/assets/js/312.cf9889ba.js"><link rel="prefetch" href="/matheusblog/assets/js/313.3e15155b.js"><link rel="prefetch" href="/matheusblog/assets/js/314.c1964a21.js"><link rel="prefetch" href="/matheusblog/assets/js/315.a7f16c02.js"><link rel="prefetch" href="/matheusblog/assets/js/316.6d91f275.js"><link rel="prefetch" href="/matheusblog/assets/js/317.8cfcc3f4.js"><link rel="prefetch" href="/matheusblog/assets/js/318.6e673fe6.js"><link rel="prefetch" href="/matheusblog/assets/js/319.5fe547d9.js"><link rel="prefetch" href="/matheusblog/assets/js/32.a5c22c7d.js"><link rel="prefetch" href="/matheusblog/assets/js/320.75269859.js"><link rel="prefetch" href="/matheusblog/assets/js/321.0b5cdb89.js"><link rel="prefetch" href="/matheusblog/assets/js/322.dc68c4f6.js"><link rel="prefetch" href="/matheusblog/assets/js/323.990b2c5e.js"><link rel="prefetch" href="/matheusblog/assets/js/324.90800df3.js"><link rel="prefetch" href="/matheusblog/assets/js/325.387258a3.js"><link rel="prefetch" href="/matheusblog/assets/js/326.dc462f7a.js"><link rel="prefetch" href="/matheusblog/assets/js/327.f7c636b5.js"><link rel="prefetch" href="/matheusblog/assets/js/328.918be9ec.js"><link rel="prefetch" href="/matheusblog/assets/js/329.053ad283.js"><link rel="prefetch" href="/matheusblog/assets/js/33.f5cd14b0.js"><link rel="prefetch" href="/matheusblog/assets/js/330.72d04514.js"><link rel="prefetch" href="/matheusblog/assets/js/331.3265759e.js"><link rel="prefetch" href="/matheusblog/assets/js/332.fe0a7d53.js"><link rel="prefetch" href="/matheusblog/assets/js/333.b8e2752f.js"><link rel="prefetch" href="/matheusblog/assets/js/334.d5908db0.js"><link rel="prefetch" href="/matheusblog/assets/js/335.5fa33b8f.js"><link rel="prefetch" href="/matheusblog/assets/js/34.4a1bb328.js"><link rel="prefetch" href="/matheusblog/assets/js/35.5ca89c32.js"><link rel="prefetch" href="/matheusblog/assets/js/36.09100e9e.js"><link rel="prefetch" href="/matheusblog/assets/js/37.4acb6660.js"><link rel="prefetch" href="/matheusblog/assets/js/38.8f0108b1.js"><link rel="prefetch" href="/matheusblog/assets/js/39.b0457fd6.js"><link rel="prefetch" href="/matheusblog/assets/js/4.605de6b3.js"><link rel="prefetch" href="/matheusblog/assets/js/40.da34c4c2.js"><link rel="prefetch" href="/matheusblog/assets/js/41.22494abc.js"><link rel="prefetch" href="/matheusblog/assets/js/42.62a646d5.js"><link rel="prefetch" href="/matheusblog/assets/js/43.e06fdd36.js"><link rel="prefetch" href="/matheusblog/assets/js/44.27c68b68.js"><link rel="prefetch" href="/matheusblog/assets/js/45.7724b677.js"><link rel="prefetch" href="/matheusblog/assets/js/46.9831445e.js"><link rel="prefetch" href="/matheusblog/assets/js/47.b4702b96.js"><link rel="prefetch" href="/matheusblog/assets/js/48.640d984a.js"><link rel="prefetch" href="/matheusblog/assets/js/49.ee8c91a2.js"><link rel="prefetch" href="/matheusblog/assets/js/5.b078cf08.js"><link rel="prefetch" href="/matheusblog/assets/js/50.784ee066.js"><link rel="prefetch" href="/matheusblog/assets/js/51.7b016ea9.js"><link rel="prefetch" href="/matheusblog/assets/js/52.fb6f4151.js"><link rel="prefetch" href="/matheusblog/assets/js/53.f79b2995.js"><link rel="prefetch" href="/matheusblog/assets/js/54.86855fe7.js"><link rel="prefetch" href="/matheusblog/assets/js/55.eb2b2737.js"><link rel="prefetch" href="/matheusblog/assets/js/56.77daf161.js"><link rel="prefetch" href="/matheusblog/assets/js/57.28b3ba1f.js"><link rel="prefetch" href="/matheusblog/assets/js/58.914e2a6e.js"><link rel="prefetch" href="/matheusblog/assets/js/59.184a5cd7.js"><link rel="prefetch" href="/matheusblog/assets/js/6.2779e9be.js"><link rel="prefetch" href="/matheusblog/assets/js/60.29086289.js"><link rel="prefetch" href="/matheusblog/assets/js/61.f56d0809.js"><link rel="prefetch" href="/matheusblog/assets/js/62.102fb7cb.js"><link rel="prefetch" href="/matheusblog/assets/js/63.c87b5520.js"><link rel="prefetch" href="/matheusblog/assets/js/64.3943c874.js"><link rel="prefetch" href="/matheusblog/assets/js/65.f673e008.js"><link rel="prefetch" href="/matheusblog/assets/js/66.40f883e4.js"><link rel="prefetch" href="/matheusblog/assets/js/67.0c1d90d0.js"><link rel="prefetch" href="/matheusblog/assets/js/68.0c95daf1.js"><link rel="prefetch" href="/matheusblog/assets/js/69.b949a514.js"><link rel="prefetch" href="/matheusblog/assets/js/7.077fca60.js"><link rel="prefetch" href="/matheusblog/assets/js/70.703ec4db.js"><link rel="prefetch" href="/matheusblog/assets/js/71.34cd11d9.js"><link rel="prefetch" href="/matheusblog/assets/js/72.114bd29f.js"><link rel="prefetch" href="/matheusblog/assets/js/73.34f025b9.js"><link rel="prefetch" href="/matheusblog/assets/js/74.bb2e30ed.js"><link rel="prefetch" href="/matheusblog/assets/js/75.37bd4e6a.js"><link rel="prefetch" href="/matheusblog/assets/js/76.0e12e24b.js"><link rel="prefetch" href="/matheusblog/assets/js/77.d161a37e.js"><link rel="prefetch" href="/matheusblog/assets/js/78.ed3d1da2.js"><link rel="prefetch" href="/matheusblog/assets/js/79.8b6e6a60.js"><link rel="prefetch" href="/matheusblog/assets/js/8.5d91406a.js"><link rel="prefetch" href="/matheusblog/assets/js/80.1b43f99a.js"><link rel="prefetch" href="/matheusblog/assets/js/81.5e96f717.js"><link rel="prefetch" href="/matheusblog/assets/js/82.f26301c1.js"><link rel="prefetch" href="/matheusblog/assets/js/84.053321b4.js"><link rel="prefetch" href="/matheusblog/assets/js/85.9ecf4ad2.js"><link rel="prefetch" href="/matheusblog/assets/js/86.b4231e28.js"><link rel="prefetch" href="/matheusblog/assets/js/87.25d7e120.js"><link rel="prefetch" href="/matheusblog/assets/js/88.bbb3a36e.js"><link rel="prefetch" href="/matheusblog/assets/js/89.db73337a.js"><link rel="prefetch" href="/matheusblog/assets/js/9.cea7668b.js"><link rel="prefetch" href="/matheusblog/assets/js/90.2ef95e92.js"><link rel="prefetch" href="/matheusblog/assets/js/91.7a0175f8.js"><link rel="prefetch" href="/matheusblog/assets/js/92.55b107b4.js"><link rel="prefetch" href="/matheusblog/assets/js/93.50337fff.js"><link rel="prefetch" href="/matheusblog/assets/js/94.a9740e63.js"><link rel="prefetch" href="/matheusblog/assets/js/95.d17d251c.js"><link rel="prefetch" href="/matheusblog/assets/js/96.b087ef79.js"><link rel="prefetch" href="/matheusblog/assets/js/97.9ba0439c.js"><link rel="prefetch" href="/matheusblog/assets/js/98.08362bda.js"><link rel="prefetch" href="/matheusblog/assets/js/99.339bf826.js">
+    <link rel="stylesheet" href="/matheusblog/assets/css/0.styles.980a01be.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/matheusblog/" class="home-link router-link-active"><!----> <span class="site-name">MyBlog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/jvm/00虚拟机内存体系与垃圾回收.html" class="nav-link">
+  JVM简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li><li class="dropdown-item"><h4>
+          ElasticSearch
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/elasticsearch/02Elasticsearch-Docker搭建ES.html" class="nav-link">
+  Docker搭建ES
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/springMVC框架.html" class="nav-link">
+  SpringMVC框架
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springboot/SpringBoot简介.html" class="nav-link">
+  SpringBoot简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/docker/01Docker入门.html" class="nav-link">
+  Docker入门
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/k8s/01Kubernetes介绍及使用.html" class="nav-link">
+  K8s介绍与使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/code-style/effective-java/目录.html" class="nav-link">
+  Effective-Java
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  单元测试
+</a></li><li class="dropdown-subitem"><a href="/matheusblog/md/project/jt-project/2. IDEA配置.html" class="nav-link">
+  IDEA配置
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/scala/Scala学习宝典.html" class="nav-link">
+  Scala学习宝典
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/python/Python基础学习.html" class="nav-link">
+  Python基础学习
+</a></li></ul></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/jvm/00虚拟机内存体系与垃圾回收.html" class="nav-link">
+  JVM简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li><li class="dropdown-item"><h4>
+          ElasticSearch
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/elasticsearch/02Elasticsearch-Docker搭建ES.html" class="nav-link">
+  Docker搭建ES
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/springMVC框架.html" class="nav-link">
+  SpringMVC框架
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springboot/SpringBoot简介.html" class="nav-link">
+  SpringBoot简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/docker/01Docker入门.html" class="nav-link">
+  Docker入门
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/k8s/01Kubernetes介绍及使用.html" class="nav-link">
+  K8s介绍与使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/code-style/effective-java/目录.html" class="nav-link">
+  Effective-Java
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  单元测试
+</a></li><li class="dropdown-subitem"><a href="/matheusblog/md/project/jt-project/2. IDEA配置.html" class="nav-link">
+  IDEA配置
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/scala/Scala学习宝典.html" class="nav-link">
+  Scala学习宝典
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/python/Python基础学习.html" class="nav-link">
+  Python基础学习
+</a></li></ul></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Go</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="sidebar-link">Go 语言介绍</a></li><li><a href="/matheusblog/md/other-languages/go/02Go语言基础.html" class="sidebar-link">Go 语言基础</a></li><li><a href="/matheusblog/md/other-languages/go/03Go语言顺序编程.html" class="sidebar-link">顺序编程</a></li><li><a href="/matheusblog/md/other-languages/go/04面向对象编程.html" class="sidebar-link">面向对象编程</a></li><li><a href="/matheusblog/md/other-languages/go/05并发编程.html" class="sidebar-link">并发编程</a></li><li><a href="/matheusblog/md/other-languages/go/06词频统计综合案例.html" class="sidebar-link">词频统计综合案例</a></li><li><a href="/matheusblog/md/other-languages/go/07IDE及环境配置.html" class="sidebar-link">IDE及环境配置</a></li><li><a href="/matheusblog/md/other-languages/go/08数组与切片.html" class="sidebar-link">数组与切片</a></li><li><a href="/matheusblog/md/other-languages/go/09栈与栈的应用.html" class="sidebar-link">栈与栈的应用</a></li><li><a href="/matheusblog/md/other-languages/go/10七大设计原则.html" class="sidebar-link">七大设计原则</a></li><li><a href="/matheusblog/md/other-languages/go/11简单工厂与抽象工厂.html" class="sidebar-link">简单工厂与抽象工厂</a></li><li><a href="/matheusblog/md/other-languages/go/12go相对Java的优势.html" class="sidebar-link">go相对Java优势</a></li><li><a href="/matheusblog/md/other-languages/go/13快速开始一个Go程序.html" class="sidebar-link">快速开始一个Go程序</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Go并发服务器框架Zinx入门</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/other-languages/go/basic-project/00项目基础go语言API.html" class="sidebar-link">项目基础go语言API</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/01Zinx课程大纲.html" class="sidebar-link">Zinx课程大纲</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/02实现Server模块.html" class="sidebar-link">实现Server模块</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/03实现链接封装业务与业务绑定.html" class="sidebar-link">实现链路封装业务与业务绑定</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/04实现基础路由模块.html" class="sidebar-link">实现基础路由模块</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/05全局配置.html" class="sidebar-link">全局配置</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/06消息封装.html" class="sidebar-link">消息封装</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/07多路由模式.html" class="sidebar-link">多路由模式</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/08读写分离.html" class="sidebar-link">读写分离</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/09实现工作池.html" class="sidebar-link">实现工作池</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/10实现链接控制.html" class="active sidebar-link">实现链路控制</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/11连接属性设置.html" class="sidebar-link">连接属性设置</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/12Web基础知识介绍.html" class="sidebar-link">Web基础知识介绍</a></li><li><a href="/matheusblog/md/other-languages/go/basic-project/13ChitCha论坛.html" class="sidebar-link">ChitCha论坛</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Scala</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/other-languages/scala/Scala学习宝典.html" class="sidebar-link">Scala学习宝典</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Python</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/other-languages/python/Python基础学习.html" class="sidebar-link">Python基础学习</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="实现链路控制"><a href="#实现链路控制" class="header-anchor">#</a> 实现链路控制</h1> <p></p><div class="table-of-contents"><ul><li><a href="#实验介绍">实验介绍</a></li><li><a href="#准备工作">准备工作</a></li><li><a href="#创建链接管理模块">创建链接管理模块</a></li><li><a href="#链接管理模块集成到-zinx-中">链接管理模块集成到 Zinx 中</a><ul><li><a href="#链接的添加">链接的添加</a></li><li><a href="#server-中添加链接数量的判断">Server 中添加链接数量的判断</a></li><li><a href="#连接的删除">连接的删除</a></li></ul></li><li><a href="#链接的带缓冲的发包方法">链接的带缓冲的发包方法</a></li><li><a href="#注册链接启动-停止自定义-hook-方法功能">注册链接启动/停止自定义 Hook 方法功能</a></li><li><a href="#测试">测试</a></li><li><a href="#实验总结">实验总结</a></li></ul></div><p></p> <h2 id="实验介绍"><a href="#实验介绍" class="header-anchor">#</a> 实验介绍</h2> <p>我们现在就需要给 Zinx 添加链接管理机制了。 本节思维导图比较大，建议同学们右键保存到本地放大查看。</p> <p><img src="/matheusblog/assets/img/image-20220531170602651.1510a4b2.png" alt="image-20220531170602651"></p> <h2 id="准备工作"><a href="#准备工作" class="header-anchor">#</a> 准备工作</h2> <p>我们先在命令行中执行如下代码：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">wget</span> https://labfile.oss.aliyuncs.com/courses/1639/src08.zip <span class="token operator">&amp;&amp;</span> <span class="token function">unzip</span> src08.zip
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">GOPATH</span><span class="token operator">=</span>/home/project
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>执行后我们的项目目录如下：</p> <p><img src="/matheusblog/assets/img/image-20220531170608287.609dba47.png" alt="image-20220531170608287"></p> <p>之前我们已经实现了让 zinx 可以处理多链接请求，现在我们要为 Zinx 框架增加链接个数的限定，如果超过一定量的客户端个数，Zinx 为了保证后端的及时响应，而拒绝链接请求。</p> <h2 id="创建链接管理模块"><a href="#创建链接管理模块" class="header-anchor">#</a> 创建链接管理模块</h2> <p>这里面我们就需要对链接有一个管理的模块。</p> <p>我们在 ziface 和 znet 分别建立 iconnmanager.go 和 connmanager.go 文件。</p> <blockquote><p>zinx/ziface/iconmanager.go</p></blockquote> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">package</span> ziface
+<span class="token comment">/*
+    连接管理抽象层
+ */</span>
+<span class="token keyword">type</span> IConnManager <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+    <span class="token function">Add</span><span class="token punctuation">(</span>conn IConnection<span class="token punctuation">)</span>                   <span class="token comment">//添加链接</span>
+    <span class="token function">Remove</span><span class="token punctuation">(</span>conn IConnection<span class="token punctuation">)</span>                <span class="token comment">//删除连接</span>
+    <span class="token function">Get</span><span class="token punctuation">(</span>connID <span class="token builtin">uint32</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>IConnection<span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span> <span class="token comment">//利用ConnID获取链接</span>
+    <span class="token function">Len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span>                               <span class="token comment">//获取当前连接</span>
+    <span class="token function">ClearConn</span><span class="token punctuation">(</span><span class="token punctuation">)</span>                                <span class="token comment">//删除并停止所有链接</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p>这里定义了一些接口方法，添加链接、删除链接、根据 ID 获取链接、链接数量、和清除链接等。下面我们对这个接口进行实现。</p> <blockquote><p>zinx/znet/connmanager.go</p></blockquote> <p>这里面 <code>ConnManager</code> 中，其中用一个 map 来承载全部的连接信息，key 是连接 ID，value 则是连接本身。其中有一个读写锁 <code>connLock</code> 主要是针对 map 做多任务修改时的保护作用。</p> <p><code>Remove()</code> 方法只是单纯的将 conn 从 map 中摘掉，而 <code>ClearConn()</code> 方法则会先停止链接业务，<code>c.Stop()</code>，然后再从 map 中摘除。</p> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">package</span> znet
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;errors&quot;</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;sync&quot;</span>
+    <span class="token string">&quot;zinx/ziface&quot;</span>
+<span class="token punctuation">)</span>
+<span class="token comment">/*
+    连接管理模块
+*/</span>
+<span class="token keyword">type</span> ConnManager <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    connections <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">uint32</span><span class="token punctuation">]</span>ziface<span class="token punctuation">.</span>IConnection <span class="token comment">//管理的连接信息</span>
+    connLock    sync<span class="token punctuation">.</span>RWMutex                  <span class="token comment">//读写连接的读写锁</span>
+<span class="token punctuation">}</span>
+<span class="token comment">/*
+    创建一个链接管理
+ */</span>
+<span class="token keyword">func</span> <span class="token function">NewConnManager</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span>ConnManager <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token operator">&amp;</span>ConnManager<span class="token punctuation">{</span>
+        connections<span class="token punctuation">:</span><span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">uint32</span><span class="token punctuation">]</span> ziface<span class="token punctuation">.</span>IConnection<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//添加链接</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>connMgr <span class="token operator">*</span>ConnManager<span class="token punctuation">)</span> <span class="token function">Add</span><span class="token punctuation">(</span>conn ziface<span class="token punctuation">.</span>IConnection<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">//保护共享资源Map 加写锁</span>
+    connMgr<span class="token punctuation">.</span>connLock<span class="token punctuation">.</span><span class="token function">Lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">defer</span> connMgr<span class="token punctuation">.</span>connLock<span class="token punctuation">.</span><span class="token function">Unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">//将conn连接添加到ConnMananger中</span>
+    connMgr<span class="token punctuation">.</span>connections<span class="token punctuation">[</span>conn<span class="token punctuation">.</span><span class="token function">GetConnID</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> conn
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;connection add to ConnManager successfully: conn num = &quot;</span><span class="token punctuation">,</span> connMgr<span class="token punctuation">.</span><span class="token function">Len</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//删除连接</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>connMgr <span class="token operator">*</span>ConnManager<span class="token punctuation">)</span> <span class="token function">Remove</span><span class="token punctuation">(</span>conn ziface<span class="token punctuation">.</span>IConnection<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">//保护共享资源Map 加写锁</span>
+    connMgr<span class="token punctuation">.</span>connLock<span class="token punctuation">.</span><span class="token function">Lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">defer</span> connMgr<span class="token punctuation">.</span>connLock<span class="token punctuation">.</span><span class="token function">Unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">//删除连接信息</span>
+    <span class="token function">delete</span><span class="token punctuation">(</span>connMgr<span class="token punctuation">.</span>connections<span class="token punctuation">,</span> conn<span class="token punctuation">.</span><span class="token function">GetConnID</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;connection Remove ConnID=&quot;</span><span class="token punctuation">,</span>conn<span class="token punctuation">.</span><span class="token function">GetConnID</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot; successfully: conn num = &quot;</span><span class="token punctuation">,</span> connMgr<span class="token punctuation">.</span><span class="token function">Len</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//利用ConnID获取链接</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>connMgr <span class="token operator">*</span>ConnManager<span class="token punctuation">)</span> <span class="token function">Get</span><span class="token punctuation">(</span>connID <span class="token builtin">uint32</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>ziface<span class="token punctuation">.</span>IConnection<span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">//保护共享资源Map 加读锁</span>
+    connMgr<span class="token punctuation">.</span>connLock<span class="token punctuation">.</span><span class="token function">RLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">defer</span> connMgr<span class="token punctuation">.</span>connLock<span class="token punctuation">.</span><span class="token function">RUnlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> conn<span class="token punctuation">,</span> ok <span class="token operator">:=</span> connMgr<span class="token punctuation">.</span>connections<span class="token punctuation">[</span>connID<span class="token punctuation">]</span><span class="token punctuation">;</span> ok <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> conn<span class="token punctuation">,</span> <span class="token boolean">nil</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token boolean">nil</span><span class="token punctuation">,</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">&quot;connection not found&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//获取当前连接</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>connMgr <span class="token operator">*</span>ConnManager<span class="token punctuation">)</span> <span class="token function">Len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">len</span><span class="token punctuation">(</span>connMgr<span class="token punctuation">.</span>connections<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//清除并停止所有连接</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>connMgr <span class="token operator">*</span>ConnManager<span class="token punctuation">)</span> <span class="token function">ClearConn</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">//保护共享资源Map 加写锁</span>
+    connMgr<span class="token punctuation">.</span>connLock<span class="token punctuation">.</span><span class="token function">Lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">defer</span> connMgr<span class="token punctuation">.</span>connLock<span class="token punctuation">.</span><span class="token function">Unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">//停止并删除全部的连接信息</span>
+    <span class="token keyword">for</span> connID<span class="token punctuation">,</span> conn <span class="token operator">:=</span> <span class="token keyword">range</span> connMgr<span class="token punctuation">.</span>connections <span class="token punctuation">{</span>
+        <span class="token comment">//停止</span>
+        conn<span class="token punctuation">.</span><span class="token function">Stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment">//删除</span>
+        <span class="token function">delete</span><span class="token punctuation">(</span>connMgr<span class="token punctuation">.</span>connections<span class="token punctuation">,</span>connID<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;Clear All Connections successfully: conn num = &quot;</span><span class="token punctuation">,</span> connMgr<span class="token punctuation">.</span><span class="token function">Len</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br></div></div><h2 id="链接管理模块集成到-zinx-中"><a href="#链接管理模块集成到-zinx-中" class="header-anchor">#</a> 链接管理模块集成到 Zinx 中</h2> <p>现在需要将<code>ConnManager</code>添加到<code>Server</code>中。</p> <blockquote><p>zinx/znet/server.go</p></blockquote> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token comment">//iServer 接口实现，定义一个Server服务类</span>
+<span class="token keyword">type</span> Server <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    <span class="token comment">//服务器的名称</span>
+    Name <span class="token builtin">string</span>
+    <span class="token comment">//tcp4 or other</span>
+    IPVersion <span class="token builtin">string</span>
+    <span class="token comment">//服务绑定的IP地址</span>
+    IP <span class="token builtin">string</span>
+    <span class="token comment">//服务绑定的端口</span>
+    Port <span class="token builtin">int</span>
+    <span class="token comment">//当前Server的消息管理模块，用来绑定MsgId和对应的处理方法</span>
+    msgHandler ziface<span class="token punctuation">.</span>IMsgHandle
+    <span class="token comment">//当前Server的链接管理器</span>
+    ConnMgr ziface<span class="token punctuation">.</span>IConnManager
+<span class="token punctuation">}</span>
+<span class="token comment">/*
+  创建一个服务器句柄
+ */</span>
+<span class="token keyword">func</span> NewServer <span class="token punctuation">(</span><span class="token punctuation">)</span> ziface<span class="token punctuation">.</span>IServer <span class="token punctuation">{</span>
+    utils<span class="token punctuation">.</span>GlobalObject<span class="token punctuation">.</span><span class="token function">Reload</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    s<span class="token operator">:=</span> <span class="token operator">&amp;</span>Server <span class="token punctuation">{</span>
+        Name <span class="token punctuation">:</span>utils<span class="token punctuation">.</span>GlobalObject<span class="token punctuation">.</span>Name<span class="token punctuation">,</span>
+        IPVersion<span class="token punctuation">:</span><span class="token string">&quot;tcp4&quot;</span><span class="token punctuation">,</span>
+        IP<span class="token punctuation">:</span>utils<span class="token punctuation">.</span>GlobalObject<span class="token punctuation">.</span>Host<span class="token punctuation">,</span>
+        Port<span class="token punctuation">:</span>utils<span class="token punctuation">.</span>GlobalObject<span class="token punctuation">.</span>TcpPort<span class="token punctuation">,</span>
+        msgHandler<span class="token punctuation">:</span> <span class="token function">NewMsgHandle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        ConnMgr<span class="token punctuation">:</span><span class="token function">NewConnManager</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>  <span class="token comment">//创建ConnManager</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> s
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br></div></div><p>现在，既然 server 具备了 ConnManager 成员，在获取的时候需要给抽象层提供一个获取 ConnManager 方法 。</p> <blockquote><p>zinx/ziface/iserver.go</p></blockquote> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">type</span> IServer <span class="token keyword">interface</span><span class="token punctuation">{</span>
+    <span class="token comment">//启动服务器方法</span>
+    <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">//停止服务器方法</span>
+    <span class="token function">Stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">//开启业务服务方法</span>
+    <span class="token function">Serve</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">//路由功能：给当前服务注册一个路由业务方法，供客户端链接处理使用</span>
+    <span class="token function">AddRouter</span><span class="token punctuation">(</span>msgId <span class="token builtin">uint32</span><span class="token punctuation">,</span> router IRouter<span class="token punctuation">)</span>
+    <span class="token comment">//得到链接管理</span>
+    <span class="token function">GetConnMgr</span><span class="token punctuation">(</span><span class="token punctuation">)</span> IConnManager
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><blockquote><p>zinx/znet/server.go</p></blockquote> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token comment">//得到链接管理</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>s <span class="token operator">*</span>Server<span class="token punctuation">)</span> <span class="token function">GetConnMgr</span><span class="token punctuation">(</span><span class="token punctuation">)</span> ziface<span class="token punctuation">.</span>IConnManager <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> s<span class="token punctuation">.</span>ConnMgr
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>因为我们现在在 server 中有链接的管理，有的时候 conn 也需要得到这个 ConnMgr 的使用权，那么我们需要将<code>Server</code>和<code>Connection</code>建立能够互相索引的关系，我们在<code>Connection</code>中，添加 Server 当前 conn 隶属的 server 句柄。</p> <blockquote><p>zinx/znet/connection.go</p></blockquote> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">type</span> Connection <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    <span class="token comment">//当前Conn属于哪个Server</span>
+    TcpServer    ziface<span class="token punctuation">.</span>IServer       <span class="token comment">//当前conn属于哪个server，在conn初始化的时候添加即可</span>
+    <span class="token comment">//当前连接的socket TCP套接字</span>
+    Conn <span class="token operator">*</span>net<span class="token punctuation">.</span>TCPConn
+    <span class="token comment">//当前连接的ID 也可以称作为SessionID，ID全局唯一</span>
+    ConnID <span class="token builtin">uint32</span>
+    <span class="token comment">//当前连接的关闭状态</span>
+    isClosed <span class="token builtin">bool</span>
+    <span class="token comment">//消息管理MsgId和对应处理方法的消息管理模块</span>
+    MsgHandler ziface<span class="token punctuation">.</span>IMsgHandle
+    <span class="token comment">//告知该链接已经退出/停止的channel</span>
+    ExitBuffChan <span class="token keyword">chan</span> <span class="token builtin">bool</span>
+    <span class="token comment">//无缓冲管道，用于读、写两个goroutine之间的消息通信</span>
+    msgChan        <span class="token keyword">chan</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span>
+    <span class="token comment">//有关冲管道，用于读、写两个goroutine之间的消息通信</span>
+    msgBuffChan <span class="token keyword">chan</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><h3 id="链接的添加"><a href="#链接的添加" class="header-anchor">#</a> 链接的添加</h3> <p>现在我们怎么样选择将创建好的连接添加到<code>ConnManager</code>中呢，这里我们选择在初始化一个新链接的时候，加进来就好了。</p> <blockquote><p>zinx/znet/connection.go</p></blockquote> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token comment">//创建连接的方法</span>
+<span class="token keyword">func</span> <span class="token function">NewConntion</span><span class="token punctuation">(</span>server ziface<span class="token punctuation">.</span>IServer<span class="token punctuation">,</span> conn <span class="token operator">*</span>net<span class="token punctuation">.</span>TCPConn<span class="token punctuation">,</span> connID <span class="token builtin">uint32</span><span class="token punctuation">,</span> msgHandler ziface<span class="token punctuation">.</span>IMsgHandle<span class="token punctuation">)</span> <span class="token operator">*</span>Connection<span class="token punctuation">{</span>
+    <span class="token comment">//初始化Conn属性</span>
+    c <span class="token operator">:=</span> <span class="token operator">&amp;</span>Connection<span class="token punctuation">{</span>
+        TcpServer<span class="token punctuation">:</span>server<span class="token punctuation">,</span>    <span class="token comment">//将隶属的server传递进来</span>
+        Conn<span class="token punctuation">:</span>     conn<span class="token punctuation">,</span>
+        ConnID<span class="token punctuation">:</span>   connID<span class="token punctuation">,</span>
+        isClosed<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+        MsgHandler<span class="token punctuation">:</span> msgHandler<span class="token punctuation">,</span>
+        ExitBuffChan<span class="token punctuation">:</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token builtin">bool</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        msgChan<span class="token punctuation">:</span><span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        msgBuffChan<span class="token punctuation">:</span><span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> utils<span class="token punctuation">.</span>GlobalObject<span class="token punctuation">.</span>MaxMsgChanLen<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">//将新创建的Conn添加到链接管理中</span>
+    c<span class="token punctuation">.</span>TcpServer<span class="token punctuation">.</span><span class="token function">GetConnMgr</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span>   <span class="token comment">//将当前新创建的连接添加到ConnManager中</span>
+    <span class="token keyword">return</span> c
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><h3 id="server-中添加链接数量的判断"><a href="#server-中添加链接数量的判断" class="header-anchor">#</a> Server 中添加链接数量的判断</h3> <p>在 server 的<code>Start()</code>方法中，在 Accept 与客户端链接建立成功后，可以直接对链接的个数做一个判断。</p> <blockquote><p>zinx/znet/server.go</p></blockquote> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token comment">//开启网络服务</span>
+<span class="token comment">// 注意 // ... 的部分是对应的原来的代码不需要变动</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>s <span class="token operator">*</span>Server<span class="token punctuation">)</span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;[START] Server name: %s,listenner at IP: %s, Port %d is starting\n&quot;</span><span class="token punctuation">,</span> s<span class="token punctuation">.</span>Name<span class="token punctuation">,</span> s<span class="token punctuation">.</span>IP<span class="token punctuation">,</span> s<span class="token punctuation">.</span>Port<span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;[Zinx] Version: %s, MaxConn: %d, MaxPacketSize: %d\n&quot;</span><span class="token punctuation">,</span>
+        utils<span class="token punctuation">.</span>GlobalObject<span class="token punctuation">.</span>Version<span class="token punctuation">,</span>
+        utils<span class="token punctuation">.</span>GlobalObject<span class="token punctuation">.</span>MaxConn<span class="token punctuation">,</span>
+        utils<span class="token punctuation">.</span>GlobalObject<span class="token punctuation">.</span>MaxPacketSize<span class="token punctuation">)</span>
+    <span class="token comment">//开启一个go去做服务端Linster业务</span>
+    <span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// ....</span>
+        <span class="token comment">//3 启动server网络连接业务</span>
+        <span class="token keyword">for</span> <span class="token punctuation">{</span>
+            <span class="token comment">//3.1 阻塞等待客户端建立连接请求</span>
+            conn<span class="token punctuation">,</span> err <span class="token operator">:=</span> listenner<span class="token punctuation">.</span><span class="token function">AcceptTCP</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+                fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;Accept err &quot;</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+                <span class="token keyword">continue</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment">//=============</span>
+            <span class="token comment">//3.2 设置服务器最大连接控制,如果超过最大连接，那么则关闭此新的连接</span>
+            <span class="token keyword">if</span> s<span class="token punctuation">.</span>ConnMgr<span class="token punctuation">.</span><span class="token function">Len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&gt;=</span> utils<span class="token punctuation">.</span>GlobalObject<span class="token punctuation">.</span>MaxConn <span class="token punctuation">{</span>
+                conn<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token keyword">continue</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment">//=============</span>
+            <span class="token comment">//3.3 处理该新连接请求的 业务 方法， 此时应该有 handler 和 conn是绑定的</span>
+            dealConn <span class="token operator">:=</span> <span class="token function">NewConntion</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> conn<span class="token punctuation">,</span> cid<span class="token punctuation">,</span> s<span class="token punctuation">.</span>msgHandler<span class="token punctuation">)</span>
+            cid <span class="token operator">++</span>
+            <span class="token comment">//3.4 启动当前链接的处理业务</span>
+            <span class="token keyword">go</span> dealConn<span class="token punctuation">.</span><span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br></div></div><p>当然，我们应该在配置文件<code>zinx.json</code>或者在<code>GlobalObject</code>全局配置中，定义好我们期望的连接的最大数目限制<code>MaxConn</code>。 同时，因为这里添加了一个新的属性，所以全局配置也需要做出修改：</p> <blockquote><p>zinx/utils/globalobj.go</p></blockquote> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">type</span> GlobalObj <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    <span class="token comment">/*
+       Server
+    */</span>
+    TcpServer ziface<span class="token punctuation">.</span>IServer <span class="token comment">//当前Zinx的全局Server对象</span>
+    Host      <span class="token builtin">string</span>         <span class="token comment">//当前服务器主机IP</span>
+    TcpPort   <span class="token builtin">int</span>            <span class="token comment">//当前服务器主机监听端口号</span>
+    Name      <span class="token builtin">string</span>         <span class="token comment">//当前服务器名称</span>
+    <span class="token comment">/*
+       Zinx
+    */</span>
+    Version          <span class="token builtin">string</span> <span class="token comment">//当前Zinx版本号</span>
+    MaxPacketSize    <span class="token builtin">uint32</span> <span class="token comment">//都需数据包的最大值</span>
+    MaxConn          <span class="token builtin">int</span>    <span class="token comment">//当前服务器主机允许的最大链接个数</span>
+    WorkerPoolSize   <span class="token builtin">uint32</span> <span class="token comment">//业务工作Worker池的数量</span>
+    MaxWorkerTaskLen <span class="token builtin">uint32</span> <span class="token comment">//业务工作Worker对应负责的任务队列最大任务存储数量</span>
+    MaxMsgChanLen    <span class="token builtin">int</span>
+    <span class="token comment">/*
+       config file path
+    */</span>
+    ConfFilePath <span class="token builtin">string</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/*
+   提供init方法，默认加载
+*/</span>
+<span class="token keyword">func</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">//初始化GlobalObject变量，设置一些默认值</span>
+    GlobalObject <span class="token operator">=</span> <span class="token operator">&amp;</span>GlobalObj<span class="token punctuation">{</span>
+        Name<span class="token punctuation">:</span>          <span class="token string">&quot;ZinxServerApp&quot;</span><span class="token punctuation">,</span>
+        Version<span class="token punctuation">:</span>       <span class="token string">&quot;V0.4&quot;</span><span class="token punctuation">,</span>
+        TcpPort<span class="token punctuation">:</span>       <span class="token number">7777</span><span class="token punctuation">,</span>
+        Host<span class="token punctuation">:</span>          <span class="token string">&quot;0.0.0.0&quot;</span><span class="token punctuation">,</span>
+        MaxConn<span class="token punctuation">:</span>       <span class="token number">12000</span><span class="token punctuation">,</span>
+        MaxPacketSize<span class="token punctuation">:</span> <span class="token number">4096</span><span class="token punctuation">,</span>
+        ConfFilePath<span class="token punctuation">:</span>  <span class="token string">&quot;conf/zinx.json&quot;</span><span class="token punctuation">,</span>
+        WorkerPoolSize<span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+        MaxWorkerTaskLen<span class="token punctuation">:</span> <span class="token number">1024</span><span class="token punctuation">,</span>
+        MaxMsgChanLen<span class="token punctuation">:</span>   <span class="token number">16</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">//从配置文件中加载一些用户配置的参数</span>
+    GlobalObject<span class="token punctuation">.</span><span class="token function">Reload</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br></div></div><h3 id="连接的删除"><a href="#连接的删除" class="header-anchor">#</a> 连接的删除</h3> <p>我们应该在连接停止的时候，将该连接从 ConnManager 中删除，所以在<code>connection</code>的<code>Stop()</code>方法中添加。</p> <blockquote><p>zinx/znet/connecion.go</p></blockquote> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>Connection<span class="token punctuation">)</span> <span class="token function">Stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;Conn Stop()...ConnID = &quot;</span><span class="token punctuation">,</span> c<span class="token punctuation">.</span>ConnID<span class="token punctuation">)</span>
+    <span class="token comment">//如果当前链接已经关闭</span>
+    <span class="token keyword">if</span> c<span class="token punctuation">.</span>isClosed <span class="token operator">==</span> <span class="token boolean">true</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span>
+    <span class="token punctuation">}</span>
+    c<span class="token punctuation">.</span>isClosed <span class="token operator">=</span> <span class="token boolean">true</span>
+    <span class="token comment">// 关闭socket链接</span>
+    c<span class="token punctuation">.</span>Conn<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">//关闭Writer Goroutine</span>
+    c<span class="token punctuation">.</span>ExitBuffChan <span class="token operator">&lt;-</span> <span class="token boolean">true</span>
+    <span class="token comment">//将链接从连接管理器中删除</span>
+    c<span class="token punctuation">.</span>TcpServer<span class="token punctuation">.</span><span class="token function">GetConnMgr</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Remove</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span>  <span class="token comment">//删除conn从ConnManager中</span>
+    <span class="token comment">//关闭该链接全部管道</span>
+    <span class="token function">close</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>ExitBuffChan<span class="token punctuation">)</span>
+    <span class="token function">close</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>msgBuffChan<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><p>当然，我们也应该在<code>server</code>停止的时候，将全部的连接清空。</p> <blockquote><p>zinx/znet/server.go</p></blockquote> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">func</span> <span class="token punctuation">(</span>s <span class="token operator">*</span>Server<span class="token punctuation">)</span> <span class="token function">Stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;[STOP] Zinx server , name &quot;</span> <span class="token punctuation">,</span> s<span class="token punctuation">.</span>Name<span class="token punctuation">)</span>
+    <span class="token comment">//将其他需要清理的连接信息或者其他信息 也要一并停止或者清理</span>
+    s<span class="token punctuation">.</span>ConnMgr<span class="token punctuation">.</span><span class="token function">ClearConn</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>现在我们已经将连接管理成功的集成到了 Zinx 之中了。 下面我们接着实现带缓冲的发包方法。</p> <h2 id="链接的带缓冲的发包方法"><a href="#链接的带缓冲的发包方法" class="header-anchor">#</a> 链接的带缓冲的发包方法</h2> <p>我们之前给<code>Connection</code>提供了一个发消息的方法<code>SendMsg()</code>，这个是将数据发送到一个无缓冲的 channel 中<code>msgChan</code>。但是如果客户端链接比较多的话，如果对方处理不及时，可能会出现短暂的阻塞现象，我们可以做一个提供一定缓冲的发消息方法，做一些非阻塞的发送体验。</p> <blockquote><p>zinx/ziface/iconnection.go</p></blockquote> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token comment">//定义连接接口</span>
+<span class="token keyword">type</span> IConnection <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+    <span class="token comment">//启动连接，让当前连接开始工作</span>
+    <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">//停止连接，结束当前连接状态M</span>
+    <span class="token function">Stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">//从当前连接获取原始的socket TCPConn</span>
+    <span class="token function">GetTCPConnection</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span>net<span class="token punctuation">.</span>TCPConn
+    <span class="token comment">//获取当前连接ID</span>
+    <span class="token function">GetConnID</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">uint32</span>
+    <span class="token comment">//获取远程客户端地址信息</span>
+    <span class="token function">RemoteAddr</span><span class="token punctuation">(</span><span class="token punctuation">)</span> net<span class="token punctuation">.</span>Addr
+    <span class="token comment">//直接将Message数据发送数据给远程的TCP客户端(无缓冲)</span>
+    <span class="token function">SendMsg</span><span class="token punctuation">(</span>msgId <span class="token builtin">uint32</span><span class="token punctuation">,</span> data <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token builtin">error</span>
+    <span class="token comment">//直接将Message数据发送给远程的TCP客户端(有缓冲)</span>
+    <span class="token function">SendBuffMsg</span><span class="token punctuation">(</span>msgId <span class="token builtin">uint32</span><span class="token punctuation">,</span> data <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token builtin">error</span>   <span class="token comment">//添加带缓冲发送消息接口</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><blockquote><p>zinx/znet/connection.go</p></blockquote> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">type</span> Connection <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    <span class="token comment">//当前Conn属于哪个Server</span>
+    TcpServer    ziface<span class="token punctuation">.</span>IServer
+    <span class="token comment">//当前连接的socket TCP套接字</span>
+    Conn <span class="token operator">*</span>net<span class="token punctuation">.</span>TCPConn
+    <span class="token comment">//当前连接的ID 也可以称作为SessionID，ID全局唯一</span>
+    ConnID <span class="token builtin">uint32</span>
+    <span class="token comment">//当前连接的关闭状态</span>
+    isClosed <span class="token builtin">bool</span>
+    <span class="token comment">//消息管理MsgId和对应处理方法的消息管理模块</span>
+    MsgHandler ziface<span class="token punctuation">.</span>IMsgHandle
+    <span class="token comment">//告知该链接已经退出/停止的channel</span>
+    ExitBuffChan <span class="token keyword">chan</span> <span class="token builtin">bool</span>
+    <span class="token comment">//无缓冲管道，用于读、写两个goroutine之间的消息通信</span>
+    msgChan        <span class="token keyword">chan</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span>
+    <span class="token comment">//有关冲管道，用于读、写两个goroutine之间的消息通信</span>
+    msgBuffChan <span class="token keyword">chan</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span>                          <span class="token comment">//定义channel成员</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//创建连接的方法</span>
+<span class="token keyword">func</span> <span class="token function">NewConntion</span><span class="token punctuation">(</span>server ziface<span class="token punctuation">.</span>IServer<span class="token punctuation">,</span> conn <span class="token operator">*</span>net<span class="token punctuation">.</span>TCPConn<span class="token punctuation">,</span> connID <span class="token builtin">uint32</span><span class="token punctuation">,</span> msgHandler ziface<span class="token punctuation">.</span>IMsgHandle<span class="token punctuation">)</span> <span class="token operator">*</span>Connection<span class="token punctuation">{</span>
+    <span class="token comment">//初始化Conn属性</span>
+    c <span class="token operator">:=</span> <span class="token operator">&amp;</span>Connection<span class="token punctuation">{</span>
+        TcpServer<span class="token punctuation">:</span>server<span class="token punctuation">,</span>
+        Conn<span class="token punctuation">:</span>     conn<span class="token punctuation">,</span>
+        ConnID<span class="token punctuation">:</span>   connID<span class="token punctuation">,</span>
+        isClosed<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+        MsgHandler<span class="token punctuation">:</span> msgHandler<span class="token punctuation">,</span>
+        ExitBuffChan<span class="token punctuation">:</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token builtin">bool</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        msgChan<span class="token punctuation">:</span><span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        msgBuffChan<span class="token punctuation">:</span><span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> utils<span class="token punctuation">.</span>GlobalObject<span class="token punctuation">.</span>MaxMsgChanLen<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">//不要忘记初始化</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">//将新创建的Conn添加到链接管理中</span>
+    c<span class="token punctuation">.</span>TcpServer<span class="token punctuation">.</span><span class="token function">GetConnMgr</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> c
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br></div></div><p>然后将<code>SendBuffMsg()</code>方法实现一下：</p> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>Connection<span class="token punctuation">)</span> <span class="token function">SendBuffMsg</span><span class="token punctuation">(</span>msgId <span class="token builtin">uint32</span><span class="token punctuation">,</span> data <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token builtin">error</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> c<span class="token punctuation">.</span>isClosed <span class="token operator">==</span> <span class="token boolean">true</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">&quot;Connection closed when send buff msg&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">//将data封包，并且发送</span>
+    dp <span class="token operator">:=</span> <span class="token function">NewDataPack</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    msg<span class="token punctuation">,</span> err <span class="token operator">:=</span> dp<span class="token punctuation">.</span><span class="token function">Pack</span><span class="token punctuation">(</span><span class="token function">NewMsgPackage</span><span class="token punctuation">(</span>msgId<span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;Pack error msg id = &quot;</span><span class="token punctuation">,</span> msgId<span class="token punctuation">)</span>
+        <span class="token keyword">return</span>  errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">&quot;Pack error msg &quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">//写回客户端</span>
+    c<span class="token punctuation">.</span>msgBuffChan <span class="token operator">&lt;-</span> msg
+    <span class="token keyword">return</span> <span class="token boolean">nil</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p>我们在 Writer 中也要有对<code>msgBuffChan</code>的数据监控：</p> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token comment">/*
+    写消息Goroutine， 用户将数据发送给客户端
+ */</span>
+ <span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>Connection<span class="token punctuation">)</span> <span class="token function">StartWriter</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;[Writer Goroutine is running]&quot;</span><span class="token punctuation">)</span>
+     <span class="token keyword">defer</span> fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span><span class="token function">RemoteAddr</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;[conn Writer exit!]&quot;</span><span class="token punctuation">)</span>
+     <span class="token keyword">for</span> <span class="token punctuation">{</span>
+         <span class="token keyword">select</span> <span class="token punctuation">{</span>
+             <span class="token keyword">case</span> data <span class="token operator">:=</span> <span class="token operator">&lt;-</span>c<span class="token punctuation">.</span>msgChan<span class="token punctuation">:</span>
+                 <span class="token comment">//有数据要写给客户端</span>
+                 <span class="token keyword">if</span> <span class="token boolean">_</span><span class="token punctuation">,</span> err <span class="token operator">:=</span> c<span class="token punctuation">.</span>Conn<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+                     fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;Send Data error:, &quot;</span><span class="token punctuation">,</span> err<span class="token punctuation">,</span> <span class="token string">&quot; Conn Writer exit&quot;</span><span class="token punctuation">)</span>
+                     <span class="token keyword">return</span>
+                <span class="token punctuation">}</span>
+            <span class="token comment">//针对有缓冲channel需要些的数据处理</span>
+             <span class="token keyword">case</span> data<span class="token punctuation">,</span> ok<span class="token operator">:=</span> <span class="token operator">&lt;-</span>c<span class="token punctuation">.</span>msgBuffChan<span class="token punctuation">:</span>
+                 <span class="token keyword">if</span> ok <span class="token punctuation">{</span>
+                    <span class="token comment">//有数据要写给客户端</span>
+                    <span class="token keyword">if</span> <span class="token boolean">_</span><span class="token punctuation">,</span> err <span class="token operator">:=</span> c<span class="token punctuation">.</span>Conn<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+                        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;Send Buff Data error:, &quot;</span><span class="token punctuation">,</span> err<span class="token punctuation">,</span> <span class="token string">&quot; Conn Writer exit&quot;</span><span class="token punctuation">)</span>
+                        <span class="token keyword">return</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">break</span>
+                    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;msgBuffChan is Closed&quot;</span><span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+             <span class="token keyword">case</span> <span class="token operator">&lt;-</span>c<span class="token punctuation">.</span>ExitBuffChan<span class="token punctuation">:</span>
+                 <span class="token keyword">return</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br></div></div><p>现在，我们实现了带缓冲的发包方法。接下来，我们去实现注册链接启动/停止自定义 Hook 方法功能。</p> <h2 id="注册链接启动-停止自定义-hook-方法功能"><a href="#注册链接启动-停止自定义-hook-方法功能" class="header-anchor">#</a> 注册链接启动/停止自定义 Hook 方法功能</h2> <p>有的时候，在创建链接的时候，希望在创建链接之后、和断开链接之前，执行一些用户自定义的业务。那么我们就需要给 Zinx 增添两个链接创建后和断开前时机的回调函数，一般也称作 Hook(钩子)函数。</p> <p>我们可以通过 Server 来注册 conn 的 hook 方法</p> <blockquote><p>zinx/ziface/iserver.go</p></blockquote> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">type</span> IServer <span class="token keyword">interface</span><span class="token punctuation">{</span>
+    <span class="token comment">//启动服务器方法</span>
+    <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">//停止服务器方法</span>
+    <span class="token function">Stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">//开启业务服务方法</span>
+    <span class="token function">Serve</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">//路由功能：给当前服务注册一个路由业务方法，供客户端链接处理使用</span>
+    <span class="token function">AddRouter</span><span class="token punctuation">(</span>msgId <span class="token builtin">uint32</span><span class="token punctuation">,</span> router IRouter<span class="token punctuation">)</span>
+    <span class="token comment">//得到链接管理</span>
+    <span class="token function">GetConnMgr</span><span class="token punctuation">(</span><span class="token punctuation">)</span> IConnManager
+    <span class="token comment">//设置该Server的连接创建时Hook函数</span>
+    <span class="token function">SetOnConnStart</span><span class="token punctuation">(</span><span class="token keyword">func</span> <span class="token punctuation">(</span>IConnection<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment">//设置该Server的连接断开时的Hook函数</span>
+    <span class="token function">SetOnConnStop</span><span class="token punctuation">(</span><span class="token keyword">func</span> <span class="token punctuation">(</span>IConnection<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment">//调用连接OnConnStart Hook函数</span>
+    <span class="token function">CallOnConnStart</span><span class="token punctuation">(</span>conn IConnection<span class="token punctuation">)</span>
+    <span class="token comment">//调用连接OnConnStop Hook函数</span>
+    <span class="token function">CallOnConnStop</span><span class="token punctuation">(</span>conn IConnection<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><blockquote><p>zinx/znet/server.go</p></blockquote> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token comment">//iServer 接口实现，定义一个Server服务类</span>
+<span class="token keyword">type</span> Server <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    <span class="token comment">//服务器的名称</span>
+    Name <span class="token builtin">string</span>
+    <span class="token comment">//tcp4 or other</span>
+    IPVersion <span class="token builtin">string</span>
+    <span class="token comment">//服务绑定的IP地址</span>
+    IP <span class="token builtin">string</span>
+    <span class="token comment">//服务绑定的端口</span>
+    Port <span class="token builtin">int</span>
+    <span class="token comment">//当前Server的消息管理模块，用来绑定MsgId和对应的处理方法</span>
+    msgHandler ziface<span class="token punctuation">.</span>IMsgHandle
+    <span class="token comment">//当前Server的链接管理器</span>
+    ConnMgr ziface<span class="token punctuation">.</span>IConnManager
+    <span class="token comment">// =======================</span>
+    <span class="token comment">//新增两个hook函数原型</span>
+    <span class="token comment">//该Server的连接创建时Hook函数</span>
+    OnConnStart    <span class="token keyword">func</span><span class="token punctuation">(</span>conn ziface<span class="token punctuation">.</span>IConnection<span class="token punctuation">)</span>
+    <span class="token comment">//该Server的连接断开时的Hook函数</span>
+    OnConnStop <span class="token keyword">func</span><span class="token punctuation">(</span>conn ziface<span class="token punctuation">.</span>IConnection<span class="token punctuation">)</span>
+    <span class="token comment">// =======================</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br></div></div><p>实现添加 hook 函数的接口和调用 hook 函数的接口。</p> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token comment">//设置该Server的连接创建时Hook函数</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>s <span class="token operator">*</span>Server<span class="token punctuation">)</span> <span class="token function">SetOnConnStart</span><span class="token punctuation">(</span>hookFunc <span class="token keyword">func</span> <span class="token punctuation">(</span>ziface<span class="token punctuation">.</span>IConnection<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    s<span class="token punctuation">.</span>OnConnStart <span class="token operator">=</span> hookFunc
+<span class="token punctuation">}</span>
+<span class="token comment">//设置该Server的连接断开时的Hook函数</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>s <span class="token operator">*</span>Server<span class="token punctuation">)</span> <span class="token function">SetOnConnStop</span><span class="token punctuation">(</span>hookFunc <span class="token keyword">func</span> <span class="token punctuation">(</span>ziface<span class="token punctuation">.</span>IConnection<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    s<span class="token punctuation">.</span>OnConnStop <span class="token operator">=</span> hookFunc
+<span class="token punctuation">}</span>
+<span class="token comment">//调用连接OnConnStart Hook函数</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>s <span class="token operator">*</span>Server<span class="token punctuation">)</span> <span class="token function">CallOnConnStart</span><span class="token punctuation">(</span>conn ziface<span class="token punctuation">.</span>IConnection<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> s<span class="token punctuation">.</span>OnConnStart <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;---&gt; CallOnConnStart....&quot;</span><span class="token punctuation">)</span>
+        s<span class="token punctuation">.</span><span class="token function">OnConnStart</span><span class="token punctuation">(</span>conn<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//调用连接OnConnStop Hook函数</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>s <span class="token operator">*</span>Server<span class="token punctuation">)</span> <span class="token function">CallOnConnStop</span><span class="token punctuation">(</span>conn ziface<span class="token punctuation">.</span>IConnection<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> s<span class="token punctuation">.</span>OnConnStop <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;---&gt; CallOnConnStop....&quot;</span><span class="token punctuation">)</span>
+        s<span class="token punctuation">.</span><span class="token function">OnConnStop</span><span class="token punctuation">(</span>conn<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br></div></div><p>那么接下来，需要选定两个 Hook 方法的调用位置。</p> <p>一个是创建链接之后:</p> <blockquote><p>zinx/znet/connection.go</p></blockquote> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token comment">//启动连接，让当前连接开始工作</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>Connection<span class="token punctuation">)</span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">//1 开启用户从客户端读取数据流程的Goroutine</span>
+    <span class="token keyword">go</span> c<span class="token punctuation">.</span><span class="token function">StartReader</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">//2 开启用于写回客户端数据流程的Goroutine</span>
+    <span class="token keyword">go</span> c<span class="token punctuation">.</span><span class="token function">StartWriter</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">//==================</span>
+    <span class="token comment">//按照用户传递进来的创建连接时需要处理的业务，执行钩子方法</span>
+    c<span class="token punctuation">.</span>TcpServer<span class="token punctuation">.</span><span class="token function">CallOnConnStart</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+    <span class="token comment">//==================</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p>一个是停止链接之前：</p> <blockquote><p>zinx/znet/connection.go</p></blockquote> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token comment">//停止连接，结束当前连接状态M</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>Connection<span class="token punctuation">)</span> <span class="token function">Stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;Conn Stop()...ConnID = &quot;</span><span class="token punctuation">,</span> c<span class="token punctuation">.</span>ConnID<span class="token punctuation">)</span>
+    <span class="token comment">//如果当前链接已经关闭</span>
+    <span class="token keyword">if</span> c<span class="token punctuation">.</span>isClosed <span class="token operator">==</span> <span class="token boolean">true</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span>
+    <span class="token punctuation">}</span>
+    c<span class="token punctuation">.</span>isClosed <span class="token operator">=</span> <span class="token boolean">true</span>
+    <span class="token comment">//==================</span>
+    <span class="token comment">//如果用户注册了该链接的关闭回调业务，那么在此刻应该显示调用</span>
+    c<span class="token punctuation">.</span>TcpServer<span class="token punctuation">.</span><span class="token function">CallOnConnStop</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+    <span class="token comment">//==================</span>
+    <span class="token comment">// 关闭socket链接</span>
+    c<span class="token punctuation">.</span>Conn<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">//关闭Writer</span>
+    c<span class="token punctuation">.</span>ExitBuffChan <span class="token operator">&lt;-</span> <span class="token boolean">true</span>
+    <span class="token comment">//将链接从连接管理器中删除</span>
+    c<span class="token punctuation">.</span>TcpServer<span class="token punctuation">.</span><span class="token function">GetConnMgr</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Remove</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+    <span class="token comment">//关闭该链接全部管道</span>
+    <span class="token function">close</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>ExitBuffChan<span class="token punctuation">)</span>
+    <span class="token function">close</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>msgBuffChan<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br></div></div><p>好了，现在我们基本上已经将全部的连接管理的功能集成到 Zinx 中了，接下来就需要测试一下链接管理模块是否可以使用了。</p> <h2 id="测试"><a href="#测试" class="header-anchor">#</a> 测试</h2> <p>写一个服务端:</p> <blockquote><p>Server.go</p></blockquote> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">package</span> main
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;zinx/ziface&quot;</span>
+    <span class="token string">&quot;zinx/znet&quot;</span>
+<span class="token punctuation">)</span>
+<span class="token comment">//ping test 自定义路由</span>
+<span class="token keyword">type</span> PingRouter <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    znet<span class="token punctuation">.</span>BaseRouter
+<span class="token punctuation">}</span>
+<span class="token comment">//Ping Handle</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>this <span class="token operator">*</span>PingRouter<span class="token punctuation">)</span> <span class="token function">Handle</span><span class="token punctuation">(</span>request ziface<span class="token punctuation">.</span>IRequest<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;Call PingRouter Handle&quot;</span><span class="token punctuation">)</span>
+    <span class="token comment">//先读取客户端的数据，再回写ping...ping...ping</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;recv from client : msgId=&quot;</span><span class="token punctuation">,</span> request<span class="token punctuation">.</span><span class="token function">GetMsgID</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;, data=&quot;</span><span class="token punctuation">,</span> <span class="token function">string</span><span class="token punctuation">(</span>request<span class="token punctuation">.</span><span class="token function">GetData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    err <span class="token operator">:=</span> request<span class="token punctuation">.</span><span class="token function">GetConnection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">SendBuffMsg</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span><span class="token string">&quot;ping...ping...ping&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">type</span> HelloZinxRouter <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    znet<span class="token punctuation">.</span>BaseRouter
+<span class="token punctuation">}</span>
+<span class="token comment">//HelloZinxRouter Handle</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>this <span class="token operator">*</span>HelloZinxRouter<span class="token punctuation">)</span> <span class="token function">Handle</span><span class="token punctuation">(</span>request ziface<span class="token punctuation">.</span>IRequest<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;Call HelloZinxRouter Handle&quot;</span><span class="token punctuation">)</span>
+    <span class="token comment">//先读取客户端的数据，再回写ping...ping...ping</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;recv from client : msgId=&quot;</span><span class="token punctuation">,</span> request<span class="token punctuation">.</span><span class="token function">GetMsgID</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;, data=&quot;</span><span class="token punctuation">,</span> <span class="token function">string</span><span class="token punctuation">(</span>request<span class="token punctuation">.</span><span class="token function">GetData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    err <span class="token operator">:=</span> request<span class="token punctuation">.</span><span class="token function">GetConnection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">SendBuffMsg</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span><span class="token string">&quot;Hello Zinx Router V0.8&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//创建连接的时候执行</span>
+<span class="token keyword">func</span> <span class="token function">DoConnectionBegin</span><span class="token punctuation">(</span>conn ziface<span class="token punctuation">.</span>IConnection<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;DoConnecionBegin is Called ... &quot;</span><span class="token punctuation">)</span>
+    err <span class="token operator">:=</span> conn<span class="token punctuation">.</span><span class="token function">SendMsg</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span><span class="token string">&quot;DoConnection BEGIN...&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//连接断开的时候执行</span>
+<span class="token keyword">func</span> <span class="token function">DoConnectionLost</span><span class="token punctuation">(</span>conn ziface<span class="token punctuation">.</span>IConnection<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;DoConneciotnLost is Called ... &quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">//创建一个server句柄</span>
+    s <span class="token operator">:=</span> znet<span class="token punctuation">.</span><span class="token function">NewServer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">//注册链接hook回调函数</span>
+    s<span class="token punctuation">.</span><span class="token function">SetOnConnStart</span><span class="token punctuation">(</span>DoConnectionBegin<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span><span class="token function">SetOnConnStop</span><span class="token punctuation">(</span>DoConnectionLost<span class="token punctuation">)</span>
+    <span class="token comment">//配置路由</span>
+    s<span class="token punctuation">.</span><span class="token function">AddRouter</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>PingRouter<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span><span class="token function">AddRouter</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>HelloZinxRouter<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token comment">//开启服务</span>
+    s<span class="token punctuation">.</span><span class="token function">Serve</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br></div></div><p>我们这里注册了两个 Hook 函数一个是链接初始化之后<code>DoConnectionBegin()</code>和链接停止之前<code>DoConnectionLost()</code>。</p> <p><code>DoConnectionBegin()</code>会发给客户端一个消息 2 的文本，并且在服务端打印一个调试信息&quot;DoConnecionBegin is Called...&quot;</p> <p><code>DoConnectionLost()</code>在服务端打印一个调试信息&quot;DoConneciotnLost is Called...&quot;</p> <p>客户端：</p> <blockquote><p>Client.go</p></blockquote> <div class="language-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">package</span> main
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;io&quot;</span>
+    <span class="token string">&quot;net&quot;</span>
+    <span class="token string">&quot;time&quot;</span>
+    <span class="token string">&quot;zinx/znet&quot;</span>
+<span class="token punctuation">)</span>
+<span class="token comment">/*
+    模拟客户端
+ */</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;Client Test ... start&quot;</span><span class="token punctuation">)</span>
+    <span class="token comment">//3秒之后发起测试请求，给服务端开启服务的机会</span>
+    time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span><span class="token number">3</span> <span class="token operator">*</span> time<span class="token punctuation">.</span>Second<span class="token punctuation">)</span>
+    conn<span class="token punctuation">,</span>err <span class="token operator">:=</span> net<span class="token punctuation">.</span><span class="token function">Dial</span><span class="token punctuation">(</span><span class="token string">&quot;tcp&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;127.0.0.1:7777&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;client start err, exit!&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">for</span> <span class="token punctuation">{</span>
+        <span class="token comment">//发封包message消息</span>
+        dp <span class="token operator">:=</span> znet<span class="token punctuation">.</span><span class="token function">NewDataPack</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        msg<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> dp<span class="token punctuation">.</span><span class="token function">Pack</span><span class="token punctuation">(</span>znet<span class="token punctuation">.</span><span class="token function">NewMsgPackage</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span><span class="token string">&quot;Zinx V0.8 Client0 Test Message&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token boolean">_</span><span class="token punctuation">,</span> err <span class="token operator">:=</span> conn<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> err <span class="token operator">!=</span><span class="token boolean">nil</span> <span class="token punctuation">{</span>
+            fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;write error err &quot;</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+            <span class="token keyword">return</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">//先读出流中的head部分</span>
+        headData <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> dp<span class="token punctuation">.</span><span class="token function">GetHeadLen</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token boolean">_</span><span class="token punctuation">,</span> err <span class="token operator">=</span> io<span class="token punctuation">.</span><span class="token function">ReadFull</span><span class="token punctuation">(</span>conn<span class="token punctuation">,</span> headData<span class="token punctuation">)</span> <span class="token comment">//ReadFull 会把msg填充满为止</span>
+        <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+            fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;read head error&quot;</span><span class="token punctuation">)</span>
+            <span class="token keyword">break</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">//将headData字节流 拆包到msg中</span>
+        msgHead<span class="token punctuation">,</span> err <span class="token operator">:=</span> dp<span class="token punctuation">.</span><span class="token function">Unpack</span><span class="token punctuation">(</span>headData<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+            fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;server unpack err:&quot;</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+            <span class="token keyword">return</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> msgHead<span class="token punctuation">.</span><span class="token function">GetDataLen</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token punctuation">{</span>
+            <span class="token comment">//msg 是有data数据的，需要再次读取data数据</span>
+            msg <span class="token operator">:=</span> msgHead<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token operator">*</span>znet<span class="token punctuation">.</span>Message<span class="token punctuation">)</span>
+            msg<span class="token punctuation">.</span>Data <span class="token operator">=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> msg<span class="token punctuation">.</span><span class="token function">GetDataLen</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token comment">//根据dataLen从io中读取字节流</span>
+            <span class="token boolean">_</span><span class="token punctuation">,</span> err <span class="token operator">:=</span> io<span class="token punctuation">.</span><span class="token function">ReadFull</span><span class="token punctuation">(</span>conn<span class="token punctuation">,</span> msg<span class="token punctuation">.</span>Data<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+                fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;server unpack data err:&quot;</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+                <span class="token keyword">return</span>
+            <span class="token punctuation">}</span>
+            fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;==&gt; Recv Msg: ID=&quot;</span><span class="token punctuation">,</span> msg<span class="token punctuation">.</span>Id<span class="token punctuation">,</span> <span class="token string">&quot;, len=&quot;</span><span class="token punctuation">,</span> msg<span class="token punctuation">.</span>DataLen<span class="token punctuation">,</span> <span class="token string">&quot;, data=&quot;</span><span class="token punctuation">,</span> <span class="token function">string</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>Data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">*</span>time<span class="token punctuation">.</span>Second<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br></div></div><p>我们在当前命令行窗口启动服务端：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>go run Server.go
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>之后新建另一个命令行窗口，即命令行右上角的按钮。点击后先在新的命令行窗口输入 <code>export GOPATH=/home/project</code> 再切换到 zinx 目录下执行 <code>go run Client.go</code>。</p> <p>测试结果：</p> <p><img src="/matheusblog/assets/img/image-20220531170624403.dd8da918.png" alt="image-20220531170624403"></p> <p><img src="/matheusblog/assets/img/image-20220531170630982.108ec647.png" alt="image-20220531170630982"></p> <p>客户端创建成功，回调 Hook 已经执行，并且 Conn 被添加到 ConnManager 中， conn num = 1，当我们手动 CTRL+C 关闭客户端的时候， 服务器 ConnManager 已经成功将 Conn 摘掉，conn num = 0。</p> <p>同时服务端也打印出 conn 停止之后的回调信息。</p> <h2 id="实验总结"><a href="#实验总结" class="header-anchor">#</a> 实验总结</h2> <p>今天我们完成了 zinx 0.9 版本，完成了链接控制的功能，以及缓冲包的使用，大家在实验结束后请思考一下，使用缓冲和不使用缓冲的优缺点是什么。</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/matheusblog/md/other-languages/go/basic-project/09实现工作池.html" class="prev">
+        实现工作池
+      </a></span> <span class="next"><a href="/matheusblog/md/other-languages/go/basic-project/11连接属性设置.html">
+        连接属性设置
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/matheusblog/assets/js/app.593a6820.js" defer></script><script src="/matheusblog/assets/js/3.21aaf515.js" defer></script><script src="/matheusblog/assets/js/83.8ceb5155.js" defer></script>
+  </body>
+</html>

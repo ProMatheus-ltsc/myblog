@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Chapter 2. Creating and Destroying Objects（创建和销毁对象） | MyBlog</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="包含: Java 基础, JVM, Spring, Spring Boot, Spring Cloud, MySQL, ElasticSearch, MongoDB, Docker, k8s, Linux, DevOps, 分布式,  开发工具, Git, IDE...">
+    
+    <link rel="preload" href="/matheusblog/assets/css/0.styles.980a01be.css" as="style"><link rel="preload" href="/matheusblog/assets/js/app.593a6820.js" as="script"><link rel="preload" href="/matheusblog/assets/js/3.21aaf515.js" as="script"><link rel="preload" href="/matheusblog/assets/js/178.db1004ac.js" as="script"><link rel="prefetch" href="/matheusblog/assets/js/10.7fc83448.js"><link rel="prefetch" href="/matheusblog/assets/js/100.05d56713.js"><link rel="prefetch" href="/matheusblog/assets/js/101.2ab45181.js"><link rel="prefetch" href="/matheusblog/assets/js/102.8bf99172.js"><link rel="prefetch" href="/matheusblog/assets/js/103.f13719cb.js"><link rel="prefetch" href="/matheusblog/assets/js/104.6bd92b70.js"><link rel="prefetch" href="/matheusblog/assets/js/105.d48f34c1.js"><link rel="prefetch" href="/matheusblog/assets/js/106.f7637ede.js"><link rel="prefetch" href="/matheusblog/assets/js/107.ebfdc222.js"><link rel="prefetch" href="/matheusblog/assets/js/108.fd750675.js"><link rel="prefetch" href="/matheusblog/assets/js/109.e560f905.js"><link rel="prefetch" href="/matheusblog/assets/js/11.ad64f2aa.js"><link rel="prefetch" href="/matheusblog/assets/js/110.7478a946.js"><link rel="prefetch" href="/matheusblog/assets/js/111.498692b5.js"><link rel="prefetch" href="/matheusblog/assets/js/112.ac966976.js"><link rel="prefetch" href="/matheusblog/assets/js/113.ce51f5b2.js"><link rel="prefetch" href="/matheusblog/assets/js/114.7d4e6324.js"><link rel="prefetch" href="/matheusblog/assets/js/115.6c883cb9.js"><link rel="prefetch" href="/matheusblog/assets/js/116.cae197e4.js"><link rel="prefetch" href="/matheusblog/assets/js/117.48a612f3.js"><link rel="prefetch" href="/matheusblog/assets/js/118.2d9116a5.js"><link rel="prefetch" href="/matheusblog/assets/js/119.e0967512.js"><link rel="prefetch" href="/matheusblog/assets/js/12.e3dfadc3.js"><link rel="prefetch" href="/matheusblog/assets/js/120.1ce6260c.js"><link rel="prefetch" href="/matheusblog/assets/js/121.c5f567f4.js"><link rel="prefetch" href="/matheusblog/assets/js/122.ff4f9bed.js"><link rel="prefetch" href="/matheusblog/assets/js/123.b354268c.js"><link rel="prefetch" href="/matheusblog/assets/js/124.48c95555.js"><link rel="prefetch" href="/matheusblog/assets/js/125.d6737c1d.js"><link rel="prefetch" href="/matheusblog/assets/js/126.9ae4183e.js"><link rel="prefetch" href="/matheusblog/assets/js/127.9bfd4011.js"><link rel="prefetch" href="/matheusblog/assets/js/128.c4c149dc.js"><link rel="prefetch" href="/matheusblog/assets/js/129.020ca51a.js"><link rel="prefetch" href="/matheusblog/assets/js/13.992d8475.js"><link rel="prefetch" href="/matheusblog/assets/js/130.8373f4f6.js"><link rel="prefetch" href="/matheusblog/assets/js/131.0049275f.js"><link rel="prefetch" href="/matheusblog/assets/js/132.9c75a703.js"><link rel="prefetch" href="/matheusblog/assets/js/133.7c5a554b.js"><link rel="prefetch" href="/matheusblog/assets/js/134.386d8166.js"><link rel="prefetch" href="/matheusblog/assets/js/135.fc6a9d8a.js"><link rel="prefetch" href="/matheusblog/assets/js/136.923ebe49.js"><link rel="prefetch" href="/matheusblog/assets/js/137.21eda887.js"><link rel="prefetch" href="/matheusblog/assets/js/138.47e05cbd.js"><link rel="prefetch" href="/matheusblog/assets/js/139.1cac91bc.js"><link rel="prefetch" href="/matheusblog/assets/js/14.74ef45d7.js"><link rel="prefetch" href="/matheusblog/assets/js/140.d4f48f33.js"><link rel="prefetch" href="/matheusblog/assets/js/141.b0eac92e.js"><link rel="prefetch" href="/matheusblog/assets/js/142.31ca9508.js"><link rel="prefetch" href="/matheusblog/assets/js/143.19c8f260.js"><link rel="prefetch" href="/matheusblog/assets/js/144.f4b520f6.js"><link rel="prefetch" href="/matheusblog/assets/js/145.45f25bf6.js"><link rel="prefetch" href="/matheusblog/assets/js/146.68a8964b.js"><link rel="prefetch" href="/matheusblog/assets/js/147.75888e64.js"><link rel="prefetch" href="/matheusblog/assets/js/148.33081c7f.js"><link rel="prefetch" href="/matheusblog/assets/js/149.16480e62.js"><link rel="prefetch" href="/matheusblog/assets/js/15.04c8d6cd.js"><link rel="prefetch" href="/matheusblog/assets/js/150.76d4704a.js"><link rel="prefetch" href="/matheusblog/assets/js/151.4cbc533a.js"><link rel="prefetch" href="/matheusblog/assets/js/152.f67f9231.js"><link rel="prefetch" href="/matheusblog/assets/js/153.c81f6a62.js"><link rel="prefetch" href="/matheusblog/assets/js/154.dab8a360.js"><link rel="prefetch" href="/matheusblog/assets/js/155.d367a937.js"><link rel="prefetch" href="/matheusblog/assets/js/156.4a4883e1.js"><link rel="prefetch" href="/matheusblog/assets/js/157.c9543f71.js"><link rel="prefetch" href="/matheusblog/assets/js/158.d9e7b7d7.js"><link rel="prefetch" href="/matheusblog/assets/js/159.dca374fd.js"><link rel="prefetch" href="/matheusblog/assets/js/16.dc555a7c.js"><link rel="prefetch" href="/matheusblog/assets/js/160.a897bdbf.js"><link rel="prefetch" href="/matheusblog/assets/js/161.c79f3328.js"><link rel="prefetch" href="/matheusblog/assets/js/162.5d163b04.js"><link rel="prefetch" href="/matheusblog/assets/js/163.f236c8e7.js"><link rel="prefetch" href="/matheusblog/assets/js/164.ae3996a0.js"><link rel="prefetch" href="/matheusblog/assets/js/165.99a4a455.js"><link rel="prefetch" href="/matheusblog/assets/js/166.2954a59d.js"><link rel="prefetch" href="/matheusblog/assets/js/167.2a009c0f.js"><link rel="prefetch" href="/matheusblog/assets/js/168.98c13248.js"><link rel="prefetch" href="/matheusblog/assets/js/169.d12d1758.js"><link rel="prefetch" href="/matheusblog/assets/js/17.6d9ca1f3.js"><link rel="prefetch" href="/matheusblog/assets/js/170.b748a5b8.js"><link rel="prefetch" href="/matheusblog/assets/js/171.32664859.js"><link rel="prefetch" href="/matheusblog/assets/js/172.db51c06c.js"><link rel="prefetch" href="/matheusblog/assets/js/173.05f4de73.js"><link rel="prefetch" href="/matheusblog/assets/js/174.cf15ba6e.js"><link rel="prefetch" href="/matheusblog/assets/js/175.f5b31a54.js"><link rel="prefetch" href="/matheusblog/assets/js/176.2d62ffaf.js"><link rel="prefetch" href="/matheusblog/assets/js/177.7998e89e.js"><link rel="prefetch" href="/matheusblog/assets/js/179.734eb25c.js"><link rel="prefetch" href="/matheusblog/assets/js/18.aaa5af31.js"><link rel="prefetch" href="/matheusblog/assets/js/180.4eeacb70.js"><link rel="prefetch" href="/matheusblog/assets/js/181.1aeca267.js"><link rel="prefetch" href="/matheusblog/assets/js/182.6f0b151f.js"><link rel="prefetch" href="/matheusblog/assets/js/183.f31d1295.js"><link rel="prefetch" href="/matheusblog/assets/js/184.681d52e3.js"><link rel="prefetch" href="/matheusblog/assets/js/185.1a0a117b.js"><link rel="prefetch" href="/matheusblog/assets/js/186.e8c0a59e.js"><link rel="prefetch" href="/matheusblog/assets/js/187.3ccf31fc.js"><link rel="prefetch" href="/matheusblog/assets/js/188.e3d7e646.js"><link rel="prefetch" href="/matheusblog/assets/js/189.c19d3eec.js"><link rel="prefetch" href="/matheusblog/assets/js/19.73bd5e10.js"><link rel="prefetch" href="/matheusblog/assets/js/190.05598997.js"><link rel="prefetch" href="/matheusblog/assets/js/191.d10d1229.js"><link rel="prefetch" href="/matheusblog/assets/js/192.3db37086.js"><link rel="prefetch" href="/matheusblog/assets/js/193.b0373c83.js"><link rel="prefetch" href="/matheusblog/assets/js/194.d2ee36cf.js"><link rel="prefetch" href="/matheusblog/assets/js/195.ae787113.js"><link rel="prefetch" href="/matheusblog/assets/js/196.83d4ca09.js"><link rel="prefetch" href="/matheusblog/assets/js/197.cdff575b.js"><link rel="prefetch" href="/matheusblog/assets/js/198.4ea68cd5.js"><link rel="prefetch" href="/matheusblog/assets/js/199.e64510f3.js"><link rel="prefetch" href="/matheusblog/assets/js/2.e59282cd.js"><link rel="prefetch" href="/matheusblog/assets/js/20.4ffcc1a6.js"><link rel="prefetch" href="/matheusblog/assets/js/200.1d5f2566.js"><link rel="prefetch" href="/matheusblog/assets/js/201.9eaf3e34.js"><link rel="prefetch" href="/matheusblog/assets/js/202.465afee5.js"><link rel="prefetch" href="/matheusblog/assets/js/203.12f299cd.js"><link rel="prefetch" href="/matheusblog/assets/js/204.932122b1.js"><link rel="prefetch" href="/matheusblog/assets/js/205.bb5c1814.js"><link rel="prefetch" href="/matheusblog/assets/js/206.fb60327e.js"><link rel="prefetch" href="/matheusblog/assets/js/207.28d97935.js"><link rel="prefetch" href="/matheusblog/assets/js/208.c47c030e.js"><link rel="prefetch" href="/matheusblog/assets/js/209.0f36f5f9.js"><link rel="prefetch" href="/matheusblog/assets/js/21.17363412.js"><link rel="prefetch" href="/matheusblog/assets/js/210.fb6cff70.js"><link rel="prefetch" href="/matheusblog/assets/js/211.2c280ba3.js"><link rel="prefetch" href="/matheusblog/assets/js/212.70017fec.js"><link rel="prefetch" href="/matheusblog/assets/js/213.0563f296.js"><link rel="prefetch" href="/matheusblog/assets/js/214.218e943a.js"><link rel="prefetch" href="/matheusblog/assets/js/215.54417a94.js"><link rel="prefetch" href="/matheusblog/assets/js/216.6a834feb.js"><link rel="prefetch" href="/matheusblog/assets/js/217.83efcc9c.js"><link rel="prefetch" href="/matheusblog/assets/js/218.1e108689.js"><link rel="prefetch" href="/matheusblog/assets/js/219.c394d2b9.js"><link rel="prefetch" href="/matheusblog/assets/js/22.33a3716f.js"><link rel="prefetch" href="/matheusblog/assets/js/220.07f185e1.js"><link rel="prefetch" href="/matheusblog/assets/js/221.22376958.js"><link rel="prefetch" href="/matheusblog/assets/js/222.4bad5952.js"><link rel="prefetch" href="/matheusblog/assets/js/223.49996418.js"><link rel="prefetch" href="/matheusblog/assets/js/224.ccaa0967.js"><link rel="prefetch" href="/matheusblog/assets/js/225.912d880d.js"><link rel="prefetch" href="/matheusblog/assets/js/226.d535936c.js"><link rel="prefetch" href="/matheusblog/assets/js/227.7786b4f6.js"><link rel="prefetch" href="/matheusblog/assets/js/228.d00849f0.js"><link rel="prefetch" href="/matheusblog/assets/js/229.b0dd9aca.js"><link rel="prefetch" href="/matheusblog/assets/js/23.e3bf2ef7.js"><link rel="prefetch" href="/matheusblog/assets/js/230.5eac07fa.js"><link rel="prefetch" href="/matheusblog/assets/js/231.52ba5c5a.js"><link rel="prefetch" href="/matheusblog/assets/js/232.4abf639c.js"><link rel="prefetch" href="/matheusblog/assets/js/233.a1bd2c65.js"><link rel="prefetch" href="/matheusblog/assets/js/234.de8b6730.js"><link rel="prefetch" href="/matheusblog/assets/js/235.028517f9.js"><link rel="prefetch" href="/matheusblog/assets/js/236.a5e5aec8.js"><link rel="prefetch" href="/matheusblog/assets/js/237.3bb9f4d1.js"><link rel="prefetch" href="/matheusblog/assets/js/238.8f877524.js"><link rel="prefetch" href="/matheusblog/assets/js/239.b8cc9b75.js"><link rel="prefetch" href="/matheusblog/assets/js/24.a8c12ef2.js"><link rel="prefetch" href="/matheusblog/assets/js/240.897160bf.js"><link rel="prefetch" href="/matheusblog/assets/js/241.fd2a3483.js"><link rel="prefetch" href="/matheusblog/assets/js/242.2ec904c6.js"><link rel="prefetch" href="/matheusblog/assets/js/243.4e49a9d3.js"><link rel="prefetch" href="/matheusblog/assets/js/244.fe01223f.js"><link rel="prefetch" href="/matheusblog/assets/js/245.582e9c12.js"><link rel="prefetch" href="/matheusblog/assets/js/246.3544e58b.js"><link rel="prefetch" href="/matheusblog/assets/js/247.b7d9ae53.js"><link rel="prefetch" href="/matheusblog/assets/js/248.972e23a8.js"><link rel="prefetch" href="/matheusblog/assets/js/249.ccaca596.js"><link rel="prefetch" href="/matheusblog/assets/js/25.7ad2fc35.js"><link rel="prefetch" href="/matheusblog/assets/js/250.f6f9a19d.js"><link rel="prefetch" href="/matheusblog/assets/js/251.f4c252f4.js"><link rel="prefetch" href="/matheusblog/assets/js/252.9f57b2df.js"><link rel="prefetch" href="/matheusblog/assets/js/253.f5189700.js"><link rel="prefetch" href="/matheusblog/assets/js/254.6489ac1e.js"><link rel="prefetch" href="/matheusblog/assets/js/255.0689b745.js"><link rel="prefetch" href="/matheusblog/assets/js/256.3d10dee2.js"><link rel="prefetch" href="/matheusblog/assets/js/257.6de983e9.js"><link rel="prefetch" href="/matheusblog/assets/js/258.6b020b2b.js"><link rel="prefetch" href="/matheusblog/assets/js/259.247a056e.js"><link rel="prefetch" href="/matheusblog/assets/js/26.b914b59c.js"><link rel="prefetch" href="/matheusblog/assets/js/260.090a63d7.js"><link rel="prefetch" href="/matheusblog/assets/js/261.68eb8558.js"><link rel="prefetch" href="/matheusblog/assets/js/262.faf9abe2.js"><link rel="prefetch" href="/matheusblog/assets/js/263.257f108f.js"><link rel="prefetch" href="/matheusblog/assets/js/264.6d2b9738.js"><link rel="prefetch" href="/matheusblog/assets/js/265.465d955b.js"><link rel="prefetch" href="/matheusblog/assets/js/266.536b61c0.js"><link rel="prefetch" href="/matheusblog/assets/js/267.96b4633e.js"><link rel="prefetch" href="/matheusblog/assets/js/268.96d76f9d.js"><link rel="prefetch" href="/matheusblog/assets/js/269.34016973.js"><link rel="prefetch" href="/matheusblog/assets/js/27.ffeceb01.js"><link rel="prefetch" href="/matheusblog/assets/js/270.d90c188c.js"><link rel="prefetch" href="/matheusblog/assets/js/271.ee4ffe7d.js"><link rel="prefetch" href="/matheusblog/assets/js/272.11f7da14.js"><link rel="prefetch" href="/matheusblog/assets/js/273.fc7315b7.js"><link rel="prefetch" href="/matheusblog/assets/js/274.bc613d3f.js"><link rel="prefetch" href="/matheusblog/assets/js/275.9eac4781.js"><link rel="prefetch" href="/matheusblog/assets/js/276.228c9705.js"><link rel="prefetch" href="/matheusblog/assets/js/277.426f8416.js"><link rel="prefetch" href="/matheusblog/assets/js/278.ccc1bb34.js"><link rel="prefetch" href="/matheusblog/assets/js/279.f5855c5b.js"><link rel="prefetch" href="/matheusblog/assets/js/28.dd11a45d.js"><link rel="prefetch" href="/matheusblog/assets/js/280.d3c75e0a.js"><link rel="prefetch" href="/matheusblog/assets/js/281.603a03b4.js"><link rel="prefetch" href="/matheusblog/assets/js/282.034b31ee.js"><link rel="prefetch" href="/matheusblog/assets/js/283.015dc7ca.js"><link rel="prefetch" href="/matheusblog/assets/js/284.93fc684a.js"><link rel="prefetch" href="/matheusblog/assets/js/285.2bcbd15b.js"><link rel="prefetch" href="/matheusblog/assets/js/286.a33e9947.js"><link rel="prefetch" href="/matheusblog/assets/js/287.dc1dcc8f.js"><link rel="prefetch" href="/matheusblog/assets/js/288.28d0560f.js"><link rel="prefetch" href="/matheusblog/assets/js/289.de725d9a.js"><link rel="prefetch" href="/matheusblog/assets/js/29.208fc435.js"><link rel="prefetch" href="/matheusblog/assets/js/290.e24c300d.js"><link rel="prefetch" href="/matheusblog/assets/js/291.f90df931.js"><link rel="prefetch" href="/matheusblog/assets/js/292.5685020e.js"><link rel="prefetch" href="/matheusblog/assets/js/293.82ed5e46.js"><link rel="prefetch" href="/matheusblog/assets/js/294.eebd2b94.js"><link rel="prefetch" href="/matheusblog/assets/js/295.adcf77fc.js"><link rel="prefetch" href="/matheusblog/assets/js/296.4f010851.js"><link rel="prefetch" href="/matheusblog/assets/js/297.9e673648.js"><link rel="prefetch" href="/matheusblog/assets/js/298.eda8bbb3.js"><link rel="prefetch" href="/matheusblog/assets/js/299.6c1c41a1.js"><link rel="prefetch" href="/matheusblog/assets/js/30.06d6d71a.js"><link rel="prefetch" href="/matheusblog/assets/js/300.6bed6a4c.js"><link rel="prefetch" href="/matheusblog/assets/js/301.8ac12ae7.js"><link rel="prefetch" href="/matheusblog/assets/js/302.79e69467.js"><link rel="prefetch" href="/matheusblog/assets/js/303.684a1a22.js"><link rel="prefetch" href="/matheusblog/assets/js/304.fc032fe3.js"><link rel="prefetch" href="/matheusblog/assets/js/305.1e280374.js"><link rel="prefetch" href="/matheusblog/assets/js/306.1d9a58df.js"><link rel="prefetch" href="/matheusblog/assets/js/307.6ebbe4b0.js"><link rel="prefetch" href="/matheusblog/assets/js/308.522434b5.js"><link rel="prefetch" href="/matheusblog/assets/js/309.60c45495.js"><link rel="prefetch" href="/matheusblog/assets/js/31.67fbcea0.js"><link rel="prefetch" href="/matheusblog/assets/js/310.efef441d.js"><link rel="prefetch" href="/matheusblog/assets/js/311.99d0fd73.js"><link rel="prefetch" href="/matheusblog/assets/js/312.cf9889ba.js"><link rel="prefetch" href="/matheusblog/assets/js/313.3e15155b.js"><link rel="prefetch" href="/matheusblog/assets/js/314.c1964a21.js"><link rel="prefetch" href="/matheusblog/assets/js/315.a7f16c02.js"><link rel="prefetch" href="/matheusblog/assets/js/316.6d91f275.js"><link rel="prefetch" href="/matheusblog/assets/js/317.8cfcc3f4.js"><link rel="prefetch" href="/matheusblog/assets/js/318.6e673fe6.js"><link rel="prefetch" href="/matheusblog/assets/js/319.5fe547d9.js"><link rel="prefetch" href="/matheusblog/assets/js/32.a5c22c7d.js"><link rel="prefetch" href="/matheusblog/assets/js/320.75269859.js"><link rel="prefetch" href="/matheusblog/assets/js/321.0b5cdb89.js"><link rel="prefetch" href="/matheusblog/assets/js/322.dc68c4f6.js"><link rel="prefetch" href="/matheusblog/assets/js/323.990b2c5e.js"><link rel="prefetch" href="/matheusblog/assets/js/324.90800df3.js"><link rel="prefetch" href="/matheusblog/assets/js/325.387258a3.js"><link rel="prefetch" href="/matheusblog/assets/js/326.dc462f7a.js"><link rel="prefetch" href="/matheusblog/assets/js/327.f7c636b5.js"><link rel="prefetch" href="/matheusblog/assets/js/328.918be9ec.js"><link rel="prefetch" href="/matheusblog/assets/js/329.053ad283.js"><link rel="prefetch" href="/matheusblog/assets/js/33.f5cd14b0.js"><link rel="prefetch" href="/matheusblog/assets/js/330.72d04514.js"><link rel="prefetch" href="/matheusblog/assets/js/331.3265759e.js"><link rel="prefetch" href="/matheusblog/assets/js/332.fe0a7d53.js"><link rel="prefetch" href="/matheusblog/assets/js/333.b8e2752f.js"><link rel="prefetch" href="/matheusblog/assets/js/334.d5908db0.js"><link rel="prefetch" href="/matheusblog/assets/js/335.5fa33b8f.js"><link rel="prefetch" href="/matheusblog/assets/js/34.4a1bb328.js"><link rel="prefetch" href="/matheusblog/assets/js/35.5ca89c32.js"><link rel="prefetch" href="/matheusblog/assets/js/36.09100e9e.js"><link rel="prefetch" href="/matheusblog/assets/js/37.4acb6660.js"><link rel="prefetch" href="/matheusblog/assets/js/38.8f0108b1.js"><link rel="prefetch" href="/matheusblog/assets/js/39.b0457fd6.js"><link rel="prefetch" href="/matheusblog/assets/js/4.605de6b3.js"><link rel="prefetch" href="/matheusblog/assets/js/40.da34c4c2.js"><link rel="prefetch" href="/matheusblog/assets/js/41.22494abc.js"><link rel="prefetch" href="/matheusblog/assets/js/42.62a646d5.js"><link rel="prefetch" href="/matheusblog/assets/js/43.e06fdd36.js"><link rel="prefetch" href="/matheusblog/assets/js/44.27c68b68.js"><link rel="prefetch" href="/matheusblog/assets/js/45.7724b677.js"><link rel="prefetch" href="/matheusblog/assets/js/46.9831445e.js"><link rel="prefetch" href="/matheusblog/assets/js/47.b4702b96.js"><link rel="prefetch" href="/matheusblog/assets/js/48.640d984a.js"><link rel="prefetch" href="/matheusblog/assets/js/49.ee8c91a2.js"><link rel="prefetch" href="/matheusblog/assets/js/5.b078cf08.js"><link rel="prefetch" href="/matheusblog/assets/js/50.784ee066.js"><link rel="prefetch" href="/matheusblog/assets/js/51.7b016ea9.js"><link rel="prefetch" href="/matheusblog/assets/js/52.fb6f4151.js"><link rel="prefetch" href="/matheusblog/assets/js/53.f79b2995.js"><link rel="prefetch" href="/matheusblog/assets/js/54.86855fe7.js"><link rel="prefetch" href="/matheusblog/assets/js/55.eb2b2737.js"><link rel="prefetch" href="/matheusblog/assets/js/56.77daf161.js"><link rel="prefetch" href="/matheusblog/assets/js/57.28b3ba1f.js"><link rel="prefetch" href="/matheusblog/assets/js/58.914e2a6e.js"><link rel="prefetch" href="/matheusblog/assets/js/59.184a5cd7.js"><link rel="prefetch" href="/matheusblog/assets/js/6.2779e9be.js"><link rel="prefetch" href="/matheusblog/assets/js/60.29086289.js"><link rel="prefetch" href="/matheusblog/assets/js/61.f56d0809.js"><link rel="prefetch" href="/matheusblog/assets/js/62.102fb7cb.js"><link rel="prefetch" href="/matheusblog/assets/js/63.c87b5520.js"><link rel="prefetch" href="/matheusblog/assets/js/64.3943c874.js"><link rel="prefetch" href="/matheusblog/assets/js/65.f673e008.js"><link rel="prefetch" href="/matheusblog/assets/js/66.40f883e4.js"><link rel="prefetch" href="/matheusblog/assets/js/67.0c1d90d0.js"><link rel="prefetch" href="/matheusblog/assets/js/68.0c95daf1.js"><link rel="prefetch" href="/matheusblog/assets/js/69.b949a514.js"><link rel="prefetch" href="/matheusblog/assets/js/7.077fca60.js"><link rel="prefetch" href="/matheusblog/assets/js/70.703ec4db.js"><link rel="prefetch" href="/matheusblog/assets/js/71.34cd11d9.js"><link rel="prefetch" href="/matheusblog/assets/js/72.114bd29f.js"><link rel="prefetch" href="/matheusblog/assets/js/73.34f025b9.js"><link rel="prefetch" href="/matheusblog/assets/js/74.bb2e30ed.js"><link rel="prefetch" href="/matheusblog/assets/js/75.37bd4e6a.js"><link rel="prefetch" href="/matheusblog/assets/js/76.0e12e24b.js"><link rel="prefetch" href="/matheusblog/assets/js/77.d161a37e.js"><link rel="prefetch" href="/matheusblog/assets/js/78.ed3d1da2.js"><link rel="prefetch" href="/matheusblog/assets/js/79.8b6e6a60.js"><link rel="prefetch" href="/matheusblog/assets/js/8.5d91406a.js"><link rel="prefetch" href="/matheusblog/assets/js/80.1b43f99a.js"><link rel="prefetch" href="/matheusblog/assets/js/81.5e96f717.js"><link rel="prefetch" href="/matheusblog/assets/js/82.f26301c1.js"><link rel="prefetch" href="/matheusblog/assets/js/83.8ceb5155.js"><link rel="prefetch" href="/matheusblog/assets/js/84.053321b4.js"><link rel="prefetch" href="/matheusblog/assets/js/85.9ecf4ad2.js"><link rel="prefetch" href="/matheusblog/assets/js/86.b4231e28.js"><link rel="prefetch" href="/matheusblog/assets/js/87.25d7e120.js"><link rel="prefetch" href="/matheusblog/assets/js/88.bbb3a36e.js"><link rel="prefetch" href="/matheusblog/assets/js/89.db73337a.js"><link rel="prefetch" href="/matheusblog/assets/js/9.cea7668b.js"><link rel="prefetch" href="/matheusblog/assets/js/90.2ef95e92.js"><link rel="prefetch" href="/matheusblog/assets/js/91.7a0175f8.js"><link rel="prefetch" href="/matheusblog/assets/js/92.55b107b4.js"><link rel="prefetch" href="/matheusblog/assets/js/93.50337fff.js"><link rel="prefetch" href="/matheusblog/assets/js/94.a9740e63.js"><link rel="prefetch" href="/matheusblog/assets/js/95.d17d251c.js"><link rel="prefetch" href="/matheusblog/assets/js/96.b087ef79.js"><link rel="prefetch" href="/matheusblog/assets/js/97.9ba0439c.js"><link rel="prefetch" href="/matheusblog/assets/js/98.08362bda.js"><link rel="prefetch" href="/matheusblog/assets/js/99.339bf826.js">
+    <link rel="stylesheet" href="/matheusblog/assets/css/0.styles.980a01be.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/matheusblog/" class="home-link router-link-active"><!----> <span class="site-name">MyBlog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/jvm/00虚拟机内存体系与垃圾回收.html" class="nav-link">
+  JVM简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li><li class="dropdown-item"><h4>
+          ElasticSearch
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/elasticsearch/02Elasticsearch-Docker搭建ES.html" class="nav-link">
+  Docker搭建ES
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/springMVC框架.html" class="nav-link">
+  SpringMVC框架
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springboot/SpringBoot简介.html" class="nav-link">
+  SpringBoot简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/docker/01Docker入门.html" class="nav-link">
+  Docker入门
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/k8s/01Kubernetes介绍及使用.html" class="nav-link">
+  K8s介绍与使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/code-style/effective-java/目录.html" class="nav-link">
+  Effective-Java
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  单元测试
+</a></li><li class="dropdown-subitem"><a href="/matheusblog/md/project/jt-project/2. IDEA配置.html" class="nav-link">
+  IDEA配置
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/scala/Scala学习宝典.html" class="nav-link">
+  Scala学习宝典
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/python/Python基础学习.html" class="nav-link">
+  Python基础学习
+</a></li></ul></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/jvm/00虚拟机内存体系与垃圾回收.html" class="nav-link">
+  JVM简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li><li class="dropdown-item"><h4>
+          ElasticSearch
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/elasticsearch/02Elasticsearch-Docker搭建ES.html" class="nav-link">
+  Docker搭建ES
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/springMVC框架.html" class="nav-link">
+  SpringMVC框架
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springboot/SpringBoot简介.html" class="nav-link">
+  SpringBoot简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/docker/01Docker入门.html" class="nav-link">
+  Docker入门
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/k8s/01Kubernetes介绍及使用.html" class="nav-link">
+  K8s介绍与使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/code-style/effective-java/目录.html" class="nav-link">
+  Effective-Java
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  单元测试
+</a></li><li class="dropdown-subitem"><a href="/matheusblog/md/project/jt-project/2. IDEA配置.html" class="nav-link">
+  IDEA配置
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/scala/Scala学习宝典.html" class="nav-link">
+  Scala学习宝典
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/python/Python基础学习.html" class="nav-link">
+  Python基础学习
+</a></li></ul></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>JUnit</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="sidebar-link">什么是软件测试</a></li><li><a href="/matheusblog/md/develop/JUnit/02第一个单元测试.html" class="sidebar-link">第一个单元测试</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Effective-Java</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/develop/code-style/effective-java/目录.html" class="sidebar-link">Effective-Java目录</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="chapter-2-creating-and-destroying-objects-创建和销毁对象"><a href="#chapter-2-creating-and-destroying-objects-创建和销毁对象" class="header-anchor">#</a> Chapter 2. Creating and Destroying Objects（创建和销毁对象）</h2> <h3 id="item-2-consider-a-builder-when-faced-with-many-constructor-parameters-当构造函数有多个参数时-考虑改用构建器"><a href="#item-2-consider-a-builder-when-faced-with-many-constructor-parameters-当构造函数有多个参数时-考虑改用构建器" class="header-anchor">#</a> Item 2: Consider a builder when faced with many constructor parameters（当构造函数有多个参数时，考虑改用构建器）</h3> <p>Static factories and constructors share a limitation: they do not scale well to large numbers of optional parameters. Consider the case of a class representing the Nutrition Facts label that appears on packaged foods. These labels have a few required fields—serving size, servings per container, and calories per serving— and more than twenty optional fields—total fat, saturated fat, trans fat,cholesterol, sodium, and so on. Most products have nonzero values for only a few of these optional fields.</p> <p>静态工厂和构造函数都有一个局限：它们不能对大量可选参数做很好的扩展。以一个类为例，它表示包装食品上的营养标签。这些标签上有一些字段是必需的，如：净含量、毛重和每单位份量的卡路里，另有超过 20 个可选的字段，如：总脂肪、饱和脂肪、反式脂肪、胆固醇、钠等等。大多数产品只有这些可选字段中的少数，且具有非零值。</p> <p>What sort of constructors or static factories should you write for such a class?Traditionally, programmers have used the telescoping constructor pattern, in which you provide a constructor with only the required parameters, another with a single optional parameter, a third with two optional parameters, and so on,culminating in a constructor with all the optional parameters. Here’s how it looks in practice. For brevity’s sake, only four optional fields are shown:</p> <p>应该为这样的类编写什么种类的构造函数或静态工厂呢？传统的方式是使用可伸缩构造函数，在这种模式中，只向构造函数提供必需的参数。即，向第一个构造函数提供单个可选参数，向第二个构造函数提供两个可选参数，以此类推，最后一个构造函数是具有所有可选参数的。这是它在实际应用中的样子。为了简洁起见，只展示具备四个可选字段的情况：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>// Telescoping constructor pattern - does not scale well!
+public class NutritionFacts {
+    private final int servingSize; // (mL) required
+    private final int servings; // (per container) required
+    private final int calories; // (per serving) optional
+    private final int fat; // (g/serving) optional
+    private final int sodium; // (mg/serving) optional
+    private final int carbohydrate; // (g/serving) optional
+
+    public NutritionFacts(int servingSize, int servings) {
+        this(servingSize, servings, 0);
+    }
+
+    public NutritionFacts(int servingSize, int servings, int calories) {
+        this(servingSize, servings, calories, 0);
+    }
+
+    public NutritionFacts(int servingSize, int servings, int calories, int fat) {
+        this(servingSize, servings, calories, fat, 0);
+    }
+
+    public NutritionFacts(int servingSize, int servings, int calories, int fat, int sodium) {
+        this(servingSize, servings, calories, fat, sodium, 0);
+    }
+
+    public NutritionFacts(int servingSize, int servings, int calories, int fat, int sodium, int carbohydrate) {
+        this.servingSize = servingSize;
+        this.servings = servings;
+        this.calories = calories;
+        this.fat = fat;
+        this.sodium = sodium;
+        this.carbohydrate = carbohydrate;
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br></div></div><p>When you want to create an instance, you use the constructor with the shortest parameter list containing all the parameters you want to set:</p> <p>当你想要创建一个实例时，可以使用包含所需参数的最短参数列表的构造函数：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>NutritionFacts cocaCola =new NutritionFacts(240, 8, 100, 0, 35, 27);
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>Typically this constructor invocation will require many parameters that you don’t want to set, but you’re forced to pass a value for them anyway. In this case,we passed a value of 0 for fat. With “only” six parameters this may not seem so bad, but it quickly gets out of hand as the number of parameters increases.</p> <p>通常，这个构造函数包含许多额外的参数，但是你必须为它们传递一个值。在本例中，我们为 fat 传递了一个值 0。只有六个参数时，这可能看起来不那么糟，但随着参数的增加，它很快就会失控。</p> <p>In short, <strong>the telescoping constructor pattern works, but it is hard to write client code when there are many parameters, and harder still to read it.</strong> The reader is left wondering what all those values mean and must carefully count parameters to find out. Long sequences of identically typed parameters can cause subtle bugs. If the client accidentally reverses two such parameters, the compiler won’t complain, but the program will misbehave at runtime (Item 51).</p> <p>简单地说，<strong>可伸缩构造函数模式可以工作，但是当有很多参数时，编写客户端代码是很困难的，而且读起来更困难。</strong> 读者想知道所有这些值是什么意思，必须仔细清点参数。相同类型参数的长序列会导致细微的错误。如果客户端不小心倒转了两个这样的参数，编译器不会报错，但是程序会在运行时出错。</p> <p>A second alternative when you’re faced with many optional parameters in a constructor is the JavaBeans pattern, in which you call a parameterless constructor to create the object and then call setter methods to set each required parameter and each optional parameter of interest:</p> <p>当你在构造函数中遇到许多可选参数时，另一种选择是 JavaBean 模式，在这种模式中，你调用一个无参数的构造函数来创建对象，然后调用 setter 方法来设置每个所需的参数和每个感兴趣的可选参数：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>// JavaBeans Pattern - allows inconsistency, mandates mutability
+public class NutritionFacts {
+    // Parameters initialized to default values (if any)
+    private int servingSize = -1; // Required; no default value
+    private int servings = -1; // Required; no default value
+    private int calories = 0;
+    private int fat = 0;
+    private int sodium = 0;
+    private int carbohydrate = 0;
+    public NutritionFacts() { }
+    // Setters
+    public void setServingSize(int val) { servingSize = val; }
+    public void setServings(int val) { servings = val; }
+    public void setCalories(int val) { calories = val; }
+    public void setFat(int val) { fat = val; }
+    public void setSodium(int val) { sodium = val; }
+    public void setCarbohydrate(int val) { carbohydrate = val; }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><p>This pattern has none of the disadvantages of the telescoping constructor pattern.It is easy, if a bit wordy, to create instances, and easy to read the resulting code:</p> <p>这个模式没有可伸缩构造函数模式的缺点。创建实例很容易，虽然有点冗长，但很容易阅读生成的代码：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>NutritionFacts cocaCola = new NutritionFacts();
+cocaCola.setServingSize(240);
+cocaCola.setServings(8);
+cocaCola.setCalories(100);
+cocaCola.setSodium(35);
+cocaCola.setCarbohydrate(27);
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>Unfortunately, the JavaBeans pattern has serious disadvantages of its own. Because construction is split across multiple calls, a JavaBean may be in an inconsistent state partway through its construction. The class does not have the option of enforcing consistency merely by checking the validity of the constructor parameters. Attempting to use an object when it’s in an inconsistent state may cause failures that are far removed from the code containing the bug and hence difficult to debug. A related disadvantage is that the JavaBeans pattern precludes the possibility of making a class immutable (Item 17) and requires added effort on the part of the programmer to ensure thread safety.</p> <p>不幸的是，JavaBean 模式本身有严重的缺点。因为构建是在多个调用之间进行的，所以 JavaBean 可能在构建的过程中处于不一致的状态。该类不能仅通过检查构造函数参数的有效性来强制一致性。在不一致的状态下尝试使用对象可能会导致错误的发生，而包含这些错误的代码很难调试。一个相关的缺点是，JavaBean 模式排除了使类不可变的可能性，并且需要程序员额外的努力来确保线程安全。</p> <p>It is possible to reduce these disadvantages by manually “freezing” the object when its construction is complete and not allowing it to be used until frozen, but this variant is unwieldy and rarely used in practice. Moreover, it can cause errors at runtime because the compiler cannot ensure that the programmer calls the freeze method on an object before using it.</p> <p>通过在对象构建完成时手动「冻结」对象，并在冻结之前不允许使用对象，可以减少这些缺陷，但是这种变通方式很笨拙，在实践中很少使用。此外，它可能在运行时导致错误，因为编译器不能确保程序员在使用对象之前调用它的 freeze 方法。</p> <p>Luckily, there is a third alternative that combines the safety of the telescoping constructor pattern with the readability of the JavaBeans pattern. It is a form of the Builder pattern [Gamma95]. Instead of making the desired object directly,the client calls a constructor (or static factory) with all of the required parameters and gets a builder object. Then the client calls setter-like methods on the builder object to set each optional parameter of interest. Finally, the client calls a parameterless build method to generate the object, which is typically immutable. The builder is typically a static member class (Item 24) of the class itbuilds. Here’s how it looks in practice:</p> <p>幸运的是，还有第三种选择，它结合了可伸缩构造函数模式的安全性和 JavaBean 模式的可读性。它是建造者模式的一种形式 [Gamma95]。客户端不直接生成所需的对象，而是使用所有必需的参数调用构造函数（或静态工厂），并获得一个 builder 对象。然后，客户端在构建器对象上调用像 setter 这样的方法来设置每个感兴趣的可选参数。最后，客户端调用一个无参数的构建方法来生成对象，这通常是不可变的。构建器通常是它构建的类的静态成员类。下面是它在实际应用中的样子：</p> <p><strong>若将该案例「构建机制」独立出来，或能广泛适应相似结构的构建需求，详见文末随笔</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>// Builder Pattern
+public class NutritionFacts {
+    private final int servingSize;
+    private final int servings;
+    private final int calories;
+    private final int fat;
+    private final int sodium;
+    private final int carbohydrate;
+
+    public static class Builder {
+        // Required parameters
+        private final int servingSize;
+        private final int servings;
+        // Optional parameters - initialized to default values
+        private int calories = 0;
+        private int fat = 0;
+        private int sodium = 0;
+        private int carbohydrate = 0;
+
+        public Builder(int servingSize, int servings) {
+            this.servingSize = servingSize;
+            this.servings = servings;
+        }
+
+        public Builder calories(int val) {
+            calories = val;
+            return this;
+        }
+
+        public Builder fat(int val) {
+            fat = val;
+            return this;
+        }
+
+        public Builder sodium(int val) {
+            sodium = val;
+            return this;
+        }
+
+        public Builder carbohydrate(int val) {
+            carbohydrate = val;
+            return this;
+        }
+
+        public NutritionFacts build() {
+            return new NutritionFacts(this);
+        }
+    }
+
+    private NutritionFacts(Builder builder) {
+        servingSize = builder.servingSize;
+        servings = builder.servings;
+        calories = builder.calories;
+        fat = builder.fat;
+        sodium = builder.sodium;
+        carbohydrate = builder.carbohydrate;
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br></div></div><p>The NutritionFacts class is immutable, and all parameter default values are in one place. The builder’s setter methods return the builder itself so that invocations can be chained, resulting in a fluent API. Here’s how the client code looks:</p> <p>NutritionFacts 类是不可变的，所有参数默认值都在一个位置。构建器的 setter 方法返回构建器本身，这样就可以链式调用，从而得到一个流畅的 API。下面是客户端代码的样子：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>NutritionFacts cocaCola = new NutritionFacts.Builder(240, 8)
+.calories(100).sodium(35).carbohydrate(27).build();
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>This client code is easy to write and, more importantly, easy to read. The Builder pattern simulates named optional parameters as found in Python and Scala.</p> <p>该客户端代码易于编写，更重要的是易于阅读。建造者模式模拟 Python 和 Scala 中的可选参数。</p> <p>Validity checks were omitted for brevity. To detect invalid parameters as soon as possible, check parameter validity in the builder’s constructor and methods.Check invariants involving multiple parameters in the constructor invoked by the build method. To ensure these invariants against attack, do the checks on object fields after copying parameters from the builder (Item 50). If a check fails, throw an IllegalArgumentException (Item 72) whose detail message indicates which parameters are invalid (Item 75).</p> <p>为了简洁，省略了有效性检查。为了尽快检测无效的参数，请检查构建器的构造函数和方法中的参数有效性。检查构建方法调用的构造函数中涉及多个参数的不变量。为了确保这些不变量不受攻击，在从构建器复制参数之后检查对象字段。如果检查失败，抛出一个 IllegalArgumentException，它的详细消息指示哪些参数无效。</p> <p>The Builder pattern is well suited to class hierarchies. Use a parallel hierarchy of builders, each nested in the corresponding class. Abstract classes have abstract builders; concrete classes have concrete builders. For example,consider an abstract class at the root of a hierarchy representing various kinds of pizza:</p> <p>建造者模式非常适合于类层次结构。使用构建器的并行层次结构，每个构建器都嵌套在相应的类中。抽象类有抽象类构建器；具体类有具体类构建器。例如，考虑一个在层次结构处于最低端的抽象类，它代表各种比萨饼：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>import java.util.EnumSet;
+import java.util.Objects;
+import java.util.Set;
+
+// Builder pattern for class hierarchies
+public abstract class Pizza {
+    public enum Topping {HAM, MUSHROOM, ONION, PEPPER, SAUSAGE}
+
+    final Set&lt;Topping&gt; toppings;
+
+    abstract static class Builder&lt;T extends Builder&lt;T&gt;&gt; {
+        EnumSet&lt;Topping&gt; toppings = EnumSet.noneOf(Topping.class);
+
+        public T addTopping(Topping topping) {
+            toppings.add(Objects.requireNonNull(topping));
+            return self();
+        }
+
+        abstract Pizza build();
+
+        // Subclasses must override this method to return &quot;this&quot;
+        protected abstract T self();
+    }
+
+    Pizza(Builder&lt;?&gt; builder) {
+        toppings = builder.toppings.clone(); // See Item 50
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br></div></div><p>Note that Pizza.Builder is a generic type with a recursive type parameter (Item 30). This, along with the abstract self method, allows method chaining to work properly in subclasses, without the need for casts. This workaround for the fact that Java lacks a self type is known as the simulated self-type idiom. Here are two concrete subclasses of Pizza, one of which represents a standard New-York-style pizza, the other a calzone. The former has a required size parameter, while the latter lets you specify whether sauce should be inside or out:</p> <p>请注意，<code>Pizza.Builder</code> 是具有递归类型参数的泛型类型。这与抽象 self 方法一起，允许方法链接在子类中正常工作，而不需要强制转换。对于 Java 缺少自类型这一事实，这种变通方法称为模拟自类型习惯用法。这里有两个具体的比萨子类，一个是标准的纽约风格的比萨，另一个是 calzone。前者有一个必需的尺寸大小参数，而后者让你指定酱料应该放在里面还是外面：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>import java.util.Objects;
+
+public class NyPizza extends Pizza {
+    public enum Size {SMALL, MEDIUM, LARGE}
+
+    private final Size size;
+
+    public static class Builder extends Pizza.Builder&lt;Builder&gt; {
+        private final Size size;
+
+        public Builder(Size size) {
+            this.size = Objects.requireNonNull(size);
+        }
+
+        @Override
+        public NyPizza build() {
+            return new NyPizza(this);
+        }
+
+        @Override
+        protected Builder self() {
+            return this;
+        }
+    }
+
+    private NyPizza(Builder builder) {
+        super(builder);
+        size = builder.size;
+    }
+}
+
+public class Calzone extends Pizza {
+    private final boolean sauceInside;
+
+    public static class Builder extends Pizza.Builder&lt;Builder&gt; {
+        private boolean sauceInside = false; // Default
+
+        public Builder sauceInside() {
+            sauceInside = true;
+            return this;
+        }
+
+        @Override
+        public Calzone build() {
+            return new Calzone(this);
+        }
+
+        @Override
+        protected Builder self() {
+            return this;
+        }
+    }
+
+    private Calzone(Builder builder) {
+        super(builder);
+        sauceInside = builder.sauceInside;
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br></div></div><p>Note that the build method in each subclass’s builder is declared to return the correct subclass: the build method of NyPizza.Builder returns NyPizza, while the one in Calzone.Builder returns Calzone. This technique, wherein a subclass method is declared to return a subtype of the return type declared in the super-class, is known as covariant return typing. It allows clients to use these builders without the need for casting.The client code for these “hierarchical builders” is essentially identical to the code for the simple NutritionFacts builder. The example client code shown next assumes static imports on enum constants for brevity:</p> <p>注意，每个子类的构建器中的构建方法声明为返回正确的子类：构建的方法 <code>NyPizza.Builder</code> 返回 NyPizza，而在 <code>Calzone.Builder</code> 则返回 Calzone。这种技术称为协变返回类型，其中一个子类方法声明为返回超类中声明的返回类型的子类型。它允许客户使用这些构建器，而不需要强制转换。这些「层次构建器」的客户端代码与简单的 NutritionFacts 构建器的代码基本相同。为简洁起见，下面显示的示例客户端代码假定枚举常量上的静态导入：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>NyPizza pizza = new NyPizza.Builder(SMALL)
+.addTopping(SAUSAGE).addTopping(ONION).build();
+Calzone calzone = new Calzone.Builder()
+.addTopping(HAM).sauceInside().build();
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>A minor advantage of builders over constructors is that builders can have multiple varargs parameters because each parameter is specified in its own method. Alternatively, builders can aggregate the parameters passed into multiple calls to a method into a single field, as demonstrated in the addTopping method earlier.</p> <p>与构造函数相比，构建器的一个小优点是构建器可以有多个变量参数，因为每个参数都是在自己的方法中指定的。或者，构建器可以将传递给一个方法的多个调用的参数聚合到单个字段中，如前面的 addTopping 方法中所示。</p> <p>The Builder pattern is quite flexible. A single builder can be used repeatedly to build multiple objects. The parameters of the builder can be tweaked between invocations of the build method to vary the objects that are created. A builder can fill in some fields automatically upon object creation, such as a serial number that increases each time an object is created.</p> <p>建造者模式非常灵活。一个构建器可以反复构建多个对象。构建器的参数可以在构建方法的调用之间进行调整，以改变创建的对象。构建器可以在创建对象时自动填充某些字段，例如在每次创建对象时增加的序列号。</p> <p>The Builder pattern has disadvantages as well. In order to create an object,you must first create its builder. While the cost of creating this builder is unlikely to be noticeable in practice, it could be a problem in performance-critical situations. Also, the Builder pattern is more verbose than the telescoping constructor pattern, so it should be used only if there are enough parameters to make it worthwhile, say four or more. But keep in mind that you may want to add more parameters in the future. But if you start out with constructors or static factories and switch to a builder when the class evolves to the point where the number of parameters gets out of hand, the obsolete constructors or static factories will stick out like a sore thumb. Therefore, it’s often better to start with a builder in the first place.</p> <p>建造者模式也有缺点。为了创建一个对象，你必须首先创建它的构建器。虽然在实际应用中创建这个构建器的成本可能并不显著，但在以性能为关键的场景下，这可能会是一个问题。而且，建造者模式比可伸缩构造函数模式更冗长，因此只有在有足够多的参数时才值得使用，比如有 4 个或更多参数时，才应该使用它。但是请记住，你可能希望在将来添加更多的参数。但是，如果你以构造函数或静态工厂开始，直至类扩展到参数数量无法控制的程度时，也会切换到构建器，但是过时的构造函数或静态工厂将很难处理。因此，最好一开始就从构建器开始。</p> <p>In summary, the Builder pattern is a good choice when designing classes whose constructors or static factories would have more than a handful of parameters, especially if many of the parameters are optional or of identical type. Client code is much easier to read and write with builders than with telescoping constructors, and builders are much safer than JavaBeans.</p> <p>总之，在设计构造函数或静态工厂的类时，建造者模式是一个很好的选择，特别是当许多参数是可选的或具有相同类型时。与可伸缩构造函数相比，使用构建器客户端代码更容易读写，而且构建器比 JavaBean 更安全。</p> <h3 id="随笔"><a href="#随笔" class="header-anchor">#</a> <strong>随笔</strong></h3> <p>每个内部 Builder 类要对每个字段建立相应方法，代码比较冗长。若将「构建机制」独立出来，或能广泛适应相似结构的构建需求。以下是针对原文案例的简要修改，仅供参考：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>class EntityCreator&lt;T&gt; {
+
+    private Class&lt;T&gt; classInstance;
+    private T entityObj;
+
+    public EntityCreator(Class&lt;T&gt; classInstance, Object... initParams) throws Exception {
+        this.classInstance = classInstance;
+        Class&lt;?&gt;[] paramTypes = new Class&lt;?&gt;[initParams.length];
+        for (int index = 0, length = initParams.length; index &lt; length; index++) {
+            String checkStr = initParams[index].getClass().getSimpleName();
+            if (checkStr.contains(&quot;Integer&quot;)) {
+                paramTypes[index] = int.class;
+            }
+            if (checkStr.contains(&quot;Double&quot;)) {
+                paramTypes[index] = double.class;
+            }
+            if (checkStr.contains(&quot;Boolean&quot;)) {
+                paramTypes[index] = boolean.class;
+            }
+            if (checkStr.contains(&quot;String&quot;)) {
+                paramTypes[index] = initParams[index].getClass();
+            }
+        }
+        Constructor&lt;T&gt; constructor = classInstance.getDeclaredConstructor(paramTypes);
+        constructor.setAccessible(true);
+        this.entityObj = constructor.newInstance(initParams);
+    }
+
+    public EntityCreator&lt;T&gt; setValue(String paramName, Object paramValue) throws Exception {
+        Field field = classInstance.getDeclaredField(paramName);
+        field.setAccessible(true);
+        field.set(entityObj, paramValue);
+        return this;
+    }
+
+    public T build() {
+        return entityObj;
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br></div></div><p>如此，可移除整个内部 Builder 类，NutritionFacts 类私有构造的参数仅包括两个必填的 servingSize、servings 字段：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>public class NutritionFacts {
+    // Required parameters
+    private final int servingSize;
+    private final int servings;
+    // Optional parameters - initialized to default values
+    private int calories = 0;
+    private int fat = 0;
+    private int sodium = 0;
+    private int carbohydrate = 0;
+
+    private NutritionFacts(int servingSize, int servings) {
+        this.servingSize = servingSize;
+        this.servings = servings;
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p>该案例的客户端代码改为：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>NutritionFacts cocaCola = new EntityCreator&lt;&gt;(NutritionFacts.class, 240, 8)
+        .setValue(&quot;calories&quot;, 100)
+        .setValue(&quot;sodium&quot;, 35)
+        .setValue(&quot;carbohydrate&quot;, 27).build();
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/matheusblog/assets/js/app.593a6820.js" defer></script><script src="/matheusblog/assets/js/3.21aaf515.js" defer></script><script src="/matheusblog/assets/js/178.db1004ac.js" defer></script>
+  </body>
+</html>
