@@ -451,8 +451,6 @@ function genSidebarspringcloud(){
             "mq/04RocketMQ.md",
             "mq/05使用RocketMQ原生API收发消息代码样例.md",
             "mq/06Springboot整合RocetMQ收发消息样例.md",
-            "mq/07RocketMQ发送事务消息原理分析和代码实现.md",
-            
         ]
       },
   ];
