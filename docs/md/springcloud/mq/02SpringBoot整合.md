@@ -3,9 +3,6 @@
 
 ## 新建项目
 
-![新建项目](https://img-blog.csdnimg.cn/20200311223610957.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODMwNTQ0MA==,size_16,color_FFFFFF,t_70)
-
-![选择依赖](https://img-blog.csdnimg.cn/20200311223742664.png)
 
 ### pom.xml
 
