@@ -65,14 +65,7 @@
 
 ```
 
-
-
-
-
 ## yml 配置
-
-
-
 
 
 ### application.yml
@@ -82,9 +75,6 @@ rocketmq:
   name-server: 192.168.64.151:9876;192.168.64.152:9876
 
 ```
-
-
-
 
 
 ### application-demo1.yml
@@ -98,10 +88,6 @@ rocketmq:
 
 ```
 
-
-
-
-
 ### application-demo2.yml
 
 使用 demo2 profile 指定生产者组组名
@@ -112,9 +98,6 @@ rocketmq:
     group: producer-demo2
 
 ```
-
-
-
 
 
 ## demo 1
@@ -200,8 +183,6 @@ public class Main {
 ```
 
 
-
-
 测试类，需要放在 test 文件夹
 
 这个测试激活 demo1 profile
@@ -227,9 +208,6 @@ public class Test1 {
 }
 
 ```
-
-
-
 
 
 ## demo 2
@@ -307,9 +285,6 @@ public class Main {
 }
 
 ```
-
-
-
 
 测试类，需要放在 test 文件夹
 
