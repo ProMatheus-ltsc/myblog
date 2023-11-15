@@ -54,7 +54,7 @@ module.exports = {
                
             ] },
             { text: 'VUE', items: [
-              { text: 'Vue简介与安装使用', link: '/md/web/vue/01Vue简介与安装使用.md' },
+              { text: 'Vue简介与安装使用', link: '/md/web/vue/02模板语法.md' },
                
             ] },
           ]
@@ -99,7 +99,6 @@ module.exports = {
 
           ]
         },
-        { text: '项目', link: '/md/project/jt-project/problem.md' },
         {
           text: 'DevOps',
           ariaLabel: 'Devops Menu',
@@ -109,9 +108,6 @@ module.exports = {
             ] },
             { text: 'tools', items: [
               { text: 'VS Code使用', link: '/md/devops/tools/VS Code使用.md' },
-            ] },
-            { text: 'Docker', items: [
-              { text: 'Docker入门', link: '/md/devops/docker/01Docker入门.md' },
             ] },
             { text: 'k8s', items: [
               { text: 'K8s介绍与使用', link: '/md/devops/k8s/01Kubernetes介绍及使用.md' },
@@ -125,14 +121,10 @@ module.exports = {
           text: '开发',
           ariaLabel: 'develop Menu',
           items: [
-            { text: '代码规范', items: [
+            { text: '代码质量', items: [
               { text: 'Effective-Java', link: '/md/develop/code-style/effective-java/目录.md' },
-            ] },
-            { text: '开发环境', items: [
-              { text: '单元测试', link: '/md/develop/JUnit/01什么是单元测试.md' },
-              { text: 'IDEA配置', link: '/md/project/jt-project/2. IDEA配置.md' },
-            ] },
-
+              { text: '单元测试', link: '/md/develop/JUnit/01什么是单元测试.md' }
+            ] }
           ]
         },
         { text: '架构',link: '/md/arch/计算机软件架构发展历史.md'},
@@ -156,7 +148,6 @@ module.exports = {
       ],
       sidebar: {
         "/md/java/": genSidebarjava(),
-        "/md/project/": genSidebarproject(),
         "/md/web/": genSidebarweb(),
         "/md/spring/": genSidebarspring(),
         "/md/springcloud/": genSidebarspringcloud(),
@@ -252,30 +243,6 @@ function genSidebarjava(){
     ];
 }
 
-function genSidebarproject(){
-  return [
-      {
-          title: "jt项目",
-          collapsable: false,
-          sidebarDepth: 0, 
-          children: [
-              "jt-project/problem.md",
-              "jt-project/1. 京淘项目业务接口文档.md",
-              "jt-project/2. IDEA配置.md",
-              "jt-project/3. Linux下安装MariaDB数据库.md",
-              "jt-project/4. 用户模块管理.md",
-              "jt-project/5. 商品分类模块.md",
-              "jt-project/6. Windows项目部署.md",
-              "jt-project/7. 虚拟机安装-IP配置说明.md",
-              "jt-project/8. Linux安装Nginx步骤.md",
-              "jt-project/9. Linux项目部署.md",
-          ]
-      },
-      
-      
-  ];
-}
-
 function genSidebarweb(){
   return [
       {
@@ -335,7 +302,6 @@ function genSidebarweb(){
         collapsable: false,
         sidebarDepth: 0, 
         children: [
-            "vue/01Vue简介与安装使用.md",
             "vue/02模板语法.md",
             "vue/03计算属性和侦听属性与过滤器.md",
             "vue/04class与style绑定.md",
@@ -346,8 +312,6 @@ function genSidebarweb(){
             "vue/09过渡与动画.md",
             "vue/10Vue进阶引导.md",
             "vue/11Element.md",
-            "vue/12Vue后端管理插件安装.md",
-            "vue/13Vue知识点整理.md",
              ]
         },
       
@@ -363,7 +327,6 @@ function genSidebarspring(){
               "maven/01Tomcat入门基础.md",
               "maven/02Maven入门基础.md",
               "maven/03Maven pom.xml常用配置.md",
-              
           ]
       },
       {
@@ -492,10 +455,7 @@ function genSidebardevops(){
           children: [
               "tools/VS Code使用.md",
               "tools/Notebook.md",
-              "tools/HBuilderX.md",
               "tools/硬件设置.md",
-              "tools/IDEA使用.md",
-              "tools/IDEA快捷键与JavaDoc.md",
               "tools/网页扒手.md",
               
               
@@ -565,24 +525,7 @@ function genSidebardevops(){
             "docker/bash/06函数.md",
             "docker/bash/07Shell脚本实现Linux系统监控.md",
         ]
-      },
-      {
-        title: "Docker",
-        collapsable: false,
-        sidebarDepth: 0, 
-        children: [
-            "docker/01Docker入门.md",
-            "docker/02Docker安装实践.md",
-            "docker/03Docker服务基本操作实践.md",
-            "docker/04Docker镜像操作实践.md",
-            "docker/05Docker容器操作实践.md",
-            "docker/06Docker数据管理实践.md",
-            "docker/07Docker镜像制作.md",
-            "docker/08Docker镜像安装实践.md",
-            "docker/09Docker容器互联实践.md",
-        ]
-      },
-      
+      }
   ];
 }
 function genSidebarotherlanguages(){

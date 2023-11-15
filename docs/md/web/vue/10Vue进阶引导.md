@@ -208,15 +208,3 @@ Vue 借鉴了 redux 和 flux 两种常用的数据流解决方案，开发了一
 
 [Nuxt.js](https://zh.nuxtjs.org/guide) 是一个基于 Vue.js 的通用应用框架。Nuxt.js 预设了利用 Vue.js 开发**服务端渲染**的应用所需要的各种配置。
 
-## 观察者设计模式
-
-观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个目标对象，当这个目标对象的状态发生变化时，会通知所有观察者对象，使它们能够自动更新。
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/70e12903469f4a198d4c6394ecd8e7a9.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTI5MzI4NzY=,size_16,color_FFFFFF,t_70)
-
-- 页面data中的address就是数据，get为获取当前数据，set为设置数据新值
-- 观察者watcher就为那多个插值表达式和input文本框，在页面加载时这些关系进行绑定
-- 当我们让数据变化时，如input文本框修改内容，其就调用数据的set的方法，把数据进行更新，其更新就被vue框架通知notify众多的观察者。如众多的插值表达式就会触发trigger，进行再次渲染re-render，修改虚拟dom树。最终vue框架局部宣传页面
-- 同样，当我们利用谷歌浏览器改变数据v.address赋值时，就调用数据的setter方法进行数据更新，数据更新后，通知众多的观察者，观察者更新如上面的流程
-
-可以看出Vue设计非常巧妙，我们页面展现的数据，必然会涉及到数据的读写，于是Vue实现了一整套机制，这套机制监控数据的获取（get），数据的更新（set），这样当数据变化，Vue就能知道。它知道有什么用呢？它就能控制当数据变化时就能重新进行页面的渲染，从而用户看到页面展现新的内容。
