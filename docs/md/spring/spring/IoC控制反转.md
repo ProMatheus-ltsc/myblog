@@ -370,20 +370,6 @@ public class shiyanlou{
 
 所以，当需要被Spring创建对象的类型是自定义的，应该使用组件扫描的做法，如果不是自定义的，只能使用`@Bean`方法。**这2种做法在实际的项目开发中都会被使用到**！
 
-#### Spring注解模式执行过程
-
-1).当程序启动Spring容器时 `AnnotationConfigApplicationContext`利用`beanFactory`实例化对象
-2).根据配置类中的包扫描开始加载指定的注解(4个). 根据配置文件的顺序依次进行加载
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210423154334585.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70)
-
-3).当程序实例化Controller时,由于缺少Service对象,所以挂起线程 继续执行后续逻辑.
-当构建Service时,由于缺少Dao对象,所以挂起线程 继续执行后续逻辑.
-当实例化Dao成功时,保存到Spring所维护的Map集合中. 执行之前挂起的线程.
-所以以此类推 所有对象实现封装.最终容器启动成功
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210423160402664.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70)
-
 4). 根据指定的注解/注入指定的对象.之后统一交给Spring容器进行管理.最终程序启动成功.
 
 ## 关于单例多例模式说明

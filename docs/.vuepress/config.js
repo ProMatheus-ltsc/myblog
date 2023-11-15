@@ -342,9 +342,7 @@ function genSidebarspring(){
             "spring/AOP面向切面编程.md",
             "spring/事务控制.md",
             "spring/注解大全.md",
-            "spring/Spring框架.md",
             "spring/Spring设计模式.md",
-            
         ]
       },
       {
@@ -392,15 +390,6 @@ function genSidebarspringcloud(){
           sidebarDepth: 0, 
           children: [
               "note.md",
-              "00微服务架构入门.md",
-              "01Nacos注册中心入门.md",
-              "02远程服务调用实践.md",
-              "03Nacos配置中心实践.md",
-              "04Sentinel限流应用实践.md",
-              "05API网关入门实践.md",
-              "06SSO单点登录系统进阶实现.md",
-              "07若依权限管理子系统简介.md",
-              "08SpringCloud入门操作手册.md",
           ]
       },
       {

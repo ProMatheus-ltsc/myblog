@@ -1,52 +1,6 @@
 # AOP面向切面编程
 [[TOC]]
 
-## 引入
-Spring核心特征中除了IoC控制反转、DI依赖注入，还有一个核心就是强大的面向切面编程AOP（Aspect Oriented Programming）的实现。
-AOP 是实现程序功能统一维护的一种技术。它把 众多模块 涉及到的同一类问题进行了统一处理。利用 AOP 可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合性降低，提高程序的可重用性，同时大大提高了开发效率。
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/0bfd95ec29754e06bc5faeea4f552cad.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY2dibHB4,size_20,color_FFFFFF,t_70,g_se,x_16)
-
-### AspectJ
-
-AspectJ 作为 Java 中流行的 AOP（aspect-oriented programming） 编程扩展框架，有一些自己的语法和特点，Spring框架底层也是采用的 AspectJ来实现的面向切面编程。
-
-他成熟稳定,输入输出都是 .class 文件,直接处理字节码文件，这个过程并不简单，特别是 针对于字节码的格式和各种指令规则，如果处理出错，就会导致程序编译或者运行过程中出现问题。
-
-他使用起来非常简单，并且它的功能非常强大，我们完全不需要理解任何 Java 字节码相关的知识，就可以在很多情况下对字节码进行操控。
-
-## 如何理解AOP
-
-### AOP的三要素
-
-**切面（Aspect）** 类是对物体特征的抽象，切面就是对同一类问题（横切关注点）的抽象
-**通知（Advice）** 来指定具体做什么事情。如方法执行前做什么，方法执行后做什么，抛出异常做什么，从而实现对象行为（方法）的增强
-**切点（PointCut）** 配置切点表达式（expression）来指定在哪些类的哪些方法上织入（ware）横切一些逻辑
-**连接点（JoinPoint）** JPoint 是一个程序的关键执行点，也是我们关注的重点。它就是指被切点拦截到的点然后执行一些通知
-
-![[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-ndLcvTsq-1623125484755)(RackMultipart20210608-4-9jbi5w_html_c5e7751ad417952f.png)]](https://img-blog.csdnimg.cn/20210608190559383.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTI5MzI4NzY=,size_16,color_FFFFFF,t_70)
-
-### 通知
-
-Spring框架实现了AOP面向切面，其引入了第三方AspectJ框架来具体实现。
-AspectJ提供了五种切入方式，术语称为通知advice。
-具体五种为：
-
-1. 前置通知before
-2. 后置通知after
-3. 环绕通知around
-4. 返回后通知afterReturning
-5. 异常通知afterThrowing。
-   异常通知特殊，这里暂不讨论。
-   可以看到，分别在业务方法（Business Method）的执行前后进行拦截，执行指定的代码。
-
-![[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-zQfJDgzH-1623125484756)(RackMultipart20210608-4-9jbi5w_html_d0e5a5c2ce593c85.png)]](https://img-blog.csdnimg.cn/20210608190607272.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTI5MzI4NzY=,size_16,color_FFFFFF,t_70)
-
-### 多切面执行顺序
-
-下面是 两个切面 各通知的执行顺序：
-![[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-T3Fp3bGa-1623125484757)(RackMultipart20210608-4-9jbi5w_html_c0c35cb4628046db.png)]](https://img-blog.csdnimg.cn/202106081906179.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTI5MzI4NzY=,size_16,color_FFFFFF,t_70)
-
 ## AOP的配置方式
 
 ### 使用步骤
