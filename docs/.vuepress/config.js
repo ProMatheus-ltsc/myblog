@@ -8,7 +8,7 @@ module.exports = {
         "/": {
             lang: "zh-CN",
             title: "MyBlog",            
-            description: "包含: Java 基础, JVM, Spring, Spring Boot, Spring Cloud, MySQL, ElasticSearch, MongoDB, Docker, k8s, Linux, DevOps, 分布式,  开发工具, Git, IDE..."
+            description: "包含: Java 基础, JVM, Spring, Spring Boot, Spring Cloud, MySQL, MongoDB, k8s, Linux, DevOps, 分布式,  开发工具, Git..."
         }
     },
     themeConfig: {
@@ -64,17 +64,11 @@ module.exports = {
           ariaLabel: 'database Menu',
           items: [
             { text: 'MySQL', items: [
-              { text: '数据库软件的安装与使用', link: '/md/db/mysql/01数据库软件的安装与使用.md' },
+              { text: '数据库和表的操作', link: '/md/db/mysql/02数据库和表的操作.md' },
             ] },
             { text: 'MongoDB', items: [
               { text: '数据库和集合基本操作', link: '/md/db/mongodb/01数据库和集合基本操作.md' },
             ] },
-           
-            { text: 'ElasticSearch', items: [
-              { text: 'Docker搭建ES', link: '/md/db/elasticsearch/02Elasticsearch-Docker搭建ES.md' },
-            ] },
-            
-            
           ]
         },
         {
@@ -588,14 +582,12 @@ function genSidebardb(){
           collapsable: false,
           sidebarDepth: 0, 
           children: [
-              "mysql/01数据库软件的安装与使用.md",
               "mysql/02数据库和表的操作.md",
               "mysql/03SQL的约束.md",
               "mysql/04SELECT语句详解.md",
               "mysql/05表内数据操作.md",
               "mysql/06其他操作.md",
               "mysql/07基础函数.md",
-              "mysql/08Oracle入门.md",
               "mysql/09创建数据库脚本.md",
               "mysql/10MySQL高性能优化规范建议.md",
               "mysql/11一千行MySQL命令.md",
@@ -613,23 +605,6 @@ function genSidebardb(){
             "mongodb/04查询,索引与聚合.md",
             "mongodb/05高级查询与索引.md",
   
-        ]
-      },
-      
-      
-      {
-        title: "ElasticSearch",
-        collapsable: false,
-        sidebarDepth: 0, 
-        children: [
-            "elasticsearch/01LuceneSolor811.md",
-            "elasticsearch/02Elasticsearch-Docker搭建ES.md",
-            "elasticsearch/03Elasticsearch-IK中文分词器.md",
-            "elasticsearch/04Elsaticsearch-使用Kibana操作ES.md",
-            "elasticsearch/05Elaticsearch-搜索.md",
-            "elasticsearch/06Elasticsearch-增删改查API.md",
-            
-            
         ]
       },
   ];

@@ -586,8 +586,6 @@ ORDER BY id;
 
 ### inner join、left join、right join的区别？
 
-![2021070213285975.png](https://img-blog.csdnimg.cn/2021070213285975.png)
-
 - INNER JOIN两边都对应有记录的才展示，其他去掉
 - LEFT JOIN左边表中的数据都出现，右边没有数据以NULL填充
 - RIGHT JOIN右边表中的数据都出现，左边没有数据以NULL填充
