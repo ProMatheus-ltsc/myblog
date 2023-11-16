@@ -76,16 +76,10 @@ module.exports = {
           ariaLabel: 'SpringFramework Menu',
           items: [
             { text: 'Maven', items: [
-              { text: 'Maven入门基础', link: '/md/spring/maven/02Maven入门基础.md' },
+              { text: 'Maven pom.xml常用配置', link: 'md/spring/maven/03Maven pom.xml常用配置.md' },
             ] },
             { text: 'Spring', items: [
               { text: 'Spring概述', link: '/md/spring/spring/Spring概述.md' },
-            ] },
-            { text: 'SpringMVC', items: [
-              { text: 'SpringMVC框架', link: '/md/spring/springmvc/springMVC框架.md' },
-            ] },
-            { text: 'MyBatis-plus', items: [
-              { text: 'MyBatis简介', link: '/md/spring/mybatis/01MyBatis简介.md' },
             ] },
             { text: 'SpringBoot', items: [
               { text: 'SpringBoot简介', link: '/md/spring/springboot/SpringBoot简介.md' },
@@ -318,8 +312,6 @@ function genSidebarspring(){
           collapsable: false,
           sidebarDepth: 0, 
           children: [
-              "maven/01Tomcat入门基础.md",
-              "maven/02Maven入门基础.md",
               "maven/03Maven pom.xml常用配置.md",
           ]
       },
@@ -337,32 +329,6 @@ function genSidebarspring(){
             "spring/事务控制.md",
             "spring/注解大全.md",
             "spring/Spring设计模式.md",
-        ]
-      },
-      {
-        title: "SpringMVC",
-        collapsable: false,
-        sidebarDepth: 0, 
-        children: [
-             "springmvc/SpringMVC简介.md",
-             "springmvc/SpringMVC入门案例与高级用法.md",
-             "springmvc/SpringMVC框架.md",
-             "springmvc/前后端交互与Spring MVC参数传递.md",
-             "springmvc/SpringMVC会话管理.md",
-        ]
-      },
-      {
-        title: "MyBatis-Plus",
-        collapsable: false,
-        sidebarDepth: 0, 
-        children: [
-            "mybatis/01MyBatis简介.md",
-            "mybatis/02入门程序.md",
-            "mybatis/03MyBatis框架.md",
-            "mybatis/04MyBatis-Plus.md",
-            
-            
-            
         ]
       },
       {
