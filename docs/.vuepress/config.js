@@ -75,9 +75,6 @@ module.exports = {
           text: 'SpringFramework',
           ariaLabel: 'SpringFramework Menu',
           items: [
-            { text: 'Maven', items: [
-              { text: 'Maven pom.xml常用配置', link: 'md/spring/maven/03Maven pom.xml常用配置.md' },
-            ] },
             { text: 'Spring', items: [
               { text: 'Spring概述', link: '/md/spring/spring/Spring概述.md' },
             ] },
