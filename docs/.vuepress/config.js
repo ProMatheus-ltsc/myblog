@@ -8,7 +8,7 @@ module.exports = {
         "/": {
             lang: "zh-CN",
             title: "MyBlog",            
-            description: "包含: Java 基础, JVM, Spring, Spring Boot, Spring Cloud, MySQL, MongoDB, k8s, Linux, DevOps, 分布式,  开发工具, Git..."
+            description: "包含: Java 基础, 前端, JVM, Spring, Spring Boot, Spring Cloud, MySQL, MongoDB, k8s, Linux, Git..."
         }
     },
     themeConfig: {
@@ -115,7 +115,7 @@ module.exports = {
             ] }
           ]
         },
-        { text: '架构',link: '/md/arch/计算机软件架构发展历史.md'},
+        { text: '架构',link: '/md/arch/分层与模块化.md'},
         {
           text: '其他语言',
           ariaLabel: 'other-languages Menu',
