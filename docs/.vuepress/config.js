@@ -123,12 +123,6 @@ module.exports = {
             { text: 'Go', items: [
               { text: 'Go语言介绍', link: '/md/other-languages/go/01Go语言介绍.md' },
             ] },
-            { text: 'Scala', items: [
-              { text: 'Scala学习宝典', link: '/md/other-languages/scala/Scala学习宝典.md' },
-            ] },
-            { text: 'Python', items: [
-              { text: 'Python基础学习', link: '/md/other-languages/python/Python基础学习.md' },
-            ] },
           
           ]
         },
@@ -374,24 +368,8 @@ function genSidebararch(){
           collapsable: false,
           sidebarDepth: 0, 
           children: [
-              "计算机软件架构发展历史.md",
               "分层与模块化.md",
           ]
-      },
-      {
-        title: "分布式事务",
-        collapsable: false,
-        sidebarDepth: 0, 
-        children: [
-            "arch-dis/01MySQL本地事务和事务隔离级别.md",
-            "arch-dis/02分布式事务方案.md",
-            "arch-dis/03Seata分布式事务框架-AT模式介绍.md",
-            "arch-dis/04SeataAT模式-SpringCloud微服务案例.md",
-            "arch-dis/05SeataAT模式-SpringCloud微服务添加AT分布式事务.md",
-            "arch-dis/06SeataTCC模式-TCC模式介绍.md",
-            "arch-dis/07SeataTCC模式-SpringCloud微服务添加TCC分布式事务.md",
-            "arch-dis/08SpringCloud微服务系统基于RocketMQ可靠消息最终一致性实现分布式事务.md",
-        ]
       },
   ];
 }
@@ -520,24 +498,6 @@ function genSidebarotherlanguages(){
             "go/basic-project/13ChitCha论坛.md",
         ]
       },
-      {
-        title: "Scala",
-        collapsable: false,
-        sidebarDepth: 0, 
-        children: [
-            "scala/Scala学习宝典.md",
-            
-        ]
-      },
-      {
-        title: "Python",
-        collapsable: false,
-        sidebarDepth: 0, 
-        children: [
-            "python/Python基础学习.md",
-            
-        ]
-      },
 
   ];
 }
@@ -557,6 +517,7 @@ function genSidebardb(){
               "mysql/09创建数据库脚本.md",
               "mysql/10MySQL高性能优化规范建议.md",
               "mysql/11一千行MySQL命令.md",
+              "mysql/01MySQL本地事务和事务隔离级别.md"
               
           ]
       },
